@@ -1,3 +1,6 @@
+Paul Trapp
+Personality type: INTP
+
 1) Completing all assignments on time without a last minute rush and getting B's or higher
 
 2) Allowing everyone to contribute equally. Not taking over and doing everything myself, as well as not giving up and doing the bare minimum to complete my share of the work.
