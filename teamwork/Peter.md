@@ -1,3 +1,5 @@
+INFJ
+
 1. I expect that my team will get the job done and will do excellent in this class.
 
 2. My personal goals are just to develop better teamwork skills and be the best teammate I can be.
