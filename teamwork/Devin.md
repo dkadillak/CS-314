@@ -1,3 +1,5 @@
+Personality Type: INFP
+
 1. I expect my team to put in the effort to get all assignments done on schedule and I think we can accomplish doing very well on all group assignments. 
 
 2. I want to be able to be able to dissect a task effectively and fairly and complete a task with someone who isn't right next to me. Effectively doing these two requires clear and precise communication.
