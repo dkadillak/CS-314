@@ -13,4 +13,20 @@ public class View {
 		x = X;
 		y = Y;
 	}
+
+	public ArrayList<Integer> getId() {
+		return id;
+	}
+
+	public ArrayList<String> getName() {
+		return name;
+	}
+
+	public ArrayList<Double> getX() {
+		return x;
+	}
+
+	public ArrayList<Double> getY() {
+		return y;
+	}
 }
