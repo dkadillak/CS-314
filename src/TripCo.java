@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import Model.Model;
 import View.View;
 import Presenter.Presenter;
 
@@ -9,6 +10,8 @@ public class TripCo {
 		ArrayList<String> name = null;
 		ArrayList<Double> x = null, y = null;
 		View view = new View(id, name, x, y);
-		Presenter presenter = new Presenter(view);
+		int rows = 0;
+		Model model = new Model(rows);
+		Presenter presenter = new Presenter(view, model);
 	}	
 }
