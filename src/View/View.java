@@ -31,6 +31,12 @@ public class View {
 		//start is the name of the first location in the leg
 		//finish the the name of the destination of the leg
 		
+		itinerary.println("<leg>");
+		itinerary.println("\t<sequence>" + sequence + "</sequence>");
+		itinerary.println("\t<start>" + start + "</start>");
+		itinerary.println("\t<finish>" + finish + "</finish>");
+		itinerary.println("\t<milage>" + milage + "</milage>");
+		itinerary.println("</leg>");
 	}
 	
 	//finalize XML
