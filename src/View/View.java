@@ -1,32 +1,31 @@
 package View;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class View {
-	private ArrayList<Integer> id;
-	private ArrayList<String> name;
-	private ArrayList<Double> x, y;
+	private PrintWriter itinerary, map;
 	
-	public View(ArrayList<Integer> ID, ArrayList<String> Name, ArrayList<Double> X, ArrayList<Double> Y){
-		id = ID;
-		name = Name;
-		x = X;
-		y = Y;
+	public View(File xml, File svg){
+		try {
+			itinerary = new PrintWriter(xml);
+			map = new PrintWriter(svg);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+
+	//just for use by JUnit
+	public PrintWriter getMap() {
+		return map;
 	}
 
-	public ArrayList<Integer> getId() {
-		return id;
+	//just for use by JUnit
+	public PrintWriter getItinerary() {
+		return itinerary;
 	}
-
-	public ArrayList<String> getName() {
-		return name;
-	}
-
-	public ArrayList<Double> getX() {
-		return x;
-	}
-
-	public ArrayList<Double> getY() {
-		return y;
-	}
+	
 }
