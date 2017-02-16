@@ -1,13 +1,16 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class location {
 	
 	//class variables
-	private String fileType;
+	//private String fileType;
 	
-	private String name, quadrangle, countySeat, city;
-	private int id, elevation, estimatedProminence;
+	private String name; 
+	private int id;
 	private double latitude, longitude;
+	private ArrayList<String> other;
 	
 	//double getters
 	public double getLatitude(){
@@ -17,25 +20,27 @@ public class location {
 	public double getLongitudee(){
 		return longitude;
 	}
-	
 	//String getters
 	public String getName(){
 		return name;
 	}
 	
-	public String getQuadrangle(){
-		return quadrangle;
+	//generic constructor
+	public location(String Name, int ID, double Latitude, double Longitude, ArrayList<String> Other){
+		
+		name=Name;
+		id=ID;
+		latitude=Latitude;
+		longitude=Longitude;
+		other=Other;
+		
 	}
 	
-	public String getCountySeat(){
-		return countySeat;
-	}
-	
-	public String getCity(){
-		return city;
-	}
-	
-	//int getters
+	/* Unused constructors and variables
+	 String quadrangle, countySeat, city;
+	 int elevation, estimatedProminence;
+	  
+	int getters
 	public int getId(){
 		return id;
 	}
@@ -48,7 +53,17 @@ public class location {
 		return estimatedProminence;
 	}
 	
+		public String getQuadrangle(){
+		return quadrangle;
+	}
 	
+	public String getCountySeat(){
+		return countySeat;
+	}
+	
+	public String getCity(){
+		return city;
+	}
 	
 	//14ers location constructor
 	public location(String Name, int Id, int Elevation, int EstimatedProminence, double Latitude, double Longitude, String Quadrangle){
@@ -90,5 +105,5 @@ public class location {
 		longitude=Longitude;
 	}
 	
-	
+	*/
 }
