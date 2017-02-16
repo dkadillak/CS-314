@@ -2,33 +2,47 @@ package View;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class TestView {
-	ArrayList<Integer> ids = new ArrayList<Integer>();
-	ArrayList<String> names = new ArrayList<String>();
-	ArrayList<Double> xs = new ArrayList<Double>();
-	ArrayList<Double> ys = new ArrayList<Double>();
+	File xml,svg;
 	View view;
 	
 	@Before
-	public void intialize(){
-		ids.add(10); ids.add(20);
-		names.add("Fort Collins"); names.add("Boulder");
-		xs.add(1.0); xs.add(2.0);
-		ys.add(3.0); ys.add(4.0);
-		view = new View(ids,names,xs,ys);
+	public void setUp(){
+		xml = new File("tempxml");
+		svg = new File("tempsvg");
+		view = new View(xml,svg);
 	}
 
 	@Test
-	public void test() {
-		assertEquals(ids,view.getId());
-		assertEquals(names,view.getName());
-		assertEquals(xs,view.getX());
-		assertEquals(ys,view.getY());
+	public void testStreams() {
+		PrintWriter out = view.getMap();
+		String s = "Test string for output stream";
+		out.println(s);
+		out.close();
+		try {
+			Scanner scan = new Scanner(svg);
+			String scanned = scan.nextLine();
+			assertEquals(s,scanned);
+			scan.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@After
+	public void cleanUp(){
+		xml.delete();
+		svg.delete();
 	}
 
 }
