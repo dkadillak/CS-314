@@ -115,7 +115,7 @@ protected void firstLineParser(String firstLine){
 }
 //still need to implement
 private double LatLongConverter(String LatLong){
-	
+
 	return 2.12;
 }
 
