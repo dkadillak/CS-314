@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class location {
 	
@@ -17,12 +18,26 @@ public class location {
 		return latitude;
 	}
 	
-	public double getLongitudee(){
+	public double getLongitude(){
 		return longitude;
 	}
 	//String getters
 	public String getName(){
 		return name;
+	}
+	public String getOtherAt(int position){
+		
+		return other.get(position);
+	}
+	//int getters
+	public int getID(){
+		return id;
+	}
+	
+	
+	public String toString(){
+	//for some reason other is not getting passed anything
+		return "Name: "+getName()+" ID: "+getID()+" Latitude: "+getLatitude()+" Longitude: "+getLongitude()+" Other: "+other.toString()+"\n";		
 	}
 	
 	//generic constructor
@@ -32,7 +47,8 @@ public class location {
 		id=ID;
 		latitude=Latitude;
 		longitude=Longitude;
-		other=Other;
+		other = new ArrayList<String>();
+		other.addAll(Other);
 		
 	}
 	

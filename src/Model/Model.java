@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 public class Model{
 	
 	//class variables
-	private ArrayList<location> data;
+	public ArrayList<location> data;
 	public ArrayList<String> extra;
 	public String Name;
 	public int ID;
@@ -23,16 +23,19 @@ public class Model{
 	public double Latitude, Longitude;
 	Scanner scan;
 
-	//model constructor without file parameter for testing purposes
+	//constructor without file parameter for testing purposes
 	public Model(){
-		
+		data = new ArrayList<location>();
+		extra = new ArrayList<String>();
 	}
+	
+	//regular constructor
 	public Model(File file) throws FileNotFoundException{
 	//initializing ArrayLists
 		data = new ArrayList<location>();
 		extra = new ArrayList<String>();
 		
-	//setting up scanner with inputted file
+	//setting up scanner with inputed file
 		scan= new Scanner(file);
 		
 	//setting up scanner to parse individual tokens by comma
@@ -41,53 +44,57 @@ public class Model{
 	//lesgo bby
 		parseData();
 	}
+	
+	//getters
 	public int getFileSize(){
 		return data.size();
 	}
-	private void parseData(){
-		//setting up count
-				int count=0;
-		//setting up string 
+	public int getNamePosition(){
+		return NamePosition;
+	}
+	public int getLatitudePosition(){
+		return LatitudePosition;
+	}
+	public int getLongitudePosition(){
+		return LongitudePosition;
+	}
+	public int getIDPosition(){
+		return IDPosition;
+	}
+	
+	//toString for Model
+	public String toString(){
+		String s="";
+		for(int i=0;i<data.size();i++){
+			s+=data.get(i);
+		}		
+		return s;
+	}
+	
+private void parseData(){
+
+	//setting up string 
 		String input="";
-		//getting information from very first line of file
+		
+	//getting information from very first line of file
 		if(scan.hasNextLine()){
 			firstLineParser(scan.nextLine());
 		}
-		
-	while(scan.hasNext()){
-		
-		input =scan.next();
-		
-		//removing all white space from a token
-		input=input.replaceAll("\\s", "");
 	
-		if(count==NamePosition){
-			Name=input;
-		}
-		else if(count==IDPosition){
-			ID=Integer.parseInt(input);
-		}
-		else if(count==LatitudePosition){
-			Latitude=LatLongConverter(input.toLowerCase());
-		}
-		else if(count==LongitudePosition){
-			Longitude=LatLongConverter(input.toLowerCase());
-		}
-		else{
-			extra.add(input);
-		}
+	//parsing the rest of the file
+	while(scan.hasNextLine()){
 		
-		System.out.println(input);
-		count++;
-		}	
-	data.add(new location(Name,ID,Latitude,Longitude,extra));
-	extra.clear();
-	count=0;
+			input=scan.nextLine();
+			input=input.replaceAll("\\s", "");
+			lineParser(input);
+	
+		}
 	}
 
-protected void firstLineParser(String firstLine){
+public void firstLineParser(String firstLine){
 
 	String input="";
+	
 	//lower case everything
 	firstLine=firstLine.toLowerCase();
 
@@ -114,36 +121,53 @@ protected void firstLineParser(String firstLine){
 			LongitudePosition=lineCount;
 		}
 		lineCount++;
-		System.out.println("INPUT: "+input);
 	}
-	/*Testing to see if variables were set correctly
-	System.out.println("char symbol test "+(char)176);
-	System.out.println("lineCount="+lineCount);
-	System.out.println("NamePosition="+NamePosition);
-	System.out.println("IDPosition="+IDPosition);
-	System.out.println("LatitudePosition="+LatitudePosition);
-	System.out.println("LongitudePosition="+LongitudePosition);
-	*/
 }
-//still need to implement
+
+public void lineParser(String input){
+	
+	String s[] = input.split(",");
+
+	
+	for(int i=0; i<lineCount;i++){
+		if(i==NamePosition){
+			Name=s[i];
+		}
+		else if(i==IDPosition){
+			ID=Integer.parseInt(s[i]);
+		}
+		else if(i==LatitudePosition){
+			
+			Latitude=LatLongConverter(s[i].toLowerCase());
+		}
+		else if(i==LongitudePosition){
+			
+			Longitude=LatLongConverter(s[i].toLowerCase());
+		}
+		else{
+			extra.add(s[i]);
+		}
+	}
+	data.add(new location(Name,ID,Latitude,Longitude,extra));
+	extra.clear();
+	return;
+}
+
 public double LatLongConverter(String LatLong){
 	//for test cases that call method directly
 	LatLong=LatLong.toLowerCase();
 	
-	//System.out.println("LatLongConverter recieved: "+LatLong);
-	
 	boolean isNeg = false;
 	int removePosition=0;
 	double degrees,minutes,seconds;
-	if((LatLong.charAt(LatLong.length()-1)=='n')||(LatLong.charAt(LatLong.length()-1)=='w')){
+
+	if((LatLong.contains((CharSequence)"n"))||(LatLong.contains((CharSequence)"w"))){
 		isNeg = true;
 	}
-	//System.out.println("result of isNeg: "+isNeg);
 	
 	//first check if degree symbol exists
 	if(LatLong.contains(Character.toString((char) 176))){
 	String doub[]=LatLong.split(Character.toString((char) 176));
-	//System.out.println("degree parsed is: "+doub[0]);
 	degrees = Double.parseDouble(doub[0]);
 	
 	//then check if minutes symbol exists
@@ -168,7 +192,7 @@ public double LatLongConverter(String LatLong){
 	//if just minutes and degree symbol exist, call appropriate converter
 	return degMinConvert(degrees,minutes,isNeg);
 		}
-		//if just degrees symbol exists, it's already in decimal degrees
+		//if just degrees symbol exists, it's already in degrees
 		if(isNeg){
 		return (degrees*-1);
 		}
@@ -176,13 +200,13 @@ public double LatLongConverter(String LatLong){
 			return degrees;
 			}
 		}
-	//if all else fails return -1;
-	return -1;
+	//Oh sweet it was already in decimal degrees
+	return Double.parseDouble(LatLong);
 	
 	}
 
 
-public double degMinSecConvert(double degrees, double minutes, double seconds, boolean isNeg){
+private double degMinSecConvert(double degrees, double minutes, double seconds, boolean isNeg){
 	
 	degrees+=((minutes/60)+(seconds/3600));
 	
@@ -194,7 +218,7 @@ public double degMinSecConvert(double degrees, double minutes, double seconds, b
 	
 }
 
-public double degMinConvert(double degrees, double minutes, boolean isNeg){
+private double degMinConvert(double degrees, double minutes, boolean isNeg){
 	
 	degrees+=((minutes/60));
 	
