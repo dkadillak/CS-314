@@ -23,7 +23,7 @@ public class TripCo {
 		File input = new File(args[0]);
 		File xml = new File(fileName + ".xml"); //make xml file with input file's name
 		File svg = new File(fileName + ".svg"); //make svg file with input file's name
-		View view = new View(xml, svg);
+		View view = new View(xml, svg, 1000);
 		Model model = new Model(input);
 		Presenter presenter = new Presenter(view, model);
 	}	
