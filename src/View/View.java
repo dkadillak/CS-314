@@ -6,11 +6,13 @@ import java.io.PrintWriter;
 
 public class View {
 	private PrintWriter itinerary, map;
+	private int mapLegCount;
 	
 	public View(File xml, File svg, int totalMiles){
 		try {
 			itinerary = new PrintWriter(xml);
 			map = new PrintWriter(svg);
+			mapLegCount = 0;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,7 +57,14 @@ public class View {
 	
 	//adds a line to the map. Coordinates need to be svg coordinates, not lat/long
 	public void addLine(int x1, int y1, int x2, int y2){
-		
+		mapLegCount++;
+		map.print("\t<line id=\"leg" + mapLegCount + "\" ");
+		map.print("y2=\"" + y2 + "\" ");
+		map.print("x2=\"" + x2 + "\" ");
+		map.print("y1=\"" + y1 + "\" ");
+		map.print("x1=\"" + x1 + "\" ");
+		map.print("stroke-width=\"3\" ");
+		map.println("stroke=\"#999999\"/>");
 	}
 	
 	//adds a label, such as an id or name of a location. takes coordinates and the label string
