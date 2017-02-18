@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 public class View {
 	private PrintWriter itinerary, map;
 	
-	public View(File xml, File svg){
+	public View(File xml, File svg, int totalMiles){
 		try {
 			itinerary = new PrintWriter(xml);
 			map = new PrintWriter(svg);
@@ -16,17 +16,28 @@ public class View {
 			e.printStackTrace();
 		}
 		
-		initializeTrip();
+		initializeTrip(totalMiles);
 	}
 	
 	//initialize XML and SVG
-	private void initializeTrip(){
+	private void initializeTrip(int totalMiles){
 		itinerary.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		itinerary.println("<trip>");
 		
 		map.println("<?xml version=\"1.0\"?>");
 		map.println("<svg width=\"1280\" height=\"1024\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\">");
+		
+		addHeader("Titles");
+		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"40\" x=\"640\">Colorado</text>");
+		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"1014\" x=\"640\">" + totalMiles + " miles</text>");
+		addFooter();
+		
 		addHeader("Borders");
+		map.println("\t<line id=\"north\" y2=\"50\" x2=\"1230\" y1=\"50\" x1=\"50\" stroke-width=\"5\" stroke=\"#666666\"/>");
+		map.println("\t<line id=\"east\" y2=\"974\" x2=\"1230\" y1=\"50\" x1=\"1230\" stroke-width=\"5\" stroke=\"#666666\"/>");
+		map.println("\t<line id=\"south\" y2=\"974\" x2=\"50\" y1=\"974\" x1=\"1230\" stroke-width=\"5\" stroke=\"#666666\"/>");
+		map.println("\t<line id=\"west\" y2=\"50\" x2=\"50\" y1=\"974\" x1=\"50\" stroke-width=\"5\" stroke=\"#666666\"/>");
+		addFooter();
 	}
 	
 	//adds a section header to svg. for example, you need to call this with the string "Legs" before you add all the legs,
@@ -34,7 +45,7 @@ public class View {
 	//"Distances" before you add all the milages
 	public void addHeader(String header){
 		map.println("<g>");
-		map.println("<title>" + header + "</title>");
+		map.println("\t<title>" + header + "</title>");
 	}
 	
 	//needs to be called after you finish a section. For example once you've added all the legs, call this
@@ -66,10 +77,13 @@ public class View {
 		itinerary.println("</leg>");
 	}
 	
-	//finalize XML
+	//finalize XML and SVG
 	public void finalizeTrip(){
 		itinerary.println("</trip>");
 		itinerary.close();
+		
+		map.println("</svg>");
+		map.close();
 	}
 	
 
