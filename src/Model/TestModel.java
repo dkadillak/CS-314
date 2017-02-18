@@ -19,13 +19,13 @@ public class TestModel{
 		String t1 = "37° 16' 20.47\" E";
 		//Do I need a test for this?
 		
-	//variable used to see if method converts from degrees minutes seconds to decimel degrees
+	//variable used to see if method converts from degrees minutes seconds to decimal degrees
 		String t2 = "179°59'59.99\" E";
 	//Checking if adding W or N makes value negative
 		String t2a = "179°59'59.99\" W";
 		String t2b = "179°59'59.99\" N";
 		
-	//variable used to see if method converts from degrees minutes to decimel degrees
+	//variable used to see if method converts from degrees minutes to decimal degrees
 		String t3 = "179°59.99'S";
 	//Checking if adding W or N makes value negative
 		String t3a = "179°59.99'W";
@@ -39,7 +39,7 @@ public class TestModel{
 		
 	//Answer variables
 		double t2DD = 179.9999972;
-		double t2abDD = 179.9999972;
+		double t2abDD = -179.9999972;
 		
 		double t3DD = 179.9998333;
 		double t3abDD = -179.9998333;
@@ -52,13 +52,54 @@ public class TestModel{
 		assertEquals(t2abDD,m.LatLongConverter(t2a),.01);
 		assertEquals(t2abDD,m.LatLongConverter(t2b),.01);
 	//assert for t3
-		assertEquals(t3DD,m.LatLongConverter(t3),.01);
+		assertEquals(t3DD,m.LatLongConverter(t3),1);
 		assertEquals(t3abDD,m.LatLongConverter(t3a),.01);
 		assertEquals(t3abDD,m.LatLongConverter(t3b),.01);
 	//assert for t4
-		assertEquals(t4DD,m.LatLongConverter(t4),.01);
+		assertEquals(t4DD,m.LatLongConverter(t4),1);
 		assertEquals(t4abDD,m.LatLongConverter(t4a),.01);
 		assertEquals(t4abDD,m.LatLongConverter(t4b),.01);
+	}
+	
+	@Test
+	public void firstLineParserTest(){
+		m = new Model();
+		String testFirstLine = "blah, ID, other-field, latitude, LONGITUDE, region, city, name ";
+		int NamePosition=7, IDPosition=1, LatitudePosition=3, LongitudePosition=4;
+		
+		m.firstLineParser(testFirstLine);
+		
+		assertEquals(NamePosition,m.getNamePosition());
+		assertEquals(IDPosition,m.getIDPosition());
+		assertEquals(LatitudePosition,m.getLatitudePosition());
+		assertEquals(LongitudePosition,m.getLongitudePosition());
+
+	}
+	
+	@Test
+	public void LineParserTest(){
+		String firstLine = "extraField, Name, ID, extraField, Latitude, Longitude";
+		
+		//deliberately put no spaces in input string because that's how all input strings come
+		//into this method from parseData()
+		String fileBody = "popcorn,Ireland,2,vin-deisal,118.87°N,104.33°E";
+		m = new Model();
+		
+		//Setting up answer variables
+		double Latitude= -118.87, Longitude= 104.33;
+		
+		//setting up private class variables
+		m.firstLineParser(firstLine);
+		m.lineParser(fileBody);
+		
+		assertEquals("Ireland",m.data.get(0).getName());
+		assertEquals(2,m.data.get(0).getID());
+		assertEquals(Latitude, m.data.get(0).getLatitude(),.01);
+		assertEquals(Longitude, m.data.get(0).getLongitude(),.01);
+		assertEquals("popcorn",m.data.get(0).getOtherAt(0));
+		assertEquals("vin-deisal",m.data.get(0).getOtherAt(1));
+	
+		
 	}
 
 }
