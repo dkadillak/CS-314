@@ -7,12 +7,14 @@ import java.io.PrintWriter;
 public class View {
 	private PrintWriter itinerary, map;
 	private int mapLegCount;
+	private int mapLabelCount;
 	
 	public View(File xml, File svg, int totalMiles){
 		try {
 			itinerary = new PrintWriter(xml);
 			map = new PrintWriter(svg);
 			mapLegCount = 0;
+			mapLabelCount = 0;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,8 +70,16 @@ public class View {
 	}
 	
 	//adds a label, such as an id or name of a location. takes coordinates and the label string
+	//should also work for adding milages
+	//When labeling a point, use the same coordinates you used for that point when making a line
+	//When doing a milage, calculate the midpoint of the leg and use that
 	public void addLabel(int x, int y, String label){
-		
+		mapLabelCount++;
+		map.print("\t<text font-family=\"Sans-serif\" font-size=\"16\" ");
+		map.print("id=\"id" + mapLabelCount + "\" ");
+		map.print("y=\"" + y + "\" ");
+		map.print("x=\"" + x + "\"");
+		map.println(">" + label + "</text>");
 	}
 	
 	//add a single leg to the XML itinerary
