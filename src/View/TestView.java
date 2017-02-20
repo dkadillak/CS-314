@@ -215,10 +215,10 @@ public class TestView {
 		view.finalizeTrip();
 	}
 	
-//	@After
-//	public void cleanUp(){
-//		xml.delete();
-//		svg.delete();
-//	}
+	@After
+	public void cleanUp(){
+		xml.delete();
+		svg.delete();
+	}
 
 }
