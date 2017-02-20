@@ -105,6 +105,18 @@ public class View {
 		map.close();
 	}
 	
+	//takes (latitude, longitude), returns (y,x) svg coordinates
+	//result[0] = y		result[1] = x
+	public int[] convertCoords(double lat, double lon){
+		int result[] = new int[2];
+		lat = 41.0 - Math.abs(lat);
+		lat *= 231.0;
+		result[0] = Math.round((float)lat) + 50;
+		lon = 109.0 - Math.abs(lon);
+		lon *= 168.5714;
+		result[1] = Math.round((float)lon) + 50;
+		return result;
+	}
 
 	//just for use by JUnit
 	public PrintWriter getMap() {

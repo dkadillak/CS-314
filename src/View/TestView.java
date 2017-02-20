@@ -197,10 +197,28 @@ public class TestView {
 		}
 	}
 	
-	@After
-	public void cleanUp(){
-		xml.delete();
-		svg.delete();
+	@Test
+	public void testConvert(){
+		xml = new File("temp.xml");
+		svg = new File("testConvert.svg");
+		view = new View(xml,svg,9999);
+		
+		view.addHeader("Labels");
+		int point1[] = view.convertCoords(39.1177, -106.4453);
+		int point2[] = view.convertCoords(37.5774, -105.4857);
+		view.addLabel(point1[1], point1[0], "Point1");
+		view.addLabel(point2[1], point2[0], "Point2");
+		view.addFooter();
+		view.addHeader("Legs");
+		view.addLine(point1[1], point1[0], point2[1], point2[0]);
+		view.addFooter();
+		view.finalizeTrip();
 	}
+	
+//	@After
+//	public void cleanUp(){
+//		xml.delete();
+//		svg.delete();
+//	}
 
 }
