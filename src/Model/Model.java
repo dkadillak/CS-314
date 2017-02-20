@@ -80,8 +80,6 @@ public class Model{
 		for(int i=0;i<legs.size();i++){
 			s+=legs.get(i);
 		}	
-		
-		
 		return s;
 	}
 	
