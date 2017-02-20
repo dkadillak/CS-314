@@ -23,19 +23,19 @@ public class TestModel{
 		String t2 = "179°59'59.99\" E";
 	//Checking if adding W or N makes value negative
 		String t2a = "179°59'59.99\" W";
-		String t2b = "179°59'59.99\" N";
+		String t2b = "179°59'59.99\" S";
 		
 	//variable used to see if method converts from degrees minutes to decimal degrees
-		String t3 = "179°59.99'S";
-	//Checking if adding W or N makes value negative
+		String t3 = "179°59.99'N";
+	//Checking if adding W or S makes value negative
 		String t3a = "179°59.99'W";
-		String t3b = "179°59.99'N";
+		String t3b = "179°59.99'S";
 		
 	//variable used to see if method converts from degrees to decimal degrees
-		String t4 = "179.99°S";
+		String t4 = "179.99°E";
 	//Checking if adding W or N makes value negative 
 		String t4a = "179.99°W";
-		String t4b = "179.99°N";
+		String t4b = "179.99°S";
 		
 	//Answer variables
 		double t2DD = 179.9999972;
@@ -81,24 +81,48 @@ public class TestModel{
 		String firstLine = "extraField, Name, ID, extraField, Latitude, Longitude";
 		
 		//deliberately put no spaces in input string because that's how all input strings come
-		//into this method from parseData()
+		//into this method from parselocations()
 		String fileBody = "popcorn,Ireland,2,vin-deisal,118.87°N,104.33°E";
 		m = new Model();
 		
 		//Setting up answer variables
-		double Latitude= -118.87, Longitude= 104.33;
+		double Latitude= 118.87, Longitude= 104.33;
 		
 		//setting up private class variables
 		m.firstLineParser(firstLine);
 		m.lineParser(fileBody);
 		
-		assertEquals("Ireland",m.data.get(0).getName());
-		assertEquals(2,m.data.get(0).getID());
-		assertEquals(Latitude, m.data.get(0).getLatitude(),.01);
-		assertEquals(Longitude, m.data.get(0).getLongitude(),.01);
-		assertEquals("popcorn",m.data.get(0).getOtherAt(0));
-		assertEquals("vin-deisal",m.data.get(0).getOtherAt(1));
+		assertEquals("Ireland",m.locations.get(0).getName());
+		assertEquals(2,m.locations.get(0).getID());
+		assertEquals(Latitude, m.locations.get(0).getLatitude(),.01);
+		assertEquals(Longitude, m.locations.get(0).getLongitude(),.01);
+		assertEquals("popcorn",m.locations.get(0).getOtherAt(0));
+		assertEquals("vin-deisal",m.locations.get(0).getOtherAt(1));
 	
+		
+	}
+	
+	
+	@Test
+	public void smallestOnLineTest(){
+		m = new Model();
+		int t1[] = new int[] {12,3,0,12321,4};
+		int t2[] = new int [] {0,0,0,0,8,89};
+		
+		assertEquals(1,m.smallestOnLine(t1));
+		assertEquals(4,m.smallestOnLine(t2));
+		
+	}
+	
+	
+	@Test
+	public void circleDistanceTest(){
+		m = new Model();
+		
+		double lat1=118.87, lon1=104.33, lat2=37.57, lon2=-105.79;
+		
+		assertEquals(2081,m.circleDistance(lat1, lon1, lat2, lon2 ));
+		
 		
 	}
 
