@@ -9,31 +9,36 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class Model{
 	
 	//class variables
-	public ArrayList<location> data;
+	public ArrayList<location> locations;
 	public ArrayList<String> extra;
+	public ArrayList<Leg> legs;
 	public String Name;
 	public int ID;
+	private int[][] distances;
 	private int lineCount=0, NamePosition, IDPosition, LatitudePosition, LongitudePosition;
 	public double Latitude, Longitude;
 	Scanner scan;
 
 	//constructor without file parameter for testing purposes
 	public Model(){
-		data = new ArrayList<location>();
+		locations = new ArrayList<location>();
 		extra = new ArrayList<String>();
 	}
 	
 	//regular constructor
 	public Model(File file) throws FileNotFoundException{
 	//initializing ArrayLists
-		data = new ArrayList<location>();
+		locations = new ArrayList<location>();
 		extra = new ArrayList<String>();
+		legs = new ArrayList<Leg>();
+		
 		
 	//setting up scanner with inputed file
 		scan= new Scanner(file);
@@ -42,12 +47,15 @@ public class Model{
 		scan.useDelimiter(",");
 		
 	//lesgo bby
-		parseData();
+		parselocations();
+		distances = new int[getFileSize()][getFileSize()];
+		computeDistances();
+		nearestNeighbor();
 	}
 	
 	//getters
 	public int getFileSize(){
-		return data.size();
+		return locations.size();
 	}
 	public int getNamePosition(){
 		return NamePosition;
@@ -64,14 +72,18 @@ public class Model{
 	
 	//toString for Model
 	public String toString(){
-		String s="";
-		for(int i=0;i<data.size();i++){
-			s+=data.get(i);
+		String s="Locations-\n";
+		for(int i=0;i<locations.size();i++){
+			s+=locations.get(i);
 		}		
+		s+="\nLegs-\n";
+		for(int i=0;i<legs.size();i++){
+			s+=legs.get(i);
+		}	
 		return s;
 	}
 	
-private void parseData(){
+private void parselocations(){
 
 	//setting up string 
 		String input="";
@@ -148,11 +160,102 @@ public void lineParser(String input){
 			extra.add(s[i]);
 		}
 	}
-	data.add(new location(Name,ID,Latitude,Longitude,extra));
+	locations.add(new location(Name,ID,Latitude,Longitude,extra));
 	extra.clear();
 	return;
 }
 
+public int circleDistance(double lat1, double lon1, double lat2, double lon2 ){
+	//credit to http://www.movable-type.co.uk/scripts/latlong.html for formula
+	if((lat1 ==lat2)&&(lon1==lon2)){
+		return 0;
+	}
+
+	double lat1R = Math.toRadians(lat1);
+	double lat2R = Math.toRadians(lat2);
+	double latDiff = Math.toRadians(lat2-lat1);
+	double longDiff= Math.toRadians(lon2-lon1);
+	double R = 3958.756	;
+	
+	/*
+	 R = 6371e3; // metres
+	 φ1 = lat1.toRadians();
+	 φ2 = lat2.toRadians();
+	 Δφ = (lat2-lat1).toRadians();	
+	 Δλ = (lon2-lon1).toRadians();
+
+ 	 a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+        Math.cos(φ1) * Math.cos(φ2) *
+        Math.sin(Δλ/2) * Math.sin(Δλ/2);
+     c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+     d = R * c;
+*/
+	
+	double a = Math.sin(latDiff/2) * Math.sin(latDiff/2)+Math.cos(lat1R)*Math.cos(lat2R)*Math.sin(longDiff/2) * Math.sin(longDiff/2);
+	double c = 2 * (Math.atan2(Math.sqrt(a), (Math.sqrt(1-a))));
+
+	return (int) (R * c);
+
+}
+private void computeDistances(){
+	
+	for(int y=0;y<getFileSize();y++){
+		
+		for(int x=0;x<getFileSize();x++){
+			distances[y][x]=(circleDistance(locations.get(y).getLatitude(), locations.get(y).getLongitude(), locations.get(x).getLatitude(), locations.get(x).getLongitude()));
+		}
+	}
+}
+
+private void printArray(){
+	
+	for(int y=0;y<getFileSize();y++){
+		for(int x=0;x<getFileSize();x++){
+		System.out.print(distances[y][x]+" ");
+		}
+		System.out.println();
+	}
+	System.out.println("\n");
+}
+
+private void nearestNeighbor(){
+		
+	int indexOfClosest, index=0,count=0;
+	indexOfClosest=smallestOnLine(distances[0]);
+	while(count!=(getFileSize())){
+		
+		
+		legs.add(new Leg(locations.get(index).getName(),locations.get(indexOfClosest).getName(),distances[index][indexOfClosest]));
+		zerOut(indexOfClosest);
+		index = indexOfClosest;
+		indexOfClosest=smallestOnLine(distances[index]);
+		count++;
+	}
+}
+public int smallestOnLine(int row[]){
+	int smallest=0, position=0;
+	
+	for(int i=0;i<row.length;i++){ 
+		if(row[i]!=0){
+			smallest = row[i];
+			position = i;
+			break;
+		}
+	}
+	for(int i=0;i<row.length;i++){
+		if((row[i]!=0)&&row[i]<smallest){
+			smallest = row[i];
+			position = i;
+		}
+	}
+	return position;
+}
+private void zerOut(int index){
+	for(int i=0; i<getFileSize();i++){
+		distances[i][index]=0;
+	}
+}
 public double LatLongConverter(String LatLong){
 	//for test cases that call method directly
 	LatLong=LatLong.toLowerCase();
@@ -161,7 +264,7 @@ public double LatLongConverter(String LatLong){
 	int removePosition=0;
 	double degrees,minutes,seconds;
 
-	if((LatLong.contains((CharSequence)"n"))||(LatLong.contains((CharSequence)"w"))){
+	if((LatLong.contains((CharSequence)"s"))||(LatLong.contains((CharSequence)"w"))){
 		isNeg = true;
 	}
 	
