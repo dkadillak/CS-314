@@ -11,4 +11,5 @@ public class Presenter {
 		this.view = view;
 		this.model = model;
 	}
+	
 }
