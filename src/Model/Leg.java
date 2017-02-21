@@ -25,7 +25,7 @@ public class Leg {
 	}
 	
 	//constructor
-	public Leg(String Start, int StartLocationID,  String End, int EndLocationID,int Mileage){
+	public Leg(String Start, int StartLocationID, String End, int EndLocationID,int Mileage){
 		startLocation=Start;
 		endLocation=End;
 		distance=Mileage;
