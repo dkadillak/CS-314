@@ -220,12 +220,9 @@ private void printArray(){
 }
 
 private void nearestNeighbor(){
-		
 	int indexOfClosest, index=0,count=0;
 	indexOfClosest=smallestOnLine(distances[0]);
 	while(count!=(getFileSize())){
-		
-		
 		legs.add(new Leg(locations.get(index).getName(),locations.get(index).getID(),locations.get(indexOfClosest).getName(),locations.get(indexOfClosest).getID(),distances[index][indexOfClosest]));
 		zerOut(indexOfClosest);
 		index = indexOfClosest;
@@ -244,7 +241,7 @@ public int smallestOnLine(int row[]){
 		}
 	}
 	for(int i=0;i<row.length;i++){
-		if((row[i]!=0)&&row[i]<smallest){
+		if(((row[i]!=0)&&(row[i]<smallest))){
 			smallest = row[i];
 			position = i;
 		}
