@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import Model.Model;
 import View.View;
 import Presenter.Presenter;
@@ -53,6 +52,14 @@ public class TripCo {
 		}
 		//this line used to test command line parsing
 		//System.out.println("m:" + count_m + " i:" + count_i + " n:" + count_n);
+		boolean opt_m = false; boolean opt_i = false; boolean opt_n = false;
+		if(count_m == 1)
+			opt_m = true;
+		if(count_i == 1)
+			opt_i = true;
+		if(count_n == 1)
+			opt_n = true;
+		//System.out.println("m:" + m + " i:" + i + " n:" + n);
 		String fileName = args[0].substring(0, args[0].length() - 4); //take ".csv" off the file name
 		File input = new File(args[0]);
 		File xml = new File(fileName + ".xml"); //make xml file with input file's name
@@ -60,5 +67,6 @@ public class TripCo {
 		View view = new View(xml, svg, 1000);
 		Model model = new Model(input);
 		Presenter presenter = new Presenter(view, model);
+		presenter.makeTrip(opt_m, opt_i, opt_n);
 	}	
 }
