@@ -4,7 +4,7 @@ public class Leg {
 	
 	private String startLocation;
 	private String endLocation;
-	private int distance;
+	private int distance, startLocationID, endLocationID;
 	
 	//getters
 	public String getStartLocation(){
@@ -17,12 +17,20 @@ public class Leg {
 	public int getDistane(){
 		return distance;
 	}
+	public int getstartLocationID(){
+		return startLocationID;
+	}
+	public int getendLocationID(){
+		return endLocationID;
+	}
 	
 	//constructor
-	public Leg(String Start, String End, int Mileage){
+	public Leg(String Start, int StartLocationID,  String End, int EndLocationID,int Mileage){
 		startLocation=Start;
 		endLocation=End;
 		distance=Mileage;
+		 startLocationID=StartLocationID;
+		 endLocationID= EndLocationID;
 	}
 	
 	public String toString(){

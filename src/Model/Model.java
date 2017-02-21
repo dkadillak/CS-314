@@ -226,7 +226,7 @@ private void nearestNeighbor(){
 	while(count!=(getFileSize())){
 		
 		
-		legs.add(new Leg(locations.get(index).getName(),locations.get(indexOfClosest).getName(),distances[index][indexOfClosest]));
+		legs.add(new Leg(locations.get(index).getName(),locations.get(index).getID(),locations.get(indexOfClosest).getName(),locations.get(indexOfClosest).getID(),distances[index][indexOfClosest]));
 		zerOut(indexOfClosest);
 		index = indexOfClosest;
 		indexOfClosest=smallestOnLine(distances[index]);
