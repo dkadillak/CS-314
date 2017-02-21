@@ -195,7 +195,7 @@ public int circleDistance(double lat1, double lon1, double lat2, double lon2 ){
 	double a = Math.sin(latDiff/2) * Math.sin(latDiff/2)+Math.cos(lat1R)*Math.cos(lat2R)*Math.sin(longDiff/2) * Math.sin(longDiff/2);
 	double c = 2 * (Math.atan2(Math.sqrt(a), (Math.sqrt(1-a))));
 
-	return (int) (R * c);
+	return Math.round((float)(R * c));
 
 }
 private void computeDistances(){
@@ -220,19 +220,27 @@ private void printArray(){
 }
 
 private void nearestNeighbor(){
-		
+	int distancesCopy[][] = new int[distances.length][distances[0].length];
+	for(int i=0;i<distances.length;i++){
+		for(int k=0; k<distances[0].length;k++){
+			distancesCopy[i][k] = distances[i][k];
+		}
+	}
 	int indexOfClosest, index=0,count=0;
 	indexOfClosest=smallestOnLine(distances[0]);
+	//printArray();
+	zerOut(index);
+	//printArray();
 	while(count!=(getFileSize())){
-		
-		
-		legs.add(new Leg(locations.get(index).getName(),locations.get(index).getID(),locations.get(indexOfClosest).getName(),locations.get(indexOfClosest).getID(),distances[index][indexOfClosest]));
+		legs.add(new Leg(locations.get(index).getName(),locations.get(index).getID(),locations.get(indexOfClosest).getName(),locations.get(indexOfClosest).getID(),distancesCopy[index][indexOfClosest]));
 		zerOut(indexOfClosest);
 		index = indexOfClosest;
-		indexOfClosest=smallestOnLine(distances[index]);
+		indexOfClosest=smallestOnLine(distances[index]);	
+		
 		count++;
 	}
 }
+
 public int smallestOnLine(int row[]){
 	int smallest=0, position=0;
 	
@@ -244,7 +252,7 @@ public int smallestOnLine(int row[]){
 		}
 	}
 	for(int i=0;i<row.length;i++){
-		if((row[i]!=0)&&row[i]<smallest){
+		if(((row[i]!=0)&&(row[i]<smallest))){
 			smallest = row[i];
 			position = i;
 		}
