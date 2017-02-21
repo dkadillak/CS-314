@@ -64,8 +64,12 @@ public class TripCo {
 		File input = new File(args[0]);
 		File xml = new File(fileName + ".xml"); //make xml file with input file's name
 		File svg = new File(fileName + ".svg"); //make svg file with input file's name
-		View view = new View(xml, svg, 1000);
 		Model model = new Model(input);
+		int totalMiles = 0;
+		for(int i = 0; i < model.legs.size(); i++){
+			totalMiles += model.legs.get(i).getDistance();
+		}
+		View view = new View(xml, svg, totalMiles);
 		Presenter presenter = new Presenter(view, model);
 		presenter.makeTrip(opt_m, opt_i, opt_n);
 	}	
