@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class location {
 	
@@ -9,7 +8,7 @@ public class location {
 	//private String fileType;
 	
 	private String name; 
-	private int id;
+	private String id;
 	private double latitude, longitude;
 	private ArrayList<String> other;
 	
@@ -30,7 +29,7 @@ public class location {
 		return other.get(position);
 	}
 	//int getters
-	public int getID(){
+	public String getID(){
 		return id;
 	}
 	
@@ -41,7 +40,7 @@ public class location {
 	}
 	
 	//generic constructor
-	public location(String Name, int ID, double Latitude, double Longitude, ArrayList<String> Other){
+	public location(String Name, String ID, double Latitude, double Longitude, ArrayList<String> Other){
 		
 		name=Name;
 		id=ID;

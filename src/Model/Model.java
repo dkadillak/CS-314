@@ -1,17 +1,8 @@
 package Model;
-//reader
-//inputstream reader
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 public class Model{
 	
@@ -20,7 +11,7 @@ public class Model{
 	public ArrayList<String> extra;
 	public ArrayList<Leg> legs;
 	public String Name;
-	public int ID;
+	public String ID;
 	private int[][] distances;
 	private int lineCount=0, NamePosition, IDPosition, LatitudePosition, LongitudePosition;
 	public double Latitude, Longitude;
@@ -51,6 +42,7 @@ public class Model{
 		distances = new int[getFileSize()][getFileSize()];
 		computeDistances();
 		nearestNeighbor();
+		scan.close();
 	}
 	
 	//getters
@@ -134,6 +126,7 @@ public void firstLineParser(String firstLine){
 		}
 		lineCount++;
 	}
+	in.close();
 }
 
 public void lineParser(String input){
@@ -146,7 +139,7 @@ public void lineParser(String input){
 			Name=s[i];
 		}
 		else if(i==IDPosition){
-			ID=Integer.parseInt(s[i]);
+			ID=s[i];
 		}
 		else if(i==LatitudePosition){
 			
@@ -208,6 +201,7 @@ private void computeDistances(){
 	}
 }
 
+@SuppressWarnings("unused")
 private void printArray(){
 	
 	for(int y=0;y<getFileSize();y++){
@@ -232,7 +226,7 @@ private void nearestNeighbor(){
 	zerOut(index);
 	//printArray();
 	while(count!=(getFileSize())){
-		legs.add(new Leg(locations.get(index).getName(),locations.get(index).getID(),locations.get(indexOfClosest).getName(),locations.get(indexOfClosest).getID(),distancesCopy[index][indexOfClosest]));
+		legs.add(new Leg(locations.get(index),locations.get(indexOfClosest),distancesCopy[index][indexOfClosest]));
 		zerOut(indexOfClosest);
 		index = indexOfClosest;
 		indexOfClosest=smallestOnLine(distances[index]);	

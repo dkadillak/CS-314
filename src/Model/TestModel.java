@@ -2,11 +2,6 @@ package Model;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-
-import org.junit.Before;
 import org.junit.Test;
 
 public class TestModel{
@@ -16,7 +11,7 @@ public class TestModel{
 	public void LatLongConverterTest() {
 		m = new Model();
 	//variable used to see if method successfully removes spaces and produce correct answer
-		String t1 = "37° 16' 20.47\" E";
+		//String t1 = "37° 16' 20.47\" E";
 		//Do I need a test for this?
 		
 	//variable used to see if method converts from degrees minutes seconds to decimal degrees
@@ -93,7 +88,7 @@ public class TestModel{
 		m.lineParser(fileBody);
 		
 		assertEquals("Ireland",m.locations.get(0).getName());
-		assertEquals(2,m.locations.get(0).getID());
+		assertEquals("2",m.locations.get(0).getID());
 		assertEquals(Latitude, m.locations.get(0).getLatitude(),.01);
 		assertEquals(Longitude, m.locations.get(0).getLongitude(),.01);
 		assertEquals("popcorn",m.locations.get(0).getOtherAt(0));
