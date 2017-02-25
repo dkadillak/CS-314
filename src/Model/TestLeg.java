@@ -10,18 +10,23 @@ public class TestLeg {
 	
 	@Test
 	public void testLeg(){
-	//Leg(String Start, int StartLocationID, String End, int EndLocationID,int Mileage)
-		String Start = "Point A", End = "Point B";
-		int StartID = 0, EndID = 4, mileage = 30;
+		String Name = "Fort Collins";
+		String ID = "10";
+		double latitude = -123.22, longitude = 56.98;
+		ArrayList<String> other = new ArrayList<String>();
+		other.add("banana");
+		other.add("Larimer County");
+		other.add("ok");
 		
-		Leg l = new Leg(Start, StartID, End, EndID, mileage);
+		location start = new location(Name, ID, latitude, longitude, other);
+		location end = new location("Denver","56",-100.6,60.1,other);
+		
+		Leg l = new Leg(start,end,1000);
 		
 		
-		assertEquals(Start, l.getStartLocation());
-		assertEquals(End, l.getendLocation());
-		assertEquals(StartID, l.getstartLocationID());
-		assertEquals(End, l.getendLocation());
-		assertEquals(mileage, l.getDistance());
+		assertEquals(start.getName(), l.getStart().getName());
+		assertEquals(end.getName(), l.getEnd().getName());
+		assertEquals(1000, l.getDistance());
 	}
 	
 	

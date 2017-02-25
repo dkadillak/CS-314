@@ -11,11 +11,11 @@ public class TestLocation {
 	@Test
 	public void locationTests(){
 		
-		//location = String Name, int ID, double Latitude, double Longitude
+		//location = String Name, String ID, double Latitude, double Longitude
 		//ArrayList<String> Other
 		
 		String Name = "Fort Collins", banana="banana",LarimerCounty="Larimer County",ok="ok";
-		int ID = 10;
+		String ID = "10";
 		double latitude = -123.22, longitude = 56.98;
 		ArrayList<String> other = new ArrayList<String>();
 		other.add("banana");
