@@ -47,7 +47,7 @@ public class location {
 		latitude=Latitude;
 		longitude=Longitude;
 		other = new ArrayList<String>();
-		other.addAll(Other);
+		if(Other != null) other.addAll(Other);
 		
 	}
 	
