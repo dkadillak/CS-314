@@ -16,6 +16,7 @@ public class Model{
 	private int lineCount=0, NamePosition, IDPosition, LatitudePosition, LongitudePosition;
 	public double Latitude, Longitude;
 	Scanner scan;
+	public int bestTripDistance;
 
 	//constructor without file parameter for testing purposes
 	public Model(){
@@ -41,7 +42,7 @@ public class Model{
 		parselocations();
 		distances = new int[getFileSize()][getFileSize()];
 		computeDistances();
-		nearestNeighbor();
+		bestNearestNeighbor();
 		scan.close();
 	}
 	
@@ -88,12 +89,13 @@ private void parselocations(){
 	//parsing the rest of the file
 	while(scan.hasNextLine()){
 		
-			input=scan.nextLine();
-			input=input.replaceAll("\\s", "");
-			lineParser(input);
+		input=scan.nextLine();
+		if(input.equals("")) continue;
+		input=input.replaceAll("\\s", "");
+		lineParser(input);
 	
-		}
 	}
+}
 
 public void firstLineParser(String firstLine){
 
@@ -168,7 +170,7 @@ public int circleDistance(double lat1, double lon1, double lat2, double lon2 ){
 	double lat2R = Math.toRadians(lat2);
 	double latDiff = Math.toRadians(lat2-lat1);
 	double longDiff= Math.toRadians(lon2-lon1);
-	double R = 3958.756	;
+	double R = 3958.7558657441	;
 	
 	/*
 	 R = 6371e3; // metres
@@ -213,26 +215,51 @@ private void printArray(){
 	System.out.println("\n");
 }
 
-private void nearestNeighbor(){
+private void bestNearestNeighbor(){
+	int n = getFileSize();
+	trip bestTrip = nearestNeighbor(0);
+	int count = 1;
+	for(int i = 1; count < n; i = (i+1)%n){
+		trip temp = nearestNeighbor(i);
+		if(temp.getTotalDistance() < bestTrip.getTotalDistance())
+			bestTrip = temp;
+		count++;
+	}
+	
+	for(int i = 0; i < bestTrip.size(); i++){
+		legs.add(bestTrip.getLegAt(i));
+	}
+	bestTripDistance = bestTrip.getTotalDistance();
+}
+
+//start is the index of the location you want to be the start point of the trip
+private trip nearestNeighbor(int start){
 	int distancesCopy[][] = new int[distances.length][distances[0].length];
 	for(int i=0;i<distances.length;i++){
 		for(int k=0; k<distances[0].length;k++){
 			distancesCopy[i][k] = distances[i][k];
 		}
 	}
-	int indexOfClosest, index=0,count=0;
-	indexOfClosest=smallestOnLine(distances[0]);
+	int indexOfClosest, index=start,count=0;
+	indexOfClosest=smallestOnLine(distances[start]);
 	//printArray();
 	zerOut(index);
 	//printArray();
-	while(count!=(getFileSize())){
-		legs.add(new Leg(locations.get(index),locations.get(indexOfClosest),distancesCopy[index][indexOfClosest]));
+	trip t = new trip();
+	while(count!=(getFileSize()) - 1){
+		t.addLeg(new Leg(locations.get(index),locations.get(indexOfClosest),distancesCopy[index][indexOfClosest]));
 		zerOut(indexOfClosest);
 		index = indexOfClosest;
 		indexOfClosest=smallestOnLine(distances[index]);	
 		
 		count++;
 	}
+	
+	//special handling for last case to loop back to start location
+	t.addLeg(new Leg(locations.get(index),locations.get(start),distancesCopy[index][start]));
+	
+	distances = distancesCopy.clone();
+	return t;
 }
 
 public int smallestOnLine(int row[]){

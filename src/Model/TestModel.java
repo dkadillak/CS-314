@@ -2,6 +2,9 @@ package Model;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import org.junit.Test;
 
 public class TestModel{
@@ -119,6 +122,13 @@ public class TestModel{
 		assertEquals(2081,m.circleDistance(lat1, lon1, lat2, lon2 ));
 		
 		
+	}
+	
+	@Test
+	public void testBestTrip() throws FileNotFoundException{
+		File f = new File("ColoradoSkiResorts.csv");
+		m = new Model(f);
+		assertEquals(677,m.bestTripDistance);
 	}
 
 }
