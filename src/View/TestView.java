@@ -50,14 +50,14 @@ public class TestView {
 		
 		String s = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 		s += "<trip>\n<leg>\n";
-		s += "\t<sequence>" + 1 + "</sequence>\n";
+		s += "\t<sequence>" + "1" + "</sequence>\n";
 		s += "\t<start>" + start + "</start>\n";
 		s += "\t<finish>" + finish + "</finish>\n";
 		s += "\t<milage>" + milage + "</milage>\n";
 		s += "</leg>\n";
 		s += "</trip>\n";
 		
-		view.addLeg(1, start, finish, milage);
+		view.addLeg("1", start, finish, milage);
 		view.finalizeTrip();
 		
 		try {
