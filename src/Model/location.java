@@ -51,6 +51,16 @@ public class location {
 		
 	}
 	
+	public boolean equals(Object obj){
+		if(this == obj) return true;
+		if(obj instanceof location){
+			location l = (location)obj;
+			if(id == l.id && latitude == l.latitude && longitude == l.longitude && name.equals(l.name))
+				return true;
+		}
+		return false;
+	}
+	
 	/* Unused constructors and variables
 	 String quadrangle, countySeat, city;
 	 int elevation, estimatedProminence;

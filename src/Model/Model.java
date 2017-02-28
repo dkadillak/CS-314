@@ -63,6 +63,18 @@ public class Model{
 		return IDPosition;
 	}
 	
+	private int distance(location l1, location l2){
+		return distances[locationIndex(l1)][locationIndex(l2)];
+	}
+	
+	private int locationIndex(location l){
+		for(int i = 0; i < locations.size(); i++){
+			if(locations.get(i).equals(l))
+				return i;
+		}
+		return -1;
+	}
+	
 	//toString for Model
 	public String toString(){
 		String s="Locations-\n";
@@ -190,7 +202,7 @@ public int circleDistance(double lat1, double lon1, double lat2, double lon2 ){
 	double a = Math.sin(latDiff/2) * Math.sin(latDiff/2)+Math.cos(lat1R)*Math.cos(lat2R)*Math.sin(longDiff/2) * Math.sin(longDiff/2);
 	double c = 2 * (Math.atan2(Math.sqrt(a), (Math.sqrt(1-a))));
 
-	return Math.round((float)(R * c));
+	return (int)Math.ceil(R * c);
 
 }
 private void computeDistances(){
@@ -259,6 +271,66 @@ private trip nearestNeighbor(int start){
 	t.addLeg(new Leg(locations.get(index),locations.get(start),distancesCopy[index][start]));
 	
 	distances = distancesCopy.clone();
+	return t;
+}
+
+public void twoOpt(){
+	//based on pseudocode from https://en.wikipedia.org/wiki/2-opt
+	//create list of locations in order of the current best trip
+	location[] route = new location[getFileSize()];
+	for(int i = 0; i < legs.size(); i++){
+		route[i] = legs.get(i).getStart();
+	}
+	route[getFileSize()-1] = route[0];
+	
+	for(int i = 1; i < getFileSize()-2; i++){
+		for(int k = i+1; k < getFileSize()-1; k++){
+			trip t = twoOptSwap(route, i, k);
+			if(t.getTotalDistance() < bestTripDistance){
+				//update legs and bestTripDistance to new values
+				//and the location array!
+				bestTripDistance = t.getTotalDistance();
+				legs.clear();
+				for(int j = 0; j < t.size(); j++){
+					legs.add(t.getLegAt(j));
+				}
+				for(int j = 0; j < legs.size(); j++){
+					route[j] = legs.get(j).getStart();
+				}
+				route[getFileSize()-1] = route[0];
+			}else return;
+		}
+	}
+}
+
+private trip twoOptSwap(location[] route,int l1, int l2){
+	//based on pseudocode from https://en.wikipedia.org/wiki/2-opt
+	//generate new location order
+	location[] newRoute = new location[route.length];
+	for(int i = 0; i < l1; i++){
+		newRoute[i] = route[i];
+	}
+	
+	int k = l1;
+	for(int i = l2; i >= l1; i--){
+		newRoute[k] = route[i];
+		k++;
+	}
+	
+	for(int i = l2+1; i < route.length; i++){
+		newRoute[i] = route[i];
+	}
+	
+	return generateTrip(newRoute);
+}
+
+//takes an array of locations and makes a trip out of them in the same order as the array
+private trip generateTrip(location[] route){
+	trip t = new trip();
+	for(int i = 0; i < legs.size()-1; i++){
+		t.addLeg(new Leg(route[i],route[i+1],distance(route[i],route[i+1])));
+	}
+	
 	return t;
 }
 
