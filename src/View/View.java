@@ -83,7 +83,7 @@ public class View {
 	}
 	
 	//add a single leg to the XML itinerary
-	public void addLeg(int sequence, String start, String finish, int milage){
+	public void addLeg(String sequence, String start, String finish, int milage){
 		//sequence is which leg of the trip this is. e.g. 1 or 2 or 3
 		//start is the name of the first location in the leg
 		//finish the the name of the destination of the leg
