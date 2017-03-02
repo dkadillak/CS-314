@@ -202,7 +202,7 @@ public int circleDistance(double lat1, double lon1, double lat2, double lon2 ){
 	double a = Math.sin(latDiff/2) * Math.sin(latDiff/2)+Math.cos(lat1R)*Math.cos(lat2R)*Math.sin(longDiff/2) * Math.sin(longDiff/2);
 	double c = 2 * (Math.atan2(Math.sqrt(a), (Math.sqrt(1-a))));
 
-	return (int)Math.ceil(R * c);
+	return Math.round((float)(R * c));
 
 }
 private void computeDistances(){
@@ -277,14 +277,14 @@ private trip nearestNeighbor(int start){
 public void twoOpt(){
 	//based on pseudocode from https://en.wikipedia.org/wiki/2-opt
 	//create list of locations in order of the current best trip
-	location[] route = new location[getFileSize()];
+	location[] route = new location[legs.size()+1];
 	for(int i = 0; i < legs.size(); i++){
 		route[i] = legs.get(i).getStart();
 	}
-	route[getFileSize()-1] = route[0];
+	route[route.length-1] = route[0];
 	
-	for(int i = 1; i < getFileSize()-2; i++){
-		for(int k = i+1; k < getFileSize()-1; k++){
+	for(int i = 1; i < route.length-2; i++){
+		for(int k = i+1; k < route.length-1; k++){
 			trip t = twoOptSwap(route, i, k);
 			if(t.getTotalDistance() < bestTripDistance){
 				//update legs and bestTripDistance to new values
@@ -297,8 +297,10 @@ public void twoOpt(){
 				for(int j = 0; j < legs.size(); j++){
 					route[j] = legs.get(j).getStart();
 				}
-				route[getFileSize()-1] = route[0];
-			}else return;
+				route[route.length-1] = route[0];
+				twoOpt();
+				return;
+			}
 		}
 	}
 }
@@ -327,7 +329,7 @@ private trip twoOptSwap(location[] route,int l1, int l2){
 //takes an array of locations and makes a trip out of them in the same order as the array
 private trip generateTrip(location[] route){
 	trip t = new trip();
-	for(int i = 0; i < legs.size()-1; i++){
+	for(int i = 0; i < route.length-1; i++){
 		t.addLeg(new Leg(route[i],route[i+1],distance(route[i],route[i+1])));
 	}
 	
