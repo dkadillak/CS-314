@@ -119,7 +119,7 @@ public class TestModel{
 		
 		double lat1=118.87, lon1=104.33, lat2=37.57, lon2=-105.79;
 		
-		assertEquals(2082,m.circleDistance(lat1, lon1, lat2, lon2 ));
+		assertEquals(2081,m.circleDistance(lat1, lon1, lat2, lon2 ));
 		
 		
 	}
@@ -128,12 +128,12 @@ public class TestModel{
 	public void testBestTrip() throws FileNotFoundException{
 		File f = new File("ColoradoSkiResorts.csv");
 		m = new Model(f);
-		assertEquals(677,m.bestTripDistance);
+		assertEquals(668,m.bestTripDistance);
 	}
 	
 	@Test
 	public void test2Opt() throws FileNotFoundException{
-		File f = new File("ColoradoSkiResorts.csv");
+		File f = new File("test.csv");
 		m = new Model(f);
 		int old = m.bestTripDistance;
 		System.out.println("Trip distance before 2opt: " + old);
