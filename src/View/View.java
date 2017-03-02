@@ -32,15 +32,15 @@ public class View {
 		map.println("<svg width=\"1280\" height=\"1024\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\">");
 		
 		addHeader("Titles");
-		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"40\" x=\"640\">Colorado</text>");
-		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"1014\" x=\"640\">" + totalMiles + " miles</text>");
+		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"165\" x=\"640\">Colorado</text>");
+		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"874\" x=\"640\">" + totalMiles + " miles</text>");
 		addFooter();
 		
 		addHeader("Borders");
-		map.println("\t<line id=\"north\" y2=\"50\" x2=\"1230\" y1=\"50\" x1=\"50\" stroke-width=\"5\" stroke=\"#666666\"/>");
-		map.println("\t<line id=\"east\" y2=\"974\" x2=\"1230\" y1=\"50\" x1=\"1230\" stroke-width=\"5\" stroke=\"#666666\"/>");
-		map.println("\t<line id=\"south\" y2=\"974\" x2=\"50\" y1=\"974\" x1=\"1230\" stroke-width=\"5\" stroke=\"#666666\"/>");
-		map.println("\t<line id=\"west\" y2=\"50\" x2=\"50\" y1=\"974\" x1=\"50\" stroke-width=\"5\" stroke=\"#666666\"/>");
+		map.println("\t<line id=\"north\" y2=\"175\" x2=\"1230\" y1=\"175\" x1=\"50\" stroke-width=\"5\" stroke=\"#666666\"/>");
+		map.println("\t<line id=\"east\" y2=\"849\" x2=\"1230\" y1=\"175\" x1=\"1230\" stroke-width=\"5\" stroke=\"#666666\"/>");
+		map.println("\t<line id=\"south\" y2=\"849\" x2=\"50\" y1=\"849\" x1=\"1230\" stroke-width=\"5\" stroke=\"#666666\"/>");
+		map.println("\t<line id=\"west\" y2=\"175\" x2=\"50\" y1=\"849\" x1=\"50\" stroke-width=\"5\" stroke=\"#666666\"/>");
 		addFooter();
 	}
 	
@@ -110,8 +110,8 @@ public class View {
 	public int[] convertCoords(double lat, double lon){
 		int result[] = new int[2];
 		lat = 41.0 - Math.abs(lat);
-		lat *= 231.0;
-		result[0] = Math.round((float)lat) + 50;
+		lat *= 168.5;
+		result[0] = Math.round((float)lat) + 175;
 		lon = 109.0 - Math.abs(lon);
 		lon *= 168.5714;
 		result[1] = Math.round((float)lon) + 50;
