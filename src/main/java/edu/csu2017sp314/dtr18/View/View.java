@@ -1,8 +1,19 @@
-package View;
+package main.java.edu.csu2017sp314.dtr18.View;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import javax.swing.*;
+import org.apache.batik.swing.JSVGCanvas;
+import org.apache.batik.swing.gvt.GVTTreeRendererAdapter;
+import org.apache.batik.swing.gvt.GVTTreeRendererEvent;
+import org.apache.batik.swing.svg.SVGDocumentLoaderAdapter;
+import org.apache.batik.swing.svg.SVGDocumentLoaderEvent;
+import org.apache.batik.swing.svg.GVTTreeBuilderAdapter;
+import org.apache.batik.swing.svg.GVTTreeBuilderEvent;
 
 public class View {
 	private PrintWriter itinerary, map;

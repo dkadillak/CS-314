@@ -1,4 +1,4 @@
-package Model;
+package main.java.edu.csu2017sp314.dtr18.Model;
 
 public class Leg {
 	

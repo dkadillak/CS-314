@@ -1,0 +1,5 @@
+language: java
+jdk:
+    - oraclejdk8
+notifications:
+    slack: csu2017sp314:gxRwKuS4JI730yuYXGOiyUZ2

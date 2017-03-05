@@ -1,6 +1,6 @@
-package Presenter;
-import Model.Model;
-import View.View;
+package main.java.edu.csu2017sp314.dtr18.Presenter;
+import main.java.edu.csu2017sp314.dtr18.Model.*;
+import main.java.edu.csu2017sp314.dtr18.View.*;
 
 public class Presenter {
 	private View view;

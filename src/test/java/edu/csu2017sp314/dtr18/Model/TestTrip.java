@@ -1,9 +1,13 @@
-package Model;
+package test.java.edu.csu2017sp314.dtr18.Model;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import main.java.edu.csu2017sp314.dtr18.Model.Leg;
+import main.java.edu.csu2017sp314.dtr18.Model.location;
+import main.java.edu.csu2017sp314.dtr18.Model.trip;
 
 public class TestTrip {
 	private Leg leg;

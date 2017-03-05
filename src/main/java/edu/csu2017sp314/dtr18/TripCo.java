@@ -1,8 +1,10 @@
+package main.java.edu.csu2017sp314.dtr18;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import Model.Model;
-import View.View;
-import Presenter.Presenter;
+import main.java.edu.csu2017sp314.dtr18.Model.*;
+import main.java.edu.csu2017sp314.dtr18.View.*;
+import main.java.edu.csu2017sp314.dtr18.Presenter.*;
 
 public class TripCo {
 	public static void main(String [ ] args) throws FileNotFoundException

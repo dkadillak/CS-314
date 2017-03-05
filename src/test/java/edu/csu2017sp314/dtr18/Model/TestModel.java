@@ -1,4 +1,4 @@
-package Model;
+package test.java.edu.csu2017sp314.dtr18.Model;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import org.junit.Test;
+
+import main.java.edu.csu2017sp314.dtr18.Model.Model;
 
 public class TestModel{
 	Model m;
