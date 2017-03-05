@@ -1,6 +1,7 @@
-package Presenter;
-import Model.Model;
-import View.View;
+package test.java.edu.csu2017sp314.dtr18.Presenter;
+import main.java.edu.csu2017sp314.dtr18.Model.*;
+import main.java.edu.csu2017sp314.dtr18.Presenter.Presenter;
+import main.java.edu.csu2017sp314.dtr18.View.*;
 import static org.junit.Assert.*;
 import java.io.File;
 import java.util.ArrayList;

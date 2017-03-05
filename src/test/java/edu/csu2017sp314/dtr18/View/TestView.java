@@ -1,4 +1,4 @@
-package View;
+package test.java.edu.csu2017sp314.dtr18.View;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +9,8 @@ import java.util.Scanner;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import main.java.edu.csu2017sp314.dtr18.View.View;
 
 public class TestView {
 	File xml,svg;

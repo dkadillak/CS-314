@@ -1,10 +1,12 @@
-package Model;
+package test.java.edu.csu2017sp314.dtr18.Model;
 
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
 import org.junit.Test;
+
+import main.java.edu.csu2017sp314.dtr18.Model.location;
 
 public class TestLocation {
 
