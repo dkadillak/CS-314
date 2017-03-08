@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 import org.junit.Test;
 
@@ -128,20 +129,38 @@ public class TestModel{
 	
 	@Test
 	public void testBestTrip() throws FileNotFoundException{
-		File f = new File("ColoradoSkiResorts.csv");
+		File f = new File("testBestTrip.csv");
+		PrintWriter out = new PrintWriter(f);
+		out.println("Id,Name,County Seat,Latitude,Longitude");
+		out.println("1,Cheyenne County,Cheyenne Wells,38.84°N,102.60°W");
+		out.println("2,El Paso County,Colorado Springs,38.83°N,104.53°W");
+		out.println("3,La Plata County,Durango,37.29°N,107.84°W");
+		out.println("4,Mineral County,Creede,37.65°N,106.93°W");
+		out.println("5,San Juan County,Silverton,37.78°N,107.67°W");
+		out.close();
+		
 		m = new Model(f);
-		assertEquals(668,m.bestTripDistance);
+		f.delete();
+		assertEquals(633,m.bestTripDistance);
 	}
 	
 	@Test
 	public void test2Opt() throws FileNotFoundException{
-		File f = new File("test.csv");
+		File f = new File("test2Opt.csv");
+		PrintWriter out = new PrintWriter(f);
+		out.println("Id,Name,County Seat,Latitude,Longitude");
+		out.println("1,Cheyenne County,Cheyenne Wells,38.84°N,102.60°W");
+		out.println("2,El Paso County,Colorado Springs,38.83°N,104.53°W");
+		out.println("3,La Plata County,Durango,37.29°N,107.84°W");
+		out.println("4,Mineral County,Creede,37.65°N,106.93°W");
+		out.println("5,San Juan County,Silverton,37.78°N,107.67°W");
+		out.close();
+		
 		m = new Model(f);
-		int old = m.bestTripDistance;
-		System.out.println("Trip distance before 2opt: " + old);
+		f.delete();
+		int distance = m.bestTripDistance;
 		m.twoOpt();
-		System.out.println("Trip distance after 2opt: " + m.bestTripDistance);
-		assertTrue(m.bestTripDistance < old);
+		assertTrue(m.bestTripDistance < distance);
 	}
 
 }
