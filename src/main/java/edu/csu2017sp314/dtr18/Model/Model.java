@@ -103,7 +103,7 @@ private void parselocations(){
 		
 		input=scan.nextLine();
 		if(input.equals("")) continue;
-		input=input.replaceAll("\\s", "");
+		//input=input.replaceAll("\\s", "");
 		lineParser(input);
 	
 	}
@@ -150,18 +150,18 @@ public void lineParser(String input){
 	
 	for(int i=0; i<lineCount;i++){
 		if(i==NamePosition){
-			Name=s[i];
+			Name=s[i].trim();
 		}
 		else if(i==IDPosition){
-			ID=s[i];
+			ID=s[i].trim();
 		}
 		else if(i==LatitudePosition){
 			
-			Latitude=LatLongConverter(s[i].toLowerCase());
+			Latitude=LatLongConverter(s[i].toLowerCase().replaceAll("\\s", ""));
 		}
 		else if(i==LongitudePosition){
 			
-			Longitude=LatLongConverter(s[i].toLowerCase());
+			Longitude=LatLongConverter(s[i].toLowerCase().replaceAll("\\s", ""));
 		}
 		else{
 			extra.add(s[i]);
