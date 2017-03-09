@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import org.junit.Test;
 
 import main.java.edu.csu2017sp314.dtr18.Model.Model;
+import main.java.edu.csu2017sp314.dtr18.Model.location;
 
 public class TestModel{
 	Model m;
@@ -161,6 +162,48 @@ public class TestModel{
 		int distance = m.bestTripDistance;
 		m.twoOpt();
 		assertTrue(m.bestTripDistance < distance);
+	}
+	
+	@Test
+	public void test3OptSwap() throws FileNotFoundException{
+		File f = new File("test3OptSwap.csv");
+		PrintWriter out = new PrintWriter(f);
+		out.println("Id,Name,County Seat,Latitude,Longitude");
+		out.println("1,Cheyenne County,Cheyenne Wells,38.84°N,102.60°W");
+		out.println("2,El Paso County,Colorado Springs,38.83°N,104.53°W");
+		out.println("3,La Plata County,Durango,37.29°N,107.84°W");
+		out.println("4,Mineral County,Creede,37.65°N,106.93°W");
+		out.println("5,San Juan County,Silverton,37.78°N,107.67°W");
+		out.println("6,Adams County,Brighton,39.87°N,104.33°W");
+		out.close();
+		
+		String[] expected = new String[7];
+		expected[0] = "5";
+		expected[1] = "3";
+		expected[2] = "4";
+		expected[3] = "2";
+		expected[4] = "1";
+		expected[5] = "6";
+		expected[6] = "5";
+		
+		m = new Model(f);
+		f.delete();
+		
+		location[] input = new location[7];
+		input[0] = m.getLocation("5");
+		input[1] = m.getLocation("3");
+		input[2] = m.getLocation("4");
+		input[3] = m.getLocation("2");
+		input[4] = m.getLocation("6");
+		input[5] = m.getLocation("1");
+		input[6] = m.getLocation("5");
+		
+		location[] result = m.threeOptSwap(input, 2, 3, 5);
+		String[] optimized = new String[7];
+		for(int i = 0; i < 7; i++){
+			optimized[i] = result[i].getID();
+		}
+		assertArrayEquals(expected,optimized);
 	}
 
 }
