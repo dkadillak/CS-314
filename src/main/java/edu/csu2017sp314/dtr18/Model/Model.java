@@ -336,6 +336,37 @@ private trip twoOptSwap(location[] route,int l1, int l2){
 	return generateTrip(newRoute);
 }
 
+public void threeOpt(){
+	twoOpt();
+	
+	//generate location array
+	location[] route = new location[legs.size()+1];
+	for(int i = 0; i < legs.size(); i++){
+		route[i] = legs.get(i).getStart();
+	}
+	route[route.length-1] = route[0];
+	
+	//actual optimization
+	for(int i = 0; i < route.length-3; i++){
+		for(int j = i+1; j < route.length-2; j++){
+			for(int k = j+1; k < route.length-1; k++){
+				location[] newRoute = threeOptSwap(route,i,j,k);
+				if(newRoute != null){
+					route = newRoute;
+				}
+			}
+		}
+	}
+	
+	//update model's trip
+	legs.clear();
+	trip t = generateTrip(route);
+	bestTripDistance = t.getTotalDistance();
+	for(int i = 0; i < t.size(); i++){
+		legs.add(t.getLegAt(i));
+	}
+}
+
 //possible optimization for the future:
 //all possible swaps have 0-i at the beginning and k+1 - end at the end, so you could potentially do all
 //the 0-i 's in a single loop and all the k+1 - end 's in another, with only the middle two loops differing

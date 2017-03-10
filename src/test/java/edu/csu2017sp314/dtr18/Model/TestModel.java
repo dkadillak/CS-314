@@ -205,5 +205,20 @@ public class TestModel{
 		}
 		assertArrayEquals(expected,optimized);
 	}
+	
+	@Test
+	public void test3opt() throws FileNotFoundException{
+		File f = new File("test3Opt.csv");
+		PrintWriter out = new PrintWriter(f);
+		//ColoradoCountySeats.csv in its entirety O.o
+		out.print("Id,Name,County Seat,Latitude,Longitude\n1,Adams County,Brighton,39.87°N,104.33°W\n2,Alamosa County,Alamosa,37.57°N,105.79°W\n3,Arapahoe County,Littleton,39.64°N,104.33°W\n4,Archuleta County,Pagosa Springs,37.20°N,107.05°W\n5,Baca County,Springfield,37.30°N,102.54°W\n6,Bent County,Las Animas,37.93°N,103.08°W\n7,Boulder County,Boulder,40.09°N,105.40°W\n8,City and County of Broomfield,Broomfield,39.95°N,105.05°W\n9,Chaffee County,Salida,38.74°N,106.32°W\n10,Cheyenne County,Cheyenne Wells,38.84°N,102.60°W\n11,Clear Creek County,Georgetown,39.69°N,105.67°W\n12,Conejos County,Conejos,37.21°N,106.18°W\n13,Costilla County,San Luis,37.28°N,105.43°W\n14,Crowley County,Ordway,38.32°N,103.79°W\n15,Custer County,Westcliffe,38.10°N,105.37°W\n16,Delta County,Delta,38.86°N,107.86°W\n17,City and County of Denver,Denver,39.76°N,104.88°W\n18,Dolores County,Dove Creek,37.75°N,108.53°W\n19,Douglas County,Castle Rock,39.33°N,104.93°W\n20,Eagle County,Eagle,39.63°N,106.69°W\n21,Elbert County,Kiowa,39.31°N,104.12°W\n22,El Paso County,Colorado Springs,38.83°N,104.53°W\n23,Fremont County,Ca°on City,38.46°N,105.42°W\n24,Garfield County,Glenwood Springs,39.60°N,107.91°W\n25,Gilpin County,Central City,39.86°N,105.53°W\n26,Grand County,Hot Sulphur Springs,40.12°N,106.10°W\n27,Gunnison County,Gunnison,38.67°N,107.08°W\n28,Hinsdale County,Lake City,37.81°N,107.38°W\n29,Huerfano County,Walsenburg,37.69°N,104.96°W\n30,Jackson County,Walden,40.66°N,106.33°W\n31,Jefferson County,Golden,39.59°N,105.25°W\n32,Kiowa County,Eads,38.39°N,102.76°W\n33,Kit Carson County,Burlington,39.31°N,102.60°W\n34,Lake County,Leadville,39.20°N,106.35°W\n35,La Plata County,Durango,37.29°N,107.84°W\n36,Larimer County,Fort Collins,40.66°N,105.48°W\n37,Las Animas County,Trinidad,37.32°N,104.04°W\n38,Lincoln County,Hugo,38.99°N,103.51°W\n39,Logan County,Sterling,40.73°N,103.09°W\n40,Mesa County,Grand Junction,39.02°N,108.46°W\n41,Mineral County,Creede,37.65°N,106.93°W\n42,Moffat County,Craig,40.57°N,108.20°W\n43,Montezuma County,Cortez,37.34°N,108.60°W\n44,Montrose County,Montrose,38.41°N,108.26°W\n45,Morgan County,Fort Morgan,40.26°N,103.81°W\n46,Otero County,La Junta,37.88°N,103.72°W\n47,Ouray County,Ouray,38.15°N,107.77°W\n48,Park County,Fairplay,39.12°N,105.72°W\n49,Phillips County,Holyoke,40.59°N,102.35°W\n50,Pitkin County,Aspen,39.22°N,106.92°W\n51,Prowers County,Lamar,37.96°N,102.39°W\n52,Pueblo County,Pueblo,38.17°N,104.49°W\n53,Rio Blanco County,Meeker,39.97°N,108.20°W\n54,Rio Grande County,Del Norte,37.49°N,106.45°W\n55,Routt County,Steamboat Springs,40.48°N,106.99°W\n56,Saguache County[7][8],Saguache,38.03°N,106.25°W\n57,San Juan County,Silverton,37.78°N,107.67°W\n58,San Miguel County,Telluride,38.01°N,108.43°W\n59,Sedgwick County,Julesburg,40.87°N,102.36°W\n60,Summit County,Breckenridge,39.62°N,106.14°W\n61,Teller County,Cripple Creek,38.87°N,105.18°W\n62,Washington County,Akron,39.97°N,103.21°W\n63,Weld County,Greeley,40.56°N,104.38°W\n64,Yuma County,Wray,40.00°N,102.42°W");
+		out.close();
+		
+		m = new Model(f);
+		f.delete();
+		int distance = m.bestTripDistance;
+		m.threeOpt();
+		assertTrue(m.bestTripDistance < distance);
+	}
 
 }
