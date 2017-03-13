@@ -13,7 +13,19 @@ public class TripCo {
 	public TripCo(int count){
 		optCount=count;
 	}
-	
+	public void printArgs(String[] args){
+		for(int i=0; i<args.length;i++){
+			System.out.println(i+" "+args[i]);
+		}
+	}
+	public void printOpt(){
+		System.out.println("opt m: "+opt_m);
+		System.out.println("opt i: "+opt_i);
+		System.out.println("opt n: "+opt_n);
+		System.out.println("opt g: "+opt_g);
+		System.out.println("opt 2: "+opt_2);
+		System.out.println("opt 3: "+opt_3);
+	}
 	public int getoptCount(){
 		return optCount;
 	}
@@ -54,10 +66,9 @@ public class TripCo {
 			return false;
 		}
 		
-		//throw error if we get both -2 and -3
+		//If we get both -2 and -3, just do -3
 		if(count_2 >= 1 && count_3 >= 1){
-			System.out.println("Error - Cannot have both " + "\"" + "-2" + "\"" + " and " + "\"" + "-3" + "\"" + " as arguments");
-			return false;
+			count_2 = 0;
 		}
 		
 		//set bools based on options
