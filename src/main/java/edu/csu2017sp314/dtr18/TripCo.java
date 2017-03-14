@@ -155,10 +155,7 @@ public class TripCo {
 	}
 	public void run() throws FileNotFoundException{
 		Model model = new Model(input);
-		int totalMiles = 0;
-		for(int i = 0; i < model.legs.size(); i++){
-			totalMiles += model.legs.get(i).getDistance();
-		}
+		int totalMiles = model.bestTripDistance;
 		View view = new View(xml, svg, totalMiles);
 		Presenter presenter = new Presenter(view, model);
 		presenter.makeTrip(opt_m, opt_i, opt_n, opt_g, opt_2, opt_3);

@@ -284,7 +284,8 @@ private trip nearestNeighbor(int start){
 	return t;
 }
 
-public void twoOpt(){
+//return value is whether any swaps were made
+public boolean twoOpt(){
 	//based on pseudocode from https://en.wikipedia.org/wiki/2-opt
 	//create list of locations in order of the current best trip
 	location[] route = new location[legs.size()+1];
@@ -309,10 +310,11 @@ public void twoOpt(){
 				}
 				route[route.length-1] = route[0];
 				twoOpt();
-				return;
+				return true;
 			}
 		}
 	}
+	return false;
 }
 
 private trip twoOptSwap(location[] route,int l1, int l2){
@@ -336,35 +338,41 @@ private trip twoOptSwap(location[] route,int l1, int l2){
 	return generateTrip(newRoute);
 }
 
-public void threeOpt(){
-	twoOpt();
-	
-	//generate location array
-	location[] route = new location[legs.size()+1];
-	for(int i = 0; i < legs.size(); i++){
-		route[i] = legs.get(i).getStart();
-	}
-	route[route.length-1] = route[0];
-	
-	//actual optimization
-	for(int i = 0; i < route.length-3; i++){
-		for(int j = i+1; j < route.length-2; j++){
-			for(int k = j+1; k < route.length-1; k++){
-				location[] newRoute = threeOptSwap(route,i,j,k);
-				if(newRoute != null){
-					route = newRoute;
+public void threeOpt(){	
+	int swapCount;
+	do {
+		swapCount = 0;
+		
+		//generate location array
+		location[] route = new location[legs.size() + 1];
+		for (int i = 0; i < legs.size(); i++) {
+			route[i] = legs.get(i).getStart();
+		}
+		route[route.length - 1] = route[0];
+		
+		//actual optimization
+		for (int i = 0; i < route.length - 3; i++) {
+			for (int j = i + 1; j < route.length - 2; j++) {
+				for (int k = j + 1; k < route.length - 1; k++) {
+					location[] newRoute = threeOptSwap(route, i, j, k);
+					if (newRoute != null) {
+						route = newRoute;
+						swapCount++;
+					}
 				}
 			}
 		}
-	}
-	
-	//update model's trip
-	legs.clear();
-	trip t = generateTrip(route);
-	bestTripDistance = t.getTotalDistance();
-	for(int i = 0; i < t.size(); i++){
-		legs.add(t.getLegAt(i));
-	}
+		
+		//update model's trip
+		if (swapCount > 0) {
+			legs.clear();
+			trip t = generateTrip(route);
+			bestTripDistance = t.getTotalDistance();
+			for (int i = 0; i < t.size(); i++) {
+				legs.add(t.getLegAt(i));
+			}
+		}
+	} while (swapCount > 0 || twoOpt());
 }
 
 //possible optimization for the future:

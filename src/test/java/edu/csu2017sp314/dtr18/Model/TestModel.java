@@ -215,10 +215,11 @@ public class TestModel{
 		out.close();
 		
 		m = new Model(f);
+		Model m2 = new Model(f);
 		f.delete();
-		int distance = m.bestTripDistance;
+		m2.twoOpt();
 		m.threeOpt();
-		assertTrue(m.bestTripDistance < distance);
+		assertTrue(m.bestTripDistance < m2.bestTripDistance);
 	}
 
 }
