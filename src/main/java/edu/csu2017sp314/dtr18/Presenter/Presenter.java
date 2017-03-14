@@ -9,7 +9,16 @@ public class Presenter {
 		this.view = view;
 		this.model = model;
 	}
-	public void makeTrip(boolean opt_m, boolean opt_i, boolean opt_n){
+	public void makeTrip(boolean opt_m, boolean opt_i, boolean opt_n, boolean opt_g, boolean opt_2, boolean opt_3){
+		if(opt_2){
+			model.twoOpt();
+		}
+		if(opt_3){
+			model.threeOpt();
+		}
+		if(opt_g){
+			//code to launch gui will go here
+		}
 		for(int index = 0; index < model.legs.size(); index++){
 			view.addLeg(model.legs.get(index).getStart().getID(), model.legs.get(index).getStart().getName(), model.legs.get(index).getEnd().getName(), model.legs.get(index).getDistance());
 		}
