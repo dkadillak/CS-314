@@ -1,6 +1,7 @@
 package main.java.edu.csu2017sp314.dtr18;
 
 import java.io.File;
+
 import java.io.FileNotFoundException;
 import main.java.edu.csu2017sp314.dtr18.Model.*;
 import main.java.edu.csu2017sp314.dtr18.View.*;
@@ -8,7 +9,7 @@ import main.java.edu.csu2017sp314.dtr18.Presenter.*;
 
 public class TripCo {
 	private int optCount, count_m, count_i ,count_n ,count_g ,count_2 ,count_3;
-	public boolean opt_m, opt_i, opt_n, opt_g, opt_2, opt_3;
+	public boolean opt_m, opt_i, opt_n, opt_g, opt_2, opt_3,xml_exists,svg_exists;
 	public File input, xml, svg;
 	public TripCo(int count){
 		optCount=count;
@@ -19,12 +20,12 @@ public class TripCo {
 		}
 	}
 	public void printOpt(){
-		System.out.println("opt m: "+opt_m);
-		System.out.println("opt i: "+opt_i);
-		System.out.println("opt n: "+opt_n);
-		System.out.println("opt g: "+opt_g);
-		System.out.println("opt 2: "+opt_2);
-		System.out.println("opt 3: "+opt_3);
+		System.out.println("opt m: "+opt_m+" count: "+count_m);
+		System.out.println("opt i: "+opt_i+" count: "+count_i);
+		System.out.println("opt n: "+opt_n+" count: "+count_n);
+		System.out.println("opt g: "+opt_g+" count: "+count_g);
+		System.out.println("opt 2: "+opt_2+" count: "+count_2);
+		System.out.println("opt 3: "+opt_3+" count: "+count_3);
 	}
 	public int getoptCount(){
 		return optCount;
@@ -127,29 +128,33 @@ public class TripCo {
 			System.out.println("Error - File: " + "\"" + args[optCount] + "\"" + " is not of type .csv!");
 			return false;
 		}
-		String fileName = args[optCount].substring(0, args[optCount].length() - 4); //take ".csv" off the file name
+		
+		//take ".csv" off the file name
+		String fileName = args[optCount].substring(0, args[optCount].length() - 4); 
 		//check for .svg file
+		
 		if(optCount+1<args.length){
 			if(!args[optCount+1].endsWith(".svg") || args[optCount+1].equals(".svg")){
-				//check if the file is type .csv or not
+				//check if the file is type .svg or not
 				System.out.println("Error - File: " + "\"" + args[optCount+1] + "\"" + " is not of type .svg!");
 				return false;
 			}
-			//include statement to get the user inputted background image
+			//include statement to get the user inputted background image args[optCount+1]
+			xml_exists=true;
 		}
 		if(optCount+2<args.length){
 			if(!args[optCount+2].endsWith(".xml") || args[optCount+2].equals(".xml")){
-				//check if the file is type .csv or not
+				//check if the file is type .xml or not
 				System.out.println("Error - File: " + "\"" + args[optCount+2] + "\"" + " is not of type .xml!");
 				return false;
 			}
-			//include statement to get user inputed selection.xml
+			//include statement to get user inputed selection.xml args[optCount+2]
+			svg_exists=true;
 		}
 		
-		input = new File(args[0]);
+		input = new File(args[optCount]);
 		xml = new File(fileName + ".xml"); //make xml file with input file's name
 		svg = new File(fileName + ".svg"); //make svg file with input file's name
-		
 		
 		return true;
 	}
@@ -164,6 +169,7 @@ public class TripCo {
 
 //END OF TRIPCO CLASS DEFINITION AND START OF MAIN
 	public static void main(String [ ] args) throws FileNotFoundException{
+		
 		/*command line example:
 		 
 		java TripCo [options] file.csv [map.svg] [selection.xml]
@@ -183,7 +189,6 @@ public class TripCo {
 		int opt=0, files=0;
 		for(int i=0;i<args.length;i++){
 			//check all options until the expected .csv file
-			//error here, isn't taking into account .xml or .svg files
 			if(args[i].matches("(.*)csv")||args[i].matches("(.*)svg")||args[i].matches("(.*)xml")){
 				files++;
 			}
@@ -202,6 +207,7 @@ public class TripCo {
 			}
 			
 			TripCo tc = new TripCo(opt);
+			
 			if(tc.optionCheck(args)==false||tc.fileCheck(args)==false){
 				System.exit(0);;
 			}
