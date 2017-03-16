@@ -21,7 +21,7 @@ public class TestPresenter {
 		testX = new File("junit.xml");
 		testS = new File("junit.svg");
 		model = new Model();
-		view = new View(testX, testS, 1000);
+		view = new View(testX, testS, 1000, false);
 		presenter = new Presenter(view, model);
 
 		assertNotNull(presenter);

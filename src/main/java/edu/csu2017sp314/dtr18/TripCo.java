@@ -3,13 +3,16 @@ package main.java.edu.csu2017sp314.dtr18;
 import java.io.File;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+
 import main.java.edu.csu2017sp314.dtr18.Model.*;
 import main.java.edu.csu2017sp314.dtr18.View.*;
 import main.java.edu.csu2017sp314.dtr18.Presenter.*;
 
 public class TripCo {
 	private int optCount, count_m, count_i ,count_n ,count_g ,count_2 ,count_3;
-	public boolean opt_m, opt_i, opt_n, opt_g, opt_2, opt_3,xml_exists,svg_exists;
+	public boolean opt_m, opt_i, opt_n, opt_g, opt_2, opt_3,xml_exists,svg_exists = false;
 	public File input, xml, svg;
 	public TripCo(int count){
 		optCount=count;
@@ -140,7 +143,7 @@ public class TripCo {
 				return false;
 			}
 			//include statement to get the user inputted background image args[optCount+1]
-			xml_exists=true;
+			svg_exists=true;
 		}
 		if(optCount+2<args.length){
 			if(!args[optCount+2].endsWith(".xml") || args[optCount+2].equals(".xml")){
@@ -149,19 +152,31 @@ public class TripCo {
 				return false;
 			}
 			//include statement to get user inputed selection.xml args[optCount+2]
-			svg_exists=true;
+			xml_exists=true;
 		}
 		
 		input = new File(args[optCount]);
+		svg = new File(fileName + ".svg");
 		xml = new File(fileName + ".xml"); //make xml file with input file's name
-		svg = new File(fileName + ".svg"); //make svg file with input file's name
+		if(svg_exists){
+			File map = new File(args[optCount+1]);
+		    try {
+		    	if(!svg.exists())
+		    		Files.copy(map.toPath(), svg.toPath());
+		    	else
+		    		System.out.println("File: " + svg.getName() + " was overwritten.");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		return true;
 	}
 	public void run() throws FileNotFoundException{
 		Model model = new Model(input);
 		int totalMiles = model.bestTripDistance;
-		View view = new View(xml, svg, totalMiles);
+		View view = new View(xml, svg, totalMiles, svg_exists);
 		Presenter presenter = new Presenter(view, model);
 		presenter.makeTrip(opt_m, opt_i, opt_n, opt_g, opt_2, opt_3);
 	}
@@ -209,7 +224,7 @@ public class TripCo {
 			TripCo tc = new TripCo(opt);
 			
 			if(tc.optionCheck(args)==false||tc.fileCheck(args)==false){
-				System.exit(0);;
+				System.exit(0);
 			}
 			tc.run();
 
