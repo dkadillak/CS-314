@@ -160,7 +160,8 @@ public class TripCo {
 	}
 	public void run() throws FileNotFoundException{
 		Model model = new Model(input);
-		if(opt_2==true){
+    
+  		if(opt_2==true){
 			model.twoOpt();
 		}
 		else if(opt_3==true){
