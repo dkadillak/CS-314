@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import org.junit.After;
@@ -21,7 +22,7 @@ public class TestView {
 	public void testEmptyXml(){
 		xml = new File("testEmpty.xml");
 		svg = new File("testEmpty.svg");
-		view = new View(xml,svg,9999);
+		view = new View(xml,svg,9999, false);
 		
 		view.finalizeTrip();
 		String s = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
@@ -45,7 +46,7 @@ public class TestView {
 	public void testAddLeg(){
 		xml = new File("testAddLeg.xml");
 		svg = new File("testAddLeg.svg");
-		view = new View(xml,svg,9999);
+		view = new View(xml,svg,9999, false);
 		String start = "Fort Collins";
 		String finish = "Denver";
 		int milage = 12;
@@ -78,22 +79,22 @@ public class TestView {
 	public void testEmptyMap(){
 		xml = new File("temp.xml");
 		svg = new File("testEmpty.svg");
-		view = new View(xml,svg,9999);
+		view = new View(xml,svg,9999, false);
 		
 		//expected file
 		String s = "<?xml version=\"1.0\"?>\n";
 		s += "<svg width=\"1280\" height=\"1024\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\">\n";
-		s += "<g>\n";
-		s += "\t<title>Titles</title>\n";
-		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"25\" x=\"532.5\">Colorado</text>\n";
-		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"770\" x=\"532.5\">9999 miles</text>\n";
-		s += "</g>\n";
 		s += "<g>\n";
 		s += "\t<title>Borders</title>\n";
 		s += "\t<line id=\"north\" y2=\"36\" x2=\"1030\" y1=\"36\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
 		s += "\t<line id=\"east\" y2=\"747\" x2=\"1030\" y1=\"36\" x1=\"1028\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
 		s += "\t<line id=\"south\" y2=\"745\" x2=\"1031\" y1=\"746\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
 		s += "\t<line id=\"west\" y2=\"745\" x2=\"37\" y1=\"35\" x1=\"37\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
+		s += "</g>\n";
+		s += "<g>\n";
+		s += "\t<title>Titles</title>\n";
+		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"25\" x=\"532.5\">Colorado</text>\n";
+		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"770\" x=\"532.5\">9999 miles</text>\n";
 		s += "</g>\n";
 		s += "</svg>\n";
 		
@@ -115,22 +116,22 @@ public class TestView {
 	public void testAddLine(){
 		xml = new File("temp.xml");
 		svg = new File("testAddLine.svg");
-		view = new View(xml,svg,9999);
+		view = new View(xml,svg,9999,false);
 		
 		//expected file
 		String s = "<?xml version=\"1.0\"?>\n";
 		s += "<svg width=\"1280\" height=\"1024\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\">\n";
-		s += "<g>\n";
-		s += "\t<title>Titles</title>\n";
-		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"25\" x=\"532.5\">Colorado</text>\n";
-		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"770\" x=\"532.5\">9999 miles</text>\n";
-		s += "</g>\n";
 		s += "<g>\n";
 		s += "\t<title>Borders</title>\n";
 		s += "\t<line id=\"north\" y2=\"36\" x2=\"1030\" y1=\"36\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
 		s += "\t<line id=\"east\" y2=\"747\" x2=\"1030\" y1=\"36\" x1=\"1028\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
 		s += "\t<line id=\"south\" y2=\"745\" x2=\"1031\" y1=\"746\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
 		s += "\t<line id=\"west\" y2=\"745\" x2=\"37\" y1=\"35\" x1=\"37\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
+		s += "</g>\n";
+		s += "<g>\n";
+		s += "\t<title>Titles</title>\n";
+		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"25\" x=\"532.5\">Colorado</text>\n";
+		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"770\" x=\"532.5\">9999 miles</text>\n";
 		s += "</g>\n";
 		s += "<g>\n";
 		s += "\t<title>Legs</title>\n";
@@ -159,22 +160,22 @@ public class TestView {
 	public void testAddLabel(){
 		xml = new File("temp.xml");
 		svg = new File("testAddLabel.svg");	
-		view = new View(xml,svg,9999);
+		view = new View(xml,svg,9999, false);
 		
 		//expected file
 		String s = "<?xml version=\"1.0\"?>\n";
 		s += "<svg width=\"1280\" height=\"1024\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\">\n";
-		s += "<g>\n";
-		s += "\t<title>Titles</title>\n";
-		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"25\" x=\"532.5\">Colorado</text>\n";
-		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"770\" x=\"532.5\">9999 miles</text>\n";
-		s += "</g>\n";
 		s += "<g>\n";
 		s += "\t<title>Borders</title>\n";
 		s += "\t<line id=\"north\" y2=\"36\" x2=\"1030\" y1=\"36\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
 		s += "\t<line id=\"east\" y2=\"747\" x2=\"1030\" y1=\"36\" x1=\"1028\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
 		s += "\t<line id=\"south\" y2=\"745\" x2=\"1031\" y1=\"746\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
 		s += "\t<line id=\"west\" y2=\"745\" x2=\"37\" y1=\"35\" x1=\"37\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
+		s += "</g>\n";
+		s += "<g>\n";
+		s += "\t<title>Titles</title>\n";
+		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"25\" x=\"532.5\">Colorado</text>\n";
+		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"770\" x=\"532.5\">9999 miles</text>\n";
 		s += "</g>\n";
 		s += "<g>\n";
 		s += "\t<title>Labels</title>\n";
@@ -203,7 +204,7 @@ public class TestView {
 	public void testConvert(){
 		xml = new File("temp.xml");
 		svg = new File("testConvert.svg");
-		view = new View(xml,svg,9999);
+		view = new View(xml,svg,9999, false);
 		
 		view.addHeader("Labels");
 		int point1[] = view.convertCoords(39.1177, -106.4453);
@@ -215,6 +216,43 @@ public class TestView {
 		view.addLine(point1[1], point1[0], point2[1], point2[0]);
 		view.addFooter();
 		view.finalizeTrip();
+	}
+	
+	@Test
+	public void testRemoveTag() throws IOException{
+		xml = new File("temp.xml");
+		svg = new File("testEmpty.svg");
+		view = new View(xml,svg,9999, false);
+		
+		//expected file
+		String s = "<?xml version=\"1.0\"?>\n";
+		s += "<svg width=\"1280\" height=\"1024\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\">\n";
+		s += "<g>\n";
+		s += "\t<title>Borders</title>\n";
+		s += "\t<line id=\"north\" y2=\"36\" x2=\"1030\" y1=\"36\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
+		s += "\t<line id=\"east\" y2=\"747\" x2=\"1030\" y1=\"36\" x1=\"1028\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
+		s += "\t<line id=\"south\" y2=\"745\" x2=\"1031\" y1=\"746\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
+		s += "\t<line id=\"west\" y2=\"745\" x2=\"37\" y1=\"35\" x1=\"37\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
+		s += "</g>\n";
+		s += "<g>\n";
+		s += "\t<title>Titles</title>\n";
+		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"25\" x=\"532.5\">Colorado</text>\n";
+		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"770\" x=\"532.5\">9999 miles</text>\n";
+		s += "</g>\n";
+		
+		view.finalizeTrip();
+		view.removeTag(svg);
+		
+		try {
+			Scanner scan = new Scanner(svg);
+			String scanned = "";
+			while(scan.hasNextLine()) scanned += scan.nextLine() + "\n";
+			assertEquals(s,scanned);
+			scan.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@After
