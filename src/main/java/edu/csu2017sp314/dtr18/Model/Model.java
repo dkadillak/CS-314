@@ -338,6 +338,7 @@ private trip twoOptSwap(location[] route,int l1, int l2){
 	return generateTrip(newRoute);
 }
 
+//3opt cannot optimize a trip with less than 6 different locations! 
 public void threeOpt(){	
 	int swapCount;
 	do {
@@ -351,9 +352,9 @@ public void threeOpt(){
 		route[route.length - 1] = route[0];
 		
 		//actual optimization
-		for (int i = 0; i < route.length - 3; i++) {
-			for (int j = i + 1; j < route.length - 2; j++) {
-				for (int k = j + 1; k < route.length - 1; k++) {
+		for (int i = 0; i < route.length - 4; i++) {
+			for (int j = i + 2; j < route.length - 3; j++) {
+				for (int k = j + 2; k < route.length - 1; k++) {
 					location[] newRoute = threeOptSwap(route, i, j, k);
 					if (newRoute != null) {
 						route = newRoute;
