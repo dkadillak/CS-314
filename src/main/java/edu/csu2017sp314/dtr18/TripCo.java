@@ -160,10 +160,17 @@ public class TripCo {
 	}
 	public void run() throws FileNotFoundException{
 		Model model = new Model(input);
+    
+  		if(opt_2==true){
+			model.twoOpt();
+		}
+		else if(opt_3==true){
+			model.threeOpt();
+		}
 		int totalMiles = model.bestTripDistance;
 		View view = new View(xml, svg, totalMiles);
 		Presenter presenter = new Presenter(view, model);
-		presenter.makeTrip(opt_m, opt_i, opt_n, opt_g, opt_2, opt_3);
+		presenter.makeTrip(opt_m, opt_i, opt_n, opt_g);
 	}
 
 
