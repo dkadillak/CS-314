@@ -1,11 +1,9 @@
 package main.java.edu.csu2017sp314.dtr18.View;
 
 import org.apache.batik.swing.*;
-import org.apache.batik.swing.svg.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.Event.*;
 
 public class GUI {
 
