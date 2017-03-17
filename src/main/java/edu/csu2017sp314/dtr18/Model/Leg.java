@@ -25,6 +25,7 @@ public class Leg {
 		return distance;
 	}
 
+	@Override
 	public String toString(){
 		return start.getName() + end.getName() + distance;
 	}

@@ -1,17 +1,12 @@
 package test.java.edu.csu2017sp314.dtr18.View;
 
-import static org.junit.Assert.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.Scanner;
-
 import org.junit.After;
 import org.junit.Test;
 
 import main.java.edu.csu2017sp314.dtr18.View.GUI;
-import main.java.edu.csu2017sp314.dtr18.View.View;
 
 public class TestGUI {
 	GUI gui;

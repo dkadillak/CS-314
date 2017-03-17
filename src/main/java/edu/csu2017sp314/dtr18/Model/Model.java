@@ -86,6 +86,7 @@ public class Model{
 	}
 	
 	//toString for Model
+	@Override
 	public String toString(){
 		String s="Locations-\n";
 		for(int i=0;i<locations.size();i++){
@@ -540,7 +541,7 @@ public double LatLongConverter(String LatLong){
 	int removePosition=0;
 	double degrees,minutes,seconds;
 
-	if((LatLong.contains((CharSequence)"s"))||(LatLong.contains((CharSequence)"w"))){
+	if((LatLong.contains("s"))||(LatLong.contains("w"))){
 		isNeg = true;
 	}
 	

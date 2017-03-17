@@ -34,6 +34,7 @@ public class location {
 	}
 	
 	
+	@Override
 	public String toString(){
 	//for some reason other is not getting passed anything
 		return "Name: "+getName()+" ID: "+getID()+" Latitude: "+getLatitude()+" Longitude: "+getLongitude()+" Other: "+other.toString()+"\n";		
@@ -51,6 +52,7 @@ public class location {
 		
 	}
 	
+	@Override
 	public boolean equals(Object obj){
 		if(this == obj) return true;
 		if(obj instanceof location){

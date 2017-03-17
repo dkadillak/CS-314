@@ -19,6 +19,7 @@ public class GUI {
 		frame.setSize(1100, 850);
 
 		frame.addWindowListener(new WindowAdapter() {
+			@Override
 			public void windowClosing(WindowEvent ev) {
 				System.exit(0);
 			}
