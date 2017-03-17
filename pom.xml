@@ -39,9 +39,8 @@
     </dependency>
     <dependency>
       <groupId>org.apache.xmlgraphics</groupId>
-      <artifactId>batik-transcoder</artifactId>
+      <artifactId>batik-swing</artifactId>
       <version>1.8</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>
