@@ -1,7 +1,13 @@
 package main.java.edu.csu2017sp314.dtr18.View;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 public class View {
@@ -9,32 +15,36 @@ public class View {
 	private int mapLegCount;
 	private int mapLabelCount;
 	
-	public View(File xml, File svg, int totalMiles){
+	public View(File xml, File svg, int totalMiles, boolean background){
 		try {
+			if(background){
+				removeTag(svg);
+				map = new PrintWriter(new FileWriter(svg, true));
+			}
+			else
+				map = new PrintWriter(svg);
 			itinerary = new PrintWriter(xml);
-			map = new PrintWriter(svg);
 			mapLegCount = 0;
 			mapLabelCount = 0;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		initializeTrip(totalMiles);
+		initializeTrip(totalMiles, background);
 	}
 	
 	//initialize XML and SVG
-	private void initializeTrip(int totalMiles){
+	private void initializeTrip(int totalMiles, boolean background){
 		itinerary.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		itinerary.println("<trip>");
 		
+		if(!background){
 		map.println("<?xml version=\"1.0\"?>");
 		map.println("<svg width=\"1280\" height=\"1024\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\">");
-		
-		addHeader("Titles");
-		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"25\" x=\"532.5\">Colorado</text>");
-		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"770\" x=\"532.5\">" + totalMiles + " miles</text>");
-		addFooter();
 		
 		addHeader("Borders");
 		map.println("\t<line id=\"north\" y2=\"36\" x2=\"1030\" y1=\"36\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>");
@@ -42,6 +52,13 @@ public class View {
 		map.println("\t<line id=\"south\" y2=\"745\" x2=\"1031\" y1=\"746\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>");
 		map.println("\t<line id=\"west\" y2=\"745\" x2=\"37\" y1=\"35\" x1=\"37\" stroke-width=\"4\" stroke=\"#666666\"/>");
 		addFooter();
+		}
+		
+		addHeader("Titles");
+		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"25\" x=\"532.5\">Colorado</text>");
+		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"770\" x=\"532.5\">" + totalMiles + " miles</text>");
+		addFooter();
+	
 	}
 	
 	//adds a section header to svg. for example, you need to call this with the string "Legs" before you add all the legs,
@@ -116,6 +133,25 @@ public class View {
 		lon *= 141.5714;
 		result[1] = Math.round((float)lon) + 36;
 		return result;
+	}
+	
+	public void removeTag(File svg) throws IOException{
+		File tempFile = new File("newMap.svg");
+
+		BufferedReader reader = new BufferedReader(new FileReader(svg));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+		String lineToRemove = "</svg>";
+		String currentLine;
+
+		while((currentLine = reader.readLine()) != null) {
+		    String trimmedLine = currentLine.trim();
+		    if(trimmedLine.equals(lineToRemove)) continue;
+		    writer.write(currentLine + System.getProperty("line.separator"));
+		}
+		writer.close(); 
+		reader.close(); 
+		tempFile.renameTo(svg);
 	}
 
 	//just for use by JUnit
