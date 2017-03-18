@@ -13,6 +13,9 @@ public class View {
 	private PrintWriter itinerary, map;
 	private int mapLegCount;
 	private int mapLabelCount;
+	private String itinContents;
+	private GUI gui;
+	private String xmlFilename;
 
 	public View(File xml, File svg, int totalMiles, boolean background){
 		try {
@@ -25,6 +28,9 @@ public class View {
 			itinerary = new PrintWriter(xml);
 			mapLegCount = 0;
 			mapLabelCount = 0;
+			itinContents = "";
+			gui = new GUI();
+			xmlFilename = xml.getName();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -110,6 +116,8 @@ public class View {
 		itinerary.println("\t<finish>" + finish + "</finish>");
 		itinerary.println("\t<milage>" + milage + "</milage>");
 		itinerary.println("</leg>");
+		itinContents += "Sequence: " + sequence + "\nFrom: " + start + "\nTo: "
+		+ finish + "\nMileage: " + Integer.toString(milage) + "\n\n";
 	}
 
 	//finalize XML and SVG
@@ -152,6 +160,11 @@ public class View {
 		writer.close(); 
 		reader.close(); 
 		tempFile.renameTo(svg);
+	}
+	
+	public void displayXML(){
+		gui.displayXML(xmlFilename, itinContents);
+		itinContents = ""; //clear out string for if they want to run another file
 	}
 
 	//just for use by JUnit
