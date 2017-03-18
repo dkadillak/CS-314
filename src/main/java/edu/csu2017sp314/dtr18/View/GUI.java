@@ -1,6 +1,6 @@
 package main.java.edu.csu2017sp314.dtr18.View;
 
-import org.apache.batik.swing.*;
+import org.apache.batik.swing.JSVGCanvas;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
