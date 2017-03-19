@@ -4,7 +4,8 @@ package test.java.edu.csu2017sp314.dtr18.View;
 //import java.io.FileNotFoundException;
 //import java.io.PrintWriter;
 //import org.junit.After;
-import org.junit.Test;
+//import org.junit.Test;
+
 
 import main.java.edu.csu2017sp314.dtr18.View.GUI;
 
@@ -31,13 +32,13 @@ public class TestGUI {
 //		gui.displaySVG("temp.svg");
 //	}
 	
-	@Test
-	public void testDisplayXML(){
-		gui = new GUI();
-		String testFilename = "trip.xml";
-		String testContents = "Sequence: 1\nFrom: Denver\nTo: Boulder\nMileage: 45\n\n";
-		gui.displayXML(testFilename, testContents);
-	}
+//	@Test
+//	public void testDisplayXML(){
+//		gui = new GUI();
+//		String testFilename = "trip.xml";
+//		String testContents = "Sequence: 1\nFrom: Denver\nTo: Boulder\nMileage: 45\n\n";
+//		gui.displayXML(testFilename, testContents);
+//	}
 
 //	@After
 //	public void cleanUp(){
