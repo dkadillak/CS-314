@@ -6,11 +6,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import main.java.edu.csu2017sp314.dtr18.Model.Model;
-import main.java.edu.csu2017sp314.dtr18.Model.location;
 
 public class TestModel{
 	Model m;

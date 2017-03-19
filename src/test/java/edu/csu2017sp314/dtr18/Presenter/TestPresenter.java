@@ -4,8 +4,6 @@ import main.java.edu.csu2017sp314.dtr18.Presenter.Presenter;
 import main.java.edu.csu2017sp314.dtr18.View.*;
 import static org.junit.Assert.*;
 import java.io.File;
-import java.util.ArrayList;
-import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
 
