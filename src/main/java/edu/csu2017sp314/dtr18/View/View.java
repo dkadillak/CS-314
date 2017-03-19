@@ -16,6 +16,7 @@ public class View {
 	private String itinContents;
 	private GUI gui;
 	private String xmlFilename;
+	private String svgFilename;
 
 	public View(File xml, File svg, int totalMiles, boolean background){
 		try {
@@ -31,6 +32,7 @@ public class View {
 			itinContents = "";
 			gui = new GUI();
 			xmlFilename = xml.getName();
+			svgFilename = svg.getName();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -165,6 +167,10 @@ public class View {
 	public void displayXML(){
 		gui.displayXML(xmlFilename, itinContents);
 		itinContents = ""; //clear out string for if they want to run another file
+	}
+	
+	public void displaySVG(){
+		gui.displaySVG(svgFilename);
 	}
 
 	//just for use by JUnit
