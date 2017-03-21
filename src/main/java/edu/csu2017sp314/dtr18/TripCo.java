@@ -211,7 +211,7 @@ public class TripCo{
   		}
 		else
 		view.initializeTrip(model.bestTripDistance, svg_exists);
-		presenter.makeTrip(opt_m, opt_i, opt_n, opt_g, false, false);
+		presenter.makeTrip(opt_m, opt_i, opt_n, false, false, false);
 	}
 
 

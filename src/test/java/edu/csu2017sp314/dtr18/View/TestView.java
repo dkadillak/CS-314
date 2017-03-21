@@ -20,7 +20,8 @@ public class TestView {
 	public void testEmptyXml(){
 		xml = new File("testEmpty.xml");
 		svg = new File("testEmpty.svg");
-		view = new View(xml,svg,9999, false);
+		view = new View(xml,svg, false);
+		view.initializeTrip(9999, false);
 		
 		view.finalizeTrip();
 		String s = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
@@ -44,7 +45,8 @@ public class TestView {
 	public void testAddLeg(){
 		xml = new File("testAddLeg.xml");
 		svg = new File("testAddLeg.svg");
-		view = new View(xml,svg,9999, false);
+		view = new View(xml,svg, false);
+		view.initializeTrip(9999, false);
 		String start = "Fort Collins";
 		String finish = "Denver";
 		int milage = 12;
@@ -77,7 +79,8 @@ public class TestView {
 	public void testEmptyMap(){
 		xml = new File("temp.xml");
 		svg = new File("testEmpty.svg");
-		view = new View(xml,svg,9999, false);
+		view = new View(xml,svg, false);
+		view.initializeTrip(9999, false);
 		
 		//expected file
 		String s = "<?xml version=\"1.0\"?>\n";
@@ -114,7 +117,8 @@ public class TestView {
 	public void testAddLine(){
 		xml = new File("temp.xml");
 		svg = new File("testAddLine.svg");
-		view = new View(xml,svg,9999,false);
+		view = new View(xml,svg, false);
+		view.initializeTrip(9999, false);
 		
 		//expected file
 		String s = "<?xml version=\"1.0\"?>\n";
@@ -158,7 +162,8 @@ public class TestView {
 	public void testAddLabel(){
 		xml = new File("temp.xml");
 		svg = new File("testAddLabel.svg");	
-		view = new View(xml,svg,9999, false);
+		view = new View(xml,svg, false);
+		view.initializeTrip(9999, false);
 		
 		//expected file
 		String s = "<?xml version=\"1.0\"?>\n";
@@ -202,7 +207,8 @@ public class TestView {
 	public void testConvert(){
 		xml = new File("temp.xml");
 		svg = new File("testConvert.svg");
-		view = new View(xml,svg,9999, false);
+		view = new View(xml,svg, false);
+		view.initializeTrip(9999, false);
 		
 		view.addHeader("Labels");
 		int point1[] = view.convertCoords(39.1177, -106.4453);
@@ -220,7 +226,8 @@ public class TestView {
 	public void testRemoveTag() throws IOException{
 		xml = new File("temp.xml");
 		svg = new File("testEmpty.svg");
-		view = new View(xml,svg,9999, false);
+		view = new View(xml,svg, false);
+		view.initializeTrip(9999, false);
 		
 		//expected file
 		String s = "<?xml version=\"1.0\"?>\n";
