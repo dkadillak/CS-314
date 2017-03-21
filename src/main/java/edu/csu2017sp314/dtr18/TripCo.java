@@ -6,11 +6,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import main.java.edu.csu2017sp314.dtr18.Model.*;
 import main.java.edu.csu2017sp314.dtr18.View.*;
 import main.java.edu.csu2017sp314.dtr18.Presenter.*;
 
-public class TripCo {
+public class TripCo{
 	private int optCount, count_m, count_i ,count_n ,count_g ,count_2 ,count_3;
 	public boolean opt_m, opt_i, opt_n, opt_g, opt_2, opt_3,xml_exists,svg_exists = false;
 	public File input, xml, svg;
@@ -22,6 +28,7 @@ public class TripCo {
 			System.out.println(i+" "+args[i]);
 		}
 	}
+
 	public void printOpt(){
 		System.out.println("opt m: "+opt_m+" count: "+count_m);
 		System.out.println("opt i: "+opt_i+" count: "+count_i);
@@ -163,14 +170,16 @@ public class TripCo {
 		    try {
 		    	if(!svg.exists())
 		    		Files.copy(map.toPath(), svg.toPath());
-		    	else
+		    	else{
+		    		svg.delete();
 		    		System.out.println("File: " + svg.getName() + " was overwritten.");
+		    		Files.copy(map.toPath(), svg.toPath());
+		    	}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		
 		return true;
 	}
 	public void run() throws FileNotFoundException{
@@ -182,10 +191,27 @@ public class TripCo {
 		else if(opt_3==true){
 			model.threeOpt();
 		}
-		int totalMiles = model.bestTripDistance;
-		View view = new View(xml, svg, totalMiles, svg_exists);
-		Presenter presenter = new Presenter(view, model);
-		presenter.makeTrip(opt_m, opt_i, opt_n, opt_g);
+  		
+		
+		View view = new View(xml, svg, svg_exists);
+		Presenter presenter = new Presenter(view, model, svg.getName());
+	
+		if(opt_g==true){
+  			AlertBox.fileName = svg.getName();
+			AlertBox.launch();
+			if(AlertBox.opt_2){
+				model.twoOpt();
+			}
+			if(AlertBox.opt_3){
+				
+				model.threeOpt();
+			}
+			view.initializeTrip(model.bestTripDistance, svg_exists);
+			presenter.makeTrip(AlertBox.opt_m, AlertBox.opt_i,AlertBox.opt_n,opt_g,false,false);
+  		}
+		else
+		view.initializeTrip(model.bestTripDistance, svg_exists);
+		presenter.makeTrip(opt_m, opt_i, opt_n, opt_g, false, false);
 	}
 
 

@@ -1,21 +1,29 @@
 package main.java.edu.csu2017sp314.dtr18.Presenter;
+import javafx.application.Application;
+import main.java.edu.csu2017sp314.dtr18.TripCo;
 import main.java.edu.csu2017sp314.dtr18.Model.*;
 import main.java.edu.csu2017sp314.dtr18.View.*;
 
-public class Presenter {
+public class Presenter{
 	private View view;
 	private Model model;
-	public Presenter(View view, Model model) {
+	public String fileName;
+	public Presenter(View view, Model model, String fileName) {
 		this.view = view;
 		this.model = model;
+		this.fileName = fileName;
+		
 	}
-	public void makeTrip(boolean opt_m, boolean opt_i, boolean opt_n, boolean opt_g){
 
-		if(opt_g){
-			//code to launch gui will go here
+	public void makeTrip(boolean opt_m, boolean opt_i, boolean opt_n, boolean opt_g,boolean opt_2, boolean opt_3){
+		if(opt_2){
+			model.twoOpt();
+		}
+		if(opt_3){
+			model.threeOpt();
 		}
 		for(int index = 0; index < model.legs.size(); index++){
-			view.addLeg(model.legs.get(index).getStart().getID(), model.legs.get(index).getStart().getName(), model.legs.get(index).getEnd().getName(), model.legs.get(index).getDistance());
+			view.addLeg(Integer.toString(index+1), model.legs.get(index).getStart().getName(), model.legs.get(index).getEnd().getName(), model.legs.get(index).getDistance());
 		}
 		view.addHeader("Legs");
 		for(int index = 0; index < model.legs.size(); index++){
@@ -54,5 +62,10 @@ public class Presenter {
 			view.addFooter();
 		}
 		view.finalizeTrip();
+		if(opt_g){
+		view.displayXML();
+		view.displaySVG();
+		}
+		return;	
 	}
 }

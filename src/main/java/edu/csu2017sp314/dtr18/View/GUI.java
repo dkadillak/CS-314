@@ -1,17 +1,33 @@
 package main.java.edu.csu2017sp314.dtr18.View;
+import javax.swing.Action;
 
+import org.omg.Messaging.SyncScopeHelper;
+
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.apache.batik.swing.JSVGCanvas;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class GUI {
-
+public class GUI{
+	
 	JSVGCanvas svgCanvas = new JSVGCanvas();
-
+	
 	public GUI() {
-		//svgCanvas.setURI("file:/c:/files/cs314/rectangles.svg");
 	}
+	
 
 	public void displayXML(String filename, String contents){
 		JTextArea textArea = new JTextArea();
@@ -42,4 +58,5 @@ public class GUI {
 		frame.setVisible(true);
 		svgCanvas.setURI(filename);
 	}
+	
 }

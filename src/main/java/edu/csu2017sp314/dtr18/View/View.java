@@ -18,7 +18,7 @@ public class View {
 	private String xmlFilename;
 	private String svgFilename;
 
-	public View(File xml, File svg, int totalMiles, boolean background){
+	public View(File xml, File svg, boolean background){
 		try {
 			if(background){
 				removeTag(svg);
@@ -40,12 +40,12 @@ public class View {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		initializeTrip(totalMiles, background);
+	
 	}
 
+	
 	//initialize XML and SVG
-	private void initializeTrip(int totalMiles, boolean background){
+	public void initializeTrip(int totalMiles, boolean background){
 		itinerary.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		itinerary.println("<trip>");
 
