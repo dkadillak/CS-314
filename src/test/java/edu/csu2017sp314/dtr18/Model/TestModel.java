@@ -141,6 +141,7 @@ public class TestModel{
 		
 		m = new Model(f);
 		f.delete();
+		m.computeDistances();
 		m.bestNearestNeighbor();
 		assertEquals(633,m.bestTripDistance);
 	}
@@ -159,6 +160,7 @@ public class TestModel{
 		
 		m = new Model(f);
 		f.delete();
+		m.computeDistances();
 		m.bestNearestNeighbor();
 		int distance = m.bestTripDistance;
 		m.twoOpt();
@@ -218,6 +220,8 @@ public class TestModel{
 		m = new Model(f);
 		Model m2 = new Model(f);
 		f.delete();
+		m.computeDistances();
+		m2.computeDistances();
 		m.bestNearestNeighbor();
 		m2.bestNearestNeighbor();
 		m2.twoOpt();
@@ -241,10 +245,9 @@ public class TestModel{
 		
 		m = new Model(f);
 		f.delete();
-		m.bestNearestNeighbor();
 		String[] s = {"2","4"};
 		Model subset = new Model(m,s);
-		System.out.println(subset);
+		//System.out.println(subset);
 		assertEquals(2, subset.locations.size());
 		assertEquals("El Paso County", subset.locations.get(0).getName());
 		assertEquals("Mineral County", subset.locations.get(1).getName());

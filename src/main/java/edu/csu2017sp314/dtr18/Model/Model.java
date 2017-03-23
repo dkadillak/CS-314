@@ -40,8 +40,8 @@ public class Model{
 		
 	//lesgo bby
 		parselocations();
-		distances = new int[getFileSize()][getFileSize()];
-		computeDistances();
+		distances = null;
+		//computeDistances();
 		//bestNearestNeighbor();
 		scan.close();
 	}
@@ -58,16 +58,7 @@ public class Model{
 		}
 		
 		//fill in distance table with only the locations in the subset
-		for(int y = 0; y < subset.length; y++){
-			int yIndex = locations.get(y).getIndex();
-			for(int x = 0; x < distances.length; x++){
-				if(x == y){
-					distances[y][x] = -1;
-					continue;
-				}
-				distances[y][x] = m.distances[yIndex][locations.get(x).getIndex()];
-			}
-		}
+		computeDistances();
 	}
 
 	
@@ -247,8 +238,8 @@ public int circleDistance(double lat1, double lon1, double lat2, double lon2 ){
 	return Math.round((float)(R * c));
 
 }
-private void computeDistances(){
-	
+public void computeDistances(){
+	distances = new int[getFileSize()][getFileSize()];
 	for(int y=0;y<getFileSize();y++){
 		
 		for(int x=0;x<getFileSize();x++){
@@ -270,6 +261,10 @@ private void printArray(){
 }
 
 public void bestNearestNeighbor(){
+	if(distances == null){
+		System.err.println("Error: cannot execute bestNearestNeighbor without first computing distances!");
+		System.exit(-1);
+	}
 	int n = getFileSize();
 	trip bestTrip = nearestNeighbor(0);
 	int count = 1;
