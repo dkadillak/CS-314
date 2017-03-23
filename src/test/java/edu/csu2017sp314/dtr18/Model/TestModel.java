@@ -141,6 +141,7 @@ public class TestModel{
 		
 		m = new Model(f);
 		f.delete();
+		m.bestNearestNeighbor();
 		assertEquals(633,m.bestTripDistance);
 	}
 	
@@ -158,6 +159,7 @@ public class TestModel{
 		
 		m = new Model(f);
 		f.delete();
+		m.bestNearestNeighbor();
 		int distance = m.bestTripDistance;
 		m.twoOpt();
 		assertTrue(m.bestTripDistance < distance);
@@ -216,6 +218,8 @@ public class TestModel{
 		m = new Model(f);
 		Model m2 = new Model(f);
 		f.delete();
+		m.bestNearestNeighbor();
+		m2.bestNearestNeighbor();
 		m2.twoOpt();
 		m.threeOpt();
 		//System.out.println("2opt: " + m2.bestTripDistance);
@@ -237,6 +241,7 @@ public class TestModel{
 		
 		m = new Model(f);
 		f.delete();
+		m.bestNearestNeighbor();
 		String[] s = {"2","4"};
 		Model subset = new Model(m,s);
 		System.out.println(subset);

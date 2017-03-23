@@ -42,7 +42,7 @@ public class Model{
 		parselocations();
 		distances = new int[getFileSize()][getFileSize()];
 		computeDistances();
-		bestNearestNeighbor();
+		//bestNearestNeighbor();
 		scan.close();
 	}
 	
@@ -68,8 +68,6 @@ public class Model{
 				distances[y][x] = m.distances[yIndex][locations.get(x).getIndex()];
 			}
 		}
-		
-		bestNearestNeighbor();
 	}
 
 	
@@ -271,7 +269,7 @@ private void printArray(){
 	System.out.println("\n");
 }
 
-private void bestNearestNeighbor(){
+public void bestNearestNeighbor(){
 	int n = getFileSize();
 	trip bestTrip = nearestNeighbor(0);
 	int count = 1;

@@ -184,6 +184,7 @@ public class TripCo{
 	}
 	public void run() throws FileNotFoundException{
 		Model model = new Model(input);
+		model.bestNearestNeighbor();
     
   		if(opt_2==true){
 			model.twoOpt();
