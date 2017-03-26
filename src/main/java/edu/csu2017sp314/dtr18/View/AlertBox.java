@@ -48,6 +48,8 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				primaryStage.setOnCloseRequest(e -> {
 					boolean answer = AlertBox.display("By closing this window you are running file "+fileName+" with no options.");
 					if(answer){
+						selectedLocations = new String[1];
+						selectedLocations[0] = "no subselection";
 					e.consume();
 					Platform.exit();
 					}
@@ -67,12 +69,13 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				subset.getItems().addAll(locations);
 				subset.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 				VBox layout = new VBox(5);
-				layout.getChildren().addAll(b1, b2, b3, b4, b5,subset,button);
+				Label l = new Label("Hold Ctrl while selecting to pick a subset of locations");
+				layout.getChildren().addAll(b1, b2, b3, b4, b5,l,subset,button);
 				
 				BorderPane bp = new BorderPane();
 				bp.setCenter(layout);
 				
-				Scene scene = new Scene(bp,250,250);
+				Scene scene = new Scene(bp,350,450);
 				window.setScene(scene);
 				window.show();
 			}
@@ -87,6 +90,10 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				for(int i=0; i<locations.size();i++){
 					selectedLocations[i] = locations.get(i);
 				}
+				}
+				else if(subset.getSelectionModel().isEmpty()){
+					selectedLocations = new String[1];
+					selectedLocations[0] = "no subselection";
 				}
 				
 				//creating string that will display in gui for user confirmation

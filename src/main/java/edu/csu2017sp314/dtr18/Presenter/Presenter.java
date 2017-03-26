@@ -6,7 +6,7 @@ import main.java.edu.csu2017sp314.dtr18.View.*;
 
 public class Presenter{
 	private View view;
-	private Model model;
+	public Model model;
 	public String fileName;
 	public Presenter(View view, Model model, String fileName) {
 		this.view = view;
@@ -32,19 +32,32 @@ public class Presenter{
 		AlertBox.fileName = fileName;
 		AlertBox.locations = createArray();	
 		AlertBox.launch();
+		if(!(AlertBox.selectedLocations[0].equals("no subselection"))){
+			Model subSelectModel = new Model(model,AlertBox.selectedLocations);
+			model = subSelectModel;
+		}
+		
 		if(AlertBox.opt_2){
+			model.computeDistances();
+			model.bestNearestNeighbor();
 			model.twoOpt();
 		}
 		if(AlertBox.opt_3){
+			model.computeDistances();
+			model.bestNearestNeighbor();
 			model.threeOpt();
 		}
 	}
 	
 	public void makeTrip(boolean opt_m, boolean opt_i, boolean opt_n, boolean opt_g,boolean opt_2, boolean opt_3){
 		if(opt_2){
+			model.computeDistances();
+			model.bestNearestNeighbor();
 			model.twoOpt();
 		}
 		if(opt_3){
+			model.computeDistances();
+			model.bestNearestNeighbor();
 			model.threeOpt();
 		}
 		for(int index = 0; index < model.legs.size(); index++){
