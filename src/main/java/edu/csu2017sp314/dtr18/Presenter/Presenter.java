@@ -14,7 +14,32 @@ public class Presenter{
 		this.fileName = fileName;
 		
 	}
-
+	
+	private String[] createArray(){
+		String ret[] = new String[model.locations.size()];
+		
+		for(int i=0; i<model.locations.size();i++){
+			ret[i] = model.locations.get(i).getName();
+		}
+		
+		return ret;
+	}
+	
+//so AlertBox has a String[] called selectedLocations, use this and the model object
+//to create the subset model object, will need to update model object in view
+//also need to check if selectedLocations is Null (don't make new model obj)
+	public void runGui(){
+		AlertBox.fileName = fileName;
+		AlertBox.locations = createArray();	
+		AlertBox.launch();
+		if(AlertBox.opt_2){
+			model.twoOpt();
+		}
+		if(AlertBox.opt_3){
+			model.threeOpt();
+		}
+	}
+	
 	public void makeTrip(boolean opt_m, boolean opt_i, boolean opt_n, boolean opt_g,boolean opt_2, boolean opt_3){
 		if(opt_2){
 			model.twoOpt();

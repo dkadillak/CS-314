@@ -197,15 +197,7 @@ public class TripCo{
 		Presenter presenter = new Presenter(view, model, svg.getName());
 	
 		if(opt_g==true){
-  			AlertBox.fileName = svg.getName();
-			AlertBox.launch();
-			if(AlertBox.opt_2){
-				model.twoOpt();
-			}
-			if(AlertBox.opt_3){
-				
-				model.threeOpt();
-			}
+			presenter.runGui();
 			view.initializeTrip(model.bestTripDistance, svg_exists);
 			presenter.makeTrip(AlertBox.opt_m, AlertBox.opt_i,AlertBox.opt_n,opt_g,false,false);
   		}
