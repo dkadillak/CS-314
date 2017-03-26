@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import org.junit.After;
 import org.junit.Test;
@@ -258,6 +259,106 @@ public class TestView {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testInitializeSelection() throws FileNotFoundException{
+		xml = new File("testEmpty.xml");
+		svg = new File("testEmpty.svg");
+		view = new View(xml,svg, false);
+		view.initializeSelection("this_name_reserved");
+		view.finalizeSelection();
+		
+		String s = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+		s += "<selection>\n";
+		s += "\t<title>this_name_reserved</title>\n";
+		s += "\t<filename>testEmpty.svg</filename>\n";
+		s += "\t<destinations>\n";
+		s += "\t</destinations>\n";
+		s += "</selection>\n";
+		
+		File sub = view.getSelection();
+		try {
+			Scanner scan = new Scanner(sub);
+			String scanned = "";
+			while(scan.hasNextLine()) scanned += scan.nextLine() + "\n";
+			assertEquals(s,scanned);
+			scan.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		view.deleteSelection();
+	}
+	
+	@Test
+	public void testAddSelectionID() throws FileNotFoundException{
+		xml = new File("testEmpty.xml");
+		svg = new File("testEmpty.svg");
+		view = new View(xml,svg, false);
+		view.initializeSelection("this_name_reserved");
+		view.addSelectionID("2");
+		view.addSelectionID("Denver");
+		view.addSelectionID("Paris");
+		view.addSelectionID("Jerusalem");
+		view.addSelectionID(Integer.toString(56));
+		view.finalizeSelection();
+		
+		String s = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+		s += "<selection>\n";
+		s += "\t<title>this_name_reserved</title>\n";
+		s += "\t<filename>testEmpty.svg</filename>\n";
+		s += "\t<destinations>\n";
+		s += "\t\t<id>2</id>\n";
+		s += "\t\t<id>Denver</id>\n";
+		s += "\t\t<id>Paris</id>\n";
+		s += "\t\t<id>Jerusalem</id>\n";
+		s += "\t\t<id>56</id>\n";
+		s += "\t</destinations>\n";
+		s += "</selection>\n";
+		
+		File sub = view.getSelection();
+		try {
+			Scanner scan = new Scanner(sub);
+			String scanned = "";
+			while(scan.hasNextLine()) scanned += scan.nextLine() + "\n";
+			assertEquals(s,scanned);
+			scan.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		view.deleteSelection();
+	}
+	
+	@Test
+	public void testFinalizeSelection() throws FileNotFoundException{
+		xml = new File("testEmpty.xml");
+		svg = new File("testEmpty.svg");
+		view = new View(xml,svg, false);
+		view.initializeSelection("this_name_reserved");
+		view.finalizeSelection();
+		
+		String s = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+		s += "<selection>\n";
+		s += "\t<title>this_name_reserved</title>\n";
+		s += "\t<filename>testEmpty.svg</filename>\n";
+		s += "\t<destinations>\n";
+		s += "\t</destinations>\n";
+		s += "</selection>\n";
+		
+		File sub = view.getSelection();
+		try {
+			Scanner scan = new Scanner(sub);
+			String scanned = "";
+			while(scan.hasNextLine()) scanned += scan.nextLine() + "\n";
+			assertEquals(s,scanned);
+			scan.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		view.deleteSelection();
 	}
 	
 	@After
