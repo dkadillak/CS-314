@@ -19,8 +19,6 @@ Optional command line arguments:
 -2: run TwoOpt
 -3: run ThreeOpt
 
-//talk about backgroun map and not selection.xml
-
 
 Purpose
 -We have added route optimization with the 2opt 3opt algorithms.
@@ -39,4 +37,9 @@ Issue Summary
 Notes
 -Haversine great-circle distance formula and code from http://www.movable-type.co.uk/scripts/latlong.html
 -TwoOpt based on pseudo code from https://en.wikipedia.org/wiki/2-opt
--
+-SVG generation based on example from: https://xmlgraphics.apache.org/batik/using/swing.html
+-XML creation based on example from: http://alvinalexander.com/java/jframe-example
+-File line removal from stack overflow
+-Dependencies for batik-1.8 and javafx, had trouble getting javafx to work on the lab machines. We added a batik zip file and a javafx jar called jfxrt.jar to our github repo in case you need to configure those to the build path when you test our code.
+
+EclEmma coverage: 67.9%

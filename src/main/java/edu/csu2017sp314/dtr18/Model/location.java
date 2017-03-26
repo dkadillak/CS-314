@@ -11,6 +11,7 @@ public class location {
 	private String id;
 	private double latitude, longitude;
 	private ArrayList<String> other;
+	private int index;		//for use with model distance table
 	
 	//double getters
 	public double getLatitude(){
@@ -33,6 +34,10 @@ public class location {
 		return id;
 	}
 	
+	public int getIndex(){
+		return index;
+	}
+	
 	
 	@Override
 	public String toString(){
@@ -49,7 +54,18 @@ public class location {
 		longitude=Longitude;
 		other = new ArrayList<String>();
 		if(Other != null) other.addAll(Other);
+		index = -1;
+	}
+	
+	public location(String Name, String ID, double Latitude, double Longitude, ArrayList<String> Other, int index){
 		
+		name=Name;
+		id=ID;
+		latitude=Latitude;
+		longitude=Longitude;
+		other = new ArrayList<String>();
+		if(Other != null) other.addAll(Other);
+		this.index = index;
 	}
 	
 	@Override

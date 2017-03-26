@@ -101,6 +101,16 @@
           <artifactId>batik-svg-dom</artifactId>
           <version>1.8</version>
         </dependency>
+        <dependency>
+          <groupId>org.apache.xmlgraphics</groupId>
+          <artifactId>xmlgraphics-commons</artifactId>
+          <version>1.5</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.servicemix.bundles</groupId>
+          <artifactId>org.apache.servicemix.bundles.xmlgraphics-commons</artifactId>
+          <version>1.4_1</version>
+        </dependency>
       </dependencies> 
     </project>
 
