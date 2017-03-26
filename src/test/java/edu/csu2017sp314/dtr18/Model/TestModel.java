@@ -141,6 +141,8 @@ public class TestModel{
 		
 		m = new Model(f);
 		f.delete();
+		m.computeDistances();
+		m.bestNearestNeighbor();
 		assertEquals(633,m.bestTripDistance);
 	}
 	
@@ -158,6 +160,8 @@ public class TestModel{
 		
 		m = new Model(f);
 		f.delete();
+		m.computeDistances();
+		m.bestNearestNeighbor();
 		int distance = m.bestTripDistance;
 		m.twoOpt();
 		assertTrue(m.bestTripDistance < distance);
@@ -216,11 +220,37 @@ public class TestModel{
 		m = new Model(f);
 		Model m2 = new Model(f);
 		f.delete();
+		m.computeDistances();
+		m2.computeDistances();
+		m.bestNearestNeighbor();
+		m2.bestNearestNeighbor();
 		m2.twoOpt();
 		m.threeOpt();
 		//System.out.println("2opt: " + m2.bestTripDistance);
 		//System.out.println("3opt: " + m.bestTripDistance);
 		assertTrue(m.bestTripDistance < m2.bestTripDistance);
+	}
+	
+	@Test
+	public void testSubset() throws FileNotFoundException{
+		File f = new File("testSubset.csv");
+		PrintWriter out = new PrintWriter(f);
+		out.println("Id,Name,County Seat,Latitude,Longitude");
+		out.println("1,Cheyenne County,Cheyenne Wells,38.84°N,102.60°W");
+		out.println("2,El Paso County,Colorado Springs,38.83°N,104.53°W");
+		out.println("3,La Plata County,Durango,37.29°N,107.84°W");
+		out.println("4,Mineral County,Creede,37.65°N,106.93°W");
+		out.println("5,San Juan County,Silverton,37.78°N,107.67°W");
+		out.close();
+		
+		m = new Model(f);
+		f.delete();
+		String[] s = {"2","4"};
+		Model subset = new Model(m,s);
+		//System.out.println(subset);
+		assertEquals(2, subset.locations.size());
+		assertEquals("El Paso County", subset.locations.get(0).getName());
+		assertEquals("Mineral County", subset.locations.get(1).getName());
 	}
 
 }
