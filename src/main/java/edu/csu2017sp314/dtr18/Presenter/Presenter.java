@@ -42,11 +42,14 @@ public class Presenter{
 			model.bestNearestNeighbor();
 			model.twoOpt();
 		}
-		if(AlertBox.opt_3){
+		else if(AlertBox.opt_3){
 			model.computeDistances();
 			model.bestNearestNeighbor();
 			model.threeOpt();
 		}
+		else
+		model.computeDistances();
+		model.bestNearestNeighbor();
 	}
 	
 	public void makeTrip(boolean opt_m, boolean opt_i, boolean opt_n, boolean opt_g,boolean opt_2, boolean opt_3){
