@@ -185,7 +185,6 @@ public class TripCo{
 	public void run() throws FileNotFoundException{
 		Model model = new Model(input);
 		model.computeDistances();
-		model.bestNearestNeighbor();
     /*
   		if(opt_2==true){
 			model.twoOpt();
@@ -203,17 +202,16 @@ public class TripCo{
 			view.initializeTrip(presenter.model.bestTripDistance, svg_exists);
 			presenter.makeTrip(AlertBox.opt_m, AlertBox.opt_i,AlertBox.opt_n,opt_g,opt_2,opt_3);
   		}
-		else
+		else{
 			if(opt_2==true){
-				model.computeDistances();
-				model.bestNearestNeighbor();
 				model.twoOpt();
 			}
 			else if(opt_3==true){
-				model.computeDistances();
-				model.bestNearestNeighbor();
 				model.threeOpt();
 			}
+			else
+				model.bestNearestNeighbor();
+		}
 		
 		view.initializeTrip(model.bestTripDistance, svg_exists);
 		presenter.makeTrip(opt_m, opt_i, opt_n, false, false, false);

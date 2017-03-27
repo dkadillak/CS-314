@@ -275,6 +275,7 @@ public void bestNearestNeighbor(){
 		count++;
 	}
 	
+	legs.clear();
 	for(int i = 0; i < bestTrip.size(); i++){
 		legs.add(bestTrip.getLegAt(i));
 	}
@@ -376,7 +377,6 @@ public void threeOpt(){
 	int start = 0;
 	trip best = null;
 	trip t = null;
-	int distance;
 	while (start < locations.size()) {
 		int swapCount;
 		t = nearestNeighbor(start);
@@ -399,16 +399,17 @@ public void threeOpt(){
 						if (newRoute != null) {
 							route = newRoute;
 							swapCount++;
+							i = j = route.length;
+							break;
 						}
 					}
 				}
 			}
 
-			//update model's trip
+			//update the working trip
 			if (swapCount > 0) {
 				t = generateTrip(route);
 			}
-			distance = t.getTotalDistance();
 		} while (swapCount > 0);
 		
 		if(best == null || t.getTotalDistance() < best.getTotalDistance())
@@ -423,10 +424,7 @@ public void threeOpt(){
 	bestTripDistance = best.getTotalDistance();
 }
 
-//possible optimization for the future:
-//all possible swaps have 0-i at the beginning and k+1 - end at the end, so you could potentially do all
-//the 0-i 's in a single loop and all the k+1 - end 's in another, with only the middle two loops differing
-//between the possible swaps
+
 public location[] threeOptSwap(location[] route, int i, int j, int k){
 	//total distance of the legs being removed
 	int originalDist = distance(route[i],route[i+1]);
@@ -507,25 +505,51 @@ public location[] threeOptSwap(location[] route, int i, int j, int k){
 	dists[3] += distance(route[j+1],route[k+1]);
 	
 	//fifth possible swap (first 2opt, i->i+1 stays the same)
+	index = i+1;
+	for(;index <= j; index++){
+		swaps[4][index] = route[index];
+	}
+	for(int count = k; count >= j+1; count--){
+		swaps[4][index] = route[count];
+		index++;
+	}
+	dists[4] = distance(route[i],route[i+1]);
+	dists[4] += distance(route[j],route[k]);
+	dists[4] += distance(route[j+1],route[k+1]);
 	
+	//sixth possible swap (second 2opt, j->j+1 stays the same)
+	index = i+1;
+	for(int count = k; count >= j+1; count--){
+		swaps[5][index] = route[count];
+		index++;
+	}
+	for(int count = j; count >= i+1; count--){
+		swaps[5][index] = route[count];
+		index++;
+	}
+	dists[5] = distance(route[i],route[k]);
+	dists[5] += distance(route[i+1],route[k+1]);
+	dists[5] += distance(route[j],route[j+1]);
+	
+	//seventh possible swap (third 2opt, k->k+1 stays the same)
+	index = i+1;
+	for(int count = j; count >= i+1; count--){
+		swaps[6][index] = route[count];
+		index++;
+	}
+	for(int count = j+1; count <= k; count++){
+		swaps[6][index] = route[count];
+		index++;
+	}
 	
 	//select and return the best swap, or null if none of the swaps are better
 	int best = 0;
-	for(int count = 1; count < 4; count++){
+	for(int count = 1; count < 7; count++){
 		if(dists[count] < dists[best]) best = count;
 	}
 	
 	if(originalDist < dists[best]) return null;
-	switch(best){
-		case 0: return s1;
-		case 1: return s2;
-		case 2: return s3;
-		case 3: return s4;
-		default: //program should never get here
-			System.err.println("3-opt swap error");
-			System.exit(-1);
-			return null;
-	}
+	return swaps[best];
 }
 
 //takes an array of locations and makes a trip out of them in the same order as the array
