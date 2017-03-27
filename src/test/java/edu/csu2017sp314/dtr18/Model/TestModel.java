@@ -208,7 +208,7 @@ public class TestModel{
 		assertArrayEquals(expected,optimized);
 	}*/
 	
-	@Ignore
+	
 	@Test
 	public void test3opt() throws FileNotFoundException{
 		File f = new File("test3Opt.csv");
