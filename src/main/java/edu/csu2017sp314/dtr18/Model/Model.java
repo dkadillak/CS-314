@@ -40,11 +40,27 @@ public class Model{
 		
 	//lesgo bby
 		parselocations();
-		distances = new int[getFileSize()][getFileSize()];
-		computeDistances();
-		bestNearestNeighbor();
+		distances = null;
+		//computeDistances();
+		//bestNearestNeighbor();
 		scan.close();
 	}
+	
+	public Model(Model m, String[] subset){
+		locations = new ArrayList<location>();
+		extra = new ArrayList<String>();
+		legs = new ArrayList<Leg>();
+		distances = new int[subset.length][subset.length];
+		
+		//fill in locations
+		for(int i = 0; i < subset.length; i++){
+			locations.add(m.getLocation(subset[i]));
+		}
+		
+		//fill in distance table with only the locations in the subset
+		computeDistances();
+	}
+
 	
 	//getters
 	public int getFileSize(){
@@ -73,6 +89,7 @@ public class Model{
 		return null;
 	}
 	
+	
 	private int distance(location l1, location l2){
 		return distances[locationIndex(l1)][locationIndex(l2)];
 	}
@@ -91,11 +108,16 @@ public class Model{
 		String s="Locations-\n";
 		for(int i=0;i<locations.size();i++){
 			s+=locations.get(i);
+			s+="  ";
 		}		
 		s+="\nLegs-\n";
 		for(int i=0;i<legs.size();i++){
 			s+=legs.get(i);
-		}	
+			s+="  ";
+		}
+		s+="\nDistance: ";
+		s+=bestTripDistance;
+		s+="\n";
 		return s;
 	}
 	
@@ -178,7 +200,7 @@ public void lineParser(String input){
 			extra.add(s[i]);
 		}
 	}
-	locations.add(new location(Name,ID,Latitude,Longitude,extra));
+	locations.add(new location(Name,ID,Latitude,Longitude,extra,locations.size()));
 	extra.clear();
 	return;
 }
@@ -216,8 +238,8 @@ public int circleDistance(double lat1, double lon1, double lat2, double lon2 ){
 	return Math.round((float)(R * c));
 
 }
-private void computeDistances(){
-	
+public void computeDistances(){
+	distances = new int[getFileSize()][getFileSize()];
 	for(int y=0;y<getFileSize();y++){
 		
 		for(int x=0;x<getFileSize();x++){
@@ -239,6 +261,10 @@ private void printArray(){
 }
 
 public void bestNearestNeighbor(){
+	if(distances == null){
+		System.err.println("Error: cannot execute bestNearestNeighbor without first computing distances!");
+		System.exit(-1);
+	}
 	int n = getFileSize();
 	trip bestTrip = nearestNeighbor(0);
 	int count = 1;

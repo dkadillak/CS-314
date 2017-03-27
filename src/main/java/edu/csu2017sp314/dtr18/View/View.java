@@ -10,13 +10,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class View {
-	private PrintWriter itinerary, map;
+	private PrintWriter itinerary, map, selection;
 	private int mapLegCount;
 	private int mapLabelCount;
 	private String itinContents;
 	private GUI gui;
 	private String xmlFilename;
 	private String svgFilename;
+	private File select;
 
 	public View(File xml, File svg, boolean background){
 		try {
@@ -66,6 +67,32 @@ public class View {
 		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"770\" x=\"532.5\">" + totalMiles + " miles</text>");
 		addFooter();
 
+	}
+	
+	public void initializeSelection(String filename){
+		select = new File(filename + ".xml");
+		try {
+			selection = new PrintWriter(select);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		selection.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+		selection.println("<selection>");
+		selection.println("\t<title>" + filename + "</title>");
+		selection.println("\t<filename>" + svgFilename + "</filename>");
+		selection.println("\t<destinations>");
+	}
+	
+	public void addSelectionID(String id){
+		selection.println("\t\t<id>" + id + "</id>");
+	}
+	
+	public void finalizeSelection(){
+		selection.println("\t</destinations>");
+		selection.println("</selection>");
+		selection.close();
 	}
 
 	//adds a section header to svg. for example, you need to call this with the string "Legs" before you add all the legs,
@@ -181,6 +208,16 @@ public class View {
 	//just for use by JUnit
 	public PrintWriter getItinerary() {
 		return itinerary;
+	}
+	
+	//just for use by JUnit
+	public File getSelection() {
+		return select;
+	}
+	
+	//just for use by junit, with great power comes great responsibility; seriously though don't use this function except for junit
+	public void deleteSelection(){
+		select.delete();
 	}
 
 }
