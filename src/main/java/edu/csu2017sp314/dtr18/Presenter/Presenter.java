@@ -53,7 +53,8 @@ public class Presenter{
 	}
 	
 	public void makeTrip(boolean opt_m, boolean opt_i, boolean opt_n, boolean opt_g,boolean opt_2, boolean opt_3){
-		if(opt_2){
+		//trip calculation is being handled in TripCo, don't need to do it again here
+		/*if(opt_2){
 			model.computeDistances();
 			model.bestNearestNeighbor();
 			model.twoOpt();
@@ -62,7 +63,7 @@ public class Presenter{
 			model.computeDistances();
 			model.bestNearestNeighbor();
 			model.threeOpt();
-		}
+		}*/
 		for(int index = 0; index < model.legs.size(); index++){
 			view.addLeg(Integer.toString(index+1), model.legs.get(index).getStart().getName(), model.legs.get(index).getEnd().getName(), model.legs.get(index).getDistance());
 		}
