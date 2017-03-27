@@ -186,32 +186,35 @@ public class TripCo{
 		Model model = new Model(input);
 		model.computeDistances();
 		model.bestNearestNeighbor();
-    
+    /*
   		if(opt_2==true){
 			model.twoOpt();
 		}
 		else if(opt_3==true){
 			model.threeOpt();
 		}
-  		
+  		*/
 		
 		View view = new View(xml, svg, svg_exists);
 		Presenter presenter = new Presenter(view, model, svg.getName());
 	
 		if(opt_g==true){
-  			AlertBox.fileName = svg.getName();
-			AlertBox.launch();
-			if(AlertBox.opt_2){
-				model.twoOpt();
-			}
-			if(AlertBox.opt_3){
-				
-				model.threeOpt();
-			}
-			view.initializeTrip(model.bestTripDistance, svg_exists);
-			presenter.makeTrip(AlertBox.opt_m, AlertBox.opt_i,AlertBox.opt_n,opt_g,false,false);
+			presenter.runGui();
+			view.initializeTrip(presenter.model.bestTripDistance, svg_exists);
+			presenter.makeTrip(AlertBox.opt_m, AlertBox.opt_i,AlertBox.opt_n,opt_g,opt_2,opt_3);
   		}
 		else
+			if(opt_2==true){
+				model.computeDistances();
+				model.bestNearestNeighbor();
+				model.twoOpt();
+			}
+			else if(opt_3==true){
+				model.computeDistances();
+				model.bestNearestNeighbor();
+				model.threeOpt();
+			}
+		
 		view.initializeTrip(model.bestTripDistance, svg_exists);
 		presenter.makeTrip(opt_m, opt_i, opt_n, false, false, false);
 	}
