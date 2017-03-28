@@ -75,7 +75,6 @@ public class Model{
 			}
 			s.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String[] ids = new String[temp_ids.size()];
