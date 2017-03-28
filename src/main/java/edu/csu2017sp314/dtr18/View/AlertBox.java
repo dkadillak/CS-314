@@ -13,13 +13,12 @@ import org.omg.Messaging.SyncScopeHelper;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -33,6 +32,9 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	static Button ok,no;
 	static boolean result;		
 	public static String fileName;
+	static ListView subset;
+	public static String[] selectedLocations;
+	public static String[] locations;
 	//class variables
 			Button button;
 			Stage window;
@@ -46,6 +48,8 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				primaryStage.setOnCloseRequest(e -> {
 					boolean answer = AlertBox.display("By closing this window you are running file "+fileName+" with no options.");
 					if(answer){
+						selectedLocations = new String[1];
+						selectedLocations[0] = "no subselection";
 					e.consume();
 					Platform.exit();
 					}
@@ -61,19 +65,37 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				CheckBox b4 = new CheckBox("Run 2opt");
 				CheckBox b5 = new CheckBox("Run 3opt");
 				button.setOnAction(e->this.checkBoxes(b1, b2, b3, b4, b5));
+				subset = new ListView();
+				subset.getItems().addAll(locations);
+				subset.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 				VBox layout = new VBox(5);
-				layout.getChildren().addAll(b1, b2, b3, b4, b5,button);
+				Label l = new Label("Hold Ctrl while selecting to pick a subset of locations");
+				layout.getChildren().addAll(b1, b2, b3, b4, b5,l,subset,button);
 				
 				BorderPane bp = new BorderPane();
 				bp.setCenter(layout);
 				
-				Scene scene = new Scene(bp,250,250);
+				Scene scene = new Scene(bp,350,450);
 				window.setScene(scene);
 				window.show();
 			}
 			
 			//this is the processing code for the gui checkboxes and submit button
 			public void checkBoxes(CheckBox b1,CheckBox b2,CheckBox b3,CheckBox b4,CheckBox b5){
+				//save selected locations
+				if(!subset.getSelectionModel().isEmpty()){
+				ObservableList<String> locations;
+				locations = subset.getSelectionModel().getSelectedItems();
+				selectedLocations = new String[locations.size()];
+				for(int i=0; i<locations.size();i++){
+					selectedLocations[i] = locations.get(i);
+				}
+				}
+				else if(subset.getSelectionModel().isEmpty()){
+					selectedLocations = new String[1];
+					selectedLocations[0] = "no subselection";
+				}
+				
 				//creating string that will display in gui for user confirmation
 				String selection = "You are running file "+fileName+" with arguments: ";
 				

@@ -6,7 +6,7 @@ import main.java.edu.csu2017sp314.dtr18.View.*;
 
 public class Presenter{
 	private View view;
-	private Model model;
+	public Model model;
 	public String fileName;
 	public Presenter(View view, Model model, String fileName) {
 		this.view = view;
@@ -14,14 +14,56 @@ public class Presenter{
 		this.fileName = fileName;
 		
 	}
-
+	
+	private String[] createArray(){
+		String ret[] = new String[model.locations.size()];
+		
+		for(int i=0; i<model.locations.size();i++){
+			ret[i] = model.locations.get(i).getName();
+		}
+		
+		return ret;
+	}
+	
+//so AlertBox has a String[] called selectedLocations, use this and the model object
+//to create the subset model object, will need to update model object in view
+//also need to check if selectedLocations is Null (don't make new model obj)
+	public void runGui(){
+		AlertBox.fileName = fileName;
+		AlertBox.locations = createArray();	
+		AlertBox.launch();
+		if(!(AlertBox.selectedLocations[0].equals("no subselection"))){
+			Model subSelectModel = new Model(model,AlertBox.selectedLocations);
+			model = subSelectModel;
+		}
+		
+		if(AlertBox.opt_2){
+			model.computeDistances();
+			model.bestNearestNeighbor();
+			model.twoOpt();
+		}
+		else if(AlertBox.opt_3){
+			model.computeDistances();
+			model.bestNearestNeighbor();
+			model.threeOpt();
+		}
+		else
+		model.computeDistances();
+		model.bestNearestNeighbor();
+	}
+	
 	public void makeTrip(boolean opt_m, boolean opt_i, boolean opt_n, boolean opt_g,boolean opt_2, boolean opt_3){
-		if(opt_2){
+		//trip calculation is being handled in TripCo, don't need to do it again here
+		/*if(opt_2){
+			model.computeDistances();
+			model.bestNearestNeighbor();
 			model.twoOpt();
 		}
 		if(opt_3){
+			model.computeDistances();
+			model.bestNearestNeighbor();
 			model.threeOpt();
-		}
+		}*/
 		for(int index = 0; index < model.legs.size(); index++){
 			view.addLeg(Integer.toString(index+1), model.legs.get(index).getStart().getName(), model.legs.get(index).getEnd().getName(), model.legs.get(index).getDistance());
 		}
