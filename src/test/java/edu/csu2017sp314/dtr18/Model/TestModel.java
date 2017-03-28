@@ -252,5 +252,29 @@ public class TestModel{
 		assertEquals("El Paso County", subset.locations.get(0).getName());
 		assertEquals("Mineral County", subset.locations.get(1).getName());
 	}
+	
+	@Test
+	public void testSubsetParser() throws FileNotFoundException{
+		m = new Model();
+		File f = new File("mstest.txt");
+		PrintWriter write = new PrintWriter(f);
+		
+		write.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+		write.println("<selection>");
+		write.println("\t<title>name</title>");
+		write.println("\t<filename>mstest.txt</filename>");
+		write.println("\t<destinations>");
+		write.println("\t\t<id>3</id>");
+		write.println("\t\t<id>poop</id>");
+		write.println("\t\t<id>$*&^#</id>");
+		write.println("\t</destinations>");
+		write.println("</selection>");
+		write.close();
+		
+		String[] results = m.subsetParser(f);
+		String[] expected = {"3", "poop", "$*&^#"};
+		assertArrayEquals(expected, results);
+		f.delete();
+	}
 
 }

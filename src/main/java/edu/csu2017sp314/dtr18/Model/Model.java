@@ -60,6 +60,27 @@ public class Model{
 		//fill in distance table with only the locations in the subset
 		computeDistances();
 	}
+	
+	public String[] subsetParser(File subset){
+		ArrayList<String> temp_ids = new ArrayList<String>();
+		try {
+			Scanner s = new Scanner(subset);
+			while(s.hasNext()){
+				String line = s.next();
+				if((line.length() >= 4 && line.startsWith("<id>")) && (line.length() >= 5 && line.substring(line.length() - 5, line.length()).equals("</id>"))){
+					line = line.substring(0, line.length() - 5);
+					line = line.substring(4, line.length());
+					temp_ids.add(line);
+				}
+			}
+			s.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		String[] ids = new String[temp_ids.size()];
+		ids = temp_ids.toArray(ids);
+		return ids;
+	}
 
 	
 	//getters
@@ -661,6 +682,5 @@ private double degMinConvert(double degrees, double minutes, boolean isNeg){
 	return degrees;
 	
 }
-
 
 }
