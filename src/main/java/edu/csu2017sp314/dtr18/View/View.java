@@ -62,10 +62,10 @@ public class View {
 			addFooter();
 		}
 
-		//addHeader("Titles");
-		//map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"25\" x=\"532.5\">Colorado</text>");
-		//map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"770\" x=\"532.5\">" + totalMiles + " miles</text>");
-		//addFooter();
+		addHeader("Titles");
+		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"25\" x=\"532.5\">Colorado</text>");
+		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"770\" x=\"532.5\">" + totalMiles + " miles</text>");
+		addFooter();
 
 	}
 	
