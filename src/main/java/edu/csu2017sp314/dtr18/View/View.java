@@ -184,6 +184,8 @@ public class View {
 		while((currentLine = reader.readLine()) != null) {
 			String trimmedLine = currentLine.trim();
 			if(trimmedLine.equals(lineToRemove)) continue;
+			if(trimmedLine.contains(lineToRemove))
+				currentLine = trimmedLine.replace(lineToRemove, "");
 			writer.write(currentLine + System.getProperty("line.separator"));
 		}
 		writer.close(); 
