@@ -1,20 +1,7 @@
 engines:
   checkstyle:
-    enabled: true
+    enabled: false
     channel: "beta"
-    checks:
-      com.puppycrawl.tools.checkstyle.checks.naming.PackageNameCheck:
-        enabled: false
-      com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyLineSeparatorCheck:
-        enabled: false
-      com.puppycrawl.tools.checkstyle.checks.naming.MemberNameCheck:
-        enabled: false
-      com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck:
-        enabled: false
-      com.puppycrawl.tools.checkstyle.checks.coding.MultipleVariableDeclarationsCheck:
-        enabled: false
-      com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck:
-        enabled: false
 
 ratings:
   paths:
