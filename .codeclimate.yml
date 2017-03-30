@@ -1,6 +1,6 @@
 engines:
   checkstyle:
-    enabled: false
+    enabled: true
     channel: "beta"
 
 ratings:
