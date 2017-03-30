@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//Innocuous change to force travis to rebuild
+
 public class Model{
 	
 	//class variables
