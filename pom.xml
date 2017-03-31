@@ -13,7 +13,33 @@
           <maven.compiler.target>1.8</maven.compiler.target>
         </properties>
         <name>TripCo</name> 
-        <url>https://github.com/csu2017sp314/DTR-18/</url> 
+        <url>https://github.com/csu2017sp314/DTR-18/</url>
+          <build>
+        <plugins>
+          <plugin>
+            <groupId>org.eluder.coveralls</groupId>
+            <artifactId>coveralls-maven-plugin</artifactId>
+            <version>4.3.0</version>
+            <configuration>
+              <repoToken><em><strong>E0VdZyKfZPMOI7U2tLqBJwnKmyzhf7qx3</strong></em></repoToken>
+              <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding> 
+            </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.7.6.201602180812</version>
+          <executions>
+            <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+      </build>
         <dependencies> 
           <dependency> 
             <groupId>junit</groupId> 
@@ -112,32 +138,6 @@
           <version>1.4_1</version>
         </dependency>
       </dependencies>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.eluder.coveralls</groupId>
-            <artifactId>coveralls-maven-plugin</artifactId>
-            <version>4.3.0</version>
-            <configuration>
-              <repoToken><<em><strong>E0VdZyKfZPMOI7U2tLqBJwnKmyzhf7qx3</strong></em>></repoToken>
-              <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding> 
-            </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.jacoco</groupId>
-          <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.7.6.201602180812</version>
-          <executions>
-            <execution>
-            <id>prepare-agent</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-            </execution>
-          </executions>
-        </plugin>
-      </plugins>
-      </build>
     </project>
 
 
