@@ -9,12 +9,12 @@
         <packaging>jar</packaging> 
         <version>0.2-sprint</version>  
         <properties>
+          <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
           <maven.compiler.source>1.8</maven.compiler.source>
           <maven.compiler.target>1.8</maven.compiler.target>
         </properties>
         <name>TripCo</name> 
         <url>https://github.com/csu2017sp314/DTR-18/</url>
-         <project.build.sourceEncoding>UTF-8 actually</project.build.sourceEncoding>
           <build>
         <plugins>
           <plugin>
