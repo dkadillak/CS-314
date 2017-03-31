@@ -67,7 +67,8 @@ public class View {
 		map.print("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\"");
 		map.println(" font-size=\"24\" id=\"state\" y=\"25\" x=\"512\">DTR-18</text>");
 		map.print("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\"");
-		map.println(" font-size=\"24\" id=\"distance\" y=\"500\" x=\"512\">" + totalMiles + " miles</text>");
+		map.print(" font-size=\"24\" id=\"distance\" y=\"500\" x=\"512\">");
+		map.println(totalMiles + " miles</text>");
 		addFooter();
 
 	}
@@ -164,10 +165,10 @@ public class View {
 	//takes (latitude, longitude), returns (y,x) svg coordinates
 	//result[0] = y		result[1] = x
 	public int[] convertCoords(double lat, double lon){
-		int[] result = new int[2];
 		lat *= -1;
 		lat += 90.0;
 		lat *= 2.8287;
+		int[] result = new int[2];
 		result[0] = Math.round((float)lat);
 		lon += 180;
 		lon *= 2.8366;
