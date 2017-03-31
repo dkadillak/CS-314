@@ -52,19 +52,23 @@ public class View {
 
 		if(!background){
 			map.println("<?xml version=\"1.0\"?>");
-			map.println("<svg width=\"1280\" height=\"1024\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:svg=\"http://www.w3.org/2000/svg\">");
+			map.print("<svg width=\"1024\" height=\"512\" xmlns=\"http://www.w3.org/2000/svg\"");
+			map.println(" xmlns:svg=\"http://www.w3.org/2000/svg\">");
 
-			addHeader("Borders");
+			/*addHeader("Borders");
 			map.println("\t<line id=\"north\" y2=\"36\" x2=\"1030\" y1=\"36\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>");
 			map.println("\t<line id=\"east\" y2=\"747\" x2=\"1030\" y1=\"36\" x1=\"1028\" stroke-width=\"4\" stroke=\"#666666\"/>");
 			map.println("\t<line id=\"south\" y2=\"745\" x2=\"1031\" y1=\"746\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>");
 			map.println("\t<line id=\"west\" y2=\"745\" x2=\"37\" y1=\"35\" x1=\"37\" stroke-width=\"4\" stroke=\"#666666\"/>");
-			addFooter();
+			addFooter();*/
 		}
 
 		addHeader("Titles");
-		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"state\" y=\"25\" x=\"532.5\">Colorado</text>");
-		map.println("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\" id=\"distance\" y=\"770\" x=\"532.5\">" + totalMiles + " miles</text>");
+		map.print("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\"");
+		map.println(" font-size=\"24\" id=\"state\" y=\"25\" x=\"512\">DTR-18</text>");
+		map.print("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\"");
+		map.print(" font-size=\"24\" id=\"distance\" y=\"500\" x=\"512\">");
+		map.println(totalMiles + " miles</text>");
 		addFooter();
 
 	}
@@ -161,13 +165,14 @@ public class View {
 	//takes (latitude, longitude), returns (y,x) svg coordinates
 	//result[0] = y		result[1] = x
 	public int[] convertCoords(double lat, double lon){
-		int result[] = new int[2];
-		lat = 41.0 - Math.abs(lat);
-		lat *= 177.5;
-		result[0] = Math.round((float)lat) + 37;
-		lon = 109.0 - Math.abs(lon);
-		lon *= 141.5714;
-		result[1] = Math.round((float)lon) + 36;
+		lat *= -1;
+		lat += 90.0;
+		lat *= 2.8287;
+		int[] result = new int[2];
+		result[0] = Math.round((float)lat);
+		lon += 180;
+		lon *= 2.8366;
+		result[1] = Math.round((float)lon);
 		return result;
 	}
 
