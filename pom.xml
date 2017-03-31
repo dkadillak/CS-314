@@ -14,6 +14,7 @@
         </properties>
         <name>TripCo</name> 
         <url>https://github.com/csu2017sp314/DTR-18/</url>
+         <project.build.sourceEncoding>UTF-8 actually</project.build.sourceEncoding>
           <build>
         <plugins>
           <plugin>
@@ -21,7 +22,7 @@
             <artifactId>coveralls-maven-plugin</artifactId>
             <version>4.3.0</version>
             <configuration>
-              <repoToken><em><strong>E0VdZyKfZPMOI7U2tLqBJwnKmyzhf7qx3</strong></em></repoToken>
+              <repoToken>E0VdZyKfZPMOI7U2tLqBJwnKmyzhf7qx3</repoToken>
               <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding> 
             </configuration>
         </plugin>
