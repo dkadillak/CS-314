@@ -16,13 +16,9 @@ public class TestLeg {
 		String Name = "Fort Collins";
 		String ID = "10";
 		double latitude = -123.22, longitude = 56.98;
-		ArrayList<String> other = new ArrayList<String>();
-		other.add("banana");
-		other.add("Larimer County");
-		other.add("ok");
 		
-		location start = new location(Name, ID, latitude, longitude, other);
-		location end = new location("Denver","56",-100.6,60.1,other);
+		location start = new location(Name, ID, latitude, longitude);
+		location end = new location("Denver","56",-100.6,60.1);
 		
 		Leg l = new Leg(start,end,1000);
 		

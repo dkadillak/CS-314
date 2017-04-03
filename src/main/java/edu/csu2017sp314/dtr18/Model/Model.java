@@ -223,7 +223,7 @@ public void lineParser(String input){
 			extra.add(s[i]);
 		}
 	}
-	locations.add(new location(Name,ID,Latitude,Longitude,extra,locations.size()));
+	locations.add(new location(Name,ID,Latitude,Longitude,locations.size()));
 	extra.clear();
 	return;
 }

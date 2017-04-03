@@ -9,8 +9,16 @@ public class location {
 	
 	private String name; 
 	private String id;
-	private double latitude, longitude;
-	private ArrayList<String> other;
+	private double latitude;
+	private double longitude;
+	private int elevation;
+	private String municipality;
+	private String region;
+	private String country;
+	private String continent;
+	private String airportUrl;
+	private String regionUrl;
+	private String countryUrl;
 	private int index;		//for use with model distance table
 	
 	//double getters
@@ -25,10 +33,7 @@ public class location {
 	public String getName(){
 		return name;
 	}
-	public String getOtherAt(int position){
-		
-		return other.get(position);
-	}
+
 	//int getters
 	public String getID(){
 		return id;
@@ -42,30 +47,44 @@ public class location {
 	@Override
 	public String toString(){
 	//for some reason other is not getting passed anything
-		return "Name: "+getName()+" ID: "+getID()+" Latitude: "+getLatitude()+" Longitude: "+getLongitude()+" Other: "+other.toString()+"\n";		
+		return "Name: "+getName()+" ID: "+getID()+" Latitude: "+getLatitude()+" Longitude: "+getLongitude() +"\n";		
 	}
 	
 	//generic constructor
-	public location(String Name, String ID, double Latitude, double Longitude, ArrayList<String> Other){
+	public location(String Name, String ID, double Latitude, double Longitude){
 		
 		name=Name;
 		id=ID;
 		latitude=Latitude;
 		longitude=Longitude;
-		other = new ArrayList<String>();
-		if(Other != null) other.addAll(Other);
 		index = -1;
 	}
 	
-	public location(String Name, String ID, double Latitude, double Longitude, ArrayList<String> Other, int index){
+	public location(String Name, String ID, double Latitude, double Longitude, int index){
 		
 		name=Name;
 		id=ID;
 		latitude=Latitude;
 		longitude=Longitude;
-		other = new ArrayList<String>();
-		if(Other != null) other.addAll(Other);
 		this.index = index;
+	}
+	
+	public location(String id, int index){
+		this.id = id;
+		this.index = index;
+		sqlInfo();
+	}
+	
+	private void sqlInfo(){
+		DBquery q = new DBquery();
+		q.addColumn("airports.name");
+		q.addColumn("latitude");
+		q.addColumn("longitude");
+		q.addColumn("municipality");
+		q.addColumn("regions.name");
+		q.addColumn("countries.name");
+		q.addColumn("continents.name");
+		q.setFrom("airports");
 	}
 	
 	@Override
