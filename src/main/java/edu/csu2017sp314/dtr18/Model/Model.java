@@ -10,7 +10,7 @@ public class Model{
 	
 	//class variables
 	public ArrayList<location> locations;
-	public ArrayList<String> extra;
+	//public ArrayList<String> extra;
 	public ArrayList<Leg> legs;
 	public String Name;
 	public String ID;
@@ -23,14 +23,14 @@ public class Model{
 	//constructor without file parameter for testing purposes
 	public Model(){
 		locations = new ArrayList<location>();
-		extra = new ArrayList<String>();
+		//extra = new ArrayList<String>();
 	}
 	
 	//regular constructor
 	public Model(File file) throws FileNotFoundException{
 	//initializing ArrayLists
 		locations = new ArrayList<location>();
-		extra = new ArrayList<String>();
+		//extra = new ArrayList<String>();
 		legs = new ArrayList<Leg>();
 		
 		
@@ -50,7 +50,7 @@ public class Model{
 	
 	public Model(Model m, String[] subset){
 		locations = new ArrayList<location>();
-		extra = new ArrayList<String>();
+		//extra = new ArrayList<String>();
 		legs = new ArrayList<Leg>();
 		distances = new int[subset.length][subset.length];
 		
@@ -219,12 +219,12 @@ public void lineParser(String input){
 			
 			Longitude=LatLongConverter(s[i].toLowerCase().replaceAll("\\s", ""));
 		}
-		else{
+		/*else{
 			extra.add(s[i]);
-		}
+		}*/
 	}
 	locations.add(new location(Name,ID,Latitude,Longitude,locations.size()));
-	extra.clear();
+	//extra.clear();
 	return;
 }
 
