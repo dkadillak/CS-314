@@ -139,7 +139,8 @@ public class DBquery {
 	}
 	
 	private void noTableError(){
-		System.err.println("Error: cannot make a database query without providing a table!");
+		System.err.print("Error: ");
+		System.err.println("cannot make a database query without providing a table!");
 		System.exit(-1);
 	}
 	
@@ -147,7 +148,8 @@ public class DBquery {
 	public ResultSet submit(){
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://faure.cs.colostate.edu/cs314","paultrap","830051314");
+			String url = "jdbc:mysql://faure.cs.colostate.edu/cs314";
+			conn = DriverManager.getConnection(url,"paultrap","830051314");
 			st = conn.createStatement();
 			String query = columns + from + where + limit;
 			rs = st.executeQuery(query);

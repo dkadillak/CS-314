@@ -47,8 +47,11 @@ public class location {
 	
 	@Override
 	public String toString(){
-	//for some reason other is not getting passed anything
-		return "Name: "+getName()+" ID: "+getID()+" Latitude: "+getLatitude()+" Longitude: "+getLongitude() +"\n";		
+		String out = "Name: " + getName();
+		out += " ID: " + getID();
+		out += " latitude: " + getLatitude();
+		out += " longitude: " + getLongitude();
+		return out;		
 	}
 	
 	//generic constructor
