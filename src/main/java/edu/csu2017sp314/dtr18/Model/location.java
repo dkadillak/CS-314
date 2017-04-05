@@ -52,21 +52,19 @@ public class location {
 	}
 	
 	//generic constructor
-	public location(String Name, String ID, double Latitude, double Longitude){
-		
-		name=Name;
-		id=ID;
-		latitude=Latitude;
-		longitude=Longitude;
+	public location(String name, String id, double latitude, double longitude){
+		this.name = name;
+		this.id = id;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		index = -1;
 	}
 	
-	public location(String Name, String ID, double Latitude, double Longitude, int index){
-		
-		name=Name;
-		id=ID;
-		latitude=Latitude;
-		longitude=Longitude;
+	public location(String name, String id, double latitude, double longitude, int index){
+		this.name = name;
+		this.id = id;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.index = index;
 	}
 	
@@ -83,25 +81,25 @@ public class location {
 	}
 	
 	private void sqlInfo(){
-		DBquery q = new DBquery();
-		q.addColumn("airports.name");
-		q.addColumn("latitude");
-		q.addColumn("longitude");
-		q.addColumn("elevation_ft");
-		q.addColumn("municipality");
-		q.addColumn("regions.name");
-		q.addColumn("countries.name");
-		q.addColumn("continents.name");
-		q.addColumn("airports.wikipedia_link");
-		q.addColumn("regions.wikipedia_link");
-		q.addColumn("countries.wikipedia_link");
+		DBquery query = new DBquery();
+		query.addColumn("airports.name");
+		query.addColumn("latitude");
+		query.addColumn("longitude");
+		query.addColumn("elevation_ft");
+		query.addColumn("municipality");
+		query.addColumn("regions.name");
+		query.addColumn("countries.name");
+		query.addColumn("continents.name");
+		query.addColumn("airports.wikipedia_link");
+		query.addColumn("regions.wikipedia_link");
+		query.addColumn("countries.wikipedia_link");
 		
-		q.setFrom("all");
+		query.setFrom("all");
 		
 		String search = "airports.id = '" + id + "'";
-		q.setWhere(search);
-		parseSqlResult(q.submit());
-		q.close();
+		query.setWhere(search);
+		parseSqlResult(query.submit());
+		query.close();
 	}
 	
 	private void parseSqlResult(ResultSet rs){

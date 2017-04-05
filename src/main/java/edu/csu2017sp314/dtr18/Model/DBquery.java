@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 public class DBquery {
 	private Connection conn;
 	private Statement st;
-	final static private String limit = " LIMIT 500";
+	private static final String limit = " LIMIT 500";
 	private String columns;
 	private String from;
 	private String where;
@@ -78,59 +78,54 @@ public class DBquery {
 		if(continents){
 			from = " from continents";
 			if(countries){
-				from += " inner join countries on countries.continent = continents.id";
+				from += " inner join countries on "
+						+ "countries.continent = continents.id";
 				if(regions){
-					from += " inner join regions on regions.iso_country = countries.code";
+					from += " inner join regions on "
+							+ "regions.iso_country = countries.code";
 					if(airports){
-						from += " inner join airports on airports.iso_region = regions.code";
+						from += " inner join airports on "
+								+ "airports.iso_region = regions.code";
 					}
 					//regions && !airports
-				}
-				//countries && !regions
-				else if(airports){
-					from += " inner join airports on airports.iso_country = countries.code";
+				}else if(airports){	//countries && !regions
+					from += " inner join airports on "
+							+ "airports.iso_country = countries.code";
 				}
 				//countries && !regions && !airports
-			}
-			
-			else if(regions){//!countries
-				from += " inner join regions on regions.continent = continents.id";
+			}else if(regions){//!countries
+				from += " inner join regions on "
+						+ "regions.continent = continents.id";
 				if(airports){
-					from += " inner join airports on airports.iso_region = regions.code";
+					from += " inner join airports on "
+							+ "airports.iso_region = regions.code";
 				}
+			}else if(airports){//!countries && !regions						
+				from += " inner join airports on "
+						+ "airports.continent = continents.id";
 			}
-			
-			else if(airports){//!countries && !regions						
-				from += " inner join airports on airports.continent = continents.id";
-			}
-		}
-		
-		else if(countries){//!continents
+		}else if(countries){//!continents
 			from = " from countries";
 			if(regions){
-				from += " inner join regions on regions.iso_country = countries.code";
+				from += " inner join regions on "
+						+ "regions.iso_country = countries.code";
 				if(airports){
-					from += " inner join airports on airports.iso_region = regions.code";
+					from += " inner join airports on "
+							+ "airports.iso_region = regions.code";
 				}
+			}else if(airports){//!regions
+				from += " inner join airports on "
+						+ "airports.iso_country = countries.code";
 			}
-			
-			else if(airports){//!regions
-				from += " inner join airports on airports.iso_country = countries.code";
-			}
-		}
-		
-		else if(regions){//!continents && !countries
+		}else if(regions){//!continents && !countries
 			from = " from regions";
 			if(airports){
-				from += " inner join airports on airports.iso_region = regions.code";
+				from += " inner join airports on "
+						+ "airports.iso_region = regions.code";
 			}
-		}
-		
-		else if(airports){
+		}else if(airports){
 			from = " from airports";
-		}
-		
-		else{
+		}else{
 			noTableError();
 		}
 	}
