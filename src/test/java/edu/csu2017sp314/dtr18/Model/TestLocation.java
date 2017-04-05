@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import main.java.edu.csu2017sp314.dtr18.Model.location;
@@ -29,6 +30,7 @@ public class TestLocation {
 		
 	}
 	
+	@Ignore
 	@Test
 	public void testSql(){
 		location l = new location("KDEN");

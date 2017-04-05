@@ -19,16 +19,9 @@ public class DBquery {
 		columns = null;
 		from = "";
 		where = "";
+		conn = null;
+		st = null;
 		rs = null;
-		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://faure.cs.colostate.edu/cs314","paultrap","830051314");
-			st = conn.createStatement();
-		} catch (Exception e) {
-			System.err.printf("Exception: ");
-			System.err.println(e.getMessage());
-		}
 	}
 	
 	public String getColumns(){
@@ -158,8 +151,10 @@ public class DBquery {
 	//output is in the same order that columns were added to the query 
 	public ResultSet submit(){
 		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://faure.cs.colostate.edu/cs314","paultrap","830051314");
+			st = conn.createStatement();
 			String query = columns + from + where + limit;
-			//System.out.println(query);
 			rs = st.executeQuery(query);
 		} catch (Exception e) {
 			System.err.printf("Exception: ");
@@ -170,8 +165,12 @@ public class DBquery {
 	
 	public void close(){
 		try {
-			conn.close();
-			st.close();
+			if(conn != null){
+				conn.close();
+			}
+			if(st != null){
+				st.close();
+			}
 			if(rs != null){
 				rs.close();
 			}
