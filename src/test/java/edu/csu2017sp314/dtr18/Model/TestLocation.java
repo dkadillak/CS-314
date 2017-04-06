@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import main.java.edu.csu2017sp314.dtr18.Model.location;
@@ -11,31 +12,40 @@ import main.java.edu.csu2017sp314.dtr18.Model.location;
 public class TestLocation {
 
 	@Test
-	public void locationTests(){
-		
-		//location = String Name, String ID, double Latitude, double Longitude
-		//ArrayList<String> Other
-		
-		String Name = "Fort Collins", banana="banana",LarimerCounty="Larimer County",ok="ok";
-		String ID = "10";
+	public void locationTests(){		
+		String name = "Fort Collins";
+		String id = "10";
 		double latitude = -123.22, longitude = 56.98;
-		ArrayList<String> other = new ArrayList<String>();
-		other.add("banana");
-		other.add("Larimer County");
-		other.add("ok");
 		
-		location l = new location(Name, ID, latitude, longitude, other);
+		location loc = new location(name, id, latitude, longitude);
 		
-		assertEquals(Name, l.getName());
-		assertEquals(ID,l.getID());
-		assertEquals(latitude,l.getLatitude(),.01);
-		assertEquals(longitude,l.getLongitude(),.01);
-		assertEquals(banana,l.getOtherAt(0));
-		assertEquals(LarimerCounty,l.getOtherAt(1));
-		assertEquals(ok,l.getOtherAt(2));
+		assertEquals(name, loc.getName());
+		assertEquals(id,loc.getID());
+		assertEquals(latitude,loc.getLatitude(),.01);
+		assertEquals(longitude,loc.getLongitude(),.01);		
 		
+	}
+	
+	@Ignore
+	@Test
+	public void testSql(){
+		location loc = new location("KDEN");
 		
-		
+		assertEquals("Denver International Airport",loc.name);
+		assertEquals("KDEN",loc.id);
+		assertTrue(loc.latitude > 39.0 && loc.latitude < 40.0);
+		assertTrue(loc.longitude < -104.0 && loc.longitude > -105.0);
+		assertEquals(5431,loc.elevation);
+		assertEquals("Denver",loc.municipality);
+		assertEquals("Colorado",loc.region);
+		assertEquals("United States",loc.country);
+		assertEquals("North America",loc.continent);
+		String url = "http://en.wikipedia.org/wiki/Denver_International_Airport";
+		assertEquals(url,loc.airportUrl);
+		url = "http://en.wikipedia.org/wiki/Colorado";
+		assertEquals(url,loc.regionUrl);
+		url = "http://en.wikipedia.org/wiki/United_States";
+		assertEquals(url,loc.countryUrl);
 	}
 	
 }

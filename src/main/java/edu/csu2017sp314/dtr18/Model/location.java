@@ -1,17 +1,26 @@
 package main.java.edu.csu2017sp314.dtr18.Model;
 
-import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class location {
 	
 	//class variables
 	//private String fileType;
 	
-	private String name; 
-	private String id;
-	private double latitude, longitude;
-	private ArrayList<String> other;
-	private int index;		//for use with model distance table
+	public String name; 
+	public String id;
+	public double latitude;
+	public double longitude;
+	public int elevation;
+	public String municipality;
+	public String region;
+	public String country;
+	public String continent;
+	public String airportUrl;
+	public String regionUrl;
+	public String countryUrl;
+	public int index;		//for use with model distance table
 	
 	//double getters
 	public double getLatitude(){
@@ -25,10 +34,7 @@ public class location {
 	public String getName(){
 		return name;
 	}
-	public String getOtherAt(int position){
-		
-		return other.get(position);
-	}
+
 	//int getters
 	public String getID(){
 		return id;
@@ -41,31 +47,97 @@ public class location {
 	
 	@Override
 	public String toString(){
-	//for some reason other is not getting passed anything
-		return "Name: "+getName()+" ID: "+getID()+" Latitude: "+getLatitude()+" Longitude: "+getLongitude()+" Other: "+other.toString()+"\n";		
+		String out = "Name: " + getName();
+		out += " ID: " + getID();
+		out += " latitude: " + getLatitude();
+		out += " longitude: " + getLongitude();
+		return out;		
 	}
 	
 	//generic constructor
-	public location(String Name, String ID, double Latitude, double Longitude, ArrayList<String> Other){
-		
-		name=Name;
-		id=ID;
-		latitude=Latitude;
-		longitude=Longitude;
-		other = new ArrayList<String>();
-		if(Other != null) other.addAll(Other);
+	public location(String name, String id, double latitude, double longitude){
+		this.name = name;
+		this.id = id;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		index = -1;
 	}
 	
-	public location(String Name, String ID, double Latitude, double Longitude, ArrayList<String> Other, int index){
-		
-		name=Name;
-		id=ID;
-		latitude=Latitude;
-		longitude=Longitude;
-		other = new ArrayList<String>();
-		if(Other != null) other.addAll(Other);
+	public location(String name, String id, double latitude, double longitude, int index){
+		this.name = name;
+		this.id = id;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.index = index;
+	}
+	
+	public location(String id, int index){
+		this.id = id;
+		this.index = index;
+		sqlInfo();
+	}
+	
+	public location(String id){
+		this.id = id;
+		index = -1;
+		sqlInfo();
+	}
+	
+	private void sqlInfo(){
+		DBquery query = new DBquery();
+		query.addColumn("airports.name");
+		query.addColumn("latitude");
+		query.addColumn("longitude");
+		query.addColumn("elevation_ft");
+		query.addColumn("municipality");
+		query.addColumn("regions.name");
+		query.addColumn("countries.name");
+		query.addColumn("continents.name");
+		query.addColumn("airports.wikipedia_link");
+		query.addColumn("regions.wikipedia_link");
+		query.addColumn("countries.wikipedia_link");
+		
+		query.setFrom("all");
+		
+		String search = "airports.id = '" + id + "'";
+		query.setWhere(search);
+		parseSqlResult(query.submit());
+		query.close();
+	}
+	
+	private void parseSqlResult(ResultSet rs){
+		//output is the same order that columns were added to query
+		
+		//output should only have a single row
+		try {
+			rs.next();
+			//fill in location object with data from the database
+			name = rs.getString(1);
+			//System.out.println(name);
+			latitude = rs.getDouble(2);
+			//System.out.println(latitude);
+			longitude = rs.getDouble(3);
+			//System.out.println(longitude);
+			elevation = rs.getInt(4);
+			//System.out.println(elevation);
+			municipality = rs.getString(5);
+			//System.out.println(municipality);
+			region = rs.getString(6);
+			//System.out.println(region);
+			country = rs.getString(7);
+			//System.out.println(country);
+			continent = rs.getString(8);
+			//System.out.println(continent);
+			airportUrl = rs.getString(9);
+			//System.out.println(airportUrl);
+			regionUrl = rs.getString(10);
+			//System.out.println(regionUrl);
+			countryUrl = rs.getString(11);
+			//System.out.println(countryUrl);
+		} catch (SQLException e) {
+			System.err.print("Error: ");
+			System.err.println(e.getMessage());
+		}
 	}
 	
 	@Override

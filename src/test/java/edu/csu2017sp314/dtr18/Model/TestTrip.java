@@ -16,8 +16,8 @@ public class TestTrip {
 	@Before
 	public void setUp(){
 		t = new trip();
-		location l1 = new location("Fort Collins","1",100.0,100.0,null);
-		location l2 = new location("Denver","2",200.0,200.0,null);
+		location l1 = new location("Fort Collins","1",100.0,100.0);
+		location l2 = new location("Denver","2",200.0,200.0);
 		leg = new Leg(l1,l2,50);
 	}
 
