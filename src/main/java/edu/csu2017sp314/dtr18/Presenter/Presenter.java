@@ -65,7 +65,7 @@ public class Presenter{
 			model.threeOpt();
 		}*/
 		for(int index = 0; index < model.legs.size(); index++){
-			view.addLeg(Integer.toString(index+1), model.legs.get(index).getStart().getName(), model.legs.get(index).getEnd().getName(), model.legs.get(index).getDistance());
+			//view.addLeg(Integer.toString(index+1), model.legs.get(index).getStart().getName(), model.legs.get(index).getEnd().getName(), model.legs.get(index).getDistance());
 		}
 		view.addHeader("Legs");
 		for(int index = 0; index < model.legs.size(); index++){
@@ -105,7 +105,7 @@ public class Presenter{
 		}
 		view.finalizeTrip();
 		if(opt_g){
-		view.displayXML();
+		//view.displayXML();
 		view.displaySVG();
 		}
 		return;	

@@ -8,12 +8,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import main.java.edu.csu2017sp314.dtr18.Model.location;
 
 public class View {
 	private PrintWriter itinerary, map, selection;
 	private int mapLegCount;
 	private int mapLabelCount;
-	private String itinContents;
 	private GUI gui;
 	private String xmlFilename;
 	private String svgFilename;
@@ -30,7 +32,6 @@ public class View {
 			itinerary = new PrintWriter(xml);
 			mapLegCount = 0;
 			mapLabelCount = 0;
-			itinContents = "";
 			gui = new GUI();
 			xmlFilename = xml.getName();
 			svgFilename = svg.getName();
@@ -136,21 +137,35 @@ public class View {
 		map.print("x=\"" + x + "\"");
 		map.println(">" + label + "</text>");
 	}
-
-	//add a single leg to the XML itinerary
-	public void addLeg(String sequence, String start, String finish, int milage){
-		//sequence is which leg of the trip this is. e.g. 1 or 2 or 3
-		//start is the name of the first location in the leg
-		//finish the the name of the destination of the leg
-
-		itinerary.println("<leg>");
-		itinerary.println("\t<sequence>" + sequence + "</sequence>");
-		itinerary.println("\t<start>" + start + "</start>");
-		itinerary.println("\t<finish>" + finish + "</finish>");
-		itinerary.println("\t<milage>" + milage + "</milage>");
-		itinerary.println("</leg>");
-		itinContents += "Sequence: " + sequence + "\nFrom: " + start + "\nTo: "
-		+ finish + "\nMileage: " + Integer.toString(milage) + "\n\n";
+	
+	public void addLeg(int sequence, location l, int distance, boolean start, String units){
+		if(start){
+			itinerary.println("<leg>");
+			itinerary.println("\t<sequence>" + Integer.toString(sequence) + "</sequence>");
+			itinerary.println("\t<start>");
+		}
+		else
+			itinerary.println("\t<finish>");
+		itinerary.println("\t\t<id>" + l.id + "</id>");
+		itinerary.println("\t\t<name>" + l.name + "</name>");
+		itinerary.println("\t\t<latitude>" + l.latitude + "</latitude>");
+		itinerary.println("\t\t<longitude>" + l.longitude + "</longitude>");
+		itinerary.println("\t\t<elevation>" + l.elevation + "</elevation>");
+		itinerary.println("\t\t<municipality>" + l.municipality + "</municipality>");
+		itinerary.println("\t\t<region>" + l.region + "</region>");
+		itinerary.println("\t\t<country>" + l.country + "</country>");
+		itinerary.println("\t\t<continent>" + l.continent + "</continent>");
+		itinerary.println("\t\t<airportURL>" + l.airportUrl + "</airportURL>");
+		itinerary.println("\t\t<regionURL>" + l.regionUrl + "</regionURL>");
+		itinerary.println("\t\t<countryURL>" + l.countryUrl + "</countryURL>");
+		if(start)
+			itinerary.println("\t</start>");
+		else{
+			itinerary.println("\t</finish>");
+			itinerary.println("\t<distance>" + distance + "</distance>");
+			itinerary.println("\t<units>" + units + "</units>");
+			itinerary.println("</leg>");
+		}
 	}
 
 	//finalize XML and SVG
@@ -198,9 +213,8 @@ public class View {
 		tempFile.renameTo(svg);
 	}
 	
-	public void displayXML(){
-		gui.displayXML(xmlFilename, itinContents);
-		itinContents = ""; //clear out string for if they want to run another file
+	public void displayXML(ArrayList<location> locations, ArrayList<Integer> mileages, String units){
+		gui.displayXML(xmlFilename, locations, mileages, units);
 	}
 	
 	public void displaySVG(){

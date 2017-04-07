@@ -11,6 +11,7 @@ import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import main.java.edu.csu2017sp314.dtr18.Model.location;
 import main.java.edu.csu2017sp314.dtr18.View.View;
 
 public class TestView {
@@ -49,20 +50,47 @@ public class TestView {
 		svg = new File("testAddLeg.svg");
 		view = new View(xml,svg, false);
 		view.initializeTrip(9999, false);
-		String start = "Fort Collins";
-		String finish = "Denver";
-		int milage = 12;
+		location l = new location("KDEN");
+		location l2 = new location("AYPY");
 		
 		String s = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 		s += "<trip>\n<leg>\n";
-		s += "\t<sequence>" + "1" + "</sequence>\n";
-		s += "\t<start>" + start + "</start>\n";
-		s += "\t<finish>" + finish + "</finish>\n";
-		s += "\t<milage>" + milage + "</milage>\n";
+		s += "\t<sequence>1</sequence>\n";
+		s += "\t<start>\n";
+		s += "\t\t<id>KDEN</id>\n";
+		s += "\t\t<name>Denver International Airport</name>\n";
+		s += "\t\t<latitude>39.861698150635</latitude>\n";
+		s += "\t\t<longitude>-104.672996521</longitude>\n";
+		s += "\t\t<elevation>5431</elevation>\n";
+		s += "\t\t<municipality>Denver</municipality>\n";
+		s += "\t\t<region>Colorado</region>\n";
+		s += "\t\t<country>United States</country>\n";
+		s += "\t\t<continent>North America</continent>\n";
+		s += "\t\t<airportURL>http://en.wikipedia.org/wiki/Denver_International_Airport</airportURL>\n";
+		s += "\t\t<regionURL>http://en.wikipedia.org/wiki/Colorado</regionURL>\n";
+		s += "\t\t<countryURL>http://en.wikipedia.org/wiki/United_States</countryURL>\n";
+		s += "\t</start>\n";
+		s += "\t<finish>\n";
+		s += "\t\t<id>AYPY</id>\n";
+		s += "\t\t<name>Port Moresby Jacksons International Airport</name>\n";
+		s += "\t\t<latitude>-9.443380355834961</latitude>\n";
+		s += "\t\t<longitude>147.22000122070312</longitude>\n";
+		s += "\t\t<elevation>146</elevation>\n";
+		s += "\t\t<municipality>Port Moresby</municipality>\n";
+		s += "\t\t<region>National Capital District (Port Moresby)</region>\n";
+		s += "\t\t<country>Papua New Guinea</country>\n";
+		s += "\t\t<continent>Oceania</continent>\n";
+		s += "\t\t<airportURL>http://en.wikipedia.org/wiki/Jacksons_International_Airport</airportURL>\n";
+		s += "\t\t<regionURL>http://en.wikipedia.org/wiki/National_Capital_District_(Port_Moresby)</regionURL>\n";
+		s += "\t\t<countryURL>http://en.wikipedia.org/wiki/Papua_New_Guinea</countryURL>\n";
+		s += "\t</finish>\n";
+		s += "\t<distance>34</distance>\n";
+		s += "\t<units>miles</units>\n";
 		s += "</leg>\n";
 		s += "</trip>\n";
 		
-		view.addLeg("1", start, finish, milage);
+		view.addLeg(1, l, 34, true, "miles");
+		view.addLeg(1, l2, 34, false, "miles");
 		view.finalizeTrip();
 		
 		try {
