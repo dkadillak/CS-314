@@ -16,15 +16,19 @@ public class GUI{
 	public GUI() {
 	}
 	
-	private String getData(location l){
-		String s = "<HTML>" + l.id + "<br>" + l.name + "<br>" + l.latitude + "N, " + l.longitude + "W, " + l.elevation + " ft<br>";
-    	String s2 = l.municipality + ", " + l.region + ",<br>" + l.country + ", " + l.continent + "<br>";
-    	String s3 = l.airportUrl + "<br>" + l.regionUrl + "<br>" + l.countryUrl + "</HTML>";
-    	return s + s2 + s3;
+	private String getData(location location){
+		String str = "<HTML>" + location.id + "<br>" + location.name + "<br>";
+		String s2 = location.latitude + ", " + location.longitude + ", " + location.elevation + " ft<br>";
+    	String s3 = location.municipality + ", " + location.region + ",<br>";
+		String s4 = location.country + ", " + location.continent + "<br>";
+    	String s5 = location.airportUrl + "<br>" + location.regionUrl;
+    	String s6 = "<br>" + location.countryUrl + "</HTML>";
+    	return str + s2 + s3 + s4 + s5 + s6;
 	}
 	
 
-	public void displayXML(String filename, ArrayList<location> locations, ArrayList<Integer> mileages, String units){
+	public void displayXml(String filename, ArrayList<location> locations,
+			ArrayList<Integer> mileages, String units){
 		String[] columns = new String[] {"Leg", "From", "To", "Distance"};
 	    Object[][] data = new Object[locations.size() - 1][4];
 	    JTable table = new JTable(data, columns);
@@ -35,10 +39,10 @@ public class GUI{
 	    toColumn.setPreferredWidth(450);
 	    for(int i = 0; i < data.length; i++){
 	    	String from = getData(locations.get(i));
-	    	int j = i;
-	    	data[i][0] = ++j;
+	    	int temp = i;
+	    	data[i][0] = ++temp;
 	    	data[i][1] = from;
-	    	String to = getData(locations.get(j++));
+	    	String to = getData(locations.get(temp++));
 	    	data[i][2] = to;
 	    	data[i][3] = mileages.get(i) + " " + units;
 	    }
@@ -67,6 +71,38 @@ public class GUI{
 		frame.getContentPane().add("Center", svgCanvas);
 		frame.setVisible(true);
 		svgCanvas.setURI(filename);
+	}
+	
+	public static void main(String [] args){
+		GUI gui = new GUI();
+		ArrayList<location> locations = new ArrayList<location>();
+		ArrayList<Integer> mileages = new ArrayList<Integer>();
+		int m1 = 2;
+		int m2 = 12;
+		int m3 = 22;
+		int m4 = 32;
+		int m5 = 42;
+		int m6 = 52;
+		mileages.add(m1);
+		mileages.add(m2);
+		mileages.add(m3);
+		mileages.add(m4);
+		mileages.add(m5);
+		mileages.add(m6);
+		
+		location l = new location("KDEN");
+		location l2 = new location("AYPY");
+		location l3 = new location("BIKF");
+		location l4 = new location("CYEG");
+		location l5 = new location("CYHZ");
+		location l6 = new location("CYOW");
+		locations.add(l);
+		locations.add(l2);
+		locations.add(l3);
+		locations.add(l4);
+		locations.add(l5);
+		locations.add(l6);
+		gui.displayXml("test.xml", locations, mileages, "miles");
 	}
 	
 }

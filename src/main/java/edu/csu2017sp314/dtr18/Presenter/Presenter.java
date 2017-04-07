@@ -64,9 +64,10 @@ public class Presenter{
 			model.bestNearestNeighbor();
 			model.threeOpt();
 		}*/
-		//for(int index = 0; index < model.legs.size(); index++){
-			//view.addLeg(Integer.toString(index+1), model.legs.get(index).getStart().getName(), model.legs.get(index).getEnd().getName(), model.legs.get(index).getDistance());
-		//}
+		for(int index = 0; index < model.legs.size(); index++){
+			//view.addLeg(Integer.toString(index+1), model.legs.get(index).getStart().getName(),
+			//model.legs.get(index).getEnd().getName(), model.legs.get(index).getDistance());
+		}
 		view.addHeader("Legs");
 		for(int index = 0; index < model.legs.size(); index++){
 			//double lat lon

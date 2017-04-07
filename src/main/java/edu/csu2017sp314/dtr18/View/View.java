@@ -138,26 +138,28 @@ public class View {
 		map.println(">" + label + "</text>");
 	}
 	
-	public void addLeg(int sequence, location l, int distance, boolean start, String units){
+	public void addLeg(int sequence, location location, int distance, boolean start, String units){
 		if(start){
 			itinerary.println("<leg>");
-			itinerary.println("\t<sequence>" + Integer.toString(sequence) + "</sequence>");
+			itinerary.print("\t<sequence>");
+			itinerary.print(Integer.toString(sequence));
+			itinerary.println("</sequence>");
 			itinerary.println("\t<start>");
 		}
 		else
 			itinerary.println("\t<finish>");
-		itinerary.println("\t\t<id>" + l.id + "</id>");
-		itinerary.println("\t\t<name>" + l.name + "</name>");
-		itinerary.println("\t\t<latitude>" + l.latitude + "</latitude>");
-		itinerary.println("\t\t<longitude>" + l.longitude + "</longitude>");
-		itinerary.println("\t\t<elevation>" + l.elevation + "</elevation>");
-		itinerary.println("\t\t<municipality>" + l.municipality + "</municipality>");
-		itinerary.println("\t\t<region>" + l.region + "</region>");
-		itinerary.println("\t\t<country>" + l.country + "</country>");
-		itinerary.println("\t\t<continent>" + l.continent + "</continent>");
-		itinerary.println("\t\t<airportURL>" + l.airportUrl + "</airportURL>");
-		itinerary.println("\t\t<regionURL>" + l.regionUrl + "</regionURL>");
-		itinerary.println("\t\t<countryURL>" + l.countryUrl + "</countryURL>");
+		itinerary.println("\t\t<id>" + location.id + "</id>");
+		itinerary.println("\t\t<name>" + location.name + "</name>");
+		itinerary.println("\t\t<latitude>" + location.latitude + "</latitude>");
+		itinerary.println("\t\t<longitude>" + location.longitude + "</longitude>");
+		itinerary.println("\t\t<elevation>" + location.elevation + "</elevation>");
+		itinerary.println("\t\t<municipality>" + location.municipality + "</municipality>");
+		itinerary.println("\t\t<region>" + location.region + "</region>");
+		itinerary.println("\t\t<country>" + location.country + "</country>");
+		itinerary.println("\t\t<continent>" + location.continent + "</continent>");
+		itinerary.println("\t\t<airportURL>" + location.airportUrl + "</airportURL>");
+		itinerary.println("\t\t<regionURL>" + location.regionUrl + "</regionURL>");
+		itinerary.println("\t\t<countryURL>" + location.countryUrl + "</countryURL>");
 		if(start){
 			itinerary.println("\t</start>");
 		}
@@ -214,8 +216,8 @@ public class View {
 		tempFile.renameTo(svg);
 	}
 	
-	public void displayXML(ArrayList<location> locations, ArrayList<Integer> mileages, String units){
-		gui.displayXML(xmlFilename, locations, mileages, units);
+	public void displayXml(ArrayList<location>locs,ArrayList<Integer>dis,String units){
+		gui.displayXml(xmlFilename, locs, dis, units);
 	}
 	
 	public void displaySVG(){

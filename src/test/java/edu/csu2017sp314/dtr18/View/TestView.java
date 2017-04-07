@@ -87,27 +87,29 @@ public class TestView {
 		s += "</leg>\n";
 		s += "</trip>\n";
 		
-		location l = new location("Denver International Airport", "KDEN", 39.861698150635, -104.672996521);
-		l.elevation = 5431;
-		l.municipality = "Denver";
-		l.region = "Colorado";
-		l.country = "United States";
-		l.continent = "North America";
-		l.airportUrl = "http://en.wikipedia.org/wiki/Denver_International_Airport";
-		l.regionUrl = "http://en.wikipedia.org/wiki/Colorado";
-		l.countryUrl = "http://en.wikipedia.org/wiki/United_States";
-		location l2 = new location("Port Moresby Jacksons International Airport", "AYPY", -9.443380355834961, 147.22000122070312);
-		l2.elevation = 146;
-		l2.region = "National Capital District (Port Moresby)";
-		l2.country = "Papua New Guinea";
-		l2.continent = "Oceania";
-		l2.airportUrl = "http://en.wikipedia.org/wiki/Jacksons_International_Airport";
-		l2.regionUrl = "http://en.wikipedia.org/wiki/National_Capital_District_(Port_Moresby)";
-		l2.countryUrl = "http://en.wikipedia.org/wiki/Papua_New_Guinea";
-		l2.municipality = "Port Moresby";
+		location location = new location("Denver International Airport", "KDEN", 
+				39.861698150635, -104.672996521);
+		location.elevation = 5431;
+		location.municipality = "Denver";
+		location.region = "Colorado";
+		location.country = "United States";
+		location.continent = "North America";
+		location.airportUrl = "http://en.wikipedia.org/wiki/Denver_International_Airport";
+		location.regionUrl = "http://en.wikipedia.org/wiki/Colorado";
+		location.countryUrl = "http://en.wikipedia.org/wiki/United_States";
+		location location2 = new location("Port Moresby Jacksons International Airport", "AYPY",
+				-9.443380355834961, 147.22000122070312);
+		location2.elevation = 146;
+		location2.region = "National Capital District (Port Moresby)";
+		location2.country = "Papua New Guinea";
+		location2.continent = "Oceania";
+		location2.airportUrl = "http://en.wikipedia.org/wiki/Jacksons_International_Airport";
+		location2.regionUrl = "http://en.wikipedia.org/wiki/National_Capital_District_(Port_Moresby)";
+		location2.countryUrl = "http://en.wikipedia.org/wiki/Papua_New_Guinea";
+		location2.municipality = "Port Moresby";
 		
-		view.addLeg(1, l, 34, true, "miles");
-		view.addLeg(1, l2, 34, false, "miles");
+		view.addLeg(1, location, 34, true, "miles");
+		view.addLeg(1, location2, 34, false, "miles");
 		view.finalizeTrip();
 		
 		try {
