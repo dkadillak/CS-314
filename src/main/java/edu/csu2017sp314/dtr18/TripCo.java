@@ -184,11 +184,11 @@ public class TripCo{
 		String output = input.substring(0, input.length()-4);
 		
 		//add options
-		if(opt_m){
-			output += "-m";
-		}
 		if(opt_i){
 			output += "-i";
+		}
+		if(opt_m){
+			output += "-m";
 		}
 		if(opt_n){
 			output += "-n";
