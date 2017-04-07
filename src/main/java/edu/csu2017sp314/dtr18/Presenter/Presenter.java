@@ -33,37 +33,22 @@ public class Presenter{
 		AlertBox.locations = createArray();	
 		AlertBox.launch();
 		if(!(AlertBox.selectedLocations[0].equals("no subselection"))){
-			Model subSelectModel = new Model(model,AlertBox.selectedLocations);
+			Model subSelectModel = new Model(AlertBox.selectedLocations);
 			model = subSelectModel;
+			model.computeDistances();
 		}
 		
 		if(AlertBox.opt_2){
-			model.computeDistances();
-			model.bestNearestNeighbor();
 			model.twoOpt();
 		}
 		else if(AlertBox.opt_3){
-			model.computeDistances();
-			model.bestNearestNeighbor();
 			model.threeOpt();
+		}else{
+			model.bestNearestNeighbor();
 		}
-		else
-		model.computeDistances();
-		model.bestNearestNeighbor();
 	}
 	
-	public void makeTrip(boolean opt_m, boolean opt_i, boolean opt_n, boolean opt_g,boolean opt_2, boolean opt_3){
-		//trip calculation is being handled in TripCo, don't need to do it again here
-		/*if(opt_2){
-			model.computeDistances();
-			model.bestNearestNeighbor();
-			model.twoOpt();
-		}
-		if(opt_3){
-			model.computeDistances();
-			model.bestNearestNeighbor();
-			model.threeOpt();
-		}*/
+	public void makeTrip(boolean opt_m, boolean opt_i, boolean opt_n, boolean opt_g){
 		for(int index = 0; index < model.legs.size(); index++){
 			view.addLeg(Integer.toString(index+1), model.legs.get(index).getStart().getName(), model.legs.get(index).getEnd().getName(), model.legs.get(index).getDistance());
 		}
