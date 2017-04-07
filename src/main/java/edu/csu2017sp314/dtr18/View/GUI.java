@@ -69,36 +69,4 @@ public class GUI{
 		svgCanvas.setURI(filename);
 	}
 	
-	public static void main(String [] args){
-		GUI gui = new GUI();
-		ArrayList<location> locations = new ArrayList<location>();
-		ArrayList<Integer> mileages = new ArrayList<Integer>();
-		int m1 = 2;
-		int m2 = 12;
-		int m3 = 22;
-		int m4 = 32;
-		int m5 = 42;
-		int m6 = 52;
-		mileages.add(m1);
-		mileages.add(m2);
-		mileages.add(m3);
-		mileages.add(m4);
-		mileages.add(m5);
-		mileages.add(m6);
-		
-		location l = new location("KDEN");
-		location l2 = new location("AYPY");
-		location l3 = new location("BIKF");
-		location l4 = new location("CYEG");
-		location l5 = new location("CYHZ");
-		location l6 = new location("CYOW");
-		locations.add(l);
-		locations.add(l2);
-		locations.add(l3);
-		locations.add(l4);
-		locations.add(l5);
-		locations.add(l6);
-		gui.displayXML("test.xml", locations, mileages, "miles");
-	}
-	
 }

@@ -50,8 +50,6 @@ public class TestView {
 		svg = new File("testAddLeg.svg");
 		view = new View(xml,svg, false);
 		view.initializeTrip(9999, false);
-		location l = new location("KDEN");
-		location l2 = new location("AYPY");
 		
 		String s = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 		s += "<trip>\n<leg>\n";
@@ -89,6 +87,8 @@ public class TestView {
 		s += "</leg>\n";
 		s += "</trip>\n";
 		
+		location l = new location("KDEN");
+		location l2 = new location("AYPY");
 		view.addLeg(1, l, 34, true, "miles");
 		view.addLeg(1, l2, 34, false, "miles");
 		view.finalizeTrip();

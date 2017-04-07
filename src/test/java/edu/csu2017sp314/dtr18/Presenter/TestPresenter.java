@@ -27,12 +27,12 @@ public class TestPresenter {
 		assertEquals(midX, ((222 + 620) / 2));
 		int midY = (525 + 482) / 2;
 		assertEquals(midY, ((525 + 481) / 2));
-		int expected [] = {144, 209};
-		int expected2 [] = {144, 209};
-		int expected3 [] = {144, 209};
-		int results [] = view.convertCoords(39.1177, -106.4453);
-		int results2 [] = view.convertCoords(39.1875, -106.4756);
-		int results3 [] = view.convertCoords(39.0294, -106.4729);
+		int[] expected = {144, 209};
+		int[] expected2 = {144, 209};
+		int[] expected3 = {144, 209};
+		int[] results = view.convertCoords(39.1177, -106.4453);
+		int[] results2 = view.convertCoords(39.1875, -106.4756);
+		int[] results3 = view.convertCoords(39.0294, -106.4729);
 		assertArrayEquals(expected, results);
 		assertArrayEquals(expected2, results2);
 		assertArrayEquals(expected3, results3);

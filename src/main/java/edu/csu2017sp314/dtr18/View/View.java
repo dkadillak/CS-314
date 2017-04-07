@@ -158,8 +158,9 @@ public class View {
 		itinerary.println("\t\t<airportURL>" + l.airportUrl + "</airportURL>");
 		itinerary.println("\t\t<regionURL>" + l.regionUrl + "</regionURL>");
 		itinerary.println("\t\t<countryURL>" + l.countryUrl + "</countryURL>");
-		if(start)
+		if(start){
 			itinerary.println("\t</start>");
+		}
 		else{
 			itinerary.println("\t</finish>");
 			itinerary.println("\t<distance>" + distance + "</distance>");
