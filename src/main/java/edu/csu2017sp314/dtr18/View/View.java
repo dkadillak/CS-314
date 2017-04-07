@@ -138,7 +138,7 @@ public class View {
 		map.println(">" + label + "</text>");
 	}
 	
-	public void addLeg(int sequence, location location, int distance, boolean start, String units){
+	public void addLeg(int sequence, location loca, int distance, boolean start, String units){
 		if(start){
 			itinerary.println("<leg>");
 			itinerary.print("\t<sequence>");
@@ -148,18 +148,18 @@ public class View {
 		}
 		else
 			itinerary.println("\t<finish>");
-		itinerary.println("\t\t<id>" + location.id + "</id>");
-		itinerary.println("\t\t<name>" + location.name + "</name>");
-		itinerary.println("\t\t<latitude>" + location.latitude + "</latitude>");
-		itinerary.println("\t\t<longitude>" + location.longitude + "</longitude>");
-		itinerary.println("\t\t<elevation>" + location.elevation + "</elevation>");
-		itinerary.println("\t\t<municipality>" + location.municipality + "</municipality>");
-		itinerary.println("\t\t<region>" + location.region + "</region>");
-		itinerary.println("\t\t<country>" + location.country + "</country>");
-		itinerary.println("\t\t<continent>" + location.continent + "</continent>");
-		itinerary.println("\t\t<airportURL>" + location.airportUrl + "</airportURL>");
-		itinerary.println("\t\t<regionURL>" + location.regionUrl + "</regionURL>");
-		itinerary.println("\t\t<countryURL>" + location.countryUrl + "</countryURL>");
+		itinerary.println("\t\t<id>" + loca.id + "</id>");
+		itinerary.println("\t\t<name>" + loca.name + "</name>");
+		itinerary.println("\t\t<latitude>" + loca.latitude + "</latitude>");
+		itinerary.println("\t\t<longitude>" + loca.longitude + "</longitude>");
+		itinerary.println("\t\t<elevation>" + loca.elevation + "</elevation>");
+		itinerary.println("\t\t<municipality>" + loca.municipality + "</municipality>");
+		itinerary.println("\t\t<region>" + loca.region + "</region>");
+		itinerary.println("\t\t<country>" + loca.country + "</country>");
+		itinerary.println("\t\t<continent>" + loca.continent + "</continent>");
+		itinerary.println("\t\t<airportURL>" + loca.airportUrl + "</airportURL>");
+		itinerary.println("\t\t<regionURL>" + loca.regionUrl + "</regionURL>");
+		itinerary.println("\t\t<countryURL>" + loca.countryUrl + "</countryURL>");
 		if(start){
 			itinerary.println("\t</start>");
 		}

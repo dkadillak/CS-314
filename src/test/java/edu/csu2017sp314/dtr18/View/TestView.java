@@ -97,8 +97,8 @@ public class TestView {
 		location.airportUrl = "http://en.wikipedia.org/wiki/Denver_International_Airport";
 		location.regionUrl = "http://en.wikipedia.org/wiki/Colorado";
 		location.countryUrl = "http://en.wikipedia.org/wiki/United_States";
-		location location2 = new location("Port Moresby Jacksons International Airport", "AYPY",
-				-9.443380355834961, 147.22000122070312);
+		location location2 = new location("Port Moresby Jacksons International Airport",
+				"AYPY", -9.443380355834961, 147.22000122070312);
 		location2.elevation = 146;
 		location2.region = "National Capital District (Port Moresby)";
 		location2.country = "Papua New Guinea";
