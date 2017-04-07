@@ -137,7 +137,8 @@ public class TripCo{
 		
 		if(!args[optCount].endsWith(".svg") || args[optCount].equals(".svg")){
 			//check if the file is type .svg or not
-			System.err.println("Error - First argument after options must be background map");
+			System.err.println("Error - "
+					+ "First argument after options must be background map");
 			return false;
 		}
 		//include statement to get the user inputted background image args[optCount]
@@ -146,7 +147,8 @@ public class TripCo{
 		if(optCount+1<args.length){
 			if(!args[optCount+1].endsWith(".xml") || args[optCount+1].equals(".xml")){
 				//check if the file is type .xml or not
-				System.err.println("Error - Second argument after options must be subselection file");
+				System.err.println("Error - Second argument "
+						+ "after options must be subselection file");
 				return false;
 			}
 			//include statement to get user inputed selection.xml args[optCount+2]
@@ -266,7 +268,8 @@ public class TripCo{
 		}
 
 			if(files==0){
-				System.out.println("Error- no subselection file was included in arguments");
+				System.out.println("Error- "
+						+ "no subselection file was included in arguments");
 				System.exit(0);
 			}
 			else if(files>2){
