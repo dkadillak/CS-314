@@ -18,7 +18,7 @@ public class TestModel{
 
 	@Test
 	public void LatLongConverterTest() {
-		m = new Model();
+		m = new Model('m');
 	//variable used to see if method successfully removes spaces and produce correct answer
 		//String t1 = "37° 16' 20.47\" E";
 		//Do I need a test for this?
@@ -67,7 +67,7 @@ public class TestModel{
 	
 	@Test
 	public void smallestOnLineTest(){
-		m = new Model();
+		m = new Model('m');
 		int t1[] = new int[] {12,3,0,12321,4};
 		int t2[] = new int [] {0,0,0,0,8,89};
 		
@@ -79,7 +79,7 @@ public class TestModel{
 	
 	@Test
 	public void circleDistanceTest(){
-		m = new Model();
+		m = new Model('m');
 		
 		double lat1=118.87, lon1=104.33, lat2=37.57, lon2=-105.79;
 		
@@ -97,7 +97,7 @@ public class TestModel{
 		locs.add(new location("4","Mineral County",37.65,-106.93));
 		locs.add(new location("5","San Juan County",37.78,-107.67));
 		
-		m = new Model();
+		m = new Model('m');
 		m.locations = locs;
 		m.computeDistances();
 		m.bestNearestNeighbor();
@@ -114,7 +114,7 @@ public class TestModel{
 		locs.add(new location("5","San Juan County",37.78,-107.67));
 		locs.add(new location("6","Adams County",39.87,-104.33));
 		
-		m = new Model();
+		m = new Model('m');
 		m.locations = locs;
 		m.computeDistances();
 		m.bestNearestNeighbor();
@@ -133,8 +133,8 @@ public class TestModel{
 		locs.add(new location("5","San Juan County",37.78,-107.67));
 		locs.add(new location("6","Adams County",39.87,-104.33));
 		
-		m = new Model();
-		Model m2 = new Model();
+		m = new Model('m');
+		Model m2 = new Model('m');
 		m.locations = locs;
 		m2.locations = locs;
 		m.computeDistances();

@@ -32,9 +32,21 @@ public class Presenter{
 		AlertBox.fileName = fileName;
 		AlertBox.locations = createArray();	
 		AlertBox.launch();
+		char units = 'z';
+		if(AlertBox.opt_m){
+			units = 'm';
+		}else if(AlertBox.opt_k){
+			units = 'k';
+		}else{
+			System.err.println("Error: units were neither k or m in Presenter.runGui()");
+			System.exit(-1);
+		}
 		if(!(AlertBox.selectedLocations[0].equals("no subselection"))){
-			Model subSelectModel = new Model(AlertBox.selectedLocations);
+			Model subSelectModel = new Model(AlertBox.selectedLocations,units);
 			model = subSelectModel;
+			model.computeDistances();
+		}else{
+			model.setUnits(units);
 			model.computeDistances();
 		}
 		
@@ -48,7 +60,7 @@ public class Presenter{
 		}
 	}
 	
-	public void makeTrip(boolean opt_m, boolean opt_i, boolean opt_n, boolean opt_g){
+	public void makeTrip(boolean opt_i, boolean opt_d, boolean opt_g){
 		for(int index = 0; index < model.legs.size(); index++){
 			view.addLeg(Integer.toString(index+1), model.legs.get(index).getStart().getName(), model.legs.get(index).getEnd().getName(), model.legs.get(index).getDistance());
 		}
@@ -60,7 +72,7 @@ public class Presenter{
 			view.addLine(first[1], first[0], second[1], second[0]);
 		}
 		view.addFooter();
-		if(opt_m){
+		if(opt_d){
 			view.addHeader("Distances");
 			for(int index = 0; index < model.legs.size(); index++){
 				int [] first = view.convertCoords(model.legs.get(index).getStart().getLatitude(),model.legs.get(index).getStart().getLongitude());
@@ -80,14 +92,7 @@ public class Presenter{
 			}
 			view.addFooter();
 		}
-		if(opt_n){
-			view.addHeader("Locations");
-			for(int index = 0; index < model.legs.size(); index++){
-				int [] point = view.convertCoords(model.legs.get(index).getStart().getLatitude(),model.legs.get(index).getStart().getLongitude());
-				view.addLabel(point[1], point[0], model.legs.get(index).getStart().getName());
-			}
-			view.addFooter();
-		}
+
 		view.finalizeTrip();
 		if(opt_g){
 		view.displayXML();
