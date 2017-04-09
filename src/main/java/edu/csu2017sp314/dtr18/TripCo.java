@@ -17,8 +17,23 @@ import main.java.edu.csu2017sp314.dtr18.View.*;
 import main.java.edu.csu2017sp314.dtr18.Presenter.*;
 
 public class TripCo{
-	private int optCount, count_m, count_i ,count_d,count_k ,count_g ,count_2 ,count_3;
-	public boolean opt_m, opt_i, opt_d,opt_k, opt_g, opt_2, opt_3,xml_exists,svg_exists = false;
+	private int optCount;
+	private int count_m; 
+	private int count_i;
+	private int count_d;
+	private int count_k;
+	private int count_g;
+	private int count_2;
+	private int count_3;
+	public boolean opt_m;
+	public boolean opt_i;
+	public boolean opt_d;
+	public boolean opt_k;
+	public boolean opt_g;
+	public boolean opt_2;
+	public boolean opt_3;
+	public boolean xml_exists;
+	public boolean svg_exists = false;
 	public File input, xml, svg;
 	public TripCo(int count){
 		optCount=count;
@@ -72,7 +87,8 @@ public class TripCo{
 		}
 		//throws an error if "m" and "k" are both given
 		if(count_m >= 1 && count_k >= 1){
-			System.out.println("Error - Cannot have both " + "\"" + "-m" + "\"" + " and " + "\"" + "-k" + "\"" + " as arguments");
+			System.out.println("Error - Cannot have both " + "\"" + "-m" + "\"" + " and "
+		+ "\"" + "-k" + "\"" + " as arguments");
 			return false;
 		}
 		

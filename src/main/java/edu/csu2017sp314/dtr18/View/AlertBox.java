@@ -29,19 +29,25 @@ import javafx.stage.Stage;
 
 public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	//Static class variables
-	static Button ok,no;
+	static Button ok;
+	static Button no;
 	static boolean result;		
 	public static String fileName;
 	static ListView subset;
 	public static String[] selectedLocations;
 	public static String[] locations;
 	//class variables
-			Button button;
-			Stage window;
+	Button button;
+	Stage window;
 	
-			public static boolean opt_m=true,opt_k=false, opt_i=false, opt_d=false, opt_2=false,opt_3=false;
-			@Override
-			//setting up the gui
+	public static boolean opt_m=true;
+	public static boolean opt_k=false;
+	public static boolean opt_i=false;
+	public static boolean opt_d=false;
+	public static boolean opt_2=false;
+	public static boolean opt_3=false;
+	@Override
+	//setting up the gui
 			
 			public void start(Stage primaryStage) throws Exception {
 				window = primaryStage;
