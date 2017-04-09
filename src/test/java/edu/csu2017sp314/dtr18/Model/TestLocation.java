@@ -26,26 +26,4 @@ public class TestLocation {
 		
 	}
 	
-	@Ignore
-	@Test
-	public void testSql(){
-		location loc = new location("KDEN");
-		
-		assertEquals("Denver International Airport",loc.name);
-		assertEquals("KDEN",loc.id);
-		assertTrue(loc.latitude > 39.0 && loc.latitude < 40.0);
-		assertTrue(loc.longitude < -104.0 && loc.longitude > -105.0);
-		assertEquals(5431,loc.elevation);
-		assertEquals("Denver",loc.municipality);
-		assertEquals("Colorado",loc.region);
-		assertEquals("United States",loc.country);
-		assertEquals("North America",loc.continent);
-		String url = "http://en.wikipedia.org/wiki/Denver_International_Airport";
-		assertEquals(url,loc.airportUrl);
-		url = "http://en.wikipedia.org/wiki/Colorado";
-		assertEquals(url,loc.regionUrl);
-		url = "http://en.wikipedia.org/wiki/United_States";
-		assertEquals(url,loc.countryUrl);
-	}
-	
 }
