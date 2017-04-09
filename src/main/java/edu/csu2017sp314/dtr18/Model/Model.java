@@ -175,6 +175,14 @@ public class Model{
 		return locations.size();
 	}
 	
+	public String getUnits(){
+		if(miles){
+			return "Miles";
+		}else{
+			return "Kilometers";
+		}
+	}
+	
 	public void setUnits(char units){
 		if(units == 'm'){
 			miles = true;

@@ -61,10 +61,11 @@ public class Presenter{
 	}
 	
 	public void makeTrip(boolean opt_i, boolean opt_d, boolean opt_g){
+		String units = model.getUnits();
 		for(int index = 0; index < model.legs.size(); index++){
 			view.addLeg(index+1, model.legs.get(index).getStart(),
 					model.legs.get(index).getEnd(),
-					model.legs.get(index).getDistance(), "units");
+					model.legs.get(index).getDistance(), units);
 		}
 		view.addHeader("Legs");
 		for(int index = 0; index < model.legs.size(); index++){

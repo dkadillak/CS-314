@@ -261,7 +261,7 @@ public class TripCo{
 	
 		if(opt_g==true){
 			presenter.runGui();
-			view.initializeTrip(presenter.model.bestTripDistance, svg_exists);
+			view.initializeTrip(presenter.model.bestTripDistance, svg_exists,model.getUnits());
 			presenter.makeTrip(AlertBox.opt_i,AlertBox.opt_d,opt_g);
   		}else{  			
   			model.computeDistances();
@@ -274,7 +274,7 @@ public class TripCo{
 			}
 		
 			
-			view.initializeTrip(model.bestTripDistance, svg_exists);
+			view.initializeTrip(model.bestTripDistance, svg_exists, model.getUnits());
 			presenter.makeTrip(opt_i, opt_d, false);
   		}
 	}
