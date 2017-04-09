@@ -1,6 +1,8 @@
 package main.java.edu.csu2017sp314.dtr18.Model;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,97 +14,143 @@ public class Model{
 	public ArrayList<location> locations;
 	//public ArrayList<String> extra;
 	public ArrayList<Leg> legs;
-	public String Name;
-	public String ID;
 	private int[][] distances;
-	private int lineCount=0, NamePosition, IDPosition, LatitudePosition, LongitudePosition;
-	public double Latitude, Longitude;
-	Scanner scan;
 	public int bestTripDistance;
 
 	//constructor without file parameter for testing purposes
 	public Model(){
 		locations = new ArrayList<location>();
-		//extra = new ArrayList<String>();
+		legs = new ArrayList<Leg>();
+		distances = null;
 	}
 	
 	//regular constructor
 	public Model(File file) throws FileNotFoundException{
-	//initializing ArrayLists
 		locations = new ArrayList<location>();
-		//extra = new ArrayList<String>();
 		legs = new ArrayList<Leg>();
 		
-		
-	//setting up scanner with inputed file
-		scan= new Scanner(file);
-		
-	//setting up scanner to parse individual tokens by comma
-		scan.useDelimiter(",");
-		
 	//lesgo bby
-		parselocations();
+		subsetParser(file);
 		distances = null;
 		//computeDistances();
 		//bestNearestNeighbor();
-		scan.close();
 	}
 	
-	public Model(Model m, String[] subset){
+	//subset constructor
+	public Model(String[] subset){
 		locations = new ArrayList<location>();
-		//extra = new ArrayList<String>();
 		legs = new ArrayList<Leg>();
-		distances = new int[subset.length][subset.length];
-		
-		//fill in locations
-		for(int i = 0; i < subset.length; i++){
-			locations.add(m.getLocation(subset[i]));
-		}
-		
-		//fill in distance table with only the locations in the subset
-		computeDistances();
+		distances = null;
+		fillLocations(subset, true);
 	}
 	
-	public String[] subsetParser(File subset){
+	private void subsetParser(File subset){
 		ArrayList<String> temp_ids = new ArrayList<String>();
 		try {
 			Scanner s = new Scanner(subset);
 			while(s.hasNext()){
-				String line = s.next();
-				if((line.length() >= 4 && line.startsWith("<id>")) && (line.length() >= 5 && line.substring(line.length() - 5, line.length()).equals("</id>"))){
-					line = line.substring(0, line.length() - 5);
-					line = line.substring(4, line.length());
+				String line = s.next().trim();
+				if(line.startsWith("<id>") && line.endsWith("</id>")){
+					line = line.substring(4, line.length() - 5);
+					line = line.trim();
 					temp_ids.add(line);
 				}
 			}
 			s.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.err.println("Error: " + e.getMessage());
 		}
 		String[] ids = new String[temp_ids.size()];
 		ids = temp_ids.toArray(ids);
-		return ids;
+		fillLocations(ids, false);
+	}
+	
+	private void fillLocations(String[] locs, boolean names){
+		DBquery query = new DBquery();
+		query.addColumn("airports.name");
+		query.addColumn("airports.id");
+		query.addColumn("latitude");
+		query.addColumn("longitude");
+		query.addColumn("elevation_ft");
+		query.addColumn("municipality");
+		query.addColumn("regions.name");
+		query.addColumn("countries.name");
+		query.addColumn("continents.name");
+		query.addColumn("airports.wikipedia_link");
+		query.addColumn("regions.wikipedia_link");
+		query.addColumn("countries.wikipedia_link");
+		
+		query.setFrom("all");
+		
+		String search;
+		if(!names){
+			search = "airports.id in (";
+		}else{
+			search = "airports.name in (";
+			locs = escapeSingleQuotes(locs);
+		}
+		for(int i = 0; i < locs.length; i++){
+			search += "'" + locs[i] + "',";
+		}
+		//remove last comma
+		search = search.substring(0, search.length()-1);
+		search += ")";
+		
+		query.setWhere(search);
+		parseSqlResult(query.submit());
+		query.close();
+	}
+	
+	public static String[] escapeSingleQuotes(String[] locs){
+		for(int i = 0; i < locs.length; i++){
+			if(locs[i].contains("'")){
+				String[] split = locs[i].split("'");
+				locs[i] = split[0];
+				for(int j = 1; j < split.length; j++){
+					locs[i] = locs[i] + "''" + split[j];
+				}
+			}
+		}
+		
+		return locs;
 	}
 
+	private void parseSqlResult(ResultSet rs){
+		//output is the same order that columns were added to query
+		
+		try {
+			int i = 0;
+			while(rs.next()){
+				location loc = new location(i++);
+				//fill in location object with data from the database
+				loc.name = rs.getString(1);
+				loc.id = rs.getString(2);
+				loc.latitude = rs.getDouble(3);
+				loc.longitude = rs.getDouble(4);
+				loc.elevation = rs.getInt(5);
+				loc.municipality = rs.getString(6);
+				loc.region = rs.getString(7);
+				loc.country = rs.getString(8);
+				loc.continent = rs.getString(9);
+				loc.airportUrl = rs.getString(10);
+				loc.regionUrl = rs.getString(11);
+				loc.countryUrl = rs.getString(12);
+				
+				locations.add(loc);
+			}
+		} catch (SQLException e) {
+			System.err.print("Error: ");
+			System.err.println(e.getMessage());
+		}
+	}
 	
 	//getters
 	public int getFileSize(){
 		return locations.size();
 	}
-	public int getNamePosition(){
-		return NamePosition;
-	}
-	public int getLatitudePosition(){
-		return LatitudePosition;
-	}
-	public int getLongitudePosition(){
-		return LongitudePosition;
-	}
-	public int getIDPosition(){
-		return IDPosition;
-	}
 	
 	//takes a string that corresponds to a location's name or id, and return that location object
+	//if no location is found, return null
 	public location getLocation(String in){
 		for(int i = 0; i < locations.size(); i++){
 			location l = locations.get(i);
@@ -144,89 +192,7 @@ public class Model{
 		return s;
 	}
 	
-private void parselocations(){
 
-	//setting up string 
-		String input="";
-		
-	//getting information from very first line of file
-		if(scan.hasNextLine()){
-			firstLineParser(scan.nextLine());
-		}
-	
-	//parsing the rest of the file
-	while(scan.hasNextLine()){
-		
-		input=scan.nextLine();
-		if(input.equals("")) continue;
-		//input=input.replaceAll("\\s", "");
-		lineParser(input);
-	
-	}
-}
-
-public void firstLineParser(String firstLine){
-
-	String input="";
-	
-	//lower case everything
-	firstLine=firstLine.toLowerCase();
-
-	//remove extra spacing if there is any
-	firstLine=firstLine.replaceAll("\\s", "");
-	
-	//setting up scanner for firstLine string and setting delimiter
-	Scanner in = new Scanner(firstLine);
-	in.useDelimiter(",");
-	
-	while(in.hasNext()){
-		input=in.next();
-		
-		if(input.equalsIgnoreCase("name")){
-			NamePosition=lineCount;
-		}
-		if(input.equalsIgnoreCase("id")){
-			IDPosition=lineCount;
-		}
-		if(input.equalsIgnoreCase("latitude")){
-			LatitudePosition=lineCount;
-		}
-		if(input.equalsIgnoreCase("longitude")){
-			LongitudePosition=lineCount;
-		}
-		lineCount++;
-	}
-	in.close();
-}
-
-public void lineParser(String input){
-	
-	String s[] = input.split(",");
-
-	
-	for(int i=0; i<lineCount;i++){
-		if(i==NamePosition){
-			Name=s[i].trim();
-		}
-		else if(i==IDPosition){
-			ID=s[i].trim();
-		}
-		else if(i==LatitudePosition){
-			
-			Latitude=LatLongConverter(s[i].toLowerCase().replaceAll("\\s", ""));
-		}
-		else if(i==LongitudePosition){
-			
-			Longitude=LatLongConverter(s[i].toLowerCase().replaceAll("\\s", ""));
-		}
-		/*else{
-			extra.add(s[i]);
-		}*/
-	}
-	locations.add(new location(Name,ID,Latitude,Longitude,locations.size()));
-	//extra.clear();
-	return;
-}
 
 public int circleDistance(double lat1, double lon1, double lat2, double lon2 ){
 	//credit to http://www.movable-type.co.uk/scripts/latlong.html for formula
@@ -269,18 +235,6 @@ public void computeDistances(){
 			distances[y][x]=(circleDistance(locations.get(y).getLatitude(), locations.get(y).getLongitude(), locations.get(x).getLatitude(), locations.get(x).getLongitude()));
 		}
 	}
-}
-
-@SuppressWarnings("unused")
-private void printArray(){
-	
-	for(int y=0;y<getFileSize();y++){
-		for(int x=0;x<getFileSize();x++){
-		System.out.print(distances[y][x]+" ");
-		}
-		System.out.println();
-	}
-	System.out.println("\n");
 }
 
 public void bestNearestNeighbor(){

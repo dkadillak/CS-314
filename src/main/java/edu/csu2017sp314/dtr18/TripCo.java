@@ -133,40 +133,38 @@ public class TripCo{
 	}
 	
 	public boolean fileCheck(String[] args){
-		if(!args[optCount].endsWith(".csv") || args[optCount].equals(".csv")){
-			//check if the file is type .csv or not
-			System.out.println("Error - File: " + "\"" + args[optCount] + "\"" + " is not of type .csv!");
-			return false;
-		}
-		
-		//take ".csv" off the file name
-		String fileName = args[optCount].substring(0, args[optCount].length() - 4); 
 		//check for .svg file
 		
-		if(optCount+1<args.length){
-			if(!args[optCount+1].endsWith(".svg") || args[optCount+1].equals(".svg")){
-				//check if the file is type .svg or not
-				System.out.println("Error - File: " + "\"" + args[optCount+1] + "\"" + " is not of type .svg!");
-				return false;
-			}
-			//include statement to get the user inputted background image args[optCount+1]
-			svg_exists=true;
+		if(!args[optCount].endsWith(".svg") || args[optCount].equals(".svg")){
+			//check if the file is type .svg or not
+			System.err.println("Error - "
+					+ "First argument after options must be background map");
+			return false;
 		}
-		if(optCount+2<args.length){
-			if(!args[optCount+2].endsWith(".xml") || args[optCount+2].equals(".xml")){
+		//include statement to get the user inputted background image args[optCount]
+		svg_exists=true;
+			
+		if(optCount+1<args.length){
+			if(!args[optCount+1].endsWith(".xml") || args[optCount+1].equals(".xml")){
 				//check if the file is type .xml or not
-				System.out.println("Error - File: " + "\"" + args[optCount+2] + "\"" + " is not of type .xml!");
+				System.err.println("Error - Second argument "
+						+ "after options must be subselection file");
 				return false;
 			}
 			//include statement to get user inputed selection.xml args[optCount+2]
 			xml_exists=true;
+		} else if(!opt_g){
+			System.err.println("Error: Must include selection file if not using -g");
+			return false;
 		}
 		
-		input = new File(args[optCount]);
-		svg = new File(fileName + ".svg");
-		xml = new File(fileName + ".xml"); //make xml file with input file's name
+		input = new File(args[optCount+1]);
+		//generate names for output files
+		String output = generateOutputName(args[optCount+1]);
+		svg = new File(output + ".svg");
+		xml = new File(output + ".xml"); //make xml file with input file's name
 		if(svg_exists){
-			File map = new File(args[optCount+1]);
+			File map = new File(args[optCount]);
 		    try {
 		    	if(!svg.exists())
 		    		Files.copy(map.toPath(), svg.toPath());
@@ -176,23 +174,46 @@ public class TripCo{
 		    		Files.copy(map.toPath(), svg.toPath());
 		    	}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.err.println("Error: " + e.getMessage());
 			}
 		}
 		return true;
 	}
+	
+	// generates base name of output without .xml or .svg
+	private String generateOutputName(String input){
+		//remove.xml
+		String output = input.substring(0, input.length()-4);
+		
+		//add options
+		if(opt_i){
+			output += "-i";
+		}
+		if(opt_m){
+			output += "-m";
+		}
+		if(opt_n){
+			output += "-n";
+		}
+		if(opt_g){
+			output += "-g";
+		}
+		if(opt_2){
+			output += "-2";
+		}
+		if(opt_3){
+			output += "-3";
+		}
+		
+		// add team
+		output += "t18";
+		
+		return output;
+	}
+	
 	public void run() throws FileNotFoundException{
 		Model model = new Model(input);
 		model.computeDistances();
-    /*
-  		if(opt_2==true){
-			model.twoOpt();
-		}
-		else if(opt_3==true){
-			model.threeOpt();
-		}
-  		*/
 		
 		View view = new View(xml, svg, svg_exists);
 		Presenter presenter = new Presenter(view, model, svg.getName());
@@ -200,21 +221,19 @@ public class TripCo{
 		if(opt_g==true){
 			presenter.runGui();
 			view.initializeTrip(presenter.model.bestTripDistance, svg_exists);
-			presenter.makeTrip(AlertBox.opt_m, AlertBox.opt_i,AlertBox.opt_n,opt_g,opt_2,opt_3);
-  		}
-		else{
-			if(opt_2==true){
+			presenter.makeTrip(AlertBox.opt_m, AlertBox.opt_i,AlertBox.opt_n,opt_g);
+  		}else{
+			if(opt_2==true && opt_3 == false){
 				model.twoOpt();
-			}
-			else if(opt_3==true){
+			}else if(opt_3==true){
 				model.threeOpt();
-			}
-			else
+			}else{
 				model.bestNearestNeighbor();
-		}
+			}
 		
-		view.initializeTrip(model.bestTripDistance, svg_exists);
-		presenter.makeTrip(opt_m, opt_i, opt_n, false, false, false);
+			view.initializeTrip(model.bestTripDistance, svg_exists);
+			presenter.makeTrip(opt_m, opt_i, opt_n, false);
+  		}
 	}
 
 
@@ -223,10 +242,10 @@ public class TripCo{
 		
 		/*command line example:
 		 
-		java TripCo [options] file.csv [map.svg] [selection.xml]
-						-i			  background	selection of
-						-m				  map		locations in
-						-n							  file.csv
+		java TripCo [options] [map.svg] [selection.xml]
+						-i	  background	selection of
+						-m	  	map		    locations in
+						-n					  file.csv					  
 						-g
 						-2
 						-3
@@ -240,7 +259,7 @@ public class TripCo{
 		int opt=0, files=0;
 		for(int i=0;i<args.length;i++){
 			//check all options until the expected .csv file
-			if(args[i].matches("(.*)csv")||args[i].matches("(.*)svg")||args[i].matches("(.*)xml")){
+			if(args[i].matches("(.*)svg")||args[i].matches("(.*)xml")){
 				files++;
 			}
 			else if(args[i].matches("[inmg23-]+")){
@@ -249,10 +268,11 @@ public class TripCo{
 		}
 
 			if(files==0){
-				System.out.println("Error- no .csv file was included in arguments");
+				System.out.println("Error- "
+						+ "no subselection file was included in arguments");
 				System.exit(0);
 			}
-			else if(files>3){
+			else if(files>2){
 				System.out.println("Error- too many files given");
 				System.exit(0);
 			}
