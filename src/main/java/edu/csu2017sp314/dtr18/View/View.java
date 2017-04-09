@@ -8,12 +8,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import main.java.edu.csu2017sp314.dtr18.Model.Leg;
+import main.java.edu.csu2017sp314.dtr18.Model.location;
 
 public class View {
 	private PrintWriter itinerary, map, selection;
 	private int mapLegCount;
 	private int mapLabelCount;
-	private String itinContents;
 	private GUI gui;
 	private String xmlFilename;
 	private String svgFilename;
@@ -30,7 +33,6 @@ public class View {
 			itinerary = new PrintWriter(xml);
 			mapLegCount = 0;
 			mapLabelCount = 0;
-			itinContents = "";
 			gui = new GUI();
 			xmlFilename = xml.getName();
 			svgFilename = svg.getName();
@@ -41,10 +43,10 @@ public class View {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 	}
 
-	
+
 	//initialize XML and SVG
 	public void initializeTrip(int totalMiles, boolean background){
 		itinerary.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -72,7 +74,7 @@ public class View {
 		addFooter();
 
 	}
-	
+
 	public void initializeSelection(String filename){
 		select = new File(filename + ".xml");
 		try {
@@ -81,18 +83,18 @@ public class View {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		selection.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		selection.println("<selection>");
 		selection.println("\t<title>" + filename + "</title>");
 		selection.println("\t<filename>" + svgFilename + "</filename>");
 		selection.println("\t<destinations>");
 	}
-	
+
 	public void addSelectionID(String id){
 		selection.println("\t\t<id>" + id + "</id>");
 	}
-	
+
 	public void finalizeSelection(){
 		selection.println("\t</destinations>");
 		selection.println("</selection>");
@@ -137,20 +139,36 @@ public class View {
 		map.println(">" + label + "</text>");
 	}
 
-	//add a single leg to the XML itinerary
-	public void addLeg(String sequence, String start, String finish, int milage){
-		//sequence is which leg of the trip this is. e.g. 1 or 2 or 3
-		//start is the name of the first location in the leg
-		//finish the the name of the destination of the leg
-
+	public void addLeg(int sequence, location start, location end, int distance, String units){
 		itinerary.println("<leg>");
-		itinerary.println("\t<sequence>" + sequence + "</sequence>");
-		itinerary.println("\t<start>" + start + "</start>");
-		itinerary.println("\t<finish>" + finish + "</finish>");
-		itinerary.println("\t<milage>" + milage + "</milage>");
+		itinerary.print("\t<sequence>");
+		itinerary.print(Integer.toString(sequence));
+		itinerary.println("</sequence>");
+		itinerary.println("\t<start>");
+		itinerary.println(makeString(start));
+		itinerary.println("\t</start>");
+		itinerary.println("\t<finish>");
+		itinerary.println(makeString(end));
+		itinerary.println("\t</finish>");
+		itinerary.println("\t<distance>" + distance + "</distance>");
+		itinerary.println("\t<units>" + units + "</units>");
 		itinerary.println("</leg>");
-		itinContents += "Sequence: " + sequence + "\nFrom: " + start + "\nTo: "
-		+ finish + "\nMileage: " + Integer.toString(milage) + "\n\n";
+	}
+
+	public String makeString(location location){
+		String line = "\t\t<id>" + location.id + "</id>\n";
+		line += "\t\t<name>" + location.name + "</name>\n";
+		line += "\t\t<latitude>" + location.latitude + "</latitude>\n";
+		line += "\t\t<longitude>" + location.longitude + "</longitude>\n";
+		line += "\t\t<elevation>" + location.elevation + "</elevation>\n";
+		line += "\t\t<municipality>" + location.municipality + "</municipality>\n";
+		line += "\t\t<region>" + location.region + "</region>\n";
+		line += "\t\t<country>" + location.country + "</country>\n";
+		line += "\t\t<continent>" + location.continent + "</continent>\n";
+		line += "\t\t<airportURL>" + location.airportUrl + "</airportURL>\n";
+		line += "\t\t<regionURL>" + location.regionUrl + "</regionURL>\n";
+		line += "\t\t<countryURL>" + location.countryUrl + "</countryURL>";
+		return line;
 	}
 
 	//finalize XML and SVG
@@ -197,12 +215,11 @@ public class View {
 		reader.close(); 
 		tempFile.renameTo(svg);
 	}
-	
-	public void displayXML(){
-		gui.displayXML(xmlFilename, itinContents);
-		itinContents = ""; //clear out string for if they want to run another file
+
+	public void displayXml(ArrayList<Leg> legs,String units){
+		gui.displayXml(xmlFilename, legs, units);
 	}
-	
+
 	public void displaySVG(){
 		gui.displaySVG(svgFilename);
 	}
@@ -216,12 +233,12 @@ public class View {
 	public PrintWriter getItinerary() {
 		return itinerary;
 	}
-	
+
 	//just for use by JUnit
 	public File getSelection() {
 		return select;
 	}
-	
+
 	//just for use by junit, with great power comes great responsibility; seriously though don't use this function except for junit
 	public void deleteSelection(){
 		select.delete();

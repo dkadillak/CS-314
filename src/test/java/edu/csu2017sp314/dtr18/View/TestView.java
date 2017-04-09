@@ -5,12 +5,11 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 
+import main.java.edu.csu2017sp314.dtr18.Model.location;
 import main.java.edu.csu2017sp314.dtr18.View.View;
 
 public class TestView {
@@ -49,20 +48,65 @@ public class TestView {
 		svg = new File("testAddLeg.svg");
 		view = new View(xml,svg, false);
 		view.initializeTrip(9999, false);
-		String start = "Fort Collins";
-		String finish = "Denver";
-		int milage = 12;
 		
 		String s = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 		s += "<trip>\n<leg>\n";
-		s += "\t<sequence>" + "1" + "</sequence>\n";
-		s += "\t<start>" + start + "</start>\n";
-		s += "\t<finish>" + finish + "</finish>\n";
-		s += "\t<milage>" + milage + "</milage>\n";
+		s += "\t<sequence>1</sequence>\n";
+		s += "\t<start>\n";
+		s += "\t\t<id>KDEN</id>\n";
+		s += "\t\t<name>Denver International Airport</name>\n";
+		s += "\t\t<latitude>39.861698150635</latitude>\n";
+		s += "\t\t<longitude>-104.672996521</longitude>\n";
+		s += "\t\t<elevation>5431</elevation>\n";
+		s += "\t\t<municipality>Denver</municipality>\n";
+		s += "\t\t<region>Colorado</region>\n";
+		s += "\t\t<country>United States</country>\n";
+		s += "\t\t<continent>North America</continent>\n";
+		s += "\t\t<airportURL>http://en.wikipedia.org/wiki/Denver_International_Airport</airportURL>\n";
+		s += "\t\t<regionURL>http://en.wikipedia.org/wiki/Colorado</regionURL>\n";
+		s += "\t\t<countryURL>http://en.wikipedia.org/wiki/United_States</countryURL>\n";
+		s += "\t</start>\n";
+		s += "\t<finish>\n";
+		s += "\t\t<id>AYPY</id>\n";
+		s += "\t\t<name>Port Moresby Jacksons International Airport</name>\n";
+		s += "\t\t<latitude>-9.443380355834961</latitude>\n";
+		s += "\t\t<longitude>147.22000122070312</longitude>\n";
+		s += "\t\t<elevation>146</elevation>\n";
+		s += "\t\t<municipality>Port Moresby</municipality>\n";
+		s += "\t\t<region>National Capital District (Port Moresby)</region>\n";
+		s += "\t\t<country>Papua New Guinea</country>\n";
+		s += "\t\t<continent>Oceania</continent>\n";
+		s += "\t\t<airportURL>http://en.wikipedia.org/wiki/Jacksons_International_Airport</airportURL>\n";
+		s += "\t\t<regionURL>http://en.wikipedia.org/wiki/National_Capital_District_(Port_Moresby)</regionURL>\n";
+		s += "\t\t<countryURL>http://en.wikipedia.org/wiki/Papua_New_Guinea</countryURL>\n";
+		s += "\t</finish>\n";
+		s += "\t<distance>34</distance>\n";
+		s += "\t<units>miles</units>\n";
 		s += "</leg>\n";
 		s += "</trip>\n";
 		
-		view.addLeg("1", start, finish, milage);
+		location location = new location("Denver International Airport", "KDEN", 
+				39.861698150635, -104.672996521);
+		location.elevation = 5431;
+		location.municipality = "Denver";
+		location.region = "Colorado";
+		location.country = "United States";
+		location.continent = "North America";
+		location.airportUrl = "http://en.wikipedia.org/wiki/Denver_International_Airport";
+		location.regionUrl = "http://en.wikipedia.org/wiki/Colorado";
+		location.countryUrl = "http://en.wikipedia.org/wiki/United_States";
+		location location2 = new location("Port Moresby Jacksons International Airport",
+				"AYPY", -9.443380355834961, 147.22000122070312);
+		location2.elevation = 146;
+		location2.region = "National Capital District (Port Moresby)";
+		location2.country = "Papua New Guinea";
+		location2.continent = "Oceania";
+		location2.airportUrl = "http://en.wikipedia.org/wiki/Jacksons_International_Airport";
+		location2.regionUrl = "http://en.wikipedia.org/wiki/National_Capital_District_(Port_Moresby)";
+		location2.countryUrl = "http://en.wikipedia.org/wiki/Papua_New_Guinea";
+		location2.municipality = "Port Moresby";
+		
+		view.addLeg(1, location, location2, 34, "miles");
 		view.finalizeTrip();
 		
 		try {
@@ -75,6 +119,41 @@ public class TestView {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testMakeString(){
+		xml = new File("testAddLeg.xml");
+		svg = new File("testAddLeg.svg");
+		view = new View(xml,svg, false);
+		view.initializeTrip(9999, false);
+		
+		String str = "\t\t<id>KDEN</id>\n";
+		str += "\t\t<name>Denver International Airport</name>\n";
+		str += "\t\t<latitude>39.861698150635</latitude>\n";
+		str += "\t\t<longitude>-104.672996521</longitude>\n";
+		str += "\t\t<elevation>5431</elevation>\n";
+		str += "\t\t<municipality>Denver</municipality>\n";
+		str += "\t\t<region>Colorado</region>\n";
+		str += "\t\t<country>United States</country>\n";
+		str += "\t\t<continent>North America</continent>\n";
+		str += "\t\t<airportURL>http://en.wikipedia.org/wiki/Denver_International_Airport</airportURL>\n";
+		str += "\t\t<regionURL>http://en.wikipedia.org/wiki/Colorado</regionURL>\n";
+		str += "\t\t<countryURL>http://en.wikipedia.org/wiki/United_States</countryURL>";
+		
+		location location = new location("Denver International Airport", "KDEN", 
+				39.861698150635, -104.672996521);
+		location.elevation = 5431;
+		location.municipality = "Denver";
+		location.region = "Colorado";
+		location.country = "United States";
+		location.continent = "North America";
+		location.airportUrl = "http://en.wikipedia.org/wiki/Denver_International_Airport";
+		location.regionUrl = "http://en.wikipedia.org/wiki/Colorado";
+		location.countryUrl = "http://en.wikipedia.org/wiki/United_States";
+		
+		assertEquals(str, view.makeString(location));
+		view.finalizeTrip();
 	}
 	
 	@Test
@@ -214,7 +293,6 @@ public class TestView {
 		}
 	}
 	
-	@Ignore
 	@Test
 	public void testConvert(){
 		xml = new File("temp.xml");
