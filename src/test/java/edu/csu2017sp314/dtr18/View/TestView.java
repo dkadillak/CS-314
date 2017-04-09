@@ -108,8 +108,7 @@ public class TestView {
 		location2.countryUrl = "http://en.wikipedia.org/wiki/Papua_New_Guinea";
 		location2.municipality = "Port Moresby";
 		
-		view.addLeg(1, location, 34, true, "miles");
-		view.addLeg(1, location2, 34, false, "miles");
+		view.addLeg(1, location, location2, 34, "miles");
 		view.finalizeTrip();
 		
 		try {
@@ -122,6 +121,41 @@ public class TestView {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testMakeString(){
+		xml = new File("testAddLeg.xml");
+		svg = new File("testAddLeg.svg");
+		view = new View(xml,svg, false);
+		view.initializeTrip(9999, false);
+		
+		String s = "\t\t<id>KDEN</id>\n";
+		s += "\t\t<name>Denver International Airport</name>\n";
+		s += "\t\t<latitude>39.861698150635</latitude>\n";
+		s += "\t\t<longitude>-104.672996521</longitude>\n";
+		s += "\t\t<elevation>5431</elevation>\n";
+		s += "\t\t<municipality>Denver</municipality>\n";
+		s += "\t\t<region>Colorado</region>\n";
+		s += "\t\t<country>United States</country>\n";
+		s += "\t\t<continent>North America</continent>\n";
+		s += "\t\t<airportURL>http://en.wikipedia.org/wiki/Denver_International_Airport</airportURL>\n";
+		s += "\t\t<regionURL>http://en.wikipedia.org/wiki/Colorado</regionURL>\n";
+		s += "\t\t<countryURL>http://en.wikipedia.org/wiki/United_States</countryURL>";
+		
+		location location = new location("Denver International Airport", "KDEN", 
+				39.861698150635, -104.672996521);
+		location.elevation = 5431;
+		location.municipality = "Denver";
+		location.region = "Colorado";
+		location.country = "United States";
+		location.continent = "North America";
+		location.airportUrl = "http://en.wikipedia.org/wiki/Denver_International_Airport";
+		location.regionUrl = "http://en.wikipedia.org/wiki/Colorado";
+		location.countryUrl = "http://en.wikipedia.org/wiki/United_States";
+		
+		assertEquals(s, view.makeString(location));
+		view.finalizeTrip();
 	}
 	
 	@Test
@@ -261,7 +295,6 @@ public class TestView {
 		}
 	}
 	
-	@Ignore
 	@Test
 	public void testConvert(){
 		xml = new File("temp.xml");

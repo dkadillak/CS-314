@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import main.java.edu.csu2017sp314.dtr18.Model.Leg;
 import main.java.edu.csu2017sp314.dtr18.Model.location;
 
 public class View {
@@ -42,10 +43,10 @@ public class View {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 	}
 
-	
+
 	//initialize XML and SVG
 	public void initializeTrip(int totalMiles, boolean background){
 		itinerary.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -73,7 +74,7 @@ public class View {
 		addFooter();
 
 	}
-	
+
 	public void initializeSelection(String filename){
 		select = new File(filename + ".xml");
 		try {
@@ -82,18 +83,18 @@ public class View {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		selection.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		selection.println("<selection>");
 		selection.println("\t<title>" + filename + "</title>");
 		selection.println("\t<filename>" + svgFilename + "</filename>");
 		selection.println("\t<destinations>");
 	}
-	
+
 	public void addSelectionID(String id){
 		selection.println("\t\t<id>" + id + "</id>");
 	}
-	
+
 	public void finalizeSelection(){
 		selection.println("\t</destinations>");
 		selection.println("</selection>");
@@ -137,38 +138,37 @@ public class View {
 		map.print("x=\"" + x + "\"");
 		map.println(">" + label + "</text>");
 	}
-	
-	public void addLeg(int sequence, location loca, int distance, boolean start, String units){
-		if(start){
-			itinerary.println("<leg>");
-			itinerary.print("\t<sequence>");
-			itinerary.print(Integer.toString(sequence));
-			itinerary.println("</sequence>");
-			itinerary.println("\t<start>");
-		}
-		else
-			itinerary.println("\t<finish>");
-		itinerary.println("\t\t<id>" + loca.id + "</id>");
-		itinerary.println("\t\t<name>" + loca.name + "</name>");
-		itinerary.println("\t\t<latitude>" + loca.latitude + "</latitude>");
-		itinerary.println("\t\t<longitude>" + loca.longitude + "</longitude>");
-		itinerary.println("\t\t<elevation>" + loca.elevation + "</elevation>");
-		itinerary.println("\t\t<municipality>" + loca.municipality + "</municipality>");
-		itinerary.println("\t\t<region>" + loca.region + "</region>");
-		itinerary.println("\t\t<country>" + loca.country + "</country>");
-		itinerary.println("\t\t<continent>" + loca.continent + "</continent>");
-		itinerary.println("\t\t<airportURL>" + loca.airportUrl + "</airportURL>");
-		itinerary.println("\t\t<regionURL>" + loca.regionUrl + "</regionURL>");
-		itinerary.println("\t\t<countryURL>" + loca.countryUrl + "</countryURL>");
-		if(start){
-			itinerary.println("\t</start>");
-		}
-		else{
-			itinerary.println("\t</finish>");
-			itinerary.println("\t<distance>" + distance + "</distance>");
-			itinerary.println("\t<units>" + units + "</units>");
-			itinerary.println("</leg>");
-		}
+
+	public void addLeg(int sequence, location start, location end, int distance, String units){
+		itinerary.println("<leg>");
+		itinerary.print("\t<sequence>");
+		itinerary.print(Integer.toString(sequence));
+		itinerary.println("</sequence>");
+		itinerary.println("\t<start>");
+		itinerary.println(makeString(start));
+		itinerary.println("\t</start>");
+		itinerary.println("\t<finish>");
+		itinerary.println(makeString(end));
+		itinerary.println("\t</finish>");
+		itinerary.println("\t<distance>" + distance + "</distance>");
+		itinerary.println("\t<units>" + units + "</units>");
+		itinerary.println("</leg>");
+	}
+
+	public String makeString(location location){
+		String line = "\t\t<id>" + location.id + "</id>\n";
+		line += "\t\t<name>" + location.name + "</name>\n";
+		line += "\t\t<latitude>" + location.latitude + "</latitude>\n";
+		line += "\t\t<longitude>" + location.longitude + "</longitude>\n";
+		line += "\t\t<elevation>" + location.elevation + "</elevation>\n";
+		line += "\t\t<municipality>" + location.municipality + "</municipality>\n";
+		line += "\t\t<region>" + location.region + "</region>\n";
+		line += "\t\t<country>" + location.country + "</country>\n";
+		line += "\t\t<continent>" + location.continent + "</continent>\n";
+		line += "\t\t<airportURL>" + location.airportUrl + "</airportURL>\n";
+		line += "\t\t<regionURL>" + location.regionUrl + "</regionURL>\n";
+		line += "\t\t<countryURL>" + location.countryUrl + "</countryURL>";
+		return line;
 	}
 
 	//finalize XML and SVG
@@ -215,11 +215,11 @@ public class View {
 		reader.close(); 
 		tempFile.renameTo(svg);
 	}
-	
-	public void displayXml(ArrayList<location>locs,ArrayList<Integer>dis,String units){
-		gui.displayXml(xmlFilename, locs, dis, units);
+
+	public void displayXml(ArrayList<Leg> legs,String units){
+		gui.displayXml(xmlFilename, legs, units);
 	}
-	
+
 	public void displaySVG(){
 		gui.displaySVG(svgFilename);
 	}
@@ -233,12 +233,12 @@ public class View {
 	public PrintWriter getItinerary() {
 		return itinerary;
 	}
-	
+
 	//just for use by JUnit
 	public File getSelection() {
 		return select;
 	}
-	
+
 	//just for use by junit, with great power comes great responsibility; seriously though don't use this function except for junit
 	public void deleteSelection(){
 		select.delete();

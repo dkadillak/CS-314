@@ -50,10 +50,9 @@ public class Presenter{
 	
 	public void makeTrip(boolean opt_m, boolean opt_i, boolean opt_n, boolean opt_g){
 		for(int index = 0; index < model.legs.size(); index++){
-			//view.addLeg(Integer.toString(index+1), 
-			//model.legs.get(index).getStart().getName(),
-			//model.legs.get(index).getEnd().getName(),
-			//model.legs.get(index).getDistance());
+			view.addLeg(index+1, model.legs.get(index).getStart(),
+					model.legs.get(index).getEnd(),
+					model.legs.get(index).getDistance(), "units");
 		}
 		view.addHeader("Legs");
 		for(int index = 0; index < model.legs.size(); index++){
@@ -93,7 +92,7 @@ public class Presenter{
 		}
 		view.finalizeTrip();
 		if(opt_g){
-		//view.displayXML();
+		view.displayXml(model.legs, "units");
 		view.displaySVG();
 		}
 		return;	
