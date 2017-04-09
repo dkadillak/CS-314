@@ -5,10 +5,8 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import main.java.edu.csu2017sp314.dtr18.Model.location;
@@ -130,18 +128,18 @@ public class TestView {
 		view = new View(xml,svg, false);
 		view.initializeTrip(9999, false);
 		
-		String s = "\t\t<id>KDEN</id>\n";
-		s += "\t\t<name>Denver International Airport</name>\n";
-		s += "\t\t<latitude>39.861698150635</latitude>\n";
-		s += "\t\t<longitude>-104.672996521</longitude>\n";
-		s += "\t\t<elevation>5431</elevation>\n";
-		s += "\t\t<municipality>Denver</municipality>\n";
-		s += "\t\t<region>Colorado</region>\n";
-		s += "\t\t<country>United States</country>\n";
-		s += "\t\t<continent>North America</continent>\n";
-		s += "\t\t<airportURL>http://en.wikipedia.org/wiki/Denver_International_Airport</airportURL>\n";
-		s += "\t\t<regionURL>http://en.wikipedia.org/wiki/Colorado</regionURL>\n";
-		s += "\t\t<countryURL>http://en.wikipedia.org/wiki/United_States</countryURL>";
+		String str = "\t\t<id>KDEN</id>\n";
+		str += "\t\t<name>Denver International Airport</name>\n";
+		str += "\t\t<latitude>39.861698150635</latitude>\n";
+		str += "\t\t<longitude>-104.672996521</longitude>\n";
+		str += "\t\t<elevation>5431</elevation>\n";
+		str += "\t\t<municipality>Denver</municipality>\n";
+		str += "\t\t<region>Colorado</region>\n";
+		str += "\t\t<country>United States</country>\n";
+		str += "\t\t<continent>North America</continent>\n";
+		str += "\t\t<airportURL>http://en.wikipedia.org/wiki/Denver_International_Airport</airportURL>\n";
+		str += "\t\t<regionURL>http://en.wikipedia.org/wiki/Colorado</regionURL>\n";
+		str += "\t\t<countryURL>http://en.wikipedia.org/wiki/United_States</countryURL>";
 		
 		location location = new location("Denver International Airport", "KDEN", 
 				39.861698150635, -104.672996521);
@@ -154,7 +152,7 @@ public class TestView {
 		location.regionUrl = "http://en.wikipedia.org/wiki/Colorado";
 		location.countryUrl = "http://en.wikipedia.org/wiki/United_States";
 		
-		assertEquals(s, view.makeString(location));
+		assertEquals(str, view.makeString(location));
 		view.finalizeTrip();
 	}
 	
