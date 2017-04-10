@@ -48,7 +48,7 @@ public class View {
 
 
 	//initialize XML and SVG
-	public void initializeTrip(int totalMiles, boolean background){
+	public void initializeTrip(int totalMiles, boolean background, String units){
 		itinerary.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		itinerary.println("<trip>");
 
@@ -70,7 +70,7 @@ public class View {
 		map.println(" font-size=\"24\" id=\"state\" y=\"25\" x=\"512\">DTR-18</text>");
 		map.print("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\"");
 		map.print(" font-size=\"24\" id=\"distance\" y=\"500\" x=\"512\">");
-		map.println(totalMiles + " miles</text>");
+		map.println(totalMiles + " " + units + "</text>");
 		addFooter();
 
 	}

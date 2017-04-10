@@ -16,20 +16,31 @@ public class Model{
 	public ArrayList<Leg> legs;
 	private int[][] distances;
 	public int bestTripDistance;
+	private boolean miles;
 
 	//constructor without file parameter for testing purposes
-	public Model(){
+	public Model(char units){
 		locations = new ArrayList<location>();
 		legs = new ArrayList<Leg>();
 		distances = null;
+		if(units == 'm'){
+			miles = true;
+		}else if(units == 'k'){
+			miles = false;
+		}else{
+			System.err.println("Error: units must be either 'm' or 'k'");
+			System.exit(-1);
+		}
 	}
 
 	//regular constructor
-	public Model(File file) throws FileNotFoundException{
+	public Model(File file, char units) throws FileNotFoundException{
 		locations = new ArrayList<location>();
 		legs = new ArrayList<Leg>();
+		setUnits(units);
+		
+	//lesgo bby
 
-		//lesgo bby
 		subsetParser(file);
 		distances = null;
 		//computeDistances();
@@ -37,10 +48,18 @@ public class Model{
 	}
 
 	//subset constructor
-	public Model(String[] subset){
+	public Model(String[] subset, char units){
 		locations = new ArrayList<location>();
 		legs = new ArrayList<Leg>();
 		distances = null;
+		if(units == 'm'){
+			miles = true;
+		}else if(units == 'k'){
+			miles = false;
+		}else{
+			System.err.println("Error: units must be either 'm' or 'k'");
+			System.exit(-1);
+		}
 		fillLocations(subset, true);
 	}
 
@@ -155,6 +174,28 @@ public class Model{
 	public int getFileSize(){
 		return locations.size();
 	}
+	
+	public String getUnits(){
+		if(miles){
+			return "Miles";
+		}else{
+			return "Kilometers";
+		}
+	}
+	
+	public void setUnits(char units){
+		if(units == 'm'){
+			miles = true;
+		}else if(units == 'k'){
+			miles = false;
+		}else if(units == 'z'){
+			//don't initialize miles yet, because we won't know until we run the gui
+		}else{
+			System.err.println("Error: units must be either 'm' or 'k'");
+			System.exit(-1);
+		}
+	}
+	
 
 	//takes a string that corresponds to a location's name or id, and return that location object
 	//if no location is found, return null
@@ -197,9 +238,7 @@ public class Model{
 		s+=bestTripDistance;
 		s+="\n";
 		return s;
-	}
-
-
+	}	
 
 	public int circleDistance(double lat1, double lon1, double lat2, double lon2 ){
 		//credit to http://www.movable-type.co.uk/scripts/latlong.html for formula
@@ -211,7 +250,12 @@ public class Model{
 		double lat2R = Math.toRadians(lat2);
 		double latDiff = Math.toRadians(lat2-lat1);
 		double longDiff= Math.toRadians(lon2-lon1);
-		double R = 3958.7558657441	;
+		double R;
+		if(miles){
+			R = 3958.7558657441;
+		}else{
+			R = 6371;
+		}
 
 		/*
 	 R = 6371e3; // metres

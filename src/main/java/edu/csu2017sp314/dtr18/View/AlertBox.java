@@ -29,19 +29,25 @@ import javafx.stage.Stage;
 
 public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	//Static class variables
-	static Button ok,no;
+	static Button ok;
+	static Button no;
 	static boolean result;		
 	public static String fileName;
 	static ListView subset;
 	public static String[] selectedLocations;
 	public static String[] locations;
 	//class variables
-			Button button;
-			Stage window;
+	Button button;
+	Stage window;
 	
-			public static boolean opt_m=false, opt_i=false, opt_n=false, opt_2=false,opt_3=false;
-			@Override
-			//setting up the gui
+	public static boolean opt_m=true;
+	public static boolean opt_k=false;
+	public static boolean opt_i=false;
+	public static boolean opt_d=false;
+	public static boolean opt_2=false;
+	public static boolean opt_3=false;
+	@Override
+	//setting up the gui
 			
 			public void start(Stage primaryStage) throws Exception {
 				window = primaryStage;
@@ -60,17 +66,23 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				window.setTitle("TripCo");
 				button = new Button("submit");
 				CheckBox b1 = new CheckBox("Display Distances");
-				CheckBox b2 = new CheckBox("Display Names");
-				CheckBox b3 = new CheckBox("Display ID's");
-				CheckBox b4 = new CheckBox("Run 2opt");
-				CheckBox b5 = new CheckBox("Run 3opt");
-				button.setOnAction(e->this.checkBoxes(b1, b2, b3, b4, b5));
+				CheckBox b2 = new CheckBox("Display ID's");
+				CheckBox b3 = new CheckBox("Run 2opt");
+				CheckBox b4 = new CheckBox("Run 3opt");
+				
+				ToggleGroup group = new ToggleGroup();
+				RadioButton miles = new RadioButton("Miles");
+				miles.setToggleGroup(group);
+				RadioButton kilometers = new RadioButton("Kilometers");
+				kilometers.setToggleGroup(group);
+				miles.fire();
+				button.setOnAction(e->this.checkBoxes(b1, b2, b3, b4, miles, kilometers));
 				subset = new ListView();
 				subset.getItems().addAll(locations);
 				subset.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 				VBox layout = new VBox(5);
 				Label l = new Label("Hold Ctrl while selecting to pick a subset of locations");
-				layout.getChildren().addAll(b1, b2, b3, b4, b5,l,subset,button);
+				layout.getChildren().addAll(b1, b2, b3, b4, miles, kilometers, l,subset,button);
 				
 				BorderPane bp = new BorderPane();
 				bp.setCenter(layout);
@@ -81,7 +93,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 			}
 			
 			//this is the processing code for the gui checkboxes and submit button
-			public void checkBoxes(CheckBox b1,CheckBox b2,CheckBox b3,CheckBox b4,CheckBox b5){
+			public void checkBoxes(CheckBox b1,CheckBox b2,CheckBox b3,CheckBox b4,RadioButton miles, RadioButton kilometers){
 				//save selected locations
 				if(!subset.getSelectionModel().isEmpty()){
 				ObservableList<String> locations;
@@ -99,49 +111,46 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				//creating string that will display in gui for user confirmation
 				String selection = "You are running file "+fileName+" with arguments: ";
 				
-				//error handling for -n and -i being selected together
-				if(b2.isSelected()&&b3.isSelected()){
-					AlertBox.Error("Error- Can't select both Display Names and Display ID's");
-					b2.setSelected(false);
-					b3.setSelected(false);
-					opt_n = false;
-					opt_i = false;
-				}
-				else{
 				//making sure just -3 is used in the case of both -3 and -2
-				if(b4.isSelected()&&b5.isSelected()){
+				if(b4.isSelected()&&b3.isSelected()){
 					opt_3 = true;
 					selection+=" -3";
 				}
 				
-				//if mileage option is selected
+				//if distance option is selected
 				if(b1.isSelected()){
 					opt_m = true;
-					selection+=" -m";
-				}
-				
-				//if names option is selected
-				if(b2.isSelected()){
-					opt_n = true;
-					selection+=" -n";
+					selection+=" -d";
 				}
 				
 				//if id option is selected
-				if(b3.isSelected()){
+				if(b2.isSelected()){
 					opt_i = true;
 					selection+=" -i";
 				}
 				
 				//if twoOpt is selected
-				if(b4.isSelected()){
+				if(b3.isSelected()){
 					opt_2 = true;
 					selection+=" -2";
 				}
 				
 				//if threeOpt is selected and twoOpt isn't selected
-				if(b5.isSelected()&&!b4.isSelected()){
+				if(b4.isSelected()&&!b3.isSelected()){
 					opt_3 = true;
 					selection+=" -3";
+				}
+				
+				if(miles.isSelected()){
+					selection += " -m";
+				}else if(kilometers.isSelected()){
+					opt_m = false;
+					opt_k = true;
+					selection += " -k";
+				}else{
+					System.err.println("Miles/kilometers button error");
+					Platform.exit();
+					System.exit(-1);
 				}
 				//no options were selected, add that to user confirmation string
 				if(selection.length()==43){
@@ -152,7 +161,6 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				if(answer){
 					window.close();
 				}
-			}
 				
 			}
 			
@@ -169,8 +177,9 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	//method to check if the correct booleans get set to true via the gui
 	public static void printOpt(){
 		System.out.println("opt m: "+opt_m);
+		System.out.println("opt k: "+opt_k);
 		System.out.println("opt i: "+opt_i);
-		System.out.println("opt n: "+opt_n);
+		System.out.println("opt n: "+opt_d);
 		System.out.println("opt 2: "+opt_2);
 		System.out.println("opt 3: "+opt_3);
 		}

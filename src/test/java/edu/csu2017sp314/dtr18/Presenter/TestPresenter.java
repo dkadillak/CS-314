@@ -18,7 +18,7 @@ public class TestPresenter {
 	public void testMakeTrip(){
 		testX = new File("junit.xml");
 		testS = new File("junit.svg");
-		model = new Model();
+		model = new Model('m');
 		view = new View(testX, testS, false);
 		presenter = new Presenter(view, model, "name");
 

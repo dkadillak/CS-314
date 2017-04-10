@@ -17,8 +17,23 @@ import main.java.edu.csu2017sp314.dtr18.View.*;
 import main.java.edu.csu2017sp314.dtr18.Presenter.*;
 
 public class TripCo{
-	private int optCount, count_m, count_i ,count_n ,count_g ,count_2 ,count_3;
-	public boolean opt_m, opt_i, opt_n, opt_g, opt_2, opt_3,xml_exists,svg_exists = false;
+	private int optCount;
+	private int count_m; 
+	private int count_i;
+	private int count_d;
+	private int count_k;
+	private int count_g;
+	private int count_2;
+	private int count_3;
+	public boolean opt_m;
+	public boolean opt_i;
+	public boolean opt_d;
+	public boolean opt_k;
+	public boolean opt_g;
+	public boolean opt_2;
+	public boolean opt_3;
+	public boolean xml_exists;
+	public boolean svg_exists = false;
 	public File input, xml, svg;
 	public TripCo(int count){
 		optCount=count;
@@ -32,7 +47,8 @@ public class TripCo{
 	public void printOpt(){
 		System.out.println("opt m: "+opt_m+" count: "+count_m);
 		System.out.println("opt i: "+opt_i+" count: "+count_i);
-		System.out.println("opt n: "+opt_n+" count: "+count_n);
+		System.out.println("opt n: "+opt_d+" count: "+count_d);
+		System.out.println("opt k: "+opt_k+" count: "+count_k);
 		System.out.println("opt g: "+opt_g+" count: "+count_g);
 		System.out.println("opt 2: "+opt_2+" count: "+count_2);
 		System.out.println("opt 3: "+opt_3+" count: "+count_3);
@@ -49,8 +65,12 @@ public class TripCo{
 			System.out.println("Error- duplicate -i options");
 			return false;
 		}
-		if(count_n>1){
+		if(count_d>1){
 			System.out.println("Error- duplicate -n options");
+			return false;
+		}
+		if(count_k>1){
+			System.out.println("Error- duplicate -k options");
 			return false;
 		}
 		if(count_g>1){
@@ -65,14 +85,15 @@ public class TripCo{
 			System.out.println("Error- duplicate -3 options");
 			return false;
 		}
-		//throws an error if "i" and "n" are both given
-		if(count_n >= 1 && count_i >= 1){
-			System.out.println("Error - Cannot have both " + "\"" + "-n" + "\"" + " and " + "\"" + "-i" + "\"" + " as arguments");
+		//throws an error if "m" and "k" are both given
+		if(count_m >= 1 && count_k >= 1){
+			System.out.println("Error - Cannot have both " + "\"" + "-m" + "\"" + " and "
+		+ "\"" + "-k" + "\"" + " as arguments");
 			return false;
 		}
 		
 		//throw error if we get a -g and any other options
-		if((count_n >= 1 || count_i >= 1 ||count_n >=1||count_2>=1||count_3>=1)&&count_g>=1){
+		if((count_d>= 1||count_i>= 1||count_m>=1||count_k>=1||count_2>=1||count_3>=1)&&count_g>=1){
 			System.out.println("Error - Cannot have multiple options with the -g option");
 			return false;
 		}
@@ -82,19 +103,34 @@ public class TripCo{
 			count_2 = 0;
 		}
 		
+		//must use either -m or -k
+		if(count_m == 0 && count_k ==0 && count_g != 1){
+			System.err.println("Error: must provide either -m or -k if not using -g");
+			return false;
+		}
+		
 		//set bools based on options
-		if(count_m == 1)
+		if(count_m == 1){
 			opt_m = true;
-		if(count_i == 1)
+		}
+		if(count_k == 1){
+			opt_k = true;
+		}
+		if(count_i == 1){
 			opt_i = true;
-		if(count_n == 1)
-			opt_n = true;
-		if(count_g == 1)
+		}
+		if(count_d == 1){
+			opt_d = true;
+		}
+		if(count_g == 1){
 			opt_g = true;
-		if(count_2 == 1)
+		}
+		if(count_2 == 1){
 			opt_2 = true;
-		if(count_3 == 1)
+		}
+		if(count_3 == 1){
 			opt_3 = true;
+		}
 		return true;
 	}
 	public boolean optionCheck(String[] args){
@@ -106,23 +142,32 @@ public class TripCo{
 				return false;
 			}
 			//check that options contain only legal characters
-			if(!args[i].matches("[inmg23-]+")){
+			if(!args[i].matches("[idkmg23-]+")){
 				System.out.println("Error - " + "\"" + args[i] + "\"" + " is an invalid argument");
 				return false;
 			}
 			//increment the appropriate count
-			if(args[i].contains("m"))
+			if(args[i].contains("m")){
 				count_m++;
-			if(args[i].contains("i"))
+			}
+			if(args[i].contains("k")){
+				count_k++;
+			}
+			if(args[i].contains("i")){
 				count_i++;
-			if(args[i].contains("n"))
-				count_n++;
-			if(args[i].contains("g"))
+			}
+			if(args[i].contains("d")){
+				count_d++;
+			}
+			if(args[i].contains("g")){
 				count_g++;
-			if(args[i].contains("2"))
+			}
+			if(args[i].contains("2")){
 				count_2++;
-			if(args[i].contains("3"))
+			}
+			if(args[i].contains("3")){
 				count_3++;
+			}
 		}
 		//check if we have duplicate options
 		if(countCheck()==false){
@@ -192,8 +237,11 @@ public class TripCo{
 		if(opt_m){
 			output += "-m";
 		}
-		if(opt_n){
-			output += "-n";
+		if(opt_k){
+			output += "-k";
+		}
+		if(opt_d){
+			output += "-d";
 		}
 		if(opt_g){
 			output += "-g";
@@ -212,17 +260,27 @@ public class TripCo{
 	}
 	
 	public void run() throws FileNotFoundException{
-		Model model = new Model(input);
-		model.computeDistances();
+		char units = 'z';
+		if(opt_m){
+			units = 'm';
+		}else if(opt_k){
+			units = 'k';
+		}else if(!opt_g){
+			System.err.println("Error: must provide either -m or -k if not using -g");
+			System.err.println("TripCo.run()");
+			System.exit(-1);
+		}
 		
-		View view = new View(xml, svg, svg_exists);
+		Model model = new Model(input,units);
+		View view = new View(xml, svg, svg_exists);	
 		Presenter presenter = new Presenter(view, model, svg.getName());
 	
 		if(opt_g==true){
 			presenter.runGui();
-			view.initializeTrip(presenter.model.bestTripDistance, svg_exists);
-			presenter.makeTrip(AlertBox.opt_m, AlertBox.opt_i,AlertBox.opt_n,opt_g);
-  		}else{
+			view.initializeTrip(presenter.model.bestTripDistance, svg_exists,model.getUnits());
+			presenter.makeTrip(AlertBox.opt_i,AlertBox.opt_d,opt_g);
+  		}else{  			
+  			model.computeDistances();
 			if(opt_2==true && opt_3 == false){
 				model.twoOpt();
 			}else if(opt_3==true){
@@ -231,8 +289,9 @@ public class TripCo{
 				model.bestNearestNeighbor();
 			}
 		
-			view.initializeTrip(model.bestTripDistance, svg_exists);
-			presenter.makeTrip(opt_m, opt_i, opt_n, false);
+			
+			view.initializeTrip(model.bestTripDistance, svg_exists, model.getUnits());
+			presenter.makeTrip(opt_i, opt_d, false);
   		}
 	}
 
@@ -262,7 +321,7 @@ public class TripCo{
 			if(args[i].matches("(.*)svg")||args[i].matches("(.*)xml")){
 				files++;
 			}
-			else if(args[i].matches("[inmg23-]+")){
+			else if(args[i].matches("[idkmg23-]+")){
 				opt++;
 			}
 		}

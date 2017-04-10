@@ -22,7 +22,7 @@ public class TestView {
 		xml = new File("testEmpty.xml");
 		svg = new File("testEmpty.svg");
 		view = new View(xml,svg, false);
-		view.initializeTrip(9999, false);
+		view.initializeTrip(9999, false, "Miles");
 		
 		view.finalizeTrip();
 		String s = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
@@ -47,7 +47,7 @@ public class TestView {
 		xml = new File("testAddLeg.xml");
 		svg = new File("testAddLeg.svg");
 		view = new View(xml,svg, false);
-		view.initializeTrip(9999, false);
+		view.initializeTrip(9999, false,"Miles");
 		
 		String s = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 		s += "<trip>\n<leg>\n";
@@ -126,7 +126,7 @@ public class TestView {
 		xml = new File("testAddLeg.xml");
 		svg = new File("testAddLeg.svg");
 		view = new View(xml,svg, false);
-		view.initializeTrip(9999, false);
+		view.initializeTrip(9999, false,"Miles");
 		
 		String str = "\t\t<id>KDEN</id>\n";
 		str += "\t\t<name>Denver International Airport</name>\n";
@@ -161,7 +161,7 @@ public class TestView {
 		xml = new File("temp.xml");
 		svg = new File("testEmpty.svg");
 		view = new View(xml,svg, false);
-		view.initializeTrip(9999, false);
+		view.initializeTrip(9999, false,"Miles");
 		
 		//expected file
 		String s = "<?xml version=\"1.0\"?>\n";
@@ -179,7 +179,7 @@ public class TestView {
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
 		s += " id=\"state\" y=\"25\" x=\"512\">DTR-18</text>\n";
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
-		s += " id=\"distance\" y=\"500\" x=\"512\">9999 miles</text>\n";
+		s += " id=\"distance\" y=\"500\" x=\"512\">9999 Miles</text>\n";
 		s += "</g>\n";
 		s += "</svg>\n";
 		
@@ -202,7 +202,7 @@ public class TestView {
 		xml = new File("temp.xml");
 		svg = new File("testAddLine.svg");
 		view = new View(xml,svg, false);
-		view.initializeTrip(9999, false);
+		view.initializeTrip(9999, false,"Miles");
 		
 		//expected file
 		String s = "<?xml version=\"1.0\"?>\n";
@@ -220,7 +220,7 @@ public class TestView {
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
 		s += " id=\"state\" y=\"25\" x=\"512\">DTR-18</text>\n";
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
-		s += " id=\"distance\" y=\"500\" x=\"512\">9999 miles</text>\n";
+		s += " id=\"distance\" y=\"500\" x=\"512\">9999 Miles</text>\n";
 		s += "</g>\n";
 		s += "<g>\n";
 		s += "\t<title>Legs</title>\n";
@@ -250,7 +250,7 @@ public class TestView {
 		xml = new File("temp.xml");
 		svg = new File("testAddLabel.svg");	
 		view = new View(xml,svg, false);
-		view.initializeTrip(9999, false);
+		view.initializeTrip(9999, false,"Miles");
 		
 		//expected file
 		String s = "<?xml version=\"1.0\"?>\n";
@@ -268,7 +268,7 @@ public class TestView {
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
 		s += " id=\"state\" y=\"25\" x=\"512\">DTR-18</text>\n";
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
-		s += " id=\"distance\" y=\"500\" x=\"512\">9999 miles</text>\n";
+		s += " id=\"distance\" y=\"500\" x=\"512\">9999 Miles</text>\n";
 		s += "</g>\n";
 		s += "<g>\n";
 		s += "\t<title>Labels</title>\n";
@@ -298,7 +298,7 @@ public class TestView {
 		xml = new File("temp.xml");
 		svg = new File("testConvert.svg");
 		view = new View(xml,svg, false);
-		view.initializeTrip(9999, false);
+		view.initializeTrip(9999, false,"Miles");
 		
 		view.addHeader("Labels");
 		int point1[] = view.convertCoords(39.1177, -106.4453);
@@ -317,7 +317,7 @@ public class TestView {
 		xml = new File("temp.xml");
 		svg = new File("testEmpty.svg");
 		view = new View(xml,svg, false);
-		view.initializeTrip(9999, false);
+		view.initializeTrip(9999, false,"Miles");
 		
 		//expected file
 		String s = "<?xml version=\"1.0\"?>\n";
@@ -335,7 +335,7 @@ public class TestView {
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
 		s += " id=\"state\" y=\"25\" x=\"512\">DTR-18</text>\n";
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
-		s += " id=\"distance\" y=\"500\" x=\"512\">9999 miles</text>\n";
+		s += " id=\"distance\" y=\"500\" x=\"512\">9999 Miles</text>\n";
 		s += "</g>\n";
 		
 		view.finalizeTrip();
