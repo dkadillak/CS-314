@@ -177,7 +177,7 @@ public class TestView {
 		s += "<g>\n";
 		s += "\t<title>Titles</title>\n";
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
-		s += " id=\"state\" y=\"25\" x=\"512\">DTR-18</text>\n";
+		s += " id=\"state\" y=\"25\" x=\"512\">testEmpty</text>\n";
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
 		s += " id=\"distance\" y=\"500\" x=\"512\">9999 Miles</text>\n";
 		s += "</g>\n";
@@ -208,23 +208,16 @@ public class TestView {
 		String s = "<?xml version=\"1.0\"?>\n";
 		s += "<svg width=\"1024\" height=\"512\" xmlns=\"http://www.w3.org/2000/svg\"";
 		s += " xmlns:svg=\"http://www.w3.org/2000/svg\">\n";
-		/*s += "<g>\n";
-		s += "\t<title>Borders</title>\n";
-		s += "\t<line id=\"north\" y2=\"36\" x2=\"1030\" y1=\"36\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
-		s += "\t<line id=\"east\" y2=\"747\" x2=\"1030\" y1=\"36\" x1=\"1028\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
-		s += "\t<line id=\"south\" y2=\"745\" x2=\"1031\" y1=\"746\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
-		s += "\t<line id=\"west\" y2=\"745\" x2=\"37\" y1=\"35\" x1=\"37\" stroke-width=\"4\" stroke=\"#666666\"/>\n";
-		s += "</g>\n";*/
 		s += "<g>\n";
 		s += "\t<title>Titles</title>\n";
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
-		s += " id=\"state\" y=\"25\" x=\"512\">DTR-18</text>\n";
+		s += " id=\"state\" y=\"25\" x=\"512\">testAddLine</text>\n";
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
 		s += " id=\"distance\" y=\"500\" x=\"512\">9999 Miles</text>\n";
 		s += "</g>\n";
 		s += "<g>\n";
 		s += "\t<title>Legs</title>\n";
-		s += "\t<line id=\"leg1\" y2=\"110\" x2=\"500\" y1=\"100\" x1=\"100\" stroke-width=\"3\" stroke=\"#999999\"/>\n";
+		s += "\t<line id=\"leg1\" y1=\"100\" x1=\"100\" y2=\"110\" x2=\"500\" stroke-width=\"3\" stroke=\"#999999\"/>\n";
 		s += "</g>\n";
 		s += "</svg>\n";
 		
@@ -266,7 +259,7 @@ public class TestView {
 		s += "<g>\n";
 		s += "\t<title>Titles</title>\n";
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
-		s += " id=\"state\" y=\"25\" x=\"512\">DTR-18</text>\n";
+		s += " id=\"state\" y=\"25\" x=\"512\">testAddLabel</text>\n";
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
 		s += " id=\"distance\" y=\"500\" x=\"512\">9999 Miles</text>\n";
 		s += "</g>\n";
@@ -333,7 +326,7 @@ public class TestView {
 		s += "<g>\n";
 		s += "\t<title>Titles</title>\n";
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
-		s += " id=\"state\" y=\"25\" x=\"512\">DTR-18</text>\n";
+		s += " id=\"state\" y=\"25\" x=\"512\">testEmpty</text>\n";
 		s += "\t<text text-anchor=\"middle\" font-family=\"Sans-serif\" font-size=\"24\"";
 		s += " id=\"distance\" y=\"500\" x=\"512\">9999 Miles</text>\n";
 		s += "</g>\n";

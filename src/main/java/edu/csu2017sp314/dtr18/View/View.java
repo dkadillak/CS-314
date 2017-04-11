@@ -69,7 +69,8 @@ public class View {
 
 		addHeader("Titles");
 		map.print("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\"");
-		map.println(" font-size=\"24\" id=\"state\" y=\"25\" x=\"512\">DTR-18</text>");
+		map.println(" font-size=\"24\" id=\"state\" y=\"25\" x=\"512\">"
+				+ svgFilename.substring(0,svgFilename.length()-4) + "</text>");
 		map.print("\t<text text-anchor=\"middle\" font-family=\"Sans-serif\"");
 		map.print(" font-size=\"24\" id=\"distance\" y=\"500\" x=\"512\">");
 		map.println(totalMiles + " " + units + "</text>");
@@ -120,12 +121,59 @@ public class View {
 	public void addLine(int x1, int y1, int x2, int y2){
 		mapLegCount++;
 		map.print("\t<line id=\"leg" + mapLegCount + "\" ");
-		map.print("y2=\"" + y2 + "\" ");
-		map.print("x2=\"" + x2 + "\" ");
 		map.print("y1=\"" + y1 + "\" ");
 		map.print("x1=\"" + x1 + "\" ");
-		map.print("stroke-width=\"3\" ");
-		map.println("stroke=\"#999999\"/>");
+		
+		//check if we need to wrap
+		double distance;
+		if(x2 != x1 && y2 != y1){
+			distance = (x2-x1) * (x2-x1);
+			distance += (y2-y1) * (y2-y1);
+			distance = Math.sqrt(distance);
+		}else if(x2 == x1 && y2 != y1){
+			distance = Math.abs(y2 - y1);
+		}else if(y2 == y1 && x2 != x1){
+			distance = Math.abs(x2 - x1);
+		}else{
+			distance = 0;
+		}
+		if(distance > 512.0){
+			//wrap around
+			int newX2;
+			if(x1 < 512){
+				newX2 = 0;
+			}else{
+				newX2 = 1024;
+			}
+			
+			double xDistance = Math.abs((double)newX2 - (double)x1);
+			double slope = (double)(y2-y1)/(double)(1024-(x2-x1));
+			int roundY = Math.round((float)(slope * xDistance));
+			int newY2 = y1 + roundY;
+			
+			map.print("y2=\"" + newY2 + "\" ");
+			map.print("x2=\"" + newX2 + "\" ");
+			map.print("stroke-width=\"3\" ");
+			map.println("stroke=\"#999999\"/>");
+			
+			map.print("\t<line id=\"leg" + mapLegCount + " pt2\" ");
+			map.print("y1=\"" + newY2 + "\" ");
+			if(newX2 == 0){
+				newX2 = 1024;
+			}else{
+				newX2 = 0;
+			}
+			map.print("x1=\"" + newX2 + "\" ");
+			map.print("y2=\"" + y2 + "\" ");
+			map.print("x2=\"" + x2 + "\" ");
+			map.print("stroke-width=\"3\" ");
+			map.println("stroke=\"#999999\"/>");
+		}else{
+			map.print("y2=\"" + y2 + "\" ");
+			map.print("x2=\"" + x2 + "\" ");
+			map.print("stroke-width=\"3\" ");
+			map.println("stroke=\"#999999\"/>");
+		}
 	}
 
 	//adds a label, such as an id or name of a location. takes coordinates and the label string
