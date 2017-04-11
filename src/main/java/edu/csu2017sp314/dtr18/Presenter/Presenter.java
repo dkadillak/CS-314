@@ -7,7 +7,8 @@ import main.java.edu.csu2017sp314.dtr18.View.*;
 public class Presenter{
 	private View view;
 	public Model model;
-	public String fileName;
+	public String fileName, xmlSubSelect;
+	
 	public Presenter(View view, Model model, String fileName) {
 		this.view = view;
 		this.model = model;
@@ -15,6 +16,13 @@ public class Presenter{
 		
 	}
 	
+	public Presenter(View view, Model model, String fileName, String xmlSubSelect) {
+		this.view = view;
+		this.model = model;
+		this.fileName = fileName;
+		this.xmlSubSelect = xmlSubSelect;
+	}
+
 	private String[] createArray(){
 		String ret[] = new String[model.locations.size()];
 		
@@ -29,7 +37,11 @@ public class Presenter{
 //to create the subset model object, will need to update model object in view
 //also need to check if selectedLocations is Null (don't make new model obj)
 	public void runGui(){
+		//System.out.println(fileName);
 		AlertBox.fileName = fileName;
+		if(!xmlSubSelect.equals("none")){
+			AlertBox.xmlNameGiven = xmlSubSelect;
+		}
 		AlertBox.locations = createArray();	
 		AlertBox.launch();
 		char units = 'z';

@@ -45,7 +45,9 @@ public class View {
 		}
 
 	}
-
+	public View(){
+		
+	}
 
 	//initialize XML and SVG
 	public void initializeTrip(int totalMiles, boolean background, String units){

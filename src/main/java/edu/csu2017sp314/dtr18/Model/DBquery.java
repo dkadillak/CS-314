@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 public class DBquery {
 	private Connection conn;
 	private Statement st;
-	private static final String limit = " LIMIT 500";
+	private static final String limit = " LIMIT 600";
 	private String columns;
 	private String from;
 	private String where;
@@ -23,7 +23,14 @@ public class DBquery {
 		st = null;
 		rs = null;
 	}
-	
+	public void clear(){
+		columns = null;
+		from = "";
+		where = "";
+		conn = null;
+		st = null;
+		rs = null;
+	}
 	public String getColumns(){
 		return columns;
 	}
@@ -70,7 +77,11 @@ public class DBquery {
 	}
 	
 	public void setWhere(String string){
-		where = " WHERE " + string;
+		if(where == ""){
+			where = " WHERE " + string;
+		}else{
+			where += " and " + string;
+		}
 	}
 	
 	//buckle-up buttercup
