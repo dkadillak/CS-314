@@ -267,7 +267,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 					selectedLocations[i] = locations.get(i);
 				}
 				}
-				if(chosenSubset.getSelectionModel().isEmpty()){
+				if(chosenSubset.getItems().isEmpty()){
 					selectedLocations = new String[1];
 					selectedLocations[0] = "no subselection";
 				}
