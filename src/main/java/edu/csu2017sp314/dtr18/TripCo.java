@@ -190,7 +190,7 @@ public class TripCo{
 		svg_exists=true;
 			
 		if(optCount+1<args.length){
-			if(!args[optCount+1].endsWith(".xml") || args[optCount+1].equals(".xml")){
+			if(!args[optCount+1].endsWith(".xml")){
 				//check if the file is type .xml or not
 				System.err.println("Error - Second argument "
 						+ "after options must be subselection file");
@@ -198,14 +198,19 @@ public class TripCo{
 			}
 			//include statement to get user inputed selection.xml args[optCount+2]
 			xml_exists=true;
+			
 		} else if(!opt_g){
 			System.err.println("Error: Must include selection file if not using -g");
 			return false;
 		}
 		
-		input = new File(args[optCount+1]);
+		
+	
 		//generate names for output files
+		
+		input = new File(args[optCount+1]);
 		String output = generateOutputName(args[optCount+1]);
+		
 		svg = new File(output + ".svg");
 		xml = new File(output + ".xml"); //make xml file with input file's name
 		if(svg_exists){
@@ -273,8 +278,10 @@ public class TripCo{
 		
 		Model model = new Model(input,units);
 		View view = new View(xml, svg, svg_exists);	
-		Presenter presenter = new Presenter(view, model, svg.getName());
-	
+
+		Presenter presenter = new Presenter(view, model, svg.getName(),input.getName());
+		
+		
 		if(opt_g==true){
 			presenter.runGui();
 			view.initializeTrip(presenter.model.bestTripDistance, svg_exists,model.getUnits());
