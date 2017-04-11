@@ -267,7 +267,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 					selectedLocations[i] = locations.get(i);
 				}
 				}
-				else if(chosenSubset.getSelectionModel().isEmpty()){
+				if(chosenSubset.getSelectionModel().isEmpty()){
 					selectedLocations = new String[1];
 					selectedLocations[0] = "no subselection";
 				}
@@ -283,7 +283,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				
 				//if distance option is selected
 				if(b1.isSelected()){
-					opt_m = true;
+					opt_d = true;
 					selection+=" -d";
 				}
 				
@@ -307,6 +307,8 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				
 				if(miles.isSelected()){
 					selection += " -m";
+					opt_m = true;
+					opt_k = false;
 				}else if(kilometers.isSelected()){
 					opt_m = false;
 					opt_k = true;
