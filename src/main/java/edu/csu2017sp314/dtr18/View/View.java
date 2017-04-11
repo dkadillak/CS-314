@@ -125,19 +125,7 @@ public class View {
 		map.print("x1=\"" + x1 + "\" ");
 		
 		//check if we need to wrap
-		double distance;
-		if(x2 != x1 && y2 != y1){
-			distance = (x2-x1) * (x2-x1);
-			distance += (y2-y1) * (y2-y1);
-			distance = Math.sqrt(distance);
-		}else if(x2 == x1 && y2 != y1){
-			distance = Math.abs(y2 - y1);
-		}else if(y2 == y1 && x2 != x1){
-			distance = Math.abs(x2 - x1);
-		}else{
-			distance = 0;
-		}
-		if(distance > 512.0){
+		if(Math.abs(x2-x1) > 512.0){
 			//wrap around
 			int newX2;
 			if(x1 < 512){
