@@ -1,37 +1,41 @@
-DTR-18 Sprint2 Release Notes		3/20/2017
+DTR-18 Sprint3 Release Notes	4/10/2017
 
 
 Overview
-TripCo takes a csv input file, produces an XML itinerary and SVG map. All files have the same base name with different extensions.
+TripCo gets data from the database, then produces a detailed XML itinerary and SVG map. All files have the same base name with different extensions and our team number (18) with the selected options as well.
 Optional command line arguments:
 	 
-		java TripCo [options] file.csv [map.svg] 
-						-i			  background	
-						-m				  map		
-						-n							  
+		/*command line example:
+		 
+		java TripCo [options] [map.svg] [selection.xml]
+						-i	  background
+						-m	  	map
 						-g
+						-k
+						-d
 						-2
 						-3
+		*/
 -i: Display ID's
--m: Display Mileages
--n: Display Names
+-m: Use miles
 -g: launch gui
+-d: Display distances (specified by -m or -k)
+-k: Use kilometers
 -2: run TwoOpt
 -3: run ThreeOpt
 
 
 Purpose
--We have added route optimization with the 2opt 3opt algorithms.
--itinerary and map gui display
--gui option selection
--background map integration
+-Now TripCo reads data from the database and not a .csv file.
+-The GUI now has more features including being able to save/load a selection file and the ability to search through the database with 6 fields and add locations to the selection xml file.
+-Itinerary display and the produced itinerary xml is now more detailed.
+-The background map is now of the whole world and not just Colorado and accounts for wrapping.
 
 
 
 Issue Summary
--Did not include sub selection functionality.
--possibly 3opt or svg display
--for now 3opt will run infinitely with 14ers
+-We could not get coveralls to work with Travis.
+-The Travis badge on our README on Github always says "failing" even though our latest builds passed and clicking on the badge takes you to our latest build which is passing.
 
 
 Notes
@@ -42,4 +46,4 @@ Notes
 -File line removal from stack overflow
 -Dependencies for batik-1.8 and javafx, had trouble getting javafx to work on the lab machines. We added a batik zip file and a javafx jar called jfxrt.jar to our github repo in case you need to configure those to the build path when you test our code.
 
-EclEmma coverage: 67.9%
+EclEmma coverage: 56.4%
