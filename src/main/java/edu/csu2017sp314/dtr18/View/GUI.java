@@ -59,7 +59,7 @@ public class GUI{
 	public void displaySVG(String filename){
 		String filenameNoExtension = filename.substring(0, filename.length() - 4); //take ".svg" off filename
 		JFrame frame = new JFrame(filenameNoExtension + " Map"); //the name displayed at the top of the window
-		frame.setSize(1100, 850);
+		frame.setSize(1024, 542);
 
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
