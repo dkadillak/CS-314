@@ -284,7 +284,7 @@ public class TripCo{
 		
 		if(opt_g==true){
 			presenter.runGui();
-			view.initializeTrip(presenter.model.bestTripDistance, svg_exists,model.getUnits());
+			view.initializeTrip(presenter.model.bestTripDistance, svg_exists,presenter.model.getUnits());
 			presenter.makeTrip(AlertBox.opt_i,AlertBox.opt_d,opt_g);
   		}else{  			
   			model.computeDistances();
