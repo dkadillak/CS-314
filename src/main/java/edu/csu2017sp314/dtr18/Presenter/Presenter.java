@@ -98,7 +98,7 @@ public class Presenter{
 
 		view.finalizeTrip();
 		if(opt_g){
-		view.displayXml(model.legs, "units");
+		view.displayXml(model.legs, units);
 		view.displaySVG();
 		}
 		return;	
