@@ -21,6 +21,7 @@ public class View {
 	private String xmlFilename;
 	private String svgFilename;
 	private File select;
+	private String coordinates;
 
 	public View(File xml, File svg, boolean background){
 		try {
@@ -52,7 +53,9 @@ public class View {
 	//initialize XML and SVG
 	public void initializeTrip(int totalMiles, boolean background, String units){
 		itinerary.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-		itinerary.println("<trip>");
+		itinerary.println("<kml xmlns=\"http://www.opengis.net/kml/2.2\">");
+		itinerary.println("\t<Folder>");
+		coordinates = "\t\t\t\t<coordinates>\n";
 
 		if(!background){
 			map.println("<?xml version=\"1.0\"?>");
@@ -177,20 +180,25 @@ public class View {
 		map.println(">" + label + "</text>");
 	}
 
-	public void addLeg(int sequence, location start, location end, int distance, String units){
-		itinerary.println("<leg>");
-		itinerary.print("\t<sequence>");
-		itinerary.print(Integer.toString(sequence));
-		itinerary.println("</sequence>");
-		itinerary.println("\t<start>");
-		itinerary.println(makeString(start));
-		itinerary.println("\t</start>");
-		itinerary.println("\t<finish>");
-		itinerary.println(makeString(end));
-		itinerary.println("\t</finish>");
-		itinerary.println("\t<distance>" + distance + "</distance>");
-		itinerary.println("\t<units>" + units + "</units>");
-		itinerary.println("</leg>");
+	public void addLeg(location location){
+		itinerary.println("\t\t<Placemark>");
+		itinerary.print("\t\t\t<name>");
+		itinerary.print(location.name + "-" + location.country);
+		itinerary.println("</name>");
+		itinerary.println("\t\t\t<description>");
+		itinerary.println("\t\t\t\t" + location.airportUrl);
+		itinerary.println("\t\t\t\t" + location.regionUrl);
+		itinerary.println("\t\t\t\t" + location.countryUrl);
+		itinerary.println("\t\t\t</description>");
+		itinerary.println("\t\t\t<Point>");
+		itinerary.print("\t\t\t\t<coordinates>" + location.longitude);
+		itinerary.print("," + location.latitude  + ",");
+		itinerary.println(location.elevation + "</coordinates>");
+		itinerary.println("\t\t\t</Point>");
+		itinerary.println("\t\t</Placemark>");
+		coordinates += "\t\t\t\t\t" + location.longitude + ",";
+		coordinates += location.latitude + ",";
+		coordinates += location.elevation + "\n";
 	}
 
 	public String makeString(location location){
@@ -211,7 +219,22 @@ public class View {
 
 	//finalize XML and SVG
 	public void finalizeTrip(){
-		itinerary.println("</trip>");
+		coordinates += "\t\t\t\t</coordinates>\n";
+		itinerary.println("\t\t<Placemark>");
+		itinerary.println("\t\t\t<LineString>");
+		itinerary.println("\t\t\t\t<extrude>1</extrude>");
+		itinerary.println("\t\t\t\t<tessellate>1</tessellate>");
+		itinerary.print(coordinates);
+		itinerary.println("\t\t\t</LineString>");
+		itinerary.println("\t\t\t<Style>");
+		itinerary.println("\t\t\t\t<LineStyle>");
+		itinerary.println("\t\t\t\t\t<color>ffff0000</color>");
+		itinerary.println("\t\t\t\t\t<width>4</width>");
+		itinerary.println("\t\t\t\t</LineStyle>");
+		itinerary.println("\t\t\t</Style>");
+		itinerary.println("\t\t</Placemark>");
+		itinerary.println("\t</Folder>");
+		itinerary.print("</kml>");
 		itinerary.close();
 
 		map.println("</svg>");

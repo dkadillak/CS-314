@@ -26,7 +26,24 @@ public class TestView {
 		
 		view.finalizeTrip();
 		String s = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-		s += "<trip>\n</trip>\n";
+		s += "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n";
+		s += "\t<Folder>\n";
+		s += "\t\t<Placemark>\n";
+		s += "\t\t\t<LineString>\n";
+		s += "\t\t\t\t<extrude>1</extrude>\n";
+		s += "\t\t\t\t<tessellate>1</tessellate>\n";
+		s += "\t\t\t\t<coordinates>\n";
+		s += "\t\t\t\t</coordinates>\n";
+		s += "\t\t\t</LineString>\n";
+		s += "\t\t\t<Style>\n";
+		s += "\t\t\t\t<LineStyle>\n";
+		s += "\t\t\t\t\t<color>ffff0000</color>\n";
+		s += "\t\t\t\t\t<width>4</width>\n";
+		s += "\t\t\t\t</LineStyle>\n";
+		s += "\t\t\t</Style>\n";
+		s += "\t\t</Placemark>\n";
+		s += "\t</Folder>\n";
+		s += "</kml>\n";
 		
 		try {
 			Scanner scan = new Scanner(xml);
@@ -50,40 +67,56 @@ public class TestView {
 		view.initializeTrip(9999, false,"Miles");
 		
 		String s = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-		s += "<trip>\n<leg>\n";
-		s += "\t<sequence>1</sequence>\n";
-		s += "\t<start>\n";
-		s += "\t\t<id>KDEN</id>\n";
-		s += "\t\t<name>Denver International Airport</name>\n";
-		s += "\t\t<latitude>39.861698150635</latitude>\n";
-		s += "\t\t<longitude>-104.672996521</longitude>\n";
-		s += "\t\t<elevation>5431</elevation>\n";
-		s += "\t\t<municipality>Denver</municipality>\n";
-		s += "\t\t<region>Colorado</region>\n";
-		s += "\t\t<country>United States</country>\n";
-		s += "\t\t<continent>North America</continent>\n";
-		s += "\t\t<airportURL>http://en.wikipedia.org/wiki/Denver_International_Airport</airportURL>\n";
-		s += "\t\t<regionURL>http://en.wikipedia.org/wiki/Colorado</regionURL>\n";
-		s += "\t\t<countryURL>http://en.wikipedia.org/wiki/United_States</countryURL>\n";
-		s += "\t</start>\n";
-		s += "\t<finish>\n";
-		s += "\t\t<id>AYPY</id>\n";
-		s += "\t\t<name>Port Moresby Jacksons International Airport</name>\n";
-		s += "\t\t<latitude>-9.443380355834961</latitude>\n";
-		s += "\t\t<longitude>147.22000122070312</longitude>\n";
-		s += "\t\t<elevation>146</elevation>\n";
-		s += "\t\t<municipality>Port Moresby</municipality>\n";
-		s += "\t\t<region>National Capital District (Port Moresby)</region>\n";
-		s += "\t\t<country>Papua New Guinea</country>\n";
-		s += "\t\t<continent>Oceania</continent>\n";
-		s += "\t\t<airportURL>http://en.wikipedia.org/wiki/Jacksons_International_Airport</airportURL>\n";
-		s += "\t\t<regionURL>http://en.wikipedia.org/wiki/National_Capital_District_(Port_Moresby)</regionURL>\n";
-		s += "\t\t<countryURL>http://en.wikipedia.org/wiki/Papua_New_Guinea</countryURL>\n";
-		s += "\t</finish>\n";
-		s += "\t<distance>34</distance>\n";
-		s += "\t<units>miles</units>\n";
-		s += "</leg>\n";
-		s += "</trip>\n";
+		s += "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n";
+		s += "\t<Folder>\n";
+		s += ("\t\t<Placemark>\n");
+		s += ("\t\t\t<name>");
+		s += ("Denver International Airport-United States");
+		s += ("</name>\n");
+		s += "\t\t\t<description>\n";
+		s += "\t\t\t\thttp://en.wikipedia.org/wiki/Denver_International_Airport\n";
+		s += "\t\t\t\thttp://en.wikipedia.org/wiki/Colorado\n";
+		s += "\t\t\t\thttp://en.wikipedia.org/wiki/United_States\n";
+		s += "\t\t\t</description>\n";
+		s += "\t\t\t<Point>\n";
+		s += "\t\t\t\t<coordinates>-104.672996521,";
+		s += "39.861698150635,5431</coordinates>\n";
+		s += "\t\t\t</Point>\n";
+		s += "\t\t</Placemark>\n";
+		
+		s += ("\t\t<Placemark>\n");
+		s += ("\t\t\t<name>");
+		s += ("Port Moresby Jacksons International Airport-Papua New Guinea");
+		s += ("</name>\n");
+		s += "\t\t\t<description>\n";
+		s += "\t\t\t\thttp://en.wikipedia.org/wiki/Jacksons_International_Airport\n";
+		s += "\t\t\t\thttp://en.wikipedia.org/wiki/National_Capital_District_(Port_Moresby)\n";
+		s += "\t\t\t\thttp://en.wikipedia.org/wiki/Papua_New_Guinea\n";
+		s += "\t\t\t</description>\n";
+		s += "\t\t\t<Point>\n";
+		s += "\t\t\t\t<coordinates>147.22000122070312,";
+		s += "-9.443380355834961,146</coordinates>\n";
+		s += "\t\t\t</Point>\n";
+		s += "\t\t</Placemark>\n";
+		
+		s += "\t\t<Placemark>\n";
+		s += "\t\t\t<LineString>\n";
+		s += "\t\t\t\t<extrude>1</extrude>\n";
+		s += "\t\t\t\t<tessellate>1</tessellate>\n";
+		s += "\t\t\t\t<coordinates>\n";
+		s += "\t\t\t\t\t-104.672996521,39.861698150635,5431\n";
+		s += "\t\t\t\t\t147.22000122070312,-9.443380355834961,146\n";
+		s += "\t\t\t\t</coordinates>\n";
+		s += "\t\t\t</LineString>\n";
+		s += "\t\t\t<Style>\n";
+		s += "\t\t\t\t<LineStyle>\n";
+		s += "\t\t\t\t\t<color>ffff0000</color>\n";
+		s += "\t\t\t\t\t<width>4</width>\n";
+		s += "\t\t\t\t</LineStyle>\n";
+		s += "\t\t\t</Style>\n";
+		s += "\t\t</Placemark>\n";
+		s += "\t</Folder>\n";
+		s += "</kml>\n";
 		
 		location location = new location("Denver International Airport", "KDEN", 
 				39.861698150635, -104.672996521);
@@ -106,7 +139,8 @@ public class TestView {
 		location2.countryUrl = "http://en.wikipedia.org/wiki/Papua_New_Guinea";
 		location2.municipality = "Port Moresby";
 		
-		view.addLeg(1, location, location2, 34, "miles");
+		view.addLeg(location);
+		view.addLeg(location2);
 		view.finalizeTrip();
 		
 		try {

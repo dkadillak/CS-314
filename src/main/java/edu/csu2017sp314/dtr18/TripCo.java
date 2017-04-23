@@ -212,7 +212,7 @@ public class TripCo{
 		String output = generateOutputName(args[optCount+1]);
 		
 		svg = new File(output + ".svg");
-		xml = new File(output + ".xml"); //make xml file with input file's name
+		xml = new File(output + ".kml"); //make xml file with input file's name
 		if(svg_exists){
 			File map = new File(args[optCount]);
 		    try {
