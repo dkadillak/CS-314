@@ -184,21 +184,17 @@ public class View {
 		itinerary.println("\t\t<Placemark>");
 		itinerary.print("\t\t\t<name>");
 		itinerary.print(location.name + "-" + location.country);
-		itinerary.println("</name>");
-		itinerary.println("\t\t\t<description>");
+		itinerary.println("</name>\n\t\t\t<description>");
 		itinerary.println("\t\t\t\t" + location.airportUrl);
 		itinerary.println("\t\t\t\t" + location.regionUrl);
 		itinerary.println("\t\t\t\t" + location.countryUrl);
-		itinerary.println("\t\t\t</description>");
-		itinerary.println("\t\t\t<Point>");
+		itinerary.println("\t\t\t</description>\n\t\t\t<Point>");
 		itinerary.print("\t\t\t\t<coordinates>" + location.longitude);
 		itinerary.print("," + location.latitude  + ",");
 		itinerary.println(location.elevation + "</coordinates>");
-		itinerary.println("\t\t\t</Point>");
-		itinerary.println("\t\t</Placemark>");
+		itinerary.println("\t\t\t</Point>\n\t\t</Placemark>");
 		coordinates += "\t\t\t\t\t" + location.longitude + ",";
-		coordinates += location.latitude + ",";
-		coordinates += location.elevation + "\n";
+		coordinates += location.latitude + "," + location.elevation + "\n";
 	}
 
 	public String makeString(location location){
@@ -219,24 +215,18 @@ public class View {
 
 	//finalize XML and SVG
 	public void finalizeTrip(){
-		coordinates += "\t\t\t\t</coordinates>\n";
-		itinerary.println("\t\t<Placemark>");
-		itinerary.println("\t\t\t<LineString>");
+		coordinates += "\t\t\t\t</coordinates>";
+		itinerary.println("\t\t<Placemark>\n\t\t\t<LineString>");
 		itinerary.println("\t\t\t\t<extrude>1</extrude>");
-		itinerary.println("\t\t\t\t<tessellate>1</tessellate>");
-		itinerary.print(coordinates);
-		itinerary.println("\t\t\t</LineString>");
-		itinerary.println("\t\t\t<Style>");
+		itinerary.println("\t\t\t\t<tessellate>1</tessellate>\n" + coordinates);
+		itinerary.println("\t\t\t</LineString>\n\t\t\t<Style>");
 		itinerary.println("\t\t\t\t<LineStyle>");
 		itinerary.println("\t\t\t\t\t<color>ffff0000</color>");
 		itinerary.println("\t\t\t\t\t<width>4</width>");
-		itinerary.println("\t\t\t\t</LineStyle>");
-		itinerary.println("\t\t\t</Style>");
+		itinerary.println("\t\t\t\t</LineStyle>\n\t\t\t</Style>");
 		itinerary.println("\t\t</Placemark>");
-		itinerary.println("\t</Folder>");
-		itinerary.print("</kml>");
+		itinerary.println("\t</Folder>\n</kml>");
 		itinerary.close();
-
 		map.println("</svg>");
 		map.close();
 	}
