@@ -221,6 +221,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				window.setScene(scene);
 				window.show();
 			}
+			
 			private void removeLocation(ListView chosenSubset) {
 				ObservableList chosen = chosenSubset.getSelectionModel().getSelectedItems();
 				chosenSubset.getItems().removeAll(chosen);
@@ -240,6 +241,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 			public void loadSelection(ListView subset, ListView chosenSubset){
 				chosenSubset.getItems().addAll(checkDuplicates(subset.getSelectionModel().getSelectedItems(),chosenSubset.getItems()));		
 			}
+			
 			public ObservableList checkDuplicates(ObservableList subset, ObservableList chosenSubset){
 				ObservableList<String> l = FXCollections.observableArrayList();
 				for(int i=0;i<subset.size();i++){
