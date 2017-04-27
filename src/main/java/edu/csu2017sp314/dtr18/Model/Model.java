@@ -15,7 +15,7 @@ public class Model{
 	//public ArrayList<String> extra;
 	public ArrayList<Leg> legs;
 	private int[][] distances;
-	private boolean[] used;
+	public boolean[] used;
 	public int bestTripDistance;
 	private boolean miles;
 
