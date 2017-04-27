@@ -15,6 +15,7 @@ public class Model{
 	//public ArrayList<String> extra;
 	public ArrayList<Leg> legs;
 	private int[][] distances;
+	private boolean[] used;
 	public int bestTripDistance;
 	private boolean miles;
 
@@ -43,8 +44,10 @@ public class Model{
 
 		subsetParser(file);
 		distances = null;
-		//computeDistances();
-		//bestNearestNeighbor();
+		used = new boolean[locations.size()];
+		for(int i = 0; i < used.length; i++){
+			used[i] = false;
+		}
 	}
 
 	//subset constructor
@@ -61,6 +64,10 @@ public class Model{
 			System.exit(-1);
 		}
 		fillLocations(subset, true);
+		used = new boolean[locations.size()];
+		for(int i = 0; i < used.length; i++){
+			used[i] = false;
+		}
 	}
 
 	private void subsetParser(File subset){
@@ -210,16 +217,9 @@ public class Model{
 
 
 	private int distance(location l1, location l2){
-		return distances[locationIndex(l1)][locationIndex(l2)];
+		return distances[l1.index][l2.index];
 	}
 
-	private int locationIndex(location l){
-		for(int i = 0; i < locations.size(); i++){
-			if(locations.get(i).equals(l))
-				return i;
-		}
-		return -1;
-	}
 
 	//toString for Model
 	@Override
@@ -283,7 +283,11 @@ public class Model{
 		for(int y=0;y<getFileSize();y++){
 
 			for(int x=0;x<getFileSize();x++){
-				distances[y][x]=(circleDistance(locations.get(y).getLatitude(), locations.get(y).getLongitude(), locations.get(x).getLatitude(), locations.get(x).getLongitude()));
+				if(x == y){
+					distances[y][x] = -1;
+				}else{
+					distances[y][x]=(circleDistance(locations.get(y).getLatitude(), locations.get(y).getLongitude(), locations.get(x).getLatitude(), locations.get(x).getLongitude()));
+				}
 			}
 		}
 	}
@@ -312,35 +316,30 @@ public class Model{
 
 	//start is the index of the location you want to be the start point of the trip
 	private trip nearestNeighbor(int start){
-		int distancesCopy[][] = new int[distances.length][distances[0].length];
-		for(int i=0;i<distances.length;i++){
-			for(int k=0; k<distances[0].length;k++){
-				distancesCopy[i][k] = distances[i][k];
-			}
+		for(int i = 0; i < used.length; i++){
+			used[i] = false;
 		}
 		int indexOfClosest, index=start,count=0;
-		indexOfClosest=smallestOnLine(distances[start]);
-		//printArray();
-		zerOut(index);
-		//printArray();
-		trip t = new trip();
-		while(count!=(getFileSize()) - 1){
-			t.addLeg(new Leg(locations.get(index),locations.get(indexOfClosest),distancesCopy[index][indexOfClosest]));
-			zerOut(indexOfClosest);
+		
+		used[index] = true;
+		indexOfClosest = findClosest(index);
+		
+		trip t = new trip(locations.size());
+		while(count!=locations.size() - 1){
+			t.addLeg(new Leg(locations.get(index),locations.get(indexOfClosest),distances[index][indexOfClosest]));
 			index = indexOfClosest;
-			indexOfClosest=smallestOnLine(distances[index]);	
+			used[index] = true;
+			indexOfClosest = findClosest(index);	
 
 			count++;
 		}
 
 		//special handling for last case to loop back to start location
-		t.addLeg(new Leg(locations.get(index),locations.get(start),distancesCopy[index][start]));
+		t.addLeg(new Leg(locations.get(index),locations.get(start),distances[index][start]));
 
-		distances = distancesCopy.clone();
 		return t;
 	}
 
-	//return value is whether any swaps were made
 	public void twoOpt(){
 		//based on pseudocode from https://en.wikipedia.org/wiki/2-opt
 		int start = 0;
@@ -353,20 +352,25 @@ public class Model{
 			}
 			route[route.length-1] = route[0];
 
-			for(int i = 1; i < route.length-2; i++){
-				for(int k = i+1; k < route.length-1; k++){
-					trip t2 = twoOptSwap(route, i, k);
-					if(t2.getTotalDistance() < t.getTotalDistance()){
-						t = t2;
-						i = 1;
-						k = 1;
-						for(int j = 0; j < t2.size(); j++)
-							route[j] = t2.getLegAt(j).getStart();
-						route[route.length-1] = route[0];
+			boolean improved = false;
+			do{
+				improved = false;
+				for(int i = 1; i < route.length-2; i++){
+					for(int k = i+1; k < route.length-1; k++){
+						//check if new route would be better before making it
+						int oldDistance = distance(route[i-1],route[i]);
+						oldDistance += distance(route[k],route[k+1]);
+						int newDistance = distance(route[i-1],route[k]);
+						newDistance += distance(route[k+1],route[i]);
+						if(newDistance < oldDistance){
+							twoOptSwap(route,i,k);												
+							improved = true;
+						}					
 					}
 				}
-			}
-
+			}while(improved);
+			
+			t = generateTrip(route);
 			if(best == null || t.getTotalDistance() < best.getTotalDistance())
 				best = t;
 			start++;
@@ -379,25 +383,12 @@ public class Model{
 		bestTripDistance = best.getTotalDistance();
 	}
 
-	private trip twoOptSwap(location[] route,int l1, int l2){
-		//based on pseudocode from https://en.wikipedia.org/wiki/2-opt
-		//generate new location order
-		location[] newRoute = new location[route.length];
-		for(int i = 0; i < l1; i++){
-			newRoute[i] = route[i];
-		}
-
-		int k = l1;
-		for(int i = l2; i >= l1; i--){
-			newRoute[k] = route[i];
-			k++;
-		}
-
-		for(int i = l2+1; i < route.length; i++){
-			newRoute[i] = route[i];
-		}
-
-		return generateTrip(newRoute);
+	private void twoOptSwap(location[] route,int i, int k){
+		for(; i < k; i++, k--){
+			location temp = route[i];
+			route[i] = route[k];
+			route[k] = temp;
+		}		
 	}
 
 	//3opt cannot optimize a trip with less than 6 different locations! 
@@ -590,29 +581,23 @@ public class Model{
 		return t;
 	}
 
-	public int smallestOnLine(int row[]){
-		int smallest=0, position=0;
+	public int findClosest(int index){
+		int min = Integer.MAX_VALUE;
+		int minIndex = -1;
+		
+		for(int i = 0; i < used.length; i++){
+			if(i != index){
+				if(distances[index][i] < min && !used[i]){
+					min = distances[index][i];
+					minIndex = i;
+				}
+			}
+		}
+		
+		return minIndex;
+	}
 
-		for(int i=0;i<row.length;i++){ 
-			if(row[i]!=0){
-				smallest = row[i];
-				position = i;
-				break;
-			}
-		}
-		for(int i=0;i<row.length;i++){
-			if(((row[i]!=0)&&(row[i]<smallest))){
-				smallest = row[i];
-				position = i;
-			}
-		}
-		return position;
-	}
-	private void zerOut(int index){
-		for(int i=0; i<getFileSize();i++){
-			distances[i][index]=0;
-		}
-	}
+	
 	public double LatLongConverter(String LatLong){
 		//for test cases that call method directly
 		LatLong=LatLong.toLowerCase();

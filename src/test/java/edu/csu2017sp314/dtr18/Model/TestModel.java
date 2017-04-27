@@ -64,18 +64,7 @@ public class TestModel{
 		assertEquals(t4abDD,m.LatLongConverter(t4a),.01);
 		assertEquals(t4abDD,m.LatLongConverter(t4b),.01);
 	}
-	
-	@Test
-	public void smallestOnLineTest(){
-		m = new Model('m');
-		int t1[] = new int[] {12,3,0,12321,4};
-		int t2[] = new int [] {0,0,0,0,8,89};
 		
-		assertEquals(1,m.smallestOnLine(t1));
-		assertEquals(4,m.smallestOnLine(t2));
-		
-	}
-	
 	
 	@Test
 	public void circleDistanceTest(){

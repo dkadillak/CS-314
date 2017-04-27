@@ -11,6 +11,11 @@ public class trip {
 		totalDistance = 0;
 	}
 	
+	public trip(int size){
+		legs = new ArrayList<Leg>(size);
+		totalDistance = 0;
+	}
+	
 	public void addLeg(Leg leg){
 		legs.add(leg);
 		totalDistance += leg.getDistance();
