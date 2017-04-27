@@ -450,97 +450,103 @@ public class Model{
 	}
 
 
-	public location[] threeOptSwap(location[] route, int i, int j, int k){
+	public void threeOptSwap(location[] route, int i, int j, int k){
 		//total distance of the legs being removed
 		int originalDist = distance(route[i],route[i+1]);
 		originalDist += distance(route[j],route[j+1]);
 		originalDist += distance(route[k],route[k+1]);
-		//first 4 are 3opt, last 3 are 2opt
-		int[] dists = new int[7];
-		location[][] swaps = new location[7][route.length]; 
+		//first 4 are 3opt, last 3 are 2opt		
 
 		//first possible swap
-		int index = 0;
-		for(int count = 0; count <= i; count++){
-			for(int count2 = 0; count2 < 7; count2++)
-				swaps[count2][index] = route[count];
-			index++;
+		int newDist = distance(route[i],route[j+1]);
+		newDist += distance(route[k],route[i+1]);
+		newDist += distance(route[j],route[k+1]);
+		if(newDist < originalDist){
+			location[] temp = new location[j-i];
+			for(int count = i+1, tempCount = 0; count <= j; count++,tempCount++){
+				temp[tempCount] = route[count];
+			}
+			int count2 = j+1;
+			int tempCount = 0;
+			for(int count = i+1; count <= j; count++){
+				route[count] = route[count2];
+				route[count2] = temp[tempCount];				
+				count2++;
+				tempCount++;
+			}
+			return;
 		}
-		for(int count = j+1; count <= k; count++){
-			swaps[0][index] = route[count];
-			index++;
-		}
-		for(int count = i+1; count <= j; count++){
-			swaps[0][index] = route[count];
-			index++;
-		}
-		for(int count = k+1; count < route.length; count++){
-			for(int count2 = 0; count2 < 7; count2++)
-				swaps[count2][index] = route[count];
-			index++;
-		}
-		//get total distance of added legs for later comparison to total distance of removed legs
-		dists[0] = distance(route[i],route[j+1]);
-		dists[0] += distance(route[k],route[i+1]);
-		dists[0] += distance(route[j],route[k+1]);
 
 		//second possible swap
-		index = i+1;
-
-		for(int count = k; count >= j+1; count--){
-			swaps[1][index] = route[count];
-			index++;
+		newDist = distance(route[i],route[k]);
+		newDist += distance(route[j+1],route[i+1]);
+		newDist += distance(route[j],route[k+1]);
+		if(newDist < originalDist){
+			location[] temp = new location[j-i];
+			for(int count = i+1, tempCount = 0; count <= j; count++,tempCount++){
+				temp[tempCount] = route[count];
+			}
+			int count2 = k;
+			int tempCount = temp.length-1;
+			for(int count = i+1; count <= j; count++){
+				route[count] = route[count2];
+				route[count2] = temp[tempCount];
+				count2--;
+				tempCount--;
+			}
+			return;
 		}
-		for(int count = i+1; count <= j; count++){
-			swaps[1][index] = route[count];
-			index++;
-		}
-		dists[1] = distance(route[i],route[k]);
-		dists[1] += distance(route[j+1],route[i+1]);
-		dists[1] += distance(route[j],route[k+1]);
 
 		//third possible swap
-		index = i+1;
-
-		for(int count = j+1; count <= k; count++){
-			swaps[2][index] = route[count];
-			index++;
+		newDist = distance(route[i],route[j+1]);
+		newDist += distance(route[k],route[j]);
+		newDist += distance(route[i+1],route[k+1]);
+		if(newDist < originalDist){
+			location[] temp = new location[j-i];
+			for(int count = i+1, tempCount = 0; count <= j; count++,tempCount++){
+				temp[tempCount] = route[count];
+			}
+			int count2 = j+1;
+			int tempCount = temp.length-1;
+			for(int count = 0; count <= j; count++){
+				route[count] = route[count2];
+				route[count2] = temp[tempCount];
+				count2++;
+				tempCount--;
+			}
+			return;
 		}
-		for(int count = j; count >= i+1; count--){
-			swaps[2][index] = route[count];
-			index++;
-		}
-		dists[2] = distance(route[i],route[j+1]);
-		dists[2] += distance(route[k],route[j]);
-		dists[2] += distance(route[i+1],route[k+1]);
 
 		//fourth possible swap
-		index = i+1;
-
-		for(int count = j; count >= i+1; count--){
-			swaps[3][index] = route[count];
-			index++;
+		newDist = distance(route[i],route[j]);
+		newDist += distance(route[i+1],route[k]);
+		newDist += distance(route[j+1],route[k+1]);
+		if(newDist < originalDist){
+			location temp;
+			int count2 = j;
+			for(int count = i+1; count < count2; count++){
+				temp = route[count];
+				route[count] = route[count2];
+				route[count2] = temp;
+				count2--;				
+			}
+			count2 = k;
+			for(int count = j+1; count < count2; count++){
+				temp = route[count];
+				route[count] = route[count2];
+				route[count2] = temp;
+				count2--;
+			}
+			return;
 		}
-		for(int count = k; count >= j+1; count--){
-			swaps[3][index] = route[count];
-			index++;
-		}
-		dists[3] = distance(route[i],route[j]);
-		dists[3] += distance(route[i+1],route[k]);
-		dists[3] += distance(route[j+1],route[k+1]);
 
 		//fifth possible swap (first 2opt, i->i+1 stays the same)
-		index = i+1;
-		for(;index <= j; index++){
-			swaps[4][index] = route[index];
+		newDist = distance(route[i],route[i+1]);
+		newDist += distance(route[j],route[k]);
+		newDist += distance(route[j+1],route[k+1]);
+		if(newDist < originalDist){
+			
 		}
-		for(int count = k; count >= j+1; count--){
-			swaps[4][index] = route[count];
-			index++;
-		}
-		dists[4] = distance(route[i],route[i+1]);
-		dists[4] += distance(route[j],route[k]);
-		dists[4] += distance(route[j+1],route[k+1]);
 
 		//sixth possible swap (second 2opt, j->j+1 stays the same)
 		index = i+1;
