@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 public class DBquery {
 	private Connection conn;
 	private Statement st;
-	private static final String limit = " LIMIT 600";
+	private static final String limit = " LIMIT 1000";
 	private String columns;
 	private String from;
 	private String where;
