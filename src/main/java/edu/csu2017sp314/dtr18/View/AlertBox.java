@@ -88,6 +88,8 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				Button load = new Button("Move to Selected");
 				Button save = new Button("save");
 				Button clear = new Button("clear");
+				Button remove = new Button("remove");
+				remove.setOnAction(e->removeLocation(chosenSubset));
 				
 				//listView is the object for displaying locations
 				subset = new ListView();
@@ -116,7 +118,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				//filling list with locations, allowing multiple selections to be a thing
 				subset.getItems().addAll(locations);
 				subset.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-	
+				chosenSubset.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 				Label l = new Label("Hold Ctrl while selecting to pick a subset of locations");
 				
 
@@ -188,7 +190,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				//end search bar creation
 				
 				VBox clearSave = new VBox();
-				clearSave.getChildren().addAll(clear,save);
+				clearSave.getChildren().addAll(save,remove,clear);
 			
 
 				Label l2 = new Label("                  Selected Locations");
@@ -219,6 +221,11 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				window.setScene(scene);
 				window.show();
 			}
+			
+			private void removeLocation(ListView chosenSubset) {
+				ObservableList chosen = chosenSubset.getSelectionModel().getSelectedItems();
+				chosenSubset.getItems().removeAll(chosen);
+			}
 			public void loadSubselection(String value) throws FileNotFoundException {
 				// TODO Auto-generated method stub
 				if(!value.equals("None")){
@@ -234,6 +241,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 			public void loadSelection(ListView subset, ListView chosenSubset){
 				chosenSubset.getItems().addAll(checkDuplicates(subset.getSelectionModel().getSelectedItems(),chosenSubset.getItems()));		
 			}
+			
 			public ObservableList checkDuplicates(ObservableList subset, ObservableList chosenSubset){
 				ObservableList<String> l = FXCollections.observableArrayList();
 				for(int i=0;i<subset.size();i++){
@@ -508,10 +516,14 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 		window.setScene(scene);
 		window.showAndWait();
 	}
-	/*
+	
 	public static void main(String [ ] args) throws FileNotFoundException{
+		AlertBox.locations = new String[]{"Colorado","New Mexico","Arizona","Aurora"}; 
+		xmlNameGiven = "testFile";
+		
 		AlertBox.launch();
 		AlertBox.printOpt();
 	}
-	*/
+	
+	
 }
