@@ -64,18 +64,7 @@ public class TestModel{
 		assertEquals(t4abDD,m.LatLongConverter(t4a),.01);
 		assertEquals(t4abDD,m.LatLongConverter(t4b),.01);
 	}
-	
-	@Test
-	public void smallestOnLineTest(){
-		m = new Model('m');
-		int t1[] = new int[] {12,3,0,12321,4};
-		int t2[] = new int [] {0,0,0,0,8,89};
 		
-		assertEquals(1,m.smallestOnLine(t1));
-		assertEquals(4,m.smallestOnLine(t2));
-		
-	}
-	
 	
 	@Test
 	public void circleDistanceTest(){
@@ -99,6 +88,7 @@ public class TestModel{
 		
 		m = new Model('m');
 		m.locations = locs;
+		m.used = new boolean[5];
 		m.computeDistances();
 		m.bestNearestNeighbor();
 		assertEquals(633,m.bestTripDistance);
@@ -107,15 +97,16 @@ public class TestModel{
 	@Test
 	public void test2Opt() throws FileNotFoundException{
 		ArrayList<location> locs = new ArrayList<location>();
-		locs.add(new location("1","Cheyenne County",38.84,-102.6));
-		locs.add(new location("2","El Paso County", 38.83, -104.53));
-		locs.add(new location("3","La Plata County",37.29,-107.84));
-		locs.add(new location("4","Mineral County",37.65,-106.93));
-		locs.add(new location("5","San Juan County",37.78,-107.67));
-		locs.add(new location("6","Adams County",39.87,-104.33));
+		locs.add(new location("1","Cheyenne County",38.84,-102.6,0));
+		locs.add(new location("2","El Paso County", 38.83, -104.53,1));
+		locs.add(new location("3","La Plata County",37.29,-107.84,2));
+		locs.add(new location("4","Mineral County",37.65,-106.93,3));
+		locs.add(new location("5","San Juan County",37.78,-107.67,4));
+		locs.add(new location("6","Adams County",39.87,-104.33,5));
 		
 		m = new Model('m');
 		m.locations = locs;
+		m.used = new boolean[6];
 		m.computeDistances();
 		m.bestNearestNeighbor();
 		int distance = m.bestTripDistance;
@@ -126,17 +117,19 @@ public class TestModel{
 	@Test
 	public void test3opt() throws FileNotFoundException{
 		ArrayList<location> locs = new ArrayList<location>();
-		locs.add(new location("1","Cheyenne County",38.84,-102.6));
-		locs.add(new location("2","El Paso County", 38.83, -104.53));
-		locs.add(new location("3","La Plata County",37.29,-107.84));
-		locs.add(new location("4","Mineral County",37.65,-106.93));
-		locs.add(new location("5","San Juan County",37.78,-107.67));
-		locs.add(new location("6","Adams County",39.87,-104.33));
+		locs.add(new location("1","Cheyenne County",38.84,-102.6,0));
+		locs.add(new location("2","El Paso County", 38.83, -104.53,1));
+		locs.add(new location("3","La Plata County",37.29,-107.84,2));
+		locs.add(new location("4","Mineral County",37.65,-106.93,3));
+		locs.add(new location("5","San Juan County",37.78,-107.67,4));
+		locs.add(new location("6","Adams County",39.87,-104.33,5));
 		
 		m = new Model('m');
 		Model m2 = new Model('m');
 		m.locations = locs;
+		m.used = new boolean[6];
 		m2.locations = locs;
+		m2.used = new boolean[6];
 		m.computeDistances();
 		m2.computeDistances();
 		m2.twoOpt();
