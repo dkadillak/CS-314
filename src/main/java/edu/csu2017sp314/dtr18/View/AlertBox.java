@@ -371,7 +371,8 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 					outputFile+="t18";
 					//this should handle cases where user does go back and we need to reset outPutFileName
 					outputFileName = outputFile;
-					    window.close();
+					db.close();
+					window.close();
 					}
 				}	
 			}
@@ -439,6 +440,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	}
 	searchLabel.setText("displaying "+count+"/200 results");
 	db.clear();
+	db.close();
 	}
 	//method to check if the correct booleans get set to true via the gui
 	public static void printOpt(){
