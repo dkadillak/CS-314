@@ -284,33 +284,21 @@ public class TripCo{
 			System.err.println("TripCo.run()");
 			System.exit(-1);
 		}
-		//mask off https://www.youtube.com/watch?v=jqcWnG2y3Kw
-		//ulimit http://stackoverflow.com/questions/28982396/failed-to-write-core-dump-core-dumps-have-been-disabled/37360913
-		//https://askubuntu.com/questions/642656/core-file-size-with-ulimit
-		//http://stackoverflow.com/questions/28158572/receiving-java-has-been-detached-already-error-when-trying-to-run-application
-		//https://access.redhat.com/solutions/61334
-		
-		
-		
-		
-		//so the options here are to run with a gui and no selection file or
-		//without the gui but with a selection file
+
 		if(opt_g==true){
 		
 			AlertBox.directoryXMLs = getAllXML();
 			Presenter p = new Presenter();
 			p.runGui();
-			System.out.println("Got back from running gui");
 			//run gui to get all info+name of output files
-			//put results from alertbox into view constructor 
+			//put results from alertbox into File objects then into view constructor 
 			svg = new File(AlertBox.outputFileName + ".svg");
-			System.out.println("created .svg file");
+		
 			
-			xml = new File(AlertBox.outputFileName + ".kml"); //make xml file with input file's name
-			System.out.println("created .kml file");    
+			xml = new File(AlertBox.outputFileName + ".kml"); 
+			
 			try {
 			    	if(!svg.exists()){
-			    		System.out.println("copy executed");
 			    		Files.copy(map.toPath(), svg.toPath());
 			    	}
 			    	else{
@@ -321,20 +309,18 @@ public class TripCo{
 				} catch (IOException e) {
 					System.err.println("Error: " + e.getMessage());
 				}
-			    System.out.println("created view with created xml and kml files");
-			    //program doesn't complete this statement. Map is probably not getting overwritten
+			  
+			  
 			View view = new View(xml, svg, svg_exists);	
 			
-			
-			System.out.println("got back from view constructor");
 			//create new presenter with model previously used
 			Presenter presenter = new Presenter(p,view);
-			System.out.println("created new presenter with old presenter and view");
+			
 			//initialize trip and create output files
 			view.initializeTrip(presenter.model.bestTripDistance, svg_exists,presenter.model.getUnits());
-			System.out.println("initializeTrip was executed");
+			
 			presenter.makeTrip(AlertBox.opt_i,AlertBox.opt_d,opt_g);
-			System.out.println("presenter.makeTrip was executed");
+			
 			
   		}else{  			
   			Model model = new Model(input,units);
@@ -385,7 +371,7 @@ public class TripCo{
 		*/
 		
 		if(args.length==0){
-			System.out.println("Error - No arguments given!");
+			System.err.println("Error - No arguments given!");
 			System.exit(0);
 		}
 		

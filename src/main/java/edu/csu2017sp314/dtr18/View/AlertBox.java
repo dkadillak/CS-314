@@ -220,7 +220,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				grid.getChildren().addAll(b1,b2,b3,b4,l,l2,buttons,searchLabel,subset,chosenSubset,searchBar,clearSave,load,submit);
 				
 				
-				Scene scene = new Scene(grid,900,500);
+				Scene scene = new Scene(grid,1000,600);
 				window.setScene(scene);
 				window.show();
 			}
@@ -247,12 +247,10 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 			public void loadSubselection(String value) throws FileNotFoundException {
 				// TODO Auto-generated method stub
 				if(!value.equals("None")){
-					System.out.println("Loading file: "+value);
 				Model m = new Model(new File(value),'m');
 				subset.getItems().clear();
 				
 				for(int i=0; i<m.locations.size();i++){
-					System.out.println(m.locations.get(i).name);
 					subset.getItems().add(m.locations.get(i).name);
 				}
 				searchLabel.setText("displaying "+m.locations.size()+"/200 results");
@@ -394,7 +392,6 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	db = new DBquery();
 	db.addColumn("airports.name");
 	String tables = "airports";
-	//System.out.println(continent.getValue());
 	
 	if(type.getValue()!=null){
 		db.addColumn("type");
@@ -488,8 +485,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 		window.showAndWait();
 	}
 	private void saveFile() {
-		//System.out.println(chosenSubset.getItems().size());
-		//System.out.println((chosenSubset.getItems().size())!=0);
+		
 		if((chosenSubset.getItems().size())!=0){
 	String[] saveMe = new String[chosenSubset.getItems().size()];
 	for(int i=0; i<chosenSubset.getItems().size();i++){
@@ -499,11 +495,11 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	View v = new View();
 	v.initializeSelection(xmlName);
 	for(int i=0;i<m.locations.size();i++){
-		System.out.println("Saving location: "+m.locations.get(i).name);
+		
 		v.addSelectionID(m.locations.get(i).id);
 	}
 	v.finalizeSelection();
-	System.out.println("\n end save \n");
+
 		}
 		else{
 		Error("Select one or more locations before you save!");
