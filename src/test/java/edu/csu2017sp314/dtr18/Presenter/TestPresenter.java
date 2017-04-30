@@ -20,7 +20,7 @@ public class TestPresenter {
 		testS = new File("junit.svg");
 		model = new Model('m');
 		view = new View(testX, testS, false);
-		presenter = new Presenter(view, model, "name");
+		presenter = new Presenter(view, model);
 
 		assertNotNull(presenter);
 		int midX = (222 + 620) / 2;

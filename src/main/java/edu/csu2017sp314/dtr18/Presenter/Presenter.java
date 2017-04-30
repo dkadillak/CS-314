@@ -7,23 +7,21 @@ import main.java.edu.csu2017sp314.dtr18.View.*;
 public class Presenter{
 	private View view;
 	public Model model;
-	public String fileName, xmlSubSelect;
 	
-	public Presenter(View view, Model model, String fileName) {
-		this.view = view;
-		this.model = model;
-		this.fileName = fileName;
-		
+	public Presenter() {
+		this.model = new Model('k');
 	}
 	
-	public Presenter(View view, Model model, String fileName, String xmlSubSelect) {
+	public Presenter(Presenter p, View view){
+		this.model = p.model;
+		this.view = view;
+	}
+	public Presenter(View view, Model model) {
 		this.view = view;
 		this.model = model;
-		this.fileName = fileName;
-		this.xmlSubSelect = xmlSubSelect;
 	}
 
-	private String[] createArray(){
+	/*private String[] createArray(){
 		String ret[] = new String[model.locations.size()];
 		
 		for(int i=0; i<model.locations.size();i++){
@@ -32,17 +30,19 @@ public class Presenter{
 		
 		return ret;
 	}
+	*/
 	
 //so AlertBox has a String[] called selectedLocations, use this and the model object
 //to create the subset model object, will need to update model object in view
 //also need to check if selectedLocations is Null (don't make new model obj)
 	public void runGui(){
 		//System.out.println(fileName);
-		AlertBox.fileName = fileName;
+		/*
 		if(!xmlSubSelect.equals("none")){
 			AlertBox.xmlNameGiven = xmlSubSelect;
 		}
 		AlertBox.locations = createArray();	
+		*/
 		AlertBox.launch();
 		char units = 'z';
 		if(AlertBox.opt_m){
