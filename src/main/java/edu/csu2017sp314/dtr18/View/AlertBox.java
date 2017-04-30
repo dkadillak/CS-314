@@ -40,10 +40,15 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	public DBquery db;
 	public ListView subset;
 	public ListView chosenSubset;
-	static Button ok,no;
+	static Button ok;
+	static Button no;
 	
-	public static boolean result, xmlSave=false, runXml=false;		
-	public static String xmlName, outputFileName="";
+	public static boolean result;
+	public static boolean xmlSave=false;
+	public static boolean runXml=false;	
+	
+	public static String xmlName;
+	public static String outputFileName="";
 	public Label searchLabel = new Label("Welcome to TripCo");
 	ChoiceBox<String> choiceBox;
 	public static String[] selectedLocations;
