@@ -41,7 +41,11 @@ public class TripCo{
 	public boolean opt_3;
 	public boolean xml_exists;
 	public boolean svg_exists = false;
-	public File input, xml, svg,map;
+	public File input;
+	public File xml;
+	public File svg;
+	public File map;
+	
 	public TripCo(int count){
 		optCount=count;
 	}
