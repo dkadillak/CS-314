@@ -36,14 +36,14 @@ public class Model{
 
 	//regular constructor
 	public Model(File file, char units) throws FileNotFoundException{
-		locations = new ArrayList<location>();
-		legs = new ArrayList<Leg>();
+		locations = new ArrayList<location>();		
 		setUnits(units);
 		
 	//lesgo bby
 
 		subsetParser(file);
 		distances = null;
+		legs = new ArrayList<Leg>(locations.size());
 		used = new boolean[locations.size()];
 		for(int i = 0; i < used.length; i++){
 			used[i] = false;
@@ -53,7 +53,6 @@ public class Model{
 	//subset constructor
 	public Model(String[] subset, char units){
 		locations = new ArrayList<location>();
-		legs = new ArrayList<Leg>();
 		distances = null;
 		if(units == 'm'){
 			miles = true;
@@ -65,6 +64,7 @@ public class Model{
 		}
 		fillLocations(subset, true);
 		used = new boolean[locations.size()];
+		legs = new ArrayList<Leg>(locations.size());
 		for(int i = 0; i < used.length; i++){
 			used[i] = false;
 		}
@@ -414,13 +414,9 @@ public class Model{
 				for (int i = 0; i < route.length - 5; i++) {
 					for (int j = i + 2; j < route.length - 3; j++) {
 						for (int k = j + 2; k < route.length - 1; k++) {
-							location[] newRoute = threeOptSwap(route, i, j, k);
-							if (newRoute != null) {
-								route = newRoute;
+							if(threeOptSwap(route, i, j, k)){
 								swapCount++;
-								i = j = route.length;
-								break;
-							}
+							}							
 						}
 					}
 				}
@@ -440,8 +436,8 @@ public class Model{
 		bestTripDistance = best.getTotalDistance();
 	}
 
-
-	public void threeOptSwap(location[] route, int i, int j, int k){
+	//return true if a swap is made
+	public boolean threeOptSwap(location[] route, int i, int j, int k){
 		//total distance of the legs being removed
 		int originalDist = distance(route[i],route[i+1]);
 		originalDist += distance(route[j],route[j+1]);
@@ -457,15 +453,16 @@ public class Model{
 			for(int count = i+1, tempCount = 0; count <= j; count++,tempCount++){
 				temp[tempCount] = route[count];
 			}
-			int count2 = j+1;
-			int tempCount = 0;
-			for(int count = i+1; count <= j; count++){
-				route[count] = route[count2];
-				route[count2] = temp[tempCount];				
-				count2++;
-				tempCount++;
+			int index = i+1;			
+			for(int index2 = j+1;index2 <= k; index2++){
+				route[index] = route[index2];
+				index++;
 			}
-			return;
+			for(int tempIndex = 0; tempIndex < temp.length; tempIndex++){
+				route[index] = temp[tempIndex];
+				index++;
+			}
+			return true;
 		}
 
 		//second possible swap
@@ -477,15 +474,20 @@ public class Model{
 			for(int count = i+1, tempCount = 0; count <= j; count++,tempCount++){
 				temp[tempCount] = route[count];
 			}
-			int count2 = k;
-			int tempCount = temp.length-1;
-			for(int count = i+1; count <= j; count++){
-				route[count] = route[count2];
-				route[count2] = temp[tempCount];
-				count2--;
-				tempCount--;
+			location[] temp2 = new location[k-j];
+			for(int count = j+1, tempCount = 0; count <= k; count++,tempCount++){
+				temp2[tempCount] = route[count];
 			}
-			return;
+			int index = i+1;			
+			for(int tempIndex = temp2.length-1;tempIndex > -1;tempIndex--){
+				route[index] = temp2[tempIndex];
+				index++;
+			}
+			for(int tempIndex = 0; tempIndex < temp.length; tempIndex++){
+				route[index] = temp[tempIndex];
+				index++;
+			}
+			return true;
 		}
 
 		//third possible swap
@@ -497,15 +499,16 @@ public class Model{
 			for(int count = i+1, tempCount = 0; count <= j; count++,tempCount++){
 				temp[tempCount] = route[count];
 			}
-			int count2 = j+1;
-			int tempCount = temp.length-1;
-			for(int count = 0; count <= j; count++){
-				route[count] = route[count2];
-				route[count2] = temp[tempCount];
-				count2++;
-				tempCount--;
+			int index = i+1;			
+			for(int index2 = j+1;index2 <= k; index2++){
+				route[index] = route[index2];
+				index++;
 			}
-			return;
+			for(int tempIndex = temp.length-1; tempIndex > -1; tempIndex--){
+				route[index] = temp[tempIndex];
+				index++;
+			}
+			return true;
 		}
 
 		//fourth possible swap
@@ -528,7 +531,7 @@ public class Model{
 				route[count2] = temp;
 				count2--;
 			}
-			return;
+			return true;
 		}
 
 		//fifth possible swap (first 2opt, i->i+1 stays the same)
@@ -536,45 +539,46 @@ public class Model{
 		newDist += distance(route[j],route[k]);
 		newDist += distance(route[j+1],route[k+1]);
 		if(newDist < originalDist){
-			
+			twoOptSwap(route,j+1,k);
+			return true;
 		}
 
 		//sixth possible swap (second 2opt, j->j+1 stays the same)
-		index = i+1;
-		for(int count = k; count >= j+1; count--){
-			swaps[5][index] = route[count];
-			index++;
+		newDist = distance(route[i],route[k]);
+		newDist += distance(route[i+1],route[k+1]);
+		newDist += distance(route[j],route[j+1]);
+		if(newDist < originalDist){
+			location[] temp = new location[j-i];
+			for(int count = i+1, tempCount = 0; count <= j; count++,tempCount++){
+				temp[tempCount] = route[count];
+			}
+			location[] temp2 = new location[k-j];
+			for(int count = j+1, tempCount = 0; count <= k; count++,tempCount++){
+				temp2[tempCount] = route[count];
+			}
+			int index = i+1;			
+			for(int tempIndex = temp2.length-1;tempIndex > -1; tempIndex--){
+				route[index] = temp2[tempIndex];
+				index++;
+			}
+			for(int tempIndex = temp.length-1; tempIndex > -1; tempIndex--){
+				route[index] = temp[tempIndex];
+				index++;
+			}
+			return true;
 		}
-		for(int count = j; count >= i+1; count--){
-			swaps[5][index] = route[count];
-			index++;
-		}
-		dists[5] = distance(route[i],route[k]);
-		dists[5] += distance(route[i+1],route[k+1]);
-		dists[5] += distance(route[j],route[j+1]);
 
 		//seventh possible swap (third 2opt, k->k+1 stays the same)
-		index = i+1;
-		for(int count = j; count >= i+1; count--){
-			swaps[6][index] = route[count];
-			index++;
+		newDist = distance(route[i],route[j]);
+		newDist += distance(route[i+1],route[j+1]);
+		newDist += distance(route[k],route[k+1]);
+		if(newDist < originalDist){
+			twoOptSwap(route,i+1,j);
+			return true;
 		}
-		for(int count = j+1; count <= k; count++){
-			swaps[6][index] = route[count];
-			index++;
-		}
-		dists[6] = distance(route[i],route[j]);
-		dists[6] += distance(route[i+1],route[j+1]);
-		dists[6] += distance(route[k],route[k+1]);
-
-		//select and return the best swap, or null if none of the swaps are better
-		int best = 0;
-		for(int count = 1; count < 7; count++){
-			if(dists[count] < dists[best]) best = count;
-		}
-
-		if(originalDist <= dists[best]) return null;
-		return swaps[best];
+		
+		//if none of the swaps were an improvement
+		return false;
 	}
 
 	//takes an array of locations and makes a trip out of them in the same order as the array
