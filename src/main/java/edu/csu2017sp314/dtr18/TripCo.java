@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -15,6 +16,12 @@ import javafx.stage.Stage;
 import main.java.edu.csu2017sp314.dtr18.Model.*;
 import main.java.edu.csu2017sp314.dtr18.View.*;
 import main.java.edu.csu2017sp314.dtr18.Presenter.*;
+//Presenter
+//TripCo
+//AlertBox
+//View
+//TestPresenter
+
 
 public class TripCo{
 	private int optCount;
@@ -34,7 +41,11 @@ public class TripCo{
 	public boolean opt_3;
 	public boolean xml_exists;
 	public boolean svg_exists = false;
-	public File input, xml, svg;
+	public File input;
+	public File xml;
+	public File svg;
+	public File map;
+	
 	public TripCo(int count){
 		optCount=count;
 	}
@@ -188,19 +199,40 @@ public class TripCo{
 		}
 		//include statement to get the user inputted background image args[optCount]
 		svg_exists=true;
-			
+		map = new File(args[optCount]);
 		if(optCount+1<args.length){
-			if(!args[optCount+1].endsWith(".xml")){
+			//check if if xml exists and no -g flag is set
+			
+			if(args[optCount+1].endsWith(".xml")&&!(opt_g)){
 				//check if the file is type .xml or not
-				System.err.println("Error - Second argument "
-						+ "after options must be subselection file");
+				xml_exists=true;
+				input = new File(args[optCount+1]);
+				String output = generateOutputName(args[optCount+1]);
+				
+				svg = new File(output + ".svg");
+				xml = new File(output + ".kml"); //make xml file with input file's name
+				if(svg_exists){
+				    try {
+				    	if(!svg.exists())
+				    		Files.copy(map.toPath(), svg.toPath());
+				    	else{
+				    		svg.delete();
+				    		System.out.println("File: " + svg.getName() + " was overwritten.");
+				    		Files.copy(map.toPath(), svg.toPath());
+				    	}
+					} catch (IOException e) {
+						System.err.println("Error: " + e.getMessage());
+					}
+				}
+			}
+			else{
+				System.err.println("Error: Must either include selection file if not using -g, or use -g and provide no selection file");
 				return false;
 			}
-			//include statement to get user inputed selection.xml args[optCount+2]
-			xml_exists=true;
 			
-		} else if(!opt_g){
-			System.err.println("Error: Must include selection file if not using -g");
+		}else if(!(opt_g)){
+			//check if -g is set and there is no xml 
+			System.err.println("Error: Must either include selection file if not using -g, or use -g and provide no selection file");
 			return false;
 		}
 		
@@ -208,25 +240,6 @@ public class TripCo{
 	
 		//generate names for output files
 		
-		input = new File(args[optCount+1]);
-		String output = generateOutputName(args[optCount+1]);
-		
-		svg = new File(output + ".svg");
-		xml = new File(output + ".kml"); //make xml file with input file's name
-		if(svg_exists){
-			File map = new File(args[optCount]);
-		    try {
-		    	if(!svg.exists())
-		    		Files.copy(map.toPath(), svg.toPath());
-		    	else{
-		    		svg.delete();
-		    		System.out.println("File: " + svg.getName() + " was overwritten.");
-		    		Files.copy(map.toPath(), svg.toPath());
-		    	}
-			} catch (IOException e) {
-				System.err.println("Error: " + e.getMessage());
-			}
-		}
 		return true;
 	}
 	
@@ -275,18 +288,48 @@ public class TripCo{
 			System.err.println("TripCo.run()");
 			System.exit(-1);
 		}
-		
-		Model model = new Model(input,units);
-		View view = new View(xml, svg, svg_exists);	
 
-		Presenter presenter = new Presenter(view, model, svg.getName(),input.getName());
-		
-		
 		if(opt_g==true){
-			presenter.runGui();
+		
+			AlertBox.directoryXMLs = getAllXML();
+			Presenter p = new Presenter();
+			p.runGui();
+			//run gui to get all info+name of output files
+			//put results from alertbox into File objects then into view constructor 
+			svg = new File(AlertBox.outputFileName + ".svg");
+		
+			
+			xml = new File(AlertBox.outputFileName + ".kml"); 
+			
+			try {
+			    	if(!svg.exists()){
+			    		Files.copy(map.toPath(), svg.toPath());
+			    	}
+			    	else{
+			    		svg.delete();
+			    		System.out.println("File: " + svg.getName() + " was overwritten.");
+			    		Files.copy(map.toPath(), svg.toPath());
+			    	}
+				} catch (IOException e) {
+					System.err.println("Error: " + e.getMessage());
+				}
+			  
+			  
+			View view = new View(xml, svg, svg_exists);	
+			
+			//create new presenter with model previously used
+			Presenter presenter = new Presenter(p,view);
+			
+			//initialize trip and create output files
 			view.initializeTrip(presenter.model.bestTripDistance, svg_exists,presenter.model.getUnits());
+			
 			presenter.makeTrip(AlertBox.opt_i,AlertBox.opt_d,opt_g);
+			
+			
   		}else{  			
+  			Model model = new Model(input,units);
+  			View view = new View(xml, svg, svg_exists);	
+  			Presenter presenter = new Presenter(view, model);
   			model.computeDistances();
 			if(opt_2==true && opt_3 == false){
 				model.twoOpt();
@@ -295,17 +338,31 @@ public class TripCo{
 			}else{
 				model.bestNearestNeighbor();
 			}
-		
-			
 			view.initializeTrip(model.bestTripDistance, svg_exists, model.getUnits());
 			presenter.makeTrip(opt_i, opt_d, false);
   		}
 	}
 
+	//Mostly taken from 
+	//http://stackoverflow.com/questions/20565333/retrieve-all-xml-file-names-from-a-directory-using-java
+	public ArrayList<String> getAllXML(){
+		File folder = new File("./");
+		File[] listOfFiles = folder.listFiles();
+		ArrayList<String> files = new ArrayList<String>();
+		for(int i = 0; i < listOfFiles.length; i++){
+		String filename = listOfFiles[i].getName();
+		if(filename.endsWith(".xml")||filename.endsWith(".XML"))
+		{
+		files.add(listOfFiles[i].getName());
+		}
+		   }
+		return files;
+		  
+	}
 
 //END OF TRIPCO CLASS DEFINITION AND START OF MAIN
 	public static void main(String [ ] args) throws FileNotFoundException{
-		
+
 		/*command line example:
 		 
 		java TripCo [options] [map.svg] [selection.xml]
@@ -318,14 +375,14 @@ public class TripCo{
 		*/
 		
 		if(args.length==0){
-			System.out.println("Error - No arguments given!");
+			System.err.println("Error - No arguments given!");
 			System.exit(0);
 		}
 		
 		int opt=0, files=0;
 		for(int i=0;i<args.length;i++){
 			//check all options until the expected .csv file
-			if(args[i].matches("(.*)svg")||args[i].matches("(.*)xml")){
+			if(args[i].matches("(.*)svg")||(args[i].matches("(.*)xml"))){
 				files++;
 			}
 			else if(args[i].matches("[idkmg23-]+")){
@@ -335,7 +392,7 @@ public class TripCo{
 
 			if(files==0){
 				System.out.println("Error- "
-						+ "no subselection file was included in arguments");
+						+ "no files provided");
 				System.exit(0);
 			}
 			else if(files>2){
@@ -351,4 +408,5 @@ public class TripCo{
 			tc.run();
 
 	}	
+	
 }

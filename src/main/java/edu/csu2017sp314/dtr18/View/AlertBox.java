@@ -9,8 +9,11 @@ import javafx.scene.control.*;
 import java.awt.Insets;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.Action;
 
@@ -37,21 +40,27 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	public DBquery db;
 	public ListView subset;
 	public ListView chosenSubset;
-	static Button ok,no;
+	static Button ok;
+	static Button no;
 	
-	public static boolean result, xmlSave=false, runXml=false;		
-	public static String fileName, xmlName, xmlNameGiven;
-	public Label searchLabel = new Label("displaying locations from "+xmlNameGiven);
+	public static boolean result;
+	public static boolean xmlSave=false;
+	public static boolean runXml=false;	
+	
+	public static String xmlName;
+	public static String outputFileName="";
+	public Label searchLabel = new Label("Welcome to TripCo");
 	ChoiceBox<String> choiceBox;
 	public static String[] selectedLocations;
 	public static String[] locations;
+	
+	public static ArrayList<String> directoryXMLs;
 	public static boolean opt_m=true;
 	public static boolean opt_k=false;
 	public static boolean opt_i=false;
 	public static boolean opt_d=false;
 	public static boolean opt_2=false;
 	public static boolean opt_3=false;
-	//public DBquery db;
 	
 	//class variables
 	Stage window;
@@ -83,17 +92,20 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				
 				
 				/*CREATING ALL GUI VARIABLES*/
-				//creating checkboxes, submit button,load button, save button and place for location subselection
+				
+				//button creation
 				Button submit = new Button("Create Trip");
 				Button load = new Button("Move to Selected");
 				Button save = new Button("save");
 				Button clear = new Button("clear");
 				Button remove = new Button("remove");
-				remove.setOnAction(e->removeLocation(chosenSubset));
+				Button choice = new Button("Load Subselection");
 				
 				//listView is the object for displaying locations
 				subset = new ListView();
 				chosenSubset = new ListView();
+				
+				//checkbox creation
 				CheckBox b1 = new CheckBox("Display Distances");
 				CheckBox b2 = new CheckBox("Display ID's");
 				CheckBox b3 = new CheckBox("Run 2opt");
@@ -107,22 +119,12 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				kilometers.setToggleGroup(group);
 				miles.fire();
 				
-				//setting actions for submit, save, clear, and load button
+				//setting actions for submit, save, clear, load, remove, and choice buttons
 				submit.setOnAction(e->this.checkBoxes(b1, b2, b3, b4,chosenSubset,miles, kilometers));
 				save.setOnAction(e->getFileName());
 				load.setOnAction(e->this.loadSelection(subset, chosenSubset));
 				clear.setOnAction(e->this.clearSelection(chosenSubset));
-				
-			
-	
-				//filling list with locations, allowing multiple selections to be a thing
-				subset.getItems().addAll(locations);
-				subset.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-				chosenSubset.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-				Label l = new Label("Hold Ctrl while selecting to pick a subset of locations");
-				
-
-				Button choice = new Button("Load Subselection");
+				remove.setOnAction(e->removeLocation(chosenSubset));
 				choice.setOnAction(e->{
 					try {
 						loadSubselection(choiceBox.getValue());
@@ -131,11 +133,17 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 						e2.printStackTrace();
 					}
 				});
-				choiceBox = new ChoiceBox<>();
-				choiceBox.getItems().add(xmlNameGiven);
-				choiceBox.getItems().add("None");
-				choiceBox.setValue("None");
-
+	
+				//filling list to choose from with locations, allowing multiple selections to be a thing
+				//for choosing the subset and removing from the chosen subset
+				//subset.getItems().addAll(locations);
+				subset.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+				chosenSubset.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+				Label l = new Label("Hold Ctrl while selecting to pick a subset of locations");
+				
+				//call method which will populate dropdown for loading XML files
+				populateXMLDropDown();
+			
 				
 				//HBox for radiobuttons and subselection loading dropdown
 				HBox buttons = new HBox();
@@ -217,19 +225,34 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				grid.getChildren().addAll(b1,b2,b3,b4,l,l2,buttons,searchLabel,subset,chosenSubset,searchBar,clearSave,load,submit);
 				
 				
-				Scene scene = new Scene(grid,900,500);
+				Scene scene = new Scene(grid,1000,600);
 				window.setScene(scene);
 				window.show();
+			}
+			
+			private void populateXMLDropDown(){
+				choiceBox = new ChoiceBox<>();
+				
+				for(int i=0;i<directoryXMLs.size();i++){
+					choiceBox.getItems().add(directoryXMLs.get(i));
+				}
+				/*
+				choiceBox.getItems().add(xmlNameGiven);
+				*/
+				choiceBox.getItems().add("None");
+				choiceBox.setValue("None");
+				
 			}
 			
 			private void removeLocation(ListView chosenSubset) {
 				ObservableList chosen = chosenSubset.getSelectionModel().getSelectedItems();
 				chosenSubset.getItems().removeAll(chosen);
 			}
+			
 			public void loadSubselection(String value) throws FileNotFoundException {
 				// TODO Auto-generated method stub
 				if(!value.equals("None")){
-				Model m = new Model(new File(xmlNameGiven),'m');
+				Model m = new Model(new File(value),'m');
 				subset.getItems().clear();
 				
 				for(int i=0; i<m.locations.size();i++){
@@ -237,6 +260,9 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				}
 				searchLabel.setText("displaying "+m.locations.size()+"/200 results");
 			}
+				else{
+					subset.getItems().clear();
+				}
 		}
 			public void loadSelection(ListView subset, ListView chosenSubset){
 				chosenSubset.getItems().addAll(checkDuplicates(subset.getSelectionModel().getSelectedItems(),chosenSubset.getItems()));		
@@ -257,15 +283,20 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 			}
 			//this is the processing code for the gui checkboxes and submit button
 			public void checkBoxes(CheckBox b1,CheckBox b2,CheckBox b3,CheckBox b4, ListView subset, RadioButton miles, RadioButton kilometers){
+				String outputFile = "";
 				if(choiceBox.getValue()!="None"){
 					runXml = true;
+					outputFile +=choiceBox.getValue().substring(0,choiceBox.getValue().length()-4);
 				}
-				if(choiceBox.getValue() != "None" && !chosenSubset.getSelectionModel().isEmpty()){
-					AlertBox.Error("Error- You cannot pick a subset of locations and load a subselection");
-					//subset.getSelectionModel().clearSelection();
-					choiceBox.setValue("None");
-					
+				else if(choiceBox.getValue()=="None"){
+					outputFile +="tripCo";
 				}
+				
+				if(chosenSubset.getItems().isEmpty()){
+					AlertBox.Error("Error- You must pick a subset of locations before running");
+					//subset.getSelectionModel().clearSelection();	
+				}
+				else{
 				//save selected locations
 				if(!chosenSubset.getItems().isEmpty()){
 				ObservableList<String> locations;
@@ -281,46 +312,54 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				}
 				
 				//creating string that will display in gui for user confirmation
-				String selection = "You are running file "+fileName+" with arguments: ";
+				String selection = "You are running with arguments: ";
+				
 				
 				//making sure just -3 is used in the case of both -3 and -2
 				if(b4.isSelected()&&b3.isSelected()){
 					opt_3 = true;
 					selection+=" -3";
+					outputFile +="-3";
 				}
 				
 				//if distance option is selected
 				if(b1.isSelected()){
 					opt_d = true;
 					selection+=" -d";
+					outputFile +="-d";
 				}
 				
 				//if id option is selected
 				if(b2.isSelected()){
 					opt_i = true;
 					selection+=" -i";
+					outputFile +="-i";
 				}
 				
 				//if twoOpt is selected
 				if(b3.isSelected()){
 					opt_2 = true;
 					selection+=" -2";
+					outputFile +="-2";
 				}
 				
 				//if threeOpt is selected and twoOpt isn't selected
 				if(b4.isSelected()&&!b3.isSelected()){
 					opt_3 = true;
 					selection+=" -3";
+					outputFile +="-3";
 				}
 				
 				if(miles.isSelected()){
 					selection += " -m";
+					outputFile +="-m";
 					opt_m = true;
 					opt_k = false;
 				}else if(kilometers.isSelected()){
 					opt_m = false;
 					opt_k = true;
 					selection += " -k";
+					outputFile +="-k";
 				}else{
 					System.err.println("Miles/kilometers button error");
 					Platform.exit();
@@ -333,8 +372,14 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				//display confirmation window. If they hit confirm, close gui. Else keep it open
 				Boolean answer = AlertBox.display(selection);
 				if(answer){
+					
+					outputFile+="t18";
+					//this should handle cases where user does go back and we need to reset outPutFileName
+					outputFileName = outputFile;
+					db.close();
 					window.close();
-				}
+					}
+				}	
 			}
 				
 			
@@ -353,7 +398,6 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	db = new DBquery();
 	db.addColumn("airports.name");
 	String tables = "airports";
-	//System.out.println(continent.getValue());
 	
 	if(type.getValue()!=null){
 		db.addColumn("type");
@@ -401,6 +445,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	}
 	searchLabel.setText("displaying "+count+"/200 results");
 	db.clear();
+	db.close();
 	}
 	//method to check if the correct booleans get set to true via the gui
 	public static void printOpt(){
@@ -430,8 +475,11 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 		xmlName = t.getText();
 		String message = "Your subselection file name is: ";
 		if(display((message+=xmlName+".xml"))==true){
+		//directoryXMLs.add(xmlName+".xml");
+		choiceBox.getItems().add(xmlName+".xml");
 		e.consume();
 		saveFile();
+		choiceBox.setValue(xmlName+".xml");
 		window.close();
 		}
 		});
@@ -442,12 +490,9 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 		Scene s = new Scene(h);
 		window.setScene(s);
 		window.showAndWait();
-		
-		
 	}
 	private void saveFile() {
-		System.out.println(chosenSubset.getItems().size());
-		System.out.println((chosenSubset.getItems().size())!=0);
+		
 		if((chosenSubset.getItems().size())!=0){
 	String[] saveMe = new String[chosenSubset.getItems().size()];
 	for(int i=0; i<chosenSubset.getItems().size();i++){
@@ -457,9 +502,11 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	View v = new View();
 	v.initializeSelection(xmlName);
 	for(int i=0;i<m.locations.size();i++){
+		
 		v.addSelectionID(m.locations.get(i).id);
 	}
 	v.finalizeSelection();
+
 		}
 		else{
 		Error("Select one or more locations before you save!");
@@ -500,7 +547,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	public static void Error(String message){
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
-		window.setWidth(450);
+		window.setWidth(550);
 		Button ok = new Button("confirm");
 		ok.setOnAction(e->{
 		e.consume();
@@ -516,14 +563,14 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 		window.setScene(scene);
 		window.showAndWait();
 	}
-	
+	/*
 	public static void main(String [ ] args) throws FileNotFoundException{
 		AlertBox.locations = new String[]{"Colorado","New Mexico","Arizona","Aurora"}; 
-		xmlNameGiven = "testFile";
+		
 		
 		AlertBox.launch();
 		AlertBox.printOpt();
 	}
-	
+	*/
 	
 }
