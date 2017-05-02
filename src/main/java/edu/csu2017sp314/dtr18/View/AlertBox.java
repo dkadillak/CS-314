@@ -73,8 +73,6 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				primaryStage.setOnCloseRequest(e -> {
 					boolean answer = AlertBox.display("Confirm exit");
 					if(answer){
-						//selectedLocations = new String[1];
-						//selectedLocations[0] = "no subselection";
 					e.consume();
 					Platform.exit();
 					System.exit(0);
@@ -136,7 +134,6 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	
 				//filling list to choose from with locations, allowing multiple selections to be a thing
 				//for choosing the subset and removing from the chosen subset
-				//subset.getItems().addAll(locations);
 				subset.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 				chosenSubset.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 				Label l = new Label("Hold Ctrl while selecting to pick a subset of locations");
@@ -185,16 +182,12 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				GridPane.setConstraints(b3,0,1);
 				GridPane.setConstraints(b4,1,1);
 				GridPane.setConstraints(buttons,3,0);
-				//GridPane.setConstraints(kilometers,4,0);
-				//GridPane.setConstraints(choice,3,1);
-				//GridPane.setConstraints(choiceBox,3,2);
 				GridPane.setConstraints(l,1,5);
 				GridPane.setConstraints(l2,3,8);
 				GridPane.setConstraints(subset,1,6);
 				GridPane.setConstraints(chosenSubset,3,6);
 				GridPane.setConstraints(searchBar,0,6);
 				GridPane.setConstraints(clearSave,4,6);
-				//GridPane.setConstraints(save,4,5);
 				GridPane.setConstraints(searchLabel,1,9);
 				GridPane.setConstraints(load,1,10);
 				GridPane.setConstraints(submit,3,10);
@@ -271,7 +264,7 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				
 				if(chosenSubset.getItems().isEmpty()){
 					AlertBox.Error("Error- You must pick a subset of locations before running");
-					//subset.getSelectionModel().clearSelection();	
+					
 				}
 				else{
 				//save selected locations
@@ -386,7 +379,6 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 		if(count==200){
 		break;
 		}
-		//m.locations.get(i).name+" / "+m.locations.get(i).country+" / "+m.locations.get(i).municipality
 		subset.getItems().add(rs.getString("airports.name")+" ~ "+rs.getString("countries.name")+" ~ "+rs.getString("municipality")+" ~ "+rs.getString("airports.id"));
 		count++;
 	}
@@ -437,7 +429,6 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 		xmlName = t.getText();
 		String message = "Your subselection file name is: ";
 		if(display((message+=xmlName+".xml"))==true){
-		//directoryXMLs.add(xmlName+".xml");
 		choiceBox.getItems().add(xmlName+".xml");
 		e.consume();
 		saveFile();
@@ -458,12 +449,10 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 		if((chosenSubset.getItems().size())!=0){
 	String[] saveMe = new String[chosenSubset.getItems().size()];
 	String[] split; 
-	//selectedLocations[i] =split[split.length-1].trim();
 	for(int i=0; i<chosenSubset.getItems().size();i++){
 		split =  chosenSubset.getItems().get(i).toString().split("~");
 		saveMe[i]=split[split.length-1].trim();
 	}
-	//Model m = new Model(saveMe,'m');
 	View v = new View();
 	v.initializeSelection(xmlName);
 	for(int i=0;i<saveMe.length;i++){
@@ -528,14 +517,4 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 		window.setScene(scene);
 		window.showAndWait();
 	}
-	/*
-	public static void main(String [ ] args) throws FileNotFoundException{
-		AlertBox.locations = new String[]{"Colorado","New Mexico","Arizona","Aurora"}; 
-		
-		
-		AlertBox.launch();
-		AlertBox.printOpt();
-	}
-	*/
-	
 }

@@ -27,7 +27,6 @@ public class Presenter{
 	public void runGui(){
 
 		AlertBox.launch();
-		//
 		char units = 'z';
 		if(AlertBox.opt_m){
 			units = 'm';
@@ -39,12 +38,9 @@ public class Presenter{
 		}
 		if(!(AlertBox.selectedLocations[0].equals("no subselection"))){
 			Model subSelectModel = new Model(AlertBox.selectedLocations,units);
-			//System.out.println(AlertBox.selectedLocations.length+" should equal "+model.used.length);
 			model = subSelectModel;
 			model.computeDistances();
 		}else{
-			//model.setUnits(units);
-			//this.model.used =new boolean[AlertBox.selectedLocations.length];
 			Model subModel = new Model(AlertBox.selectedLocations,units);
 			
 			model.computeDistances();
@@ -71,7 +67,6 @@ public class Presenter{
 		}
 		view.addHeader("Legs");
 		for(int index = 0; index < model.legs.size(); index++){
-			//double lat lon
 			int [] first = view.convertCoords(model.legs.get(index).getStart().getLatitude(),model.legs.get(index).getStart().getLongitude());
 			int [] second = view.convertCoords(model.legs.get(index).getEnd().getLatitude(),model.legs.get(index).getEnd().getLongitude());
 			view.addLine(first[1], first[0], second[1], second[0]);
@@ -92,7 +87,6 @@ public class Presenter{
 			view.addHeader("Locations");
 			for(int index = 0; index < model.legs.size(); index++){
 				int [] point = view.convertCoords(model.legs.get(index).getStart().getLatitude(),model.legs.get(index).getStart().getLongitude());
-				//view.addLabel(int x, int y, String label);
 				view.addLabel(point[1], point[0], model.legs.get(index).getStart().getID());
 			}
 			view.addFooter();
