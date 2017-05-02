@@ -61,13 +61,6 @@ public class View {
 			map.println("<?xml version=\"1.0\"?>");
 			map.print("<svg width=\"1024\" height=\"512\" xmlns=\"http://www.w3.org/2000/svg\"");
 			map.println(" xmlns:svg=\"http://www.w3.org/2000/svg\">");
-
-			/*addHeader("Borders");
-			map.println("\t<line id=\"north\" y2=\"36\" x2=\"1030\" y1=\"36\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>");
-			map.println("\t<line id=\"east\" y2=\"747\" x2=\"1030\" y1=\"36\" x1=\"1028\" stroke-width=\"4\" stroke=\"#666666\"/>");
-			map.println("\t<line id=\"south\" y2=\"745\" x2=\"1031\" y1=\"746\" x1=\"35\" stroke-width=\"4\" stroke=\"#666666\"/>");
-			map.println("\t<line id=\"west\" y2=\"745\" x2=\"37\" y1=\"35\" x1=\"37\" stroke-width=\"4\" stroke=\"#666666\"/>");
-			addFooter();*/
 		}
 
 		addHeader("Titles");

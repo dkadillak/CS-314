@@ -73,8 +73,6 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				primaryStage.setOnCloseRequest(e -> {
 					boolean answer = AlertBox.display("Confirm exit");
 					if(answer){
-						//selectedLocations = new String[1];
-						//selectedLocations[0] = "no subselection";
 					e.consume();
 					Platform.exit();
 					System.exit(0);
@@ -136,7 +134,6 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 	
 				//filling list to choose from with locations, allowing multiple selections to be a thing
 				//for choosing the subset and removing from the chosen subset
-				//subset.getItems().addAll(locations);
 				subset.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 				chosenSubset.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 				Label l = new Label("Hold Ctrl while selecting to pick a subset of locations");
@@ -152,48 +149,25 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				buttons.setSpacing(10);
 				buttons.getChildren().addAll(kilometers,miles,sub);
 				
-				Label typeLabel = new Label("Select Airport Type");
+				Label typeLabel = new Label("Search Airport");
 				//setting up search bar
-				ChoiceBox type = new ChoiceBox<>();
-				type.getItems().add("small_airport");
-				type.getItems().add("medium_airport");
-				type.getItems().add("large_airport");
-				type.getItems().add("closed");
-				
-				Label continentLabel = new Label("Select Continent");
-				ChoiceBox continent = new ChoiceBox<>();
-				continent.getItems().add("Africa");
-				continent.getItems().add("Antartica");
-				continent.getItems().add("Asia");
-				continent.getItems().add("Europe");
-				continent.getItems().add("North America");
-				continent.getItems().add("Oceania");
-				continent.getItems().add("South America");
 				
 				
-				TextField region = new TextField();
-				region.setPromptText("search region");
-				
-				TextField country = new TextField();
-				country.setPromptText("search country");
-				
-				TextField municipality = new TextField();
-				municipality.setPromptText("search municipality");
 				
 				TextField airport = new TextField();
-				airport.setPromptText("search airport");
+				airport.setPromptText("search");
 			
 				Button  search = new Button("search");
 				search.setOnAction(e->{
 					try {
-						dbSearch(type,continent,region.getText(),municipality.getText(),airport.getText(),country.getText());
+						dbSearch(airport.getText());
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				});
 				VBox searchBar = new VBox();
-				searchBar.getChildren().addAll(typeLabel,type,continentLabel,continent,region,municipality,country,airport,search);
+				searchBar.getChildren().addAll(typeLabel,airport,search);
 				searchBar.setSpacing(2);
 				//end search bar creation
 				
@@ -208,16 +182,12 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				GridPane.setConstraints(b3,0,1);
 				GridPane.setConstraints(b4,1,1);
 				GridPane.setConstraints(buttons,3,0);
-				//GridPane.setConstraints(kilometers,4,0);
-				//GridPane.setConstraints(choice,3,1);
-				//GridPane.setConstraints(choiceBox,3,2);
 				GridPane.setConstraints(l,1,5);
 				GridPane.setConstraints(l2,3,8);
 				GridPane.setConstraints(subset,1,6);
 				GridPane.setConstraints(chosenSubset,3,6);
 				GridPane.setConstraints(searchBar,0,6);
 				GridPane.setConstraints(clearSave,4,6);
-				//GridPane.setConstraints(save,4,5);
 				GridPane.setConstraints(searchLabel,1,9);
 				GridPane.setConstraints(load,1,10);
 				GridPane.setConstraints(submit,3,10);
@@ -256,9 +226,9 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				subset.getItems().clear();
 				
 				for(int i=0; i<m.locations.size();i++){
-					subset.getItems().add(m.locations.get(i).name);
+					subset.getItems().add(m.locations.get(i).name+" ~ "+m.locations.get(i).country+" ~ "+m.locations.get(i).municipality+" ~ "+m.locations.get(i).id);
 				}
-				searchLabel.setText("displaying "+m.locations.size()+"/200 results");
+				
 			}
 				else{
 					subset.getItems().clear();
@@ -294,17 +264,12 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 				
 				if(chosenSubset.getItems().isEmpty()){
 					AlertBox.Error("Error- You must pick a subset of locations before running");
-					//subset.getSelectionModel().clearSelection();	
+					
 				}
 				else{
 				//save selected locations
 				if(!chosenSubset.getItems().isEmpty()){
-				ObservableList<String> locations;
-				locations = chosenSubset.getItems();
-				selectedLocations = new String[locations.size()];
-				for(int i=0; i<locations.size();i++){
-					selectedLocations[i] = locations.get(i);
-				}
+				parseID();
 				}
 				if(chosenSubset.getItems().isEmpty()){
 					selectedLocations = new String[1];
@@ -376,7 +341,6 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 					outputFile+="t18";
 					//this should handle cases where user does go back and we need to reset outPutFileName
 					outputFileName = outputFile;
-					db.close();
 					window.close();
 					}
 				}	
@@ -394,45 +358,20 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 					// TODO Auto-generated method stub
 					
 				}
-	public void dbSearch(ChoiceBox type, ChoiceBox continent, String region,String municipality,String airport,String country) throws SQLException{
+	public void dbSearch(String airport) throws SQLException{
 	db = new DBquery();
 	db.addColumn("airports.name");
+	db.addColumn("airports.id");
+	db.addColumn("municipality");
+	db.addColumn("countries.name");
 	String tables = "airports";
-	
-	if(type.getValue()!=null){
-		db.addColumn("type");
-		db.setWhere("type='"+type.getValue()+"'");
-	}
-	if(continent.getValue()!=null){
-		tables+=" continents";
-		db.addColumn("airports.continent");
-		db.addColumn("continents.name");
-		db.setWhere("continents.name= '"+continent.getValue()+"'");
-	}
-	if(!region.equals("")){
-		tables+=" regions";
-		db.addColumn("airports.iso_region");
-		db.addColumn("regions.name");
-		db.setWhere("regions.name LIKE '%"+region+"%'");
-		
-	}
-	if(!municipality.equals("")){
-		db.addColumn("municipality");
-		db.setWhere("municipality LIKE '%"+municipality+"%'");
-		
-	}
-	if(!country.equals("")){
-		tables+=" countries";
-		db.addColumn("airports.iso_country");
-		db.addColumn("countries.name");
-		db.setWhere("countries.name LIKE '%"+country+"%'");
-	}
-	
-	if(!airport.equals("")){	
-		db.setWhere("airports.name LIKE '%"+airport+"%'");
-	}
+	tables += " countries";
 	
 	db.setFrom(tables);
+	db.setWhere("airports.name LIKE '%" + airport + "%'");
+	db.setWhere("airports.id LIKE '%" + airport + "%'");
+	db.setWhere("municipality LIKE '%" + airport + "%'");
+	db.setWhere("countries.name LIKE '%" + airport + "%'");
 	ResultSet rs = db.submit();
 	int count = 0;
 	subset.getItems().clear();
@@ -440,10 +379,9 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 		if(count==200){
 		break;
 		}
-		subset.getItems().add(rs.getString("airports.name"));
+		subset.getItems().add(rs.getString("airports.name")+" ~ "+rs.getString("countries.name")+" ~ "+rs.getString("municipality")+" ~ "+rs.getString("airports.id"));
 		count++;
 	}
-	searchLabel.setText("displaying "+count+"/200 results");
 	db.clear();
 	db.close();
 	}
@@ -456,6 +394,22 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 		System.out.println("opt 2: "+opt_2);
 		System.out.println("opt 3: "+opt_3);
 		}
+	
+	public void parseID(){
+		selectedLocations = new String[chosenSubset.getItems().size()];
+		
+		
+		String[] split;
+		for(int i=0;i<chosenSubset.getItems().size();i++){
+			split =  chosenSubset.getItems().get(i).toString().split("~");
+			selectedLocations[i] =split[split.length-1].trim();
+		}
+		
+		
+	
+	}
+	
+	
 	//method to get name from user after they hit 'save'			
 	public  void getFileName(){
 		Stage window = new Stage();
@@ -475,7 +429,6 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 		xmlName = t.getText();
 		String message = "Your subselection file name is: ";
 		if(display((message+=xmlName+".xml"))==true){
-		//directoryXMLs.add(xmlName+".xml");
 		choiceBox.getItems().add(xmlName+".xml");
 		e.consume();
 		saveFile();
@@ -495,15 +448,16 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 		
 		if((chosenSubset.getItems().size())!=0){
 	String[] saveMe = new String[chosenSubset.getItems().size()];
+	String[] split; 
 	for(int i=0; i<chosenSubset.getItems().size();i++){
-		saveMe[i]=(String)chosenSubset.getItems().get(i);
+		split =  chosenSubset.getItems().get(i).toString().split("~");
+		saveMe[i]=split[split.length-1].trim();
 	}
-	Model m = new Model(saveMe,'m');
 	View v = new View();
 	v.initializeSelection(xmlName);
-	for(int i=0;i<m.locations.size();i++){
+	for(int i=0;i<saveMe.length;i++){
 		
-		v.addSelectionID(m.locations.get(i).id);
+		v.addSelectionID(saveMe[i]);
 	}
 	v.finalizeSelection();
 
@@ -563,14 +517,4 @@ public class AlertBox extends Application implements EventHandler<ActionEvent>{
 		window.setScene(scene);
 		window.showAndWait();
 	}
-	/*
-	public static void main(String [ ] args) throws FileNotFoundException{
-		AlertBox.locations = new String[]{"Colorado","New Mexico","Arizona","Aurora"}; 
-		
-		
-		AlertBox.launch();
-		AlertBox.printOpt();
-	}
-	*/
-	
 }

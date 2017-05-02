@@ -62,7 +62,7 @@ public class Model{
 			System.err.println("Error: units must be either 'm' or 'k'");
 			System.exit(-1);
 		}
-		fillLocations(subset, true);
+		fillLocations(subset, false);
 		used = new boolean[locations.size()];
 		legs = new ArrayList<Leg>(locations.size());
 		for(int i = 0; i < used.length; i++){
@@ -320,7 +320,7 @@ public class Model{
 			used[i] = false;
 		}
 		int indexOfClosest, index=start,count=0;
-		
+		//System.out.println(index);
 		used[index] = true;
 		indexOfClosest = findClosest(index);
 		
