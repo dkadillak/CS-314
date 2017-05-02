@@ -10,10 +10,12 @@ public class Presenter{
 	
 	public Presenter() {
 		this.model = new Model('k');
+
 	}
 	
 	public Presenter(Presenter p, View view){
 		this.model = p.model;
+		
 		this.view = view;
 	}
 	public Presenter(View view, Model model) {
@@ -25,6 +27,7 @@ public class Presenter{
 	public void runGui(){
 
 		AlertBox.launch();
+		//
 		char units = 'z';
 		if(AlertBox.opt_m){
 			units = 'm';
@@ -36,10 +39,14 @@ public class Presenter{
 		}
 		if(!(AlertBox.selectedLocations[0].equals("no subselection"))){
 			Model subSelectModel = new Model(AlertBox.selectedLocations,units);
+			//System.out.println(AlertBox.selectedLocations.length+" should equal "+model.used.length);
 			model = subSelectModel;
 			model.computeDistances();
 		}else{
-			model.setUnits(units);
+			//model.setUnits(units);
+			//this.model.used =new boolean[AlertBox.selectedLocations.length];
+			Model subModel = new Model(AlertBox.selectedLocations,units);
+			
 			model.computeDistances();
 		}
 		

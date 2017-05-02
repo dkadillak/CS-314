@@ -80,7 +80,7 @@ public class DBquery {
 		if(where == ""){
 			where = " WHERE " + string;
 		}else{
-			where += " and " + string;
+			where += " OR " + string;
 		}
 	}
 	

@@ -1,8 +1,8 @@
-DTR-18 Sprint3 Release Notes	4/10/2017
+DTR-18 Sprint4 Release Notes	5/2/2017
 
 
 Overview
-TripCo gets data from the database, then produces a detailed XML itinerary and SVG map. All files have the same base name with different extensions and our team number (18) with the selected options as well.
+TripCo gets data from the database, then produces a KML itinerary and SVG map. All files have the same base name with different extensions and our team number (18) with the selected options as well.
 Optional command line arguments:
 	 
 		/*command line example:
@@ -26,11 +26,13 @@ Optional command line arguments:
 
 
 Purpose
--Now TripCo reads data from the database and not a .csv file.
--The GUI now has more features including being able to save/load a selection file and the ability to search through the database with 6 fields and add locations to the selection xml file.
--Itinerary display and the produced itinerary xml is now more detailed.
--The background map is now of the whole world and not just Colorado and accounts for wrapping.
-
+-TripCo produces a KML file instead of an XML file now.
+-The GUI now has more features including automatically searching the src directory for XML files and letting you load those into the GUI and the ability to remove individual locations from your selection on the GUI.
+-Now you can save a subselection file in the GUI and load it in the same session.
+-The user no longer has to provide an XML file in the command line when using the -g option, now you can run the GUI just using -g and a background map SVG.
+-2 opt and 3 opt and nearestNeighbor are much faster now.
+-Panning and zooming is not supported.
+-We did not end up using Grommet, we opted to improve our existing GUI.
 
 
 Issue Summary
@@ -44,6 +46,6 @@ Notes
 -SVG generation based on example from: https://xmlgraphics.apache.org/batik/using/swing.html
 -XML creation based on example from: http://alvinalexander.com/java/jframe-example
 -File line removal from stack overflow
--Dependencies for batik-1.8 and javafx, had trouble getting javafx to work on the lab machines. We added a batik zip file and a javafx jar called jfxrt.jar to our github repo in case you need to configure those to the build path when you test our code.
+-Dependencies for batik-1.8 and javafx, had trouble getting javafx to work on the lab machines.
 
-EclEmma coverage: 56.4%
+EclEmma coverage: 58.1%
