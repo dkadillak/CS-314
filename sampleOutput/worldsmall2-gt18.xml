@@ -1,0 +1,1917 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trip>
+<leg>
+	<sequence>1</sequence>
+	<start>
+		<id>TKPK</id>
+		<name>Robert L. Bradshaw International Airport</name>
+		<latitude>17.311199188232422</latitude>
+		<longitude>-62.71870040893555</longitude>
+		<elevation>170</elevation>
+		<municipality>Basseterre</municipality>
+		<region>(unassigned)</region>
+		<country>Saint Kitts and Nevis</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Robert_L._Bradshaw_International_Airport</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Saint_Kitts_and_Nevis</countryURL>
+	</start>
+	<finish>
+		<id>TAPT</id>
+		<name>Coco Point Lodge Airstrip</name>
+		<latitude>17.555599</latitude>
+		<longitude>-61.765301</longitude>
+		<elevation>15</elevation>
+		<municipality>Coco Point</municipality>
+		<region>Barbuda</region>
+		<country>Antigua and Barbuda</country>
+		<continent>North America</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Barbuda</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Antigua_and_Barbuda</countryURL>
+	</finish>
+	<distance>105</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>2</sequence>
+	<start>
+		<id>TAPT</id>
+		<name>Coco Point Lodge Airstrip</name>
+		<latitude>17.555599</latitude>
+		<longitude>-61.765301</longitude>
+		<elevation>15</elevation>
+		<municipality>Coco Point</municipality>
+		<region>Barbuda</region>
+		<country>Antigua and Barbuda</country>
+		<continent>North America</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Barbuda</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Antigua_and_Barbuda</countryURL>
+	</start>
+	<finish>
+		<id>TDPD</id>
+		<name>Melville Hall Airport</name>
+		<latitude>15.54699993133545</latitude>
+		<longitude>-61.29999923706055</longitude>
+		<elevation>73</elevation>
+		<municipality>Marigot</municipality>
+		<region>Saint Andrew Parish</region>
+		<country>Dominica</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Melville_Hall_Airport</airportURL>
+		<regionURL>https://en.wikipedia.org/wiki/Saint_Andrew_Parish,_Dominica</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Dominica</countryURL>
+	</finish>
+	<distance>229</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>3</sequence>
+	<start>
+		<id>TDPD</id>
+		<name>Melville Hall Airport</name>
+		<latitude>15.54699993133545</latitude>
+		<longitude>-61.29999923706055</longitude>
+		<elevation>73</elevation>
+		<municipality>Marigot</municipality>
+		<region>Saint Andrew Parish</region>
+		<country>Dominica</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Melville_Hall_Airport</airportURL>
+		<regionURL>https://en.wikipedia.org/wiki/Saint_Andrew_Parish,_Dominica</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Dominica</countryURL>
+	</start>
+	<finish>
+		<id>TBPB</id>
+		<name>Sir Grantley Adams International Airport</name>
+		<latitude>13.0746002197</latitude>
+		<longitude>-59.4925003052</longitude>
+		<elevation>169</elevation>
+		<municipality>Bridgetown</municipality>
+		<region>Christ Church</region>
+		<country>Barbados</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Grantley_Adams_International_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Christ_Church</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Barbados</countryURL>
+	</finish>
+	<distance>337</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>4</sequence>
+	<start>
+		<id>TBPB</id>
+		<name>Sir Grantley Adams International Airport</name>
+		<latitude>13.0746002197</latitude>
+		<longitude>-59.4925003052</longitude>
+		<elevation>169</elevation>
+		<municipality>Bridgetown</municipality>
+		<region>Christ Church</region>
+		<country>Barbados</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Grantley_Adams_International_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Christ_Church</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Barbados</countryURL>
+	</start>
+	<finish>
+		<id>TGPZ</id>
+		<name>Lauriston Airport</name>
+		<latitude>12.476099967956543</latitude>
+		<longitude>-61.472801208496094</longitude>
+		<elevation>5</elevation>
+		<municipality>Carriacou Island</municipality>
+		<region>Saint Patrick</region>
+		<country>Grenada</country>
+		<continent>North America</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Saint_Patrick</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Grenada</countryURL>
+	</finish>
+	<distance>225</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>5</sequence>
+	<start>
+		<id>TGPZ</id>
+		<name>Lauriston Airport</name>
+		<latitude>12.476099967956543</latitude>
+		<longitude>-61.472801208496094</longitude>
+		<elevation>5</elevation>
+		<municipality>Carriacou Island</municipality>
+		<region>Saint Patrick</region>
+		<country>Grenada</country>
+		<continent>North America</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Saint_Patrick</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Grenada</countryURL>
+	</start>
+	<finish>
+		<id>SPQU</id>
+		<name>RodrÃ­guez BallÃ³n International Airport</name>
+		<latitude>-16.3411006927</latitude>
+		<longitude>-71.5830993652</longitude>
+		<elevation>8405</elevation>
+		<municipality>Arequipa</municipality>
+		<region>Arequipa Region</region>
+		<country>PerÃº</country>
+		<continent>South America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Rodriguez_Ballon_International_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Arequipa_Region</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/PerÃº</countryURL>
+	</finish>
+	<distance>3392</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>6</sequence>
+	<start>
+		<id>SPQU</id>
+		<name>RodrÃ­guez BallÃ³n International Airport</name>
+		<latitude>-16.3411006927</latitude>
+		<longitude>-71.5830993652</longitude>
+		<elevation>8405</elevation>
+		<municipality>Arequipa</municipality>
+		<region>Arequipa Region</region>
+		<country>PerÃº</country>
+		<continent>South America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Rodriguez_Ballon_International_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Arequipa_Region</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/PerÃº</countryURL>
+	</start>
+	<finish>
+		<id>SCPC</id>
+		<name>PucÃ³n Airport</name>
+		<latitude>-39.29280090332031</latitude>
+		<longitude>-71.91590118408203</longitude>
+		<elevation>853</elevation>
+		<municipality>Pucon</municipality>
+		<region>AraucanÃ­a Region</region>
+		<country>Chile</country>
+		<continent>South America</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/AraucanÃ­a_Region</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Chile</countryURL>
+	</finish>
+	<distance>2552</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>7</sequence>
+	<start>
+		<id>SCPC</id>
+		<name>PucÃ³n Airport</name>
+		<latitude>-39.29280090332031</latitude>
+		<longitude>-71.91590118408203</longitude>
+		<elevation>853</elevation>
+		<municipality>Pucon</municipality>
+		<region>AraucanÃ­a Region</region>
+		<country>Chile</country>
+		<continent>South America</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/AraucanÃ­a_Region</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Chile</countryURL>
+	</start>
+	<finish>
+		<id>NZPG</id>
+		<name>McMurdo Station Pegasus Field</name>
+		<latitude>-77.9634017944336</latitude>
+		<longitude>166.52499389648438</longitude>
+		<elevation>18</elevation>
+		<municipality>McMurdo Station</municipality>
+		<region>(unassigned)</region>
+		<country>Antarctica</country>
+		<continent>Antarctica</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Pegasus_blue_ice_runway</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Antarctica</countryURL>
+	</finish>
+	<distance>6412</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>8</sequence>
+	<start>
+		<id>NZPG</id>
+		<name>McMurdo Station Pegasus Field</name>
+		<latitude>-77.9634017944336</latitude>
+		<longitude>166.52499389648438</longitude>
+		<elevation>18</elevation>
+		<municipality>McMurdo Station</municipality>
+		<region>(unassigned)</region>
+		<country>Antarctica</country>
+		<continent>Antarctica</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Pegasus_blue_ice_runway</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Antarctica</countryURL>
+	</start>
+	<finish>
+		<id>MH-JEJ</id>
+		<name>Jeh Airport</name>
+		<latitude>7.565350055690001</latitude>
+		<longitude>168.962005615</longitude>
+		<elevation>10</elevation>
+		<municipality>Ailinglapalap Atoll</municipality>
+		<region>Ailinglapalap</region>
+		<country>Marshall Islands</country>
+		<continent>Oceania</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Jeh_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Ailinglapalap</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Marshall_Islands</countryURL>
+	</finish>
+	<distance>9512</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>9</sequence>
+	<start>
+		<id>MH-JEJ</id>
+		<name>Jeh Airport</name>
+		<latitude>7.565350055690001</latitude>
+		<longitude>168.962005615</longitude>
+		<elevation>10</elevation>
+		<municipality>Ailinglapalap Atoll</municipality>
+		<region>Ailinglapalap</region>
+		<country>Marshall Islands</country>
+		<continent>Oceania</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Jeh_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Ailinglapalap</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Marshall_Islands</countryURL>
+	</start>
+	<finish>
+		<id>PG-0031</id>
+		<name>Kabori Airstrip</name>
+		<latitude>-3.32161111111</latitude>
+		<longitude>141.858416667</longitude>
+		<elevation>2090</elevation>
+		<municipality>Kabori</municipality>
+		<region>Sandaun (West Sepik)</region>
+		<country>Papua New Guinea</country>
+		<continent>Oceania</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Santaun</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Papua_New_Guinea</countryURL>
+	</finish>
+	<distance>3242</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>10</sequence>
+	<start>
+		<id>PG-0031</id>
+		<name>Kabori Airstrip</name>
+		<latitude>-3.32161111111</latitude>
+		<longitude>141.858416667</longitude>
+		<elevation>2090</elevation>
+		<municipality>Kabori</municipality>
+		<region>Sandaun (West Sepik)</region>
+		<country>Papua New Guinea</country>
+		<continent>Oceania</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Santaun</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Papua_New_Guinea</countryURL>
+	</start>
+	<finish>
+		<id>C23</id>
+		<name>Peleliu Airport</name>
+		<latitude>7.0</latitude>
+		<longitude>134.23300170898438</longitude>
+		<elevation>9</elevation>
+		<municipality>Babelthuap Island</municipality>
+		<region>Peleliu</region>
+		<country>Palau</country>
+		<continent>Oceania</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Peleliu</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Palau</countryURL>
+	</finish>
+	<distance>1426</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>11</sequence>
+	<start>
+		<id>C23</id>
+		<name>Peleliu Airport</name>
+		<latitude>7.0</latitude>
+		<longitude>134.23300170898438</longitude>
+		<elevation>9</elevation>
+		<municipality>Babelthuap Island</municipality>
+		<region>Peleliu</region>
+		<country>Palau</country>
+		<continent>Oceania</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Peleliu</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Palau</countryURL>
+	</start>
+	<finish>
+		<id>WPAT</id>
+		<name>Atauro Airport</name>
+		<latitude>-8.210519790649414</latitude>
+		<longitude>125.61599731445312</longitude>
+		<elevation>29</elevation>
+		<municipality>Atauro</municipality>
+		<region>Dili</region>
+		<country>Timor-Leste</country>
+		<continent>Asia</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Dili</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Timor-Leste</countryURL>
+	</finish>
+	<distance>1942</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>12</sequence>
+	<start>
+		<id>WPAT</id>
+		<name>Atauro Airport</name>
+		<latitude>-8.210519790649414</latitude>
+		<longitude>125.61599731445312</longitude>
+		<elevation>29</elevation>
+		<municipality>Atauro</municipality>
+		<region>Dili</region>
+		<country>Timor-Leste</country>
+		<continent>Asia</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Dili</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Timor-Leste</countryURL>
+	</start>
+	<finish>
+		<id>WBSB</id>
+		<name>Brunei International Airport</name>
+		<latitude>4.944200038909912</latitude>
+		<longitude>114.9280014038086</longitude>
+		<elevation>73</elevation>
+		<municipality>Bandar Seri Begawan</municipality>
+		<region>Brunei-Muara District</region>
+		<country>Brunei</country>
+		<continent>Asia</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Brunei_International_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Brunei-Muara_District</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Brunei</countryURL>
+	</finish>
+	<distance>1883</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>13</sequence>
+	<start>
+		<id>WBSB</id>
+		<name>Brunei International Airport</name>
+		<latitude>4.944200038909912</latitude>
+		<longitude>114.9280014038086</longitude>
+		<elevation>73</elevation>
+		<municipality>Bandar Seri Begawan</municipality>
+		<region>Brunei-Muara District</region>
+		<country>Brunei</country>
+		<continent>Asia</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Brunei_International_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Brunei-Muara_District</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Brunei</countryURL>
+	</start>
+	<finish>
+		<id>VMMC</id>
+		<name>Macau International Airport</name>
+		<latitude>22.149599075317383</latitude>
+		<longitude>113.59200286865234</longitude>
+		<elevation>20</elevation>
+		<municipality>Taipa</municipality>
+		<region>(unassigned)</region>
+		<country>Macau</country>
+		<continent>Asia</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Macau_International_Airport</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Macau</countryURL>
+	</finish>
+	<distance>1919</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>14</sequence>
+	<start>
+		<id>VMMC</id>
+		<name>Macau International Airport</name>
+		<latitude>22.149599075317383</latitude>
+		<longitude>113.59200286865234</longitude>
+		<elevation>20</elevation>
+		<municipality>Taipa</municipality>
+		<region>(unassigned)</region>
+		<country>Macau</country>
+		<continent>Asia</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Macau_International_Airport</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Macau</countryURL>
+	</start>
+	<finish>
+		<id>UJN</id>
+		<name>Uljin Airport</name>
+		<latitude>36.7766666667</latitude>
+		<longitude>129.461944444</longitude>
+		<elevation>191</elevation>
+		<municipality>Uljin</municipality>
+		<region>Gyeongsangbugdo</region>
+		<country>South Korea</country>
+		<continent>Asia</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Uljin_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Gyeongsangbugdo</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/South_Korea</countryURL>
+	</finish>
+	<distance>2231</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>15</sequence>
+	<start>
+		<id>UJN</id>
+		<name>Uljin Airport</name>
+		<latitude>36.7766666667</latitude>
+		<longitude>129.461944444</longitude>
+		<elevation>191</elevation>
+		<municipality>Uljin</municipality>
+		<region>Gyeongsangbugdo</region>
+		<country>South Korea</country>
+		<continent>Asia</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Uljin_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Gyeongsangbugdo</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/South_Korea</countryURL>
+	</start>
+	<finish>
+		<id>ZBCF</id>
+		<name>Chifeng Airport</name>
+		<latitude>42.23500061035156</latitude>
+		<longitude>118.90799713134766</longitude>
+		<elevation>0</elevation>
+		<municipality>Chifeng</municipality>
+		<region>Inner Mongolia Autonomous Region</region>
+		<country>China</country>
+		<continent>Asia</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Chifeng_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Inner_Mongolia</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/China</countryURL>
+	</finish>
+	<distance>1089</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>16</sequence>
+	<start>
+		<id>ZBCF</id>
+		<name>Chifeng Airport</name>
+		<latitude>42.23500061035156</latitude>
+		<longitude>118.90799713134766</longitude>
+		<elevation>0</elevation>
+		<municipality>Chifeng</municipality>
+		<region>Inner Mongolia Autonomous Region</region>
+		<country>China</country>
+		<continent>Asia</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Chifeng_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Inner_Mongolia</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/China</countryURL>
+	</start>
+	<finish>
+		<id>VQPR</id>
+		<name>Paro Airport</name>
+		<latitude>27.403200149499998</latitude>
+		<longitude>89.42459869380001</longitude>
+		<elevation>7332</elevation>
+		<municipality>Paro</municipality>
+		<region>Paro</region>
+		<country>Bhutan</country>
+		<continent>Asia</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Paro_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Paro</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Bhutan</countryURL>
+	</finish>
+	<distance>3132</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>17</sequence>
+	<start>
+		<id>VQPR</id>
+		<name>Paro Airport</name>
+		<latitude>27.403200149499998</latitude>
+		<longitude>89.42459869380001</longitude>
+		<elevation>7332</elevation>
+		<municipality>Paro</municipality>
+		<region>Paro</region>
+		<country>Bhutan</country>
+		<continent>Asia</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Paro_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Paro</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Bhutan</countryURL>
+	</start>
+	<finish>
+		<id>TJ-UT44</id>
+		<name>Murghab Airport</name>
+		<latitude>38.190399169921875</latitude>
+		<longitude>74.02469635009766</longitude>
+		<elevation>11962</elevation>
+		<municipality>Murghab</municipality>
+		<region>Gorno-Badakhshan Autonomous Region</region>
+		<country>Tajikistan</country>
+		<continent>Asia</continent>
+		<airportURL></airportURL>
+		<regionURL>https://en.wikipedia.org/wiki/Gorno-Badakhshan_Autonomous_Region</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Tajikistan</countryURL>
+	</finish>
+	<distance>1869</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>18</sequence>
+	<start>
+		<id>TJ-UT44</id>
+		<name>Murghab Airport</name>
+		<latitude>38.190399169921875</latitude>
+		<longitude>74.02469635009766</longitude>
+		<elevation>11962</elevation>
+		<municipality>Murghab</municipality>
+		<region>Gorno-Badakhshan Autonomous Region</region>
+		<country>Tajikistan</country>
+		<continent>Asia</continent>
+		<airportURL></airportURL>
+		<regionURL>https://en.wikipedia.org/wiki/Gorno-Badakhshan_Autonomous_Region</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Tajikistan</countryURL>
+	</start>
+	<finish>
+		<id>UGEJ</id>
+		<name>Dzhermuk Airport</name>
+		<latitude>39.8240013123</latitude>
+		<longitude>45.673999786399996</longitude>
+		<elevation>0</elevation>
+		<municipality>Dzhermuk</municipality>
+		<region>Vayots Dzor Province</region>
+		<country>Armenia</country>
+		<continent>Asia</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Vayots_Dzor_Province</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Armenia</countryURL>
+	</finish>
+	<distance>2446</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>19</sequence>
+	<start>
+		<id>UGEJ</id>
+		<name>Dzhermuk Airport</name>
+		<latitude>39.8240013123</latitude>
+		<longitude>45.673999786399996</longitude>
+		<elevation>0</elevation>
+		<municipality>Dzhermuk</municipality>
+		<region>Vayots Dzor Province</region>
+		<country>Armenia</country>
+		<continent>Asia</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Vayots_Dzor_Province</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Armenia</countryURL>
+	</start>
+	<finish>
+		<id>OS66</id>
+		<name>Rasin El Aboud Airport</name>
+		<latitude>36.18709945678711</latitude>
+		<longitude>37.58319854736328</longitude>
+		<elevation>1207</elevation>
+		<municipality></municipality>
+		<region>Aleppo Governorate</region>
+		<country>Syria</country>
+		<continent>Asia</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Aleppo_Governorate</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Syria</countryURL>
+	</finish>
+	<distance>816</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>20</sequence>
+	<start>
+		<id>OS66</id>
+		<name>Rasin El Aboud Airport</name>
+		<latitude>36.18709945678711</latitude>
+		<longitude>37.58319854736328</longitude>
+		<elevation>1207</elevation>
+		<municipality></municipality>
+		<region>Aleppo Governorate</region>
+		<country>Syria</country>
+		<continent>Asia</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Aleppo_Governorate</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Syria</countryURL>
+	</start>
+	<finish>
+		<id>OIAI</id>
+		<name>Shahid Asyaee Airport</name>
+		<latitude>32.00239944458008</latitude>
+		<longitude>49.27040100097656</longitude>
+		<elevation>1206</elevation>
+		<municipality></municipality>
+		<region>Khuzestan Province</region>
+		<country>Iran</country>
+		<continent>Asia</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Khuzestan_Province</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Iran</countryURL>
+	</finish>
+	<distance>1171</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>21</sequence>
+	<start>
+		<id>OIAI</id>
+		<name>Shahid Asyaee Airport</name>
+		<latitude>32.00239944458008</latitude>
+		<longitude>49.27040100097656</longitude>
+		<elevation>1206</elevation>
+		<municipality></municipality>
+		<region>Khuzestan Province</region>
+		<country>Iran</country>
+		<continent>Asia</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Khuzestan_Province</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Iran</countryURL>
+	</start>
+	<finish>
+		<id>OBKH</id>
+		<name>Sakhir Air Base</name>
+		<latitude>26.034533</latitude>
+		<longitude>50.524544</longitude>
+		<elevation>49</elevation>
+		<municipality>Zallaq</municipality>
+		<region>Southern Governorate</region>
+		<country>Bahrain</country>
+		<continent>Asia</continent>
+		<airportURL>https://en.wikipedia.org/wiki/Sakhir_Air_Base</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Southern_Governorate</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Bahrain</countryURL>
+	</finish>
+	<distance>675</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>22</sequence>
+	<start>
+		<id>OBKH</id>
+		<name>Sakhir Air Base</name>
+		<latitude>26.034533</latitude>
+		<longitude>50.524544</longitude>
+		<elevation>49</elevation>
+		<municipality>Zallaq</municipality>
+		<region>Southern Governorate</region>
+		<country>Bahrain</country>
+		<continent>Asia</continent>
+		<airportURL>https://en.wikipedia.org/wiki/Sakhir_Air_Base</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Southern_Governorate</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Bahrain</countryURL>
+	</start>
+	<finish>
+		<id>QA-0001</id>
+		<name>Hamad International Airport</name>
+		<latitude>25.273056</latitude>
+		<longitude>51.608056</longitude>
+		<elevation>13</elevation>
+		<municipality>Doha</municipality>
+		<region>Ad Dawhah Municipality</region>
+		<country>Qatar</country>
+		<continent>Asia</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Hamad_International_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Ad_Dawhah</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Qatar</countryURL>
+	</finish>
+	<distance>138</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>23</sequence>
+	<start>
+		<id>QA-0001</id>
+		<name>Hamad International Airport</name>
+		<latitude>25.273056</latitude>
+		<longitude>51.608056</longitude>
+		<elevation>13</elevation>
+		<municipality>Doha</municipality>
+		<region>Ad Dawhah Municipality</region>
+		<country>Qatar</country>
+		<continent>Asia</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Hamad_International_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Ad_Dawhah</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Qatar</countryURL>
+	</start>
+	<finish>
+		<id>FJDG</id>
+		<name>Diego Garcia Naval Support Facility</name>
+		<latitude>-7.31327</latitude>
+		<longitude>72.411102</longitude>
+		<elevation>9</elevation>
+		<municipality>Diego Garcia</municipality>
+		<region>(unassigned)</region>
+		<country>British Indian Ocean Territory</country>
+		<continent>Asia</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Diego_Garcia</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/British_Indian_Ocean_Territory</countryURL>
+	</finish>
+	<distance>4266</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>24</sequence>
+	<start>
+		<id>FJDG</id>
+		<name>Diego Garcia Naval Support Facility</name>
+		<latitude>-7.31327</latitude>
+		<longitude>72.411102</longitude>
+		<elevation>9</elevation>
+		<municipality>Diego Garcia</municipality>
+		<region>(unassigned)</region>
+		<country>British Indian Ocean Territory</country>
+		<continent>Asia</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Diego_Garcia</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/British_Indian_Ocean_Territory</countryURL>
+	</start>
+	<finish>
+		<id>FMMR</id>
+		<name>Morafenobe Airport</name>
+		<latitude>-17.850083459</latitude>
+		<longitude>44.920467138300005</longitude>
+		<elevation>748</elevation>
+		<municipality>Morafenobe</municipality>
+		<region>Mahajanga</region>
+		<country>Madagascar</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Mahajanga</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Madagascar</countryURL>
+	</finish>
+	<distance>3199</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>25</sequence>
+	<start>
+		<id>FMMR</id>
+		<name>Morafenobe Airport</name>
+		<latitude>-17.850083459</latitude>
+		<longitude>44.920467138300005</longitude>
+		<elevation>748</elevation>
+		<municipality>Morafenobe</municipality>
+		<region>Mahajanga</region>
+		<country>Madagascar</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Mahajanga</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Madagascar</countryURL>
+	</start>
+	<finish>
+		<id>FR-0314</id>
+		<name>Europa Island Airstrip</name>
+		<latitude>-22.3486995697</latitude>
+		<longitude>40.3515014648</longitude>
+		<elevation>0</elevation>
+		<municipality>Europa Island</municipality>
+		<region>(unassigned)</region>
+		<country>French Southern Territories</country>
+		<continent>Antarctica</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Europa_Island</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/French_Southern_Territories</countryURL>
+	</finish>
+	<distance>691</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>26</sequence>
+	<start>
+		<id>FR-0314</id>
+		<name>Europa Island Airstrip</name>
+		<latitude>-22.3486995697</latitude>
+		<longitude>40.3515014648</longitude>
+		<elevation>0</elevation>
+		<municipality>Europa Island</municipality>
+		<region>(unassigned)</region>
+		<country>French Southern Territories</country>
+		<continent>Antarctica</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Europa_Island</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/French_Southern_Territories</countryURL>
+	</start>
+	<finish>
+		<id>FWCB</id>
+		<name>Chilumba Prv Airport</name>
+		<latitude>-10.433300018310547</latitude>
+		<longitude>34.25</longitude>
+		<elevation>1611</elevation>
+		<municipality>Chilumba</municipality>
+		<region>Karonga District</region>
+		<country>Malawi</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Karonga_District</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Malawi</countryURL>
+	</finish>
+	<distance>1476</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>27</sequence>
+	<start>
+		<id>FWCB</id>
+		<name>Chilumba Prv Airport</name>
+		<latitude>-10.433300018310547</latitude>
+		<longitude>34.25</longitude>
+		<elevation>1611</elevation>
+		<municipality>Chilumba</municipality>
+		<region>Karonga District</region>
+		<country>Malawi</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Karonga_District</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Malawi</countryURL>
+	</start>
+	<finish>
+		<id>TZ-0123</id>
+		<name>Klein's Camp Airport</name>
+		<latitude>-1.775438</latitude>
+		<longitude>35.278282</longitude>
+		<elevation>6300</elevation>
+		<municipality></municipality>
+		<region>Mara Region</region>
+		<country>Tanzania</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Mara_Region</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Tanzania</countryURL>
+	</finish>
+	<distance>969</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>28</sequence>
+	<start>
+		<id>TZ-0123</id>
+		<name>Klein's Camp Airport</name>
+		<latitude>-1.775438</latitude>
+		<longitude>35.278282</longitude>
+		<elevation>6300</elevation>
+		<municipality></municipality>
+		<region>Mara Region</region>
+		<country>Tanzania</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Mara_Region</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Tanzania</countryURL>
+	</start>
+	<finish>
+		<id>KE-6874</id>
+		<name>Impala Farm Airport</name>
+		<latitude>0.3666670024394989</latitude>
+		<longitude>36.91666793823242</longitude>
+		<elevation>5500</elevation>
+		<municipality>Impala Farm</municipality>
+		<region>Rift Valley Province</region>
+		<country>Kenya</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Rift_Valley_Province</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Kenya</countryURL>
+	</finish>
+	<distance>300</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>29</sequence>
+	<start>
+		<id>KE-6874</id>
+		<name>Impala Farm Airport</name>
+		<latitude>0.3666670024394989</latitude>
+		<longitude>36.91666793823242</longitude>
+		<elevation>5500</elevation>
+		<municipality>Impala Farm</municipality>
+		<region>Rift Valley Province</region>
+		<country>Kenya</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Rift_Valley_Province</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Kenya</countryURL>
+	</start>
+	<finish>
+		<id>SS-0013</id>
+		<name>Pathai Airstrip</name>
+		<latitude>8.06976738146</latitude>
+		<longitude>31.8386363983</longitude>
+		<elevation>0</elevation>
+		<municipality></municipality>
+		<region>Jonglei State</region>
+		<country>South Sudan</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Jonglei</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/South_Sudan</countryURL>
+	</finish>
+	<distance>1025</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>30</sequence>
+	<start>
+		<id>SS-0013</id>
+		<name>Pathai Airstrip</name>
+		<latitude>8.06976738146</latitude>
+		<longitude>31.8386363983</longitude>
+		<elevation>0</elevation>
+		<municipality></municipality>
+		<region>Jonglei State</region>
+		<country>South Sudan</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Jonglei</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/South_Sudan</countryURL>
+	</start>
+	<finish>
+		<id>HRYU</id>
+		<name>Ruhengeri Airport</name>
+		<latitude>-1.5</latitude>
+		<longitude>29.632999420166016</longitude>
+		<elevation>6102</elevation>
+		<municipality>Ruhengeri</municipality>
+		<region>North</region>
+		<country>Rwanda</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/North</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Rwanda</countryURL>
+	</finish>
+	<distance>1092</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>31</sequence>
+	<start>
+		<id>HRYU</id>
+		<name>Ruhengeri Airport</name>
+		<latitude>-1.5</latitude>
+		<longitude>29.632999420166016</longitude>
+		<elevation>6102</elevation>
+		<municipality>Ruhengeri</municipality>
+		<region>North</region>
+		<country>Rwanda</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/North</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Rwanda</countryURL>
+	</start>
+	<finish>
+		<id>FZAP</id>
+		<name>Lukala Airport</name>
+		<latitude>-5.517000198364258</latitude>
+		<longitude>14.5</longitude>
+		<elevation>1312</elevation>
+		<municipality>Lukala</municipality>
+		<region>Bas-Congo Province</region>
+		<country>Congo (Kinshasa)</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Bas-Congo_Province</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Congo_(Kinshasa)</countryURL>
+	</finish>
+	<distance>1738</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>32</sequence>
+	<start>
+		<id>FZAP</id>
+		<name>Lukala Airport</name>
+		<latitude>-5.517000198364258</latitude>
+		<longitude>14.5</longitude>
+		<elevation>1312</elevation>
+		<municipality>Lukala</municipality>
+		<region>Bas-Congo Province</region>
+		<country>Congo (Kinshasa)</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Bas-Congo_Province</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Congo_(Kinshasa)</countryURL>
+	</start>
+	<finish>
+		<id>FCMZ</id>
+		<name>N'Zabi Airport</name>
+		<latitude>-3.1670000553131104</latitude>
+		<longitude>12.866999626159668</longitude>
+		<elevation>1640</elevation>
+		<municipality>N'Zabi</municipality>
+		<region>Niari Department</region>
+		<country>Congo (Brazzaville)</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Niari_Department</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Congo_(Brazzaville)</countryURL>
+	</finish>
+	<distance>318</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>33</sequence>
+	<start>
+		<id>FCMZ</id>
+		<name>N'Zabi Airport</name>
+		<latitude>-3.1670000553131104</latitude>
+		<longitude>12.866999626159668</longitude>
+		<elevation>1640</elevation>
+		<municipality>N'Zabi</municipality>
+		<region>Niari Department</region>
+		<country>Congo (Brazzaville)</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Niari_Department</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Congo_(Brazzaville)</countryURL>
+	</start>
+	<finish>
+		<id>OCS</id>
+		<name>Corisco International Airport</name>
+		<latitude>0.9125</latitude>
+		<longitude>9.3304</longitude>
+		<elevation>55</elevation>
+		<municipality>Corisco Island</municipality>
+		<region>Litoral</region>
+		<country>Equatorial Guinea</country>
+		<continent>Africa</continent>
+		<airportURL>https://en.wikipedia.org/wiki/Corisco_International_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Litoral</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Equatorial_Guinea</countryURL>
+	</finish>
+	<distance>600</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>34</sequence>
+	<start>
+		<id>OCS</id>
+		<name>Corisco International Airport</name>
+		<latitude>0.9125</latitude>
+		<longitude>9.3304</longitude>
+		<elevation>55</elevation>
+		<municipality>Corisco Island</municipality>
+		<region>Litoral</region>
+		<country>Equatorial Guinea</country>
+		<continent>Africa</continent>
+		<airportURL>https://en.wikipedia.org/wiki/Corisco_International_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Litoral</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Equatorial_Guinea</countryURL>
+	</start>
+	<finish>
+		<id>NG-0005</id>
+		<name>Kebbi International Airport</name>
+		<latitude>12.480556</latitude>
+		<longitude>4.369444</longitude>
+		<elevation>775</elevation>
+		<municipality>Birinin Kebbi</municipality>
+		<region>Kebbi</region>
+		<country>Nigeria</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Kebbi</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Nigeria</countryURL>
+	</finish>
+	<distance>1398</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>35</sequence>
+	<start>
+		<id>NG-0005</id>
+		<name>Kebbi International Airport</name>
+		<latitude>12.480556</latitude>
+		<longitude>4.369444</longitude>
+		<elevation>775</elevation>
+		<municipality>Birinin Kebbi</municipality>
+		<region>Kebbi</region>
+		<country>Nigeria</country>
+		<continent>Africa</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Kebbi</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Nigeria</countryURL>
+	</start>
+	<finish>
+		<id>GFYE</id>
+		<name>Yengema Airport</name>
+		<latitude>8.610469818115234</latitude>
+		<longitude>-11.04539966583252</longitude>
+		<elevation>1300</elevation>
+		<municipality>Yengema</municipality>
+		<region>Eastern Province</region>
+		<country>Sierra Leone</country>
+		<continent>Africa</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Yengema_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Eastern_Province,_Sierra_Leone</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Sierra_Leone</countryURL>
+	</finish>
+	<distance>1739</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>36</sequence>
+	<start>
+		<id>GFYE</id>
+		<name>Yengema Airport</name>
+		<latitude>8.610469818115234</latitude>
+		<longitude>-11.04539966583252</longitude>
+		<elevation>1300</elevation>
+		<municipality>Yengema</municipality>
+		<region>Eastern Province</region>
+		<country>Sierra Leone</country>
+		<continent>Africa</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Yengema_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Eastern_Province,_Sierra_Leone</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Sierra_Leone</countryURL>
+	</start>
+	<finish>
+		<id>DAOS</id>
+		<name>Sidi Bel Abbes Airport</name>
+		<latitude>35.1717987061</latitude>
+		<longitude>-0.593275010586</longitude>
+		<elevation>1614</elevation>
+		<municipality>Sidi Bel AbbÃ¨s</municipality>
+		<region>Sidi Bel Abbes Province</region>
+		<country>Algeria</country>
+		<continent>Africa</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Sidi_Bel_Abb%C3%A8s_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Sidi_Bel_Abbes_Province</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Algeria</countryURL>
+	</finish>
+	<distance>3139</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>37</sequence>
+	<start>
+		<id>DAOS</id>
+		<name>Sidi Bel Abbes Airport</name>
+		<latitude>35.1717987061</latitude>
+		<longitude>-0.593275010586</longitude>
+		<elevation>1614</elevation>
+		<municipality>Sidi Bel AbbÃ¨s</municipality>
+		<region>Sidi Bel Abbes Province</region>
+		<country>Algeria</country>
+		<continent>Africa</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Sidi_Bel_Abb%C3%A8s_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Sidi_Bel_Abbes_Province</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Algeria</countryURL>
+	</start>
+	<finish>
+		<id>GR-0016</id>
+		<name>Dounis Airfield</name>
+		<latitude>38.02401</latitude>
+		<longitude>23.3037096</longitude>
+		<elevation>0</elevation>
+		<municipality>Megara</municipality>
+		<region>(unassigned)</region>
+		<country>Greece</country>
+		<continent>Europe</continent>
+		<airportURL></airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Greece</countryURL>
+	</finish>
+	<distance>2151</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>38</sequence>
+	<start>
+		<id>GR-0016</id>
+		<name>Dounis Airfield</name>
+		<latitude>38.02401</latitude>
+		<longitude>23.3037096</longitude>
+		<elevation>0</elevation>
+		<municipality>Megara</municipality>
+		<region>(unassigned)</region>
+		<country>Greece</country>
+		<continent>Europe</continent>
+		<airportURL></airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Greece</countryURL>
+	</start>
+	<finish>
+		<id>LAKO</id>
+		<name>KorÃ§Ã« Northwest Airport</name>
+		<latitude>40.64569854736328</latitude>
+		<longitude>20.741500854492188</longitude>
+		<elevation>665</elevation>
+		<municipality>KorÃ§Ã«</municipality>
+		<region>KorÃ§Ã« County</region>
+		<country>Albania</country>
+		<continent>Europe</continent>
+		<airportURL></airportURL>
+		<regionURL>https://en.wikipedia.org/wiki/KorÃ§Ã«_County</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Albania</countryURL>
+	</finish>
+	<distance>365</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>39</sequence>
+	<start>
+		<id>LAKO</id>
+		<name>KorÃ§Ã« Northwest Airport</name>
+		<latitude>40.64569854736328</latitude>
+		<longitude>20.741500854492188</longitude>
+		<elevation>665</elevation>
+		<municipality>KorÃ§Ã«</municipality>
+		<region>KorÃ§Ã« County</region>
+		<country>Albania</country>
+		<continent>Europe</continent>
+		<airportURL></airportURL>
+		<regionURL>https://en.wikipedia.org/wiki/KorÃ§Ã«_County</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Albania</countryURL>
+	</start>
+	<finish>
+		<id>LYBR</id>
+		<name>Berane Airport</name>
+		<latitude>42.8390007019043</latitude>
+		<longitude>19.86199951171875</longitude>
+		<elevation>2287</elevation>
+		<municipality>Berane</municipality>
+		<region>Berane Municipality</region>
+		<country>Montenegro</country>
+		<continent>Europe</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Berane_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Berane</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Montenegro</countryURL>
+	</finish>
+	<distance>255</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>40</sequence>
+	<start>
+		<id>LYBR</id>
+		<name>Berane Airport</name>
+		<latitude>42.8390007019043</latitude>
+		<longitude>19.86199951171875</longitude>
+		<elevation>2287</elevation>
+		<municipality>Berane</municipality>
+		<region>Berane Municipality</region>
+		<country>Montenegro</country>
+		<continent>Europe</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Berane_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Berane</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Montenegro</countryURL>
+	</start>
+	<finish>
+		<id>LYVR</id>
+		<name>VrÅ¡ac International Airport</name>
+		<latitude>45.1469</latitude>
+		<longitude>21.3099</longitude>
+		<elevation>276</elevation>
+		<municipality></municipality>
+		<region>South Banat</region>
+		<country>Serbia</country>
+		<continent>Europe</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Vr%C5%A1ac_International_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/South_Banat</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Serbia</countryURL>
+	</finish>
+	<distance>282</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>41</sequence>
+	<start>
+		<id>LYVR</id>
+		<name>VrÅ¡ac International Airport</name>
+		<latitude>45.1469</latitude>
+		<longitude>21.3099</longitude>
+		<elevation>276</elevation>
+		<municipality></municipality>
+		<region>South Banat</region>
+		<country>Serbia</country>
+		<continent>Europe</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Vr%C5%A1ac_International_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/South_Banat</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Serbia</countryURL>
+	</start>
+	<finish>
+		<id>EVKA</id>
+		<name>JÄ“kabpils Air Base</name>
+		<latitude>56.534698</latitude>
+		<longitude>25.8925</longitude>
+		<elevation>289</elevation>
+		<municipality>JÄ“kabpils</municipality>
+		<region>JÄ“kabpils District</region>
+		<country>Latvia</country>
+		<continent>Europe</continent>
+		<airportURL>http://en.wikipedia.org/wiki/J%C4%93kabpils_(air_base)</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/J%C4%93kabpils_District</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Latvia</countryURL>
+	</finish>
+	<distance>1306</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>42</sequence>
+	<start>
+		<id>EVKA</id>
+		<name>JÄ“kabpils Air Base</name>
+		<latitude>56.534698</latitude>
+		<longitude>25.8925</longitude>
+		<elevation>289</elevation>
+		<municipality>JÄ“kabpils</municipality>
+		<region>JÄ“kabpils District</region>
+		<country>Latvia</country>
+		<continent>Europe</continent>
+		<airportURL>http://en.wikipedia.org/wiki/J%C4%93kabpils_(air_base)</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/J%C4%93kabpils_District</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Latvia</countryURL>
+	</start>
+	<finish>
+		<id>SK-0044</id>
+		<name>TuÅ¾ina Airstrip</name>
+		<latitude>48.893912</latitude>
+		<longitude>18.6233162</longitude>
+		<elevation>0</elevation>
+		<municipality>TuÅ¾ina</municipality>
+		<region>TrenÄ�Ã­n</region>
+		<country>Slovakia</country>
+		<continent>Europe</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/TrenÄ�Ã­n</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Slovakia</countryURL>
+	</finish>
+	<distance>979</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>43</sequence>
+	<start>
+		<id>SK-0044</id>
+		<name>TuÅ¾ina Airstrip</name>
+		<latitude>48.893912</latitude>
+		<longitude>18.6233162</longitude>
+		<elevation>0</elevation>
+		<municipality>TuÅ¾ina</municipality>
+		<region>TrenÄ�Ã­n</region>
+		<country>Slovakia</country>
+		<continent>Europe</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/TrenÄ�Ã­n</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Slovakia</countryURL>
+	</start>
+	<finish>
+		<id>LKVY</id>
+		<name>Vyskov Airport</name>
+		<latitude>49.30030059814453</latitude>
+		<longitude>17.025299072265625</longitude>
+		<elevation>922</elevation>
+		<municipality>Vyskov</municipality>
+		<region>South Moravian Region</region>
+		<country>Czechia</country>
+		<continent>Europe</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/South_Moravian_Region</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Czech_Republic</countryURL>
+	</finish>
+	<distance>125</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>44</sequence>
+	<start>
+		<id>LKVY</id>
+		<name>Vyskov Airport</name>
+		<latitude>49.30030059814453</latitude>
+		<longitude>17.025299072265625</longitude>
+		<elevation>922</elevation>
+		<municipality>Vyskov</municipality>
+		<region>South Moravian Region</region>
+		<country>Czechia</country>
+		<continent>Europe</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/South_Moravian_Region</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Czech_Republic</countryURL>
+	</start>
+	<finish>
+		<id>LJBL</id>
+		<name>Lesce-Bled Airport</name>
+		<latitude>46.3572006226</latitude>
+		<longitude>14.1738996506</longitude>
+		<elevation>1654</elevation>
+		<municipality>Bled</municipality>
+		<region>Bled</region>
+		<country>Slovenia</country>
+		<continent>Europe</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Bled</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Slovenia</countryURL>
+	</finish>
+	<distance>390</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>45</sequence>
+	<start>
+		<id>LJBL</id>
+		<name>Lesce-Bled Airport</name>
+		<latitude>46.3572006226</latitude>
+		<longitude>14.1738996506</longitude>
+		<elevation>1654</elevation>
+		<municipality>Bled</municipality>
+		<region>Bled</region>
+		<country>Slovenia</country>
+		<continent>Europe</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Bled</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Slovenia</countryURL>
+	</start>
+	<finish>
+		<id>ELNT</id>
+		<name>Noertrange Airport</name>
+		<latitude>49.98109817504883</latitude>
+		<longitude>5.917779922485352</longitude>
+		<elevation>1522</elevation>
+		<municipality>Winseler</municipality>
+		<region>Diekirch</region>
+		<country>Luxembourg</country>
+		<continent>Europe</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Diekirch</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Luxembourg</countryURL>
+	</finish>
+	<distance>732</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>46</sequence>
+	<start>
+		<id>ELNT</id>
+		<name>Noertrange Airport</name>
+		<latitude>49.98109817504883</latitude>
+		<longitude>5.917779922485352</longitude>
+		<elevation>1522</elevation>
+		<municipality>Winseler</municipality>
+		<region>Diekirch</region>
+		<country>Luxembourg</country>
+		<continent>Europe</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Diekirch</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Luxembourg</countryURL>
+	</start>
+	<finish>
+		<id>EBBR</id>
+		<name>Brussels Airport</name>
+		<latitude>50.901401519800004</latitude>
+		<longitude>4.48443984985</longitude>
+		<elevation>184</elevation>
+		<municipality>Brussels</municipality>
+		<region>Brussels-Capital Region</region>
+		<country>Belgium</country>
+		<continent>Europe</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Brussels_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Brussels-Capital_Region</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Belgium</countryURL>
+	</finish>
+	<distance>144</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>47</sequence>
+	<start>
+		<id>EBBR</id>
+		<name>Brussels Airport</name>
+		<latitude>50.901401519800004</latitude>
+		<longitude>4.48443984985</longitude>
+		<elevation>184</elevation>
+		<municipality>Brussels</municipality>
+		<region>Brussels-Capital Region</region>
+		<country>Belgium</country>
+		<continent>Europe</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Brussels_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Brussels-Capital_Region</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Belgium</countryURL>
+	</start>
+	<finish>
+		<id>EGJB</id>
+		<name>Guernsey Airport</name>
+		<latitude>49.435001373291016</latitude>
+		<longitude>-2.6019699573516846</longitude>
+		<elevation>336</elevation>
+		<municipality>Saint Peter Port</municipality>
+		<region>(unassigned)</region>
+		<country>Guernsey</country>
+		<continent>Europe</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Guernsey_Airport</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Guernsey</countryURL>
+	</finish>
+	<distance>530</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>48</sequence>
+	<start>
+		<id>EGJB</id>
+		<name>Guernsey Airport</name>
+		<latitude>49.435001373291016</latitude>
+		<longitude>-2.6019699573516846</longitude>
+		<elevation>336</elevation>
+		<municipality>Saint Peter Port</municipality>
+		<region>(unassigned)</region>
+		<country>Guernsey</country>
+		<continent>Europe</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Guernsey_Airport</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Guernsey</countryURL>
+	</start>
+	<finish>
+		<id>GB-0179</id>
+		<name>Wombleton</name>
+		<latitude>54.2369039</latitude>
+		<longitude>-0.97116</longitude>
+		<elevation>0</elevation>
+		<municipality></municipality>
+		<region>England</region>
+		<country>United Kingdom</country>
+		<continent>Europe</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/England</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/United_Kingdom</countryURL>
+	</finish>
+	<distance>546</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>49</sequence>
+	<start>
+		<id>GB-0179</id>
+		<name>Wombleton</name>
+		<latitude>54.2369039</latitude>
+		<longitude>-0.97116</longitude>
+		<elevation>0</elevation>
+		<municipality></municipality>
+		<region>England</region>
+		<country>United Kingdom</country>
+		<continent>Europe</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/England</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/United_Kingdom</countryURL>
+	</start>
+	<finish>
+		<id>CHF2</id>
+		<name>Ottawa / Manotick (Hope Field)</name>
+		<latitude>45.190601348899996</latitude>
+		<longitude>-75.70860290530001</longitude>
+		<elevation>315</elevation>
+		<municipality>Manotick</municipality>
+		<region>Ontario</region>
+		<country>Canada</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Ottawa/Manotick_(Hope_Field)_Aerodrome</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Ontario</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Canada</countryURL>
+	</finish>
+	<distance>5208</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>50</sequence>
+	<start>
+		<id>CHF2</id>
+		<name>Ottawa / Manotick (Hope Field)</name>
+		<latitude>45.190601348899996</latitude>
+		<longitude>-75.70860290530001</longitude>
+		<elevation>315</elevation>
+		<municipality>Manotick</municipality>
+		<region>Ontario</region>
+		<country>Canada</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Ottawa/Manotick_(Hope_Field)_Aerodrome</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Ontario</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Canada</countryURL>
+	</start>
+	<finish>
+		<id>7MO3</id>
+		<name>B S Ranch Airport</name>
+		<latitude>36.600101470947266</latitude>
+		<longitude>-94.3501968383789</longitude>
+		<elevation>1000</elevation>
+		<municipality>Pineville</municipality>
+		<region>Missouri</region>
+		<country>United States</country>
+		<continent>North America</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Missouri</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/United_States</countryURL>
+	</finish>
+	<distance>1828</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>51</sequence>
+	<start>
+		<id>7MO3</id>
+		<name>B S Ranch Airport</name>
+		<latitude>36.600101470947266</latitude>
+		<longitude>-94.3501968383789</longitude>
+		<elevation>1000</elevation>
+		<municipality>Pineville</municipality>
+		<region>Missouri</region>
+		<country>United States</country>
+		<continent>North America</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Missouri</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/United_States</countryURL>
+	</start>
+	<finish>
+		<id>MMAA</id>
+		<name>General Juan N Alvarez International Airport</name>
+		<latitude>16.757099151611328</latitude>
+		<longitude>-99.75399780273438</longitude>
+		<elevation>16</elevation>
+		<municipality>Acapulco</municipality>
+		<region>Guerrero</region>
+		<country>Mexico</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/General_Juan_N._%C3%81lvarez_International_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Guerrero</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Mexico</countryURL>
+	</finish>
+	<distance>2270</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>52</sequence>
+	<start>
+		<id>MMAA</id>
+		<name>General Juan N Alvarez International Airport</name>
+		<latitude>16.757099151611328</latitude>
+		<longitude>-99.75399780273438</longitude>
+		<elevation>16</elevation>
+		<municipality>Acapulco</municipality>
+		<region>Guerrero</region>
+		<country>Mexico</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/General_Juan_N._%C3%81lvarez_International_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Guerrero</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Mexico</countryURL>
+	</start>
+	<finish>
+		<id>MHSN</id>
+		<name>Sinaloa Airport</name>
+		<latitude>15.69333267211914</latitude>
+		<longitude>-85.95527648925781</longitude>
+		<elevation>20</elevation>
+		<municipality>Sinaloa</municipality>
+		<region>Colon</region>
+		<country>Honduras</country>
+		<continent>North America</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Colon</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Honduras</countryURL>
+	</finish>
+	<distance>1478</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>53</sequence>
+	<start>
+		<id>MHSN</id>
+		<name>Sinaloa Airport</name>
+		<latitude>15.69333267211914</latitude>
+		<longitude>-85.95527648925781</longitude>
+		<elevation>20</elevation>
+		<municipality>Sinaloa</municipality>
+		<region>Colon</region>
+		<country>Honduras</country>
+		<continent>North America</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Colon</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Honduras</countryURL>
+	</start>
+	<finish>
+		<id>JM-0016</id>
+		<name>Bath Airfield</name>
+		<latitude>17.9405</latitude>
+		<longitude>-76.3075</longitude>
+		<elevation>84</elevation>
+		<municipality>Bath</municipality>
+		<region>Saint Thomea</region>
+		<country>Jamaica</country>
+		<continent>North America</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Saint_Thomea</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Jamaica</countryURL>
+	</finish>
+	<distance>1057</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>54</sequence>
+	<start>
+		<id>JM-0016</id>
+		<name>Bath Airfield</name>
+		<latitude>17.9405</latitude>
+		<longitude>-76.3075</longitude>
+		<elevation>84</elevation>
+		<municipality>Bath</municipality>
+		<region>Saint Thomea</region>
+		<country>Jamaica</country>
+		<continent>North America</continent>
+		<airportURL></airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/Saint_Thomea</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Jamaica</countryURL>
+	</start>
+	<finish>
+		<id>MBSC</id>
+		<name>South Caicos Airport</name>
+		<latitude>21.515699386599998</latitude>
+		<longitude>-71.528503418</longitude>
+		<elevation>6</elevation>
+		<municipality></municipality>
+		<region>South Caicos</region>
+		<country>Turks and Caicos Islands</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/South_Caicos_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/South_Caicos_</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Turks_and_Caicos_Islands</countryURL>
+	</finish>
+	<distance>639</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>55</sequence>
+	<start>
+		<id>MBSC</id>
+		<name>South Caicos Airport</name>
+		<latitude>21.515699386599998</latitude>
+		<longitude>-71.528503418</longitude>
+		<elevation>6</elevation>
+		<municipality></municipality>
+		<region>South Caicos</region>
+		<country>Turks and Caicos Islands</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/South_Caicos_Airport</airportURL>
+		<regionURL>http://en.wikipedia.org/wiki/South_Caicos_</regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Turks_and_Caicos_Islands</countryURL>
+	</start>
+	<finish>
+		<id>TISX</id>
+		<name>Henry E Rohlsen Airport</name>
+		<latitude>17.701900482177734</latitude>
+		<longitude>-64.79859924316406</longitude>
+		<elevation>74</elevation>
+		<municipality>Christiansted</municipality>
+		<region>(unassigned)</region>
+		<country>U.S. Virgin Islands</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Henry_E._Rohlsen_Airport</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/U.S._Virgin_Islands</countryURL>
+	</finish>
+	<distance>822</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>56</sequence>
+	<start>
+		<id>TISX</id>
+		<name>Henry E Rohlsen Airport</name>
+		<latitude>17.701900482177734</latitude>
+		<longitude>-64.79859924316406</longitude>
+		<elevation>74</elevation>
+		<municipality>Christiansted</municipality>
+		<region>(unassigned)</region>
+		<country>U.S. Virgin Islands</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Henry_E._Rohlsen_Airport</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/U.S._Virgin_Islands</countryURL>
+	</start>
+	<finish>
+		<id>TNCM</id>
+		<name>Princess Juliana International Airport</name>
+		<latitude>18.041000366200002</latitude>
+		<longitude>-63.1088981628</longitude>
+		<elevation>13</elevation>
+		<municipality>Saint Martin</municipality>
+		<region>(unassigned)</region>
+		<country>Sint Maarten</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Princess_Juliana_International_Airport</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Sint_Maarten</countryURL>
+	</finish>
+	<distance>183</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>57</sequence>
+	<start>
+		<id>TNCM</id>
+		<name>Princess Juliana International Airport</name>
+		<latitude>18.041000366200002</latitude>
+		<longitude>-63.1088981628</longitude>
+		<elevation>13</elevation>
+		<municipality>Saint Martin</municipality>
+		<region>(unassigned)</region>
+		<country>Sint Maarten</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Princess_Juliana_International_Airport</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Sint_Maarten</countryURL>
+	</start>
+	<finish>
+		<id>TFFG</id>
+		<name>L'EspÃ©rance Airport</name>
+		<latitude>18.099899291992</latitude>
+		<longitude>-63.047199249268</longitude>
+		<elevation>7</elevation>
+		<municipality>Grand Case</municipality>
+		<region>(unassigned)</region>
+		<country>Saint Martin</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Grand_Case_Airport</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Saint_Martin_(France)</countryURL>
+	</finish>
+	<distance>9</distance>
+	<units>Kilometers</units>
+</leg>
+<leg>
+	<sequence>58</sequence>
+	<start>
+		<id>TFFG</id>
+		<name>L'EspÃ©rance Airport</name>
+		<latitude>18.099899291992</latitude>
+		<longitude>-63.047199249268</longitude>
+		<elevation>7</elevation>
+		<municipality>Grand Case</municipality>
+		<region>(unassigned)</region>
+		<country>Saint Martin</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Grand_Case_Airport</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Saint_Martin_(France)</countryURL>
+	</start>
+	<finish>
+		<id>TKPK</id>
+		<name>Robert L. Bradshaw International Airport</name>
+		<latitude>17.311199188232422</latitude>
+		<longitude>-62.71870040893555</longitude>
+		<elevation>170</elevation>
+		<municipality>Basseterre</municipality>
+		<region>(unassigned)</region>
+		<country>Saint Kitts and Nevis</country>
+		<continent>North America</continent>
+		<airportURL>http://en.wikipedia.org/wiki/Robert_L._Bradshaw_International_Airport</airportURL>
+		<regionURL></regionURL>
+		<countryURL>http://en.wikipedia.org/wiki/Saint_Kitts_and_Nevis</countryURL>
+	</finish>
+	<distance>94</distance>
+	<units>Kilometers</units>
+</leg>
+</trip>
